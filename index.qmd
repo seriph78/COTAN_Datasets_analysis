@@ -1,0 +1,13 @@
+---
+title: "COTAN_Datasets_analysis"
+---
+
+# Dataset 1
+
+This is a mouse cortex dataset E14.5 Drop-seq from \*\*Single-cell transcriptomic analysis of mouse neocortical development\*\*
+
+\*\*Loo, Simon \_et al.\_\*\*, \_Nature Communications\_, 2019: https://www.nature.com/articles/s41467-018-08079-9
+
+```{r}
+
+```

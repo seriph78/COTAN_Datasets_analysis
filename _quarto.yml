@@ -1,0 +1,24 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "COTAN Datasets analysis"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - Dataset1.qmd
+      - geneCoexAnalysisDataset1.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+execute: 
+  freeze: auto
+  
+
