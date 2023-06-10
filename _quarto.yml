@@ -10,6 +10,8 @@ website:
         text: Home
       - Dataset1.qmd
       - geneCoexAnalysisDataset1.qmd
+      - CorticalCells_GSM2861511_E135-analysis.qmd
+      - CorticalCells_GSM2861514_E175-analysis.qmd
 
 format:
   html:
