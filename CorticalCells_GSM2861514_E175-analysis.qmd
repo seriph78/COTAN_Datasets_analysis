@@ -2,12 +2,8 @@
 title: "Cortical cells DGE E17.5 Data-set Anaysis"
 ---
 
-```{r}
-#library(SingleCellExperiment)
-#library(DuoClustering2018)
-#library(tidyr)
+```{r, warning=FALSE}
 library(ggplot2)
-#library(ggsankey) # remotes::install_github("davidsjoberg/ggsankey")
 library(tibble)
 library(zeallot)
 library(COTAN)

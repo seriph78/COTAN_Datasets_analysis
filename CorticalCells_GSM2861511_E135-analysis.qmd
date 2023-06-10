@@ -2,7 +2,7 @@
 title: "Cortical cells DGE E13.5 Data-set Anaysis"
 ---
 
-```{r, include=FALSE}
+```{r, warning=FALSE}
 library(ggplot2)
 library(tibble)
 library(zeallot)
@@ -274,9 +274,6 @@ table(mergedClusters)
 saveRDS(cc135Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
 ```
 
-```{r}
-#clustersMarkersHeatmapPlot(cc135Obj, groupMarkers, clName = "merge", kCuts = 4)
-```
 
 ```{r}
 sessionInfo()

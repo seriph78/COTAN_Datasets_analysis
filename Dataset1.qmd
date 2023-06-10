@@ -1,5 +1,5 @@
 ---
-title: "Dataset1: Mouse cortex"
+title: "E14.5 Mouse Cortex Loo 2019"
 ---
 
 ```{r}
@@ -52,6 +52,7 @@ genesSizePlot(obj,splitPattern = "_",numCol = 1)
 mit <- mitochondrialPercentagePlot(obj, genePrefix = "^mt-",splitPattern = "_",numCol = 1)
 mit[["plot"]]
 ```
+
 To drop cells by cell library size:
 
 ```{r}
@@ -75,10 +76,10 @@ mit <- mitochondrialPercentagePlot(obj, genePrefix = "^mt-",splitPattern = "_",n
 
 mit[["plot"]]
 ```
+
 ```{r}
 cellSizePlot(obj,splitPattern = "_",numCol = 1)
 ```
-
 
 ```{r}
 obj <- clean(obj)
@@ -86,6 +87,7 @@ c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(obj)
 
 pcaCellsPlot
 ```
+
 ```{r}
 genesPlot
 ```
@@ -98,9 +100,11 @@ c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(obj)
 
 pcaCellsPlot
 ```
+
 ```{r}
  genesPlot
 ```
+
 ```{r}
 plot(nuPlot)
 ```
@@ -120,6 +124,7 @@ plot.ude <- ggplot(nuDf, aes(x = n, y = nu)) +
 
 plot.ude
 ```
+
 ```{r}
 obj <- addElementToMetaDataset(obj, "Threshold low UDE cells:", yset)
 
@@ -130,9 +135,11 @@ c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(obj)
 
 pcaCellsPlot
 ```
+
 ```{r}
 genesPlot
 ```
+
 ```{r}
 UDEPlot
 ```
@@ -140,11 +147,13 @@ UDEPlot
 ```{r}
 nuPlot
 ```
+
 ```{r}
 UDEPlot$data$Sample <- str_split(rownames(UDEPlot$data),pattern = "_",simplify = T)[,1]
 
 ggplot(UDEPlot$data, aes(PC1,PC2,color = Sample)) + geom_point(size = 0.5, alpha=0.7)
 ```
+
 ```{r}
 ggplot(UDEPlot$data, aes(PC2,PC3,color = Sample)) + geom_point(size = 0.5, alpha=0.7)
 ```
@@ -152,9 +161,11 @@ ggplot(UDEPlot$data, aes(PC2,PC3,color = Sample)) + geom_point(size = 0.5, alpha
 ```{r}
 ggplot(UDEPlot$data, aes(PC2,PC5,color = Sample)) + geom_point(size = 0.5, alpha=0.7)
 ```
+
 ```{r}
 ggplot(UDEPlot$data, aes(PC2,PC5,color = groups)) + geom_point(size = 0.5, alpha=0.7)
 ```
+
 ## COTAN analysis
 
 In this part, all the contingency tables are computed and used to get the statistics.
@@ -181,9 +192,3 @@ obj <- readRDS(file = file.path(outDir, paste0(cond, ".cotan.RDS")))
 ```{r}
 sessionInfo()
 ```
-
-
-
-
-
-

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>COTAN Datasets analysis - COTAN_Datasets_analysis</title>
+<title>COTAN Datasets analysis - COTAN V2.0 Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,11 +40,11 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
+  "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
+  "panel-placement": "start",
+  "type": "textbox",
   "limit": 20,
   "language": {
     "search-no-results-text": "No results",
@@ -63,67 +63,112 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar docked">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">COTAN Datasets analysis</span>
-    </a>
-  </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">
- <span class="menu-text">Home</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./Dataset1.html">
- <span class="menu-text">Dataset1: Mouse cortex</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./geneCoexAnalysisDataset1.html">
- <span class="menu-text">Gene Correlation Analysis</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./CorticalCells_GSM2861511_E135-analysis.html">
- <span class="menu-text">Cortical cells DGE E13.5 Data-set Anaysis</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./CorticalCells_GSM2861514_E175-analysis.html">
- <span class="menu-text">Cortical cells DGE E17.5 Data-set Anaysis</span></a>
-  </li>  
-</ul>
-              <div id="quarto-search" class="" title="Search"></div>
-          </div> <!-- /navcollapse -->
-      </div> <!-- /container-fluid -->
-    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">COTAN V2.0 Datasets analysis</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">COTAN Datasets analysis</a> 
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link active">Home</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">Mouse Cortex Loo 2019</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Dataset1.html" class="sidebar-item-text sidebar-link">Cleaning and cell clustering</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDataset1.html" class="sidebar-item-text sidebar-link">Coexpression analaysis</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">Mouse Cortex Yuzwa 2017</a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861511_E135-analysis.html" class="sidebar-item-text sidebar-link">E13.5 Cleaning and cell clustering</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5Yuzwa.html" class="sidebar-item-text sidebar-link">Correlation analysis for E13.5</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861514_E175-analysis.html" class="sidebar-item-text sidebar-link">E17.5 Cleaning and cell clustering</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5Yuzwa.html" class="sidebar-item-text sidebar-link">Correlation analysis for E17.5</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">Mouse Brain </span>
+  </li>
+    </ul>
+    </div>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dataset-1" id="toc-dataset-1" class="nav-link active" data-scroll-target="#dataset-1">Dataset 1</a></li>
+  <li><a href="#schematic-data-sets-information" id="toc-schematic-data-sets-information" class="nav-link active" data-scroll-target="#schematic-data-sets-information">Schematic data-sets information</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">COTAN_Datasets_analysis</h1>
+<h1 class="title d-none d-lg-block">COTAN V2.0 Datasets analysis</h1>
 </div>
 
 
@@ -138,12 +183,135 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="dataset-1" class="level1">
-<h1>Dataset 1</h1>
-<p>This is a mouse cortex dataset E14.5 Drop-seq from **Single-cell transcriptomic analysis of mouse neocortical development**</p>
-<p>**Loo, Simon _et al._**, _Nature Communications_, 2019: https://www.nature.com/articles/s41467-018-08079-9</p>
-<div class="cell">
-
+<section id="schematic-data-sets-information" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="schematic-data-sets-information">Schematic data-sets information</h2>
+<div class="column-screen-inset-right">
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Number</th>
+<th>Data-set name</th>
+<th>Tissue</th>
+<th style="text-align: center;">Organism</th>
+<th style="text-align: center;">Initial cell number</th>
+<th style="text-align: center;">Original paper</th>
+<th style="text-align: center;">Database code</th>
+<th style="text-align: center;">Cell number after cleaning</th>
+<th style="text-align: center;">sc Method</th>
+<th style="text-align: center;">Labelled</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">1</td>
+<td>E14.5 Mouse Cortex Loo 2019</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.nature.com/articles/s41467-018-08079-9" aria-label="Loo, Simon _et al.">📖</a></td>
+<td style="text-align: center;">GSE123335</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Drop-seq</td>
+<td style="text-align: center;">NO</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">2</td>
+<td>E13.5 Mouse Cortex Yuzwa 2017</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://doi.org/10.1016/j.celrep.2017.12.017" aria-label="Yuzwa SA,_et al.">📖</a></td>
+<td style="text-align: center;">GSE107122</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Drop-seq</td>
+<td style="text-align: center;">NO</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">3</td>
+<td>E17.5 Mouse Cortex Yuzwa 2017</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://doi.org/10.1016/j.celrep.2017.12.017" aria-label="Yuzwa SA,_et al.">📖</a></td>
+<td style="text-align: center;">GSE107122</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Drop-seq</td>
+<td style="text-align: center;">NO</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">4</td>
+<td>E13.5 Forebrain La Manno 2021</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.nature.com/articles/s41586-021-03775-x" aria-label="Le Manno G.,_et al.">📖</a></td>
+<td style="text-align: center;">PRJNA637987</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10X</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td>E14.5 Forebrain La Manno 2021</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.nature.com/articles/s41586-021-03775-x" aria-label="Le Manno G.,_et al.">📖</a></td>
+<td style="text-align: center;">PRJNA637987</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10X</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">6</td>
+<td>E15.0 Forebrain La Manno 2021</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.nature.com/articles/s41586-021-03775-x" aria-label="Le Manno G.,_et al.">📖</a></td>
+<td style="text-align: center;">PRJNA637987</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10X</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td>E15.5 Forebrain La Manno 2021</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.nature.com/articles/s41586-021-03775-x" aria-label="Le Manno G.,_et al.">📖</a></td>
+<td style="text-align: center;">PRJNA637987</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10X</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td>E17.0 Forebrain La Manno 2021</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.nature.com/articles/s41586-021-03775-x" aria-label="Le Manno G.,_et al.">📖</a></td>
+<td style="text-align: center;">PRJNA637987</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10X</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">9</td>
+<td>E17.5 Forebrain La Manno 2021</td>
+<td>Brain</td>
+<td style="text-align: center;">mm</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"><a href="https://www.nature.com/articles/s41586-021-03775-x" aria-label="Le Manno G.,_et al.">📖</a></td>
+<td style="text-align: center;">PRJNA637987</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">10X</td>
+<td style="text-align: center;">Yes</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
