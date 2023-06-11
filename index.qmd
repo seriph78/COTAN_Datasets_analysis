@@ -1,0 +1,20 @@
+---
+title: "COTAN V2.0 Datasets analysis"
+---
+
+## Schematic data-sets information
+
+::: column-screen-inset-right
+| Number | Data-set name | Tissue | Organism | Initial cell number | Original paper | Database code | Cell number after cleaning |  sc Method | Labelled | 
+|:------:|--------|--------|:------:|:------:|:------:|:------:|:------:|:------:|:------:|
+1 | E14.5 Mouse Cortex Loo 2019 | Brain | mm | | [📖](https://www.nature.com/articles/s41467-018-08079-9){aria-label="Loo, Simon \_et al."} | GSE123335 | | Drop-seq | NO | 
+2 | E13.5 Mouse Cortex Yuzwa 2017 | Brain | mm | | [📖](https://doi.org/10.1016/j.celrep.2017.12.017){aria-label="Yuzwa SA,\_et al."} | GSE107122 | | Drop-seq | NO |
+3 | E17.5 Mouse Cortex Yuzwa 2017 | Brain | mm | | [📖](https://doi.org/10.1016/j.celrep.2017.12.017){aria-label="Yuzwa SA,\_et al."} | GSE107122 | | Drop-seq | NO |
+4 | E13.5 Forebrain La Manno 2021 | Brain | mm | | [📖](https://www.nature.com/articles/s41586-021-03775-x){aria-label="Le Manno G.,\_et al."} | PRJNA637987 | | 10X | Yes | 
+5 | E14.5 Forebrain La Manno 2021 | Brain | mm | | [📖](https://www.nature.com/articles/s41586-021-03775-x){aria-label="Le Manno G.,\_et al."} | PRJNA637987 | | 10X | Yes | 
+6 | E15.0 Forebrain La Manno 2021 | Brain | mm | | [📖](https://www.nature.com/articles/s41586-021-03775-x){aria-label="Le Manno G.,\_et al."} | PRJNA637987 | | 10X | Yes | 
+7 | E15.5 Forebrain La Manno 2021 | Brain | mm | | [📖](https://www.nature.com/articles/s41586-021-03775-x){aria-label="Le Manno G.,\_et al."} | PRJNA637987 | | 10X | Yes | 
+8 | E17.0 Forebrain La Manno 2021 | Brain | mm | | [📖](https://www.nature.com/articles/s41586-021-03775-x){aria-label="Le Manno G.,\_et al."} | PRJNA637987 | | 10X | Yes | 
+9 | E17.5 Forebrain La Manno 2021 | Brain | mm | | [📖](https://www.nature.com/articles/s41586-021-03775-x){aria-label="Le Manno G.,\_et al."} | PRJNA637987 | | 10X | Yes | 
+
+:::

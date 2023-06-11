@@ -1,0 +1,14 @@
+{
+  "hash": "07b7ee965ea6a565503638441969dae3",
+  "result": {
+    "markdown": "---\ntitle: \"COTAN_Datasets_analysis\"\n---\n\n\n# Dataset 1\n\nThis is a mouse cortex dataset E14.5 Drop-seq from \\*\\*Single-cell transcriptomic analysis of mouse neocortical development\\*\\*\n\n\\*\\*Loo, Simon \\_et al.\\_\\*\\*, \\_Nature Communications\\_, 2019: https://www.nature.com/articles/s41467-018-08079-9\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
