@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
 <span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"Seurat corr"</span>)</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(seurat.data.cor),</span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(seurat.corMat)*unit(2.5, "mm"), </span></span>
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"Seurat corr SCT"</span>)</span>
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(seurat.data.cor),</span>
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(seurat.corMat)*unit(2.5, "mm"), </span></span>
@@ -449,7 +449,7 @@ other attached packages:
  [1] Rfast_2.0.7           RcppZiggurat_0.1.6    Rcpp_1.0.10          
  [4] patchwork_1.1.2       SeuratObject_4.1.3    Seurat_4.3.0         
  [7] dplyr_1.1.2           circlize_0.4.15       ComplexHeatmap_2.16.0
-[10] COTAN_2.1.2          
+[10] COTAN_2.1.5          
 
 loaded via a namespace (and not attached):
   [1] RColorBrewer_1.1-3          jsonlite_1.8.4             
@@ -510,19 +510,20 @@ loaded via a namespace (and not attached):
 [111] lazyeval_0.2.2              yaml_2.3.7                 
 [113] evaluate_0.20               codetools_0.2-19           
 [115] tibble_3.2.1                cli_3.6.1                  
-[117] uwot_0.1.14                 xtable_1.8-4               
-[119] reticulate_1.28             munsell_0.5.0              
-[121] GenomeInfoDb_1.36.0         globals_0.16.2             
-[123] spatstat.random_3.1-4       zeallot_0.1.0              
-[125] png_0.1-8                   parallel_4.3.0             
-[127] ellipsis_0.3.2              ggplot2_3.4.2              
-[129] assertthat_0.2.1            sparseMatrixStats_1.12.0   
-[131] bitops_1.0-7                listenv_0.9.0              
-[133] ggthemes_4.2.4              viridisLite_0.4.1          
-[135] scales_1.2.1                ggridges_0.5.4             
-[137] leiden_0.4.3                purrr_1.0.1                
-[139] crayon_1.5.2                GetoptLong_1.0.5           
-[141] rlang_1.1.0                 cowplot_1.1.1              </code></pre>
+[117] RcppParallel_5.1.7          uwot_0.1.14                
+[119] xtable_1.8-4                reticulate_1.28            
+[121] munsell_0.5.0               GenomeInfoDb_1.36.0        
+[123] globals_0.16.2              spatstat.random_3.1-4      
+[125] zeallot_0.1.0               png_0.1-8                  
+[127] parallel_4.3.0              ellipsis_0.3.2             
+[129] ggplot2_3.4.2               assertthat_0.2.1           
+[131] parallelDist_0.2.6          sparseMatrixStats_1.12.0   
+[133] bitops_1.0-7                listenv_0.9.0              
+[135] ggthemes_4.2.4              viridisLite_0.4.1          
+[137] scales_1.2.1                ggridges_0.5.4             
+[139] leiden_0.4.3                purrr_1.0.1                
+[141] crayon_1.5.2                GetoptLong_1.0.5           
+[143] rlang_1.1.0                 cowplot_1.1.1              </code></pre>
 </div>
 </div>
 
