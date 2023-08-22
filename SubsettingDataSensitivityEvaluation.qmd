@@ -1,0 +1,58 @@
+---
+title: "Subsetting data for sensitivity evaluation"
+---
+
+Import data
+
+```{r}
+library(COTAN)
+objE15 <- readRDS("Data/MouseCortexFromLoom/e15.0_ForebrainDorsal.cotan.RDS")
+
+```
+
+Cell types distribution across the dataset
+
+```{r}
+table(objE15@metaCells$Class)
+```
+
+```{r}
+table(objE15@metaCells[objE15@metaCells$Class %in% c("Neuron","Neuroblast","Radial glia"),]$Class,
+      objE15@metaCells[objE15@metaCells$Class %in% c("Neuron","Neuroblast","Radial glia"),]$Subclass)
+```
+
+```{r}
+neuron.CajalRCells <- rownames(objE15@metaCells[objE15@metaCells$Class == "Neuron" & objE15@metaCells$Subclass == "Cajal-Retzius",])
+length(neuron.CajalRCells)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+neuron.CajalRCells <- automaticCOTANObjectCreation(raw = getRawData(objE15)[,neuron.CajalRCells],
+  GEO = getMetadataDataset(e15)[1,2],
+  cores = 13,
+  saveObj = TRUE,
+  outDir = "Data/MouseCortexFromLoom/",
+  sequencingMethod = getMetadataDataset(e15)[2,2],
+  sampleCondition = "E15.0_CajalRCells"
+)
+
+```
+
+```{r}
+genesList <- list(
+  "NPGs"= 
+    c("Nes", "Vim", "Sox2", "Sox1", "Notch1", "Hes1", "Hes5", "Pax6"),
+  "PNGs"= 
+    c("Map2", "Tubb3", "Neurod1", "Nefm", "Nefl", "Dcx", "Tbr1"),
+  "hk"= 
+    c("Calm1", "Cox6b1", "Ppia", "Rpl18", "Cox7c", "Erh", "H3f3a",
+      "Taf1", "Taf2", "Gapdh", "Actb", "Golph3", "Zfr", "Sub1",
+      "Tars", "Amacr"),
+  "layers" = 
+    c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2")
+)
+
+neuron.CajalRCells <- readRDS("Data/MouseCortexFromLoom/E15.0_CajalRCells.cotan.RDS")
+
+GDIPlot(neuron.CajalRCells,genes = genesList)
+```

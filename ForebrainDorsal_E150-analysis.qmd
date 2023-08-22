@@ -1,0 +1,316 @@
+---
+title: "Forebrain Dorsal E13.5 Data-set Anaysis"
+---
+
+```{r}
+library(ggplot2)
+library(tibble)
+library(zeallot)
+library(COTAN)
+
+options(parallelly.fork.enable = TRUE)
+
+outDir <- "Data/MouseCortexFromLoom/"
+
+setLoggingLevel(1)
+setLoggingFile(file.path(outDir, "ForebrainDorsal_E150-analysis.log"))
+```
+
+Read the already created COTAN object
+
+```{r}
+fb150Obj <- readRDS("Data/MouseCortexFromLoom/SourceData/e15.0_ForebrainDorsal.cotan.RDS")
+sampleCondition <- getMetadataElement(fb150Obj, datasetTags()[["cond"]])
+
+sampleCondition
+```
+
+Inspect cells' sizes
+
+```{r}
+cellSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
+```
+
+Drop cells with too many ritz reads as they are probably duplets
+
+```{r}
+cellsSizeThr <- 10000
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Cells size threshold", cellsSizeThr)
+
+cells_to_rem <- getCells(fb150Obj)[getCellsSize(fb150Obj) > cellsSizeThr]
+fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
+
+cellSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
+```
+
+Inspect the number of expressed genes per cell
+
+```{r}
+genesSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
+```
+
+Drop cells with too low genes expession as they are probably dead
+
+```{r}
+genesSizeLowThr <- 700
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Num genes low threshold", genesSizeLowThr)
+
+numExprGenes <- getNumExpressedGenes(fb150Obj)
+cells_to_rem <- names(numExprGenes)[numExprGenes < genesSizeLowThr]
+fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
+
+genesSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
+```
+
+Check number of mitocondrial genes expressed in each cell
+
+```{r}
+mitGenesPattern <- "^mt."
+getGenes(fb150Obj)[grep(mitGenesPattern, getGenes(fb150Obj))]
+
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(fb150Obj, genePrefix = mitGenesPattern,
+                              splitPattern = ":", numCol = 1)
+
+plot(mitPlot)
+```
+
+Cells with a too high percentage of mitocondrial genes are likely dead (or at the last problematic) cells. So we drop them!
+
+```{r}
+mitPercThr <- 1.0
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Mitoc. perc. threshold", mitPercThr)
+
+cells_to_rem <- rownames(mitSizes)[mitSizes[["mit.percentage"]] > mitPercThr]
+
+fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
+
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(fb150Obj, genePrefix = mitGenesPattern,
+                              splitPattern = ":", numCol = 1)
+
+plot(mitPlot)
+```
+
+Check no further outliers after all the culling
+
+```{r}
+cellSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
+genesSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
+```
+
+Clean: round 1
+
+```{r}
+fb150Obj <- clean(fb150Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Num drop B group", 0)
+```
+
+B group contains highly diverse cells: drop them!
+
+```{r}
+cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
+
+fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
+```
+
+Clean: round 2
+
+```{r}
+fb150Obj <- clean(fb150Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Num drop B group", 1)
+```
+
+B group contains one cell with high diversity in the higher components
+
+```{r}
+plot(pcaCellsData)
+
+cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
+
+fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
+```
+
+Clean: round 3
+
+```{r}
+fb150Obj <- clean(fb150Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Num drop B group", 2)
+```
+
+B group contains one cell with high diversity in the higher components
+
+```{r}
+plot(pcaCellsData)
+
+cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
+
+fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
+```
+
+Clean: round 4
+
+```{r}
+fb150Obj <- clean(fb150Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Num drop B group", 3)
+```
+
+B group contains few cell with high diversity
+
+```{r}
+plot(pcaCellsData)
+
+cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
+
+fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
+```
+
+Clean: round 4
+
+```{r}
+fb150Obj <- clean(fb150Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+fb150Obj <- addElementToMetaDataset(fb150Obj, "Num drop B group", 4)
+```
+
+Visualize if all is ok:
+
+```{r}
+plot(UDEPlot)
+
+plot(nuPlot)
+
+lowUDEThr <- 0.4 # the threshold to remove low UDE cells
+
+nuDf <- data.frame("nu" = sort(getNu(fb150Obj)), "n" = seq_along(getNu(fb150Obj)))
+UDEPlot_zoomed <- ggplot(nuDf, aes(x = n, y = nu)) +
+            geom_point(colour = "#8491B4B2", size = 1.0) +
+            xlim(0L, 400L) +
+            ylim(0.0, 1.0) +
+            geom_hline(yintercept = lowUDEThr, linetype = "dashed",
+                       color = "darkred") +
+            annotate(geom = "text", x = 200L, y = 0.25,
+                     label = paste0("to remove cells with nu < ", lowUDEThr),
+                     color = "darkred", size = 4.5)
+
+plot(UDEPlot_zoomed)
+```
+
+Final cleaning to check all is OK
+
+```{r}
+fb150Obj <- clean(fb150Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+plot(UDEPlot)
+plot(nuPlot)
+
+plot(cellSizePlot(fb150Obj, splitPattern = ":", numCol = 1))
+plot(genesSizePlot(fb150Obj, splitPattern = ":", numCol = 1))
+```
+
+Calculate genes' COEX
+
+```{r, echo=TRUE, eval=FALSE}
+Sys.time()
+
+fb150Obj <- proceedToCoex(fb150Obj, calcCoex = TRUE, cores = 12,
+                          saveObj = TRUE, outDir = outDir)
+
+Sys.time()
+```
+
+Save the COTAN object
+
+```{r, echo=TRUE, eval=FALSE}
+saveRDS(fb150Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r}
+fb150Obj <- readRDS(file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r}
+gdiData <- calculateGDI(fb150Obj)
+
+genesToLabel <- head(rownames(gdiData[order(gdiData[["GDI"]],
+                                            decreasing = TRUE), ]), n = 10L)
+
+genesToLabel
+
+gdiPlot <- GDIPlot(fb150Obj, GDIIn = gdiData, GDIThreshold = 1.4,
+                   genes = list("Top 10 GDI genes" = genesToLabel))
+
+plot(gdiPlot)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+splitClusters <- cellsUniformClustering(fb150Obj, GDIThreshold = 1.4, cores = 13,
+                                        saveObj = TRUE, outDir = outDir)
+
+c(splitCoexDF, splitPValueDF) %<-% DEAOnClusters(fb150Obj, clusters = splitClusters)
+
+fb150Obj <- addClusterization(fb150Obj, clName = "split",
+                              clusters = splitClusters,
+                              coexDF = splitCoexDF, override = TRUE)
+
+table(splitClusters)
+```
+
+```{r, echo=FALSE, eval=FALSE}
+saveRDS(fb150Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF, mergedPValueDF) %<-%
+  mergeUniformCellsClusters(fb150Obj, clusters = splitClusters,
+                            GDIThreshold = 1.4, cores = 13,
+                            saveObj = TRUE, outDir = outDir)
+
+fb150Obj <- addClusterization(fb150Obj, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+table(mergedClusters)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+saveRDS(fb150Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r}
+sessionInfo()
+```

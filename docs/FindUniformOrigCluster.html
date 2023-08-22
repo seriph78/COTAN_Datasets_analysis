@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>COTAN Datasets analysis - Find uniform given cluster in Forebrain Dorsal E15.0</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cd14_analysis.html">GDI sensitivity</a></li><li class="breadcrumb-item"><a href="./FindUniformOrigCluster.html">Cluster Unifomity and GDI score</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">COTAN Datasets analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Loo 2019</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Dataset1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDataset1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coexpression analaysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861511_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861514_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Mouse Brain</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E150-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E15.0 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE15.0MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E15.0</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Coex score evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalCoexAssess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Coex Evaluation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">GDI sensitivity</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FindUniformOrigCluster.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Cluster Unifomity and GDI score</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Cluster evaluation</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text">DEA evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DEA_Seurat_COTAN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DEA comparison Seurat - Cotan</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Find uniform given cluster in Forebrain Dorsal E15.0</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(COTAN)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">parallelly.fork.enable =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>outDir <span class="ot">&lt;-</span> <span class="st">"./e15.0_FD_CheckClustersUniformity"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingLevel</span>(<span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingFile</span>(<span class="fu">file.path</span>(outDir, <span class="st">"FindUniformGivenClustersInForebrainDorsal_E150.log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Relevant genes lists</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>genesList <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NPGs"</span>   <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Nes"</span>, <span class="st">"Vim"</span>, <span class="st">"Sox2"</span>, <span class="st">"Sox1"</span>, <span class="st">"Notch1"</span>, <span class="st">"Hes1"</span>, <span class="st">"Hes5"</span>, <span class="st">"Pax6"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PNGs"</span>   <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Map2"</span>, <span class="st">"Tubb3"</span>, <span class="st">"Neurod1"</span>, <span class="st">"Nefm"</span>, <span class="st">"Nefl"</span>, <span class="st">"Dcx"</span>, <span class="st">"Tbr1"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"hk"</span>     <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Calm1"</span>, <span class="st">"Cox6b1"</span>, <span class="st">"Ppia"</span>, <span class="st">"Rpl18"</span>, <span class="st">"Cox7c"</span>, <span class="st">"Erh"</span>, <span class="st">"H3f3a"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Taf1"</span>, <span class="st">"Taf2"</span>, <span class="st">"Gapdh"</span>, <span class="st">"Actb"</span>, <span class="st">"Golph3"</span>, <span class="st">"Zfr"</span>, <span class="st">"Sub1"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Tars"</span>, <span class="st">"Amacr"</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"layers"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Reln"</span>, <span class="st">"Lhx5"</span>, <span class="st">"Cux1"</span>, <span class="st">"Satb2"</span>, <span class="st">"Tle1"</span>, <span class="st">"Mef2c"</span>, <span class="st">"Rorb"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Sox5"</span>, <span class="st">"Bcl11b"</span>, <span class="st">"Fezf2"</span>, <span class="st">"Foxp2"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This is a version of the function <code>checkClusterUniformity()</code> adapted to be used in this markdown document</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>clusterIsUniform <span class="ot">&lt;-</span> <span class="cf">function</span>(objCOTAN, cluster, cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  cores <span class="ot">&lt;-</span> 14L</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(objCOTAN)[<span class="sc">!</span><span class="fu">getCells</span>(objCOTAN) <span class="sc">%in%</span> cells]</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  objCOTAN <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(objCOTAN, <span class="at">cells =</span> cellsToDrop)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  objCOTAN <span class="ot">&lt;-</span> <span class="fu">proceedToCoex</span>(objCOTAN, <span class="at">cores =</span> cores, <span class="at">saveObj =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  GDIData <span class="ot">&lt;-</span> <span class="fu">calculateGDI</span>(objCOTAN)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  gdi <span class="ot">&lt;-</span> GDIData[[<span class="st">"GDI"</span>]]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(gdi) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(GDIData)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  gdi <span class="ot">&lt;-</span> <span class="fu">sort</span>(gdi, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot GDI</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  genesToRemark <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"Top 10 GDI genes"</span> <span class="ot">=</span> <span class="fu">names</span>(gdi)[1L<span class="sc">:</span>5L])</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  genesToRemark <span class="ot">&lt;-</span> <span class="fu">append</span>(genesToRemark, genesList)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  plot <span class="ot">&lt;-</span> <span class="fu">GDIPlot</span>(objCOTAN, <span class="at">GDIIn =</span> GDIData,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">GDIThreshold =</span> GDIThreshold,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>                  <span class="at">genes =</span> genesToRemark,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                  <span class="at">condition =</span> <span class="fu">paste0</span>(<span class="st">"e15.0 cluster "</span>, cluster))</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(objCOTAN)</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rm</span>(GDIData)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># A cluster is deemed uniform if the number of genes</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># with [GDI &gt; GDIThreshold] is not more than 1%</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  highGDIRatio <span class="ot">&lt;-</span> <span class="fu">sum</span>(gdi <span class="sc">&gt;=</span> GDIThreshold) <span class="sc">/</span> <span class="fu">length</span>(gdi)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  lastPercentile <span class="ot">&lt;-</span> <span class="fu">quantile</span>(gdi, <span class="at">probs =</span> <span class="fl">0.99</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  isUniform <span class="ot">&lt;-</span> highGDIRatio <span class="sc">&lt;=</span> <span class="fl">0.01</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(plot)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"The cluster '"</span>, cluster, <span class="st">"' is "</span>,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>               (<span class="cf">if</span>(isUniform) {<span class="st">""</span>} <span class="cf">else</span> {<span class="st">"not "</span>}), <span class="st">"uniform"</span>))</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"The percentage of genes with GDI above "</span>, GDIThreshold, <span class="st">" is: "</span>,</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>               <span class="fu">round</span>(highGDIRatio <span class="sc">*</span> <span class="fl">100.0</span>, <span class="at">digits =</span> <span class="dv">2</span>), <span class="st">"%"</span>))</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"The last percentile (99%) of the GDI values is: "</span>,</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>               <span class="fu">round</span>(lastPercentile, <span class="at">digits =</span> <span class="dv">4</span>)))</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="st">"isUniform"</span> <span class="ot">=</span> isUniform, <span class="st">"highGDIRatio"</span> <span class="ot">=</span> highGDIRatio,</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>              <span class="st">"lastPercentile"</span> <span class="ot">=</span> lastPercentile, <span class="st">"GDIPlot"</span> <span class="ot">=</span> plot))</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fb150ObjRaw <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/SourceData/"</span>, <span class="st">"e15.0_ForebrainDorsal.cotan.RDS"</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/"</span>, <span class="st">"e15.0_ForebrainDorsal.cotan.RDS"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Align to cleaned cells’ list</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>metaC <span class="ot">&lt;-</span> <span class="fu">getMetadataCells</span>(fb150ObjRaw)[<span class="fu">getCells</span>(fb150Obj), ]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>metaCDrop <span class="ot">&lt;-</span> <span class="fu">getMetadataCells</span>(fb150ObjRaw)[<span class="sc">!</span><span class="fu">getCells</span>(fb150ObjRaw) <span class="sc">%in%</span> <span class="fu">getCells</span>(fb150Obj), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Extract the cells of class ‘Neuron’</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>metaNeuron <span class="ot">&lt;-</span> metaC[metaC[[<span class="st">"Class"</span>]] <span class="sc">==</span> <span class="st">"Neuron"</span>, ]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(metaNeuron[[<span class="st">"Subclass"</span>]]), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Cortical or hippocampal glutamatergic                   Forebrain GABAergic 
+                                 3969                                   610 
+                        Cajal-Retzius                Mixed region GABAergic 
+                                  145                                    21 
+                            Undefined               Forebrain glutamatergic 
+                                   16                                    15 
+                         Hypothalamus            Mixed region glutamatergic 
+                                    8                                     5 
+    Mixed region and neurotransmitter               Hindbrain glutamatergic 
+                                    4                                     2 
+                Hindbrain glycinergic            Hypothalamus glutamatergic 
+                                    2                                     2 
+        Dorsal midbrain glutamatergic                          Mixed region 
+                                    1                                     1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(metaNeuron[[<span class="st">"ClusterName"</span>]]), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Neur525 Neur511 Neur509 Neur510 Neur508 Neur507 Neur568 Neur504 Neur505 Neur516 
+    826     540     402     402     397     183     181     174     147     137 
+Neur565 Neur524 Neur679 Neur493 Neur498 Neur497 Neur506 Neur502 Neur494 Neur574 
+    133     108     105      93      79      51      46      42      41      41 
+Neur575 Neur492 Neur519 Neur526 Neur566 Neur501 Neur573 Neur499 Neur518 Neur560 
+     41      38      31      28      28      24      24      23      22      20 
+Neur514 Neur523 Neur569 Neur557 Neur495 Neur520 Neur535 Neur542 Neur677 Neur527 
+     19      19      18      16      15      15      14      14      14      13 
+Neur496 Neur512 Neur676 Neur517 Neur558 Neur503 Neur739 Neur559 Neur564 Neur538 
+     11      11      11      10       9       8       8       7       7       6 
+Neur549 Neur561 Neur671 Neur695 Neur738 Neur747 Neur500 Neur536 Neur678 Neur534 
+      6       6       6       6       6       6       5       5       5       4 
+Neur550 Neur570 Neur686 Neur731 Neur737 Neur513 Neur515 Neur528 Neur533 Neur539 
+      4       4       4       4       4       3       3       3       3       3 
+Neur544 Neur571 Neur674 Neur675 Neur732 Neur531 Neur543 Neur548 Neur552 Neur554 
+      3       3       3       3       3       2       2       2       2       2 
+Neur562 Neur670 Neur689 Neur740 Neur529 Neur530 Neur532 Neur537 Neur540 Neur553 
+      2       2       2       2       1       1       1       1       1       1 
+Neur567 Neur572 Neur601 Neur614 Neur634 Neur647 Neur649 Neur672 Neur680 Neur681 
+      1       1       1       1       1       1       1       1       1       1 
+Neur684 Neur693 Neur696 Neur726 Neur734 Neur749 Neur750 Neur751 Neur760 Neur771 
+      1       1       1       1       1       1       1       1       1       1 </code></pre>
+</div>
+</div>
+<p>Check uniformity of sub-class: Cajal-Retzius</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>FB_CaRe_Cells <span class="ot">&lt;-</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"Subclass"</span>]] <span class="sc">==</span> <span class="st">"Cajal-Retzius"</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(metaNeuron[FB_CaRe_Cells, <span class="st">"ClusterName"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Neur674 Neur675 Neur676 Neur677 Neur678 Neur679 Neur686 
+      3       3      11      14       5     105       4 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_CaRe_IsUniform, FB_CaRe_HighGDIRatio,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  FB_CaRe_LastPercentile, FB_CaRe_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Cajal-Retzius"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_CaRe_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Cajal-Retzius' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0.82%"
+[1] "The last percentile (99%) of the GDI values is: 1.3896"</code></pre>
+</div>
+</div>
+<p>Check uniformity of sub-class: Forebrain GABAergic</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>FB_GABA_Cells <span class="ot">&lt;-</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"Subclass"</span>]] <span class="sc">==</span> <span class="st">"Forebrain GABAergic"</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(metaNeuron[FB_GABA_Cells, <span class="st">"ClusterName"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Neur529 Neur530 Neur531 Neur532 Neur533 Neur534 Neur535 Neur536 Neur537 Neur538 
+      1       1       2       1       3       4      14       5       1       6 
+Neur539 Neur540 Neur542 Neur543 Neur544 Neur548 Neur549 Neur550 Neur552 Neur553 
+      3       1      14       2       3       2       6       4       2       1 
+Neur554 Neur558 Neur559 Neur560 Neur561 Neur562 Neur564 Neur565 Neur566 Neur567 
+      2       9       7      20       6       2       7     133      28       1 
+Neur568 Neur569 Neur570 Neur571 Neur572 Neur573 Neur574 Neur575 Neur747 
+    181      18       4       3       1      24      41      41       6 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_GABA_isUniform, FB_GABA_HighGDIRatio,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  FB_GABA_LastPercentile, FB_GABA_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Forebrain_GABAergic"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_GABA_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Forebrain_GABAergic' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 12.68%"
+[1] "The last percentile (99%) of the GDI values is: 1.6987"</code></pre>
+</div>
+</div>
+<p>Check uniformity of sub-class: Cortical or hippocampal glutamatergic</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>FB_CHGl_Cells <span class="ot">&lt;-</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"Subclass"</span>]] <span class="sc">==</span> <span class="st">"Cortical or hippocampal glutamatergic"</span>]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(metaNeuron[FB_CHGl_Cells, <span class="st">"ClusterName"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Neur492 Neur493 Neur494 Neur495 Neur496 Neur497 Neur498 Neur499 Neur500 Neur501 
+     38      93      41      15      11      51      79      23       5      24 
+Neur502 Neur503 Neur504 Neur505 Neur506 Neur507 Neur508 Neur509 Neur510 Neur511 
+     42       8     174     147      46     183     397     402     402     540 
+Neur512 Neur513 Neur514 Neur515 Neur516 Neur517 Neur518 Neur519 Neur520 Neur523 
+     11       3      19       3     137      10      22      31      15      19 
+Neur524 Neur525 Neur526 Neur527 Neur528 
+    108     826      28      13       3 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_CHGl_IsUniform, FB_CHGl_HighGDIRatio,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  FB_CHGl_LastPercentile, FB_CHGl_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Cortical or hippocampal glutamatergic"</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_CHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Cortical or hippocampal glutamatergic' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 61.17%"
+[1] "The last percentile (99%) of the GDI values is: 3.0064"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cajal-Retzius cluster: Neur679</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>FB_Neur679_Cells <span class="ot">&lt;-</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur679"</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur679_IsUniform, FB_Neur679_HighGDIRatio,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  FB_Neur679_LastPercentile, FB_Neur679_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur679"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur679' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0.24%"
+[1] "The last percentile (99%) of the GDI values is: 1.3392"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Forebrain GABAergic cluster: Neur568</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>FB_Neur568_Cells <span class="ot">&lt;-</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>]</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur568_IsUniform, FB_Neur568_HighGDIRatio,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  FB_Neur568_LastPercentile, FB_Neur568_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568"</span>,</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur568' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0%"
+[1] "The last percentile (99%) of the GDI values is: 1.3058"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur525</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>FB_Neur525_Cells <span class="ot">&lt;-</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur525"</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur525_IsUniform, FB_Neur525_HighGDIRatio,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  FB_Neur525_LastPercentile, FB_Neur525_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur525"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur525_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur525' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 30.16%"
+[1] "The last percentile (99%) of the GDI values is: 2.3522"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508_Cells <span class="ot">&lt;-</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508_IsUniform, FB_Neur508_HighGDIRatio,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  FB_Neur508_LastPercentile, FB_Neur508_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508"</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0.46%"
+[1] "The last percentile (99%) of the GDI values is: 1.3701"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>FB_Neur509_Cells <span class="ot">&lt;-</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>]</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur509_IsUniform, FB_Neur509_HighGDIRatio,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  FB_Neur509_LastPercentile, FB_Neur509_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur509' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0.67%"
+[1] "The last percentile (99%) of the GDI values is: 1.3811"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur507</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>FB_Neur507_Cells <span class="ot">&lt;-</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur507"</span>]</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur507_IsUniform, FB_Neur507_HighGDIRatio,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  FB_Neur507_LastPercentile, FB_Neur507_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur507"</span>,</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur507' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0.94%"
+[1] "The last percentile (99%) of the GDI values is: 1.3939"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Neur509</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.Neur509_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.Neur509_IsUniform, FB_Neur508.Neur509_HighGDIRatio,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.Neur509_LastPercentile, FB_Neur508.Neur509_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur509"</span>,</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur509_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.Neur509' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 2.63%"
+[1] "The last percentile (99%) of the GDI values is: 1.4529"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Neur507</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.Neur507_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur507"</span>]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.Neur507_IsUniform, FB_Neur508.Neur507_HighGDIRatio,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.Neur507_LastPercentile, FB_Neur508.Neur507_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur507"</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.Neur507' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 3.76%"
+[1] "The last percentile (99%) of the GDI values is: 1.5202"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Cajal-Retzius cluster: Neur679</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.Neur679_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur679"</span>]</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.Neur679_IsUniform, FB_Neur508.Neur679_HighGDIRatio,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.Neur679_LastPercentile, FB_Neur508.Neur679_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur679"</span>,</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.Neur679' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 15.95%"
+[1] "The last percentile (99%) of the GDI values is: 2.1736"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Forebrain GABAergic cluster: Neur568</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.Neur568_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>]</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.Neur568_IsUniform, FB_Neur508.Neur568_HighGDIRatio,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.Neur568_LastPercentile, FB_Neur508.Neur568_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur568"</span>,</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.Neur568' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 21.27%"
+[1] "The last percentile (99%) of the GDI values is: 2.1539"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and Cajal-Retzius cluster: Neur679</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>FB_Neur509.Neur679_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>],</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur679"</span>]</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur509.Neur679_IsUniform, FB_Neur509.Neur679_HighGDIRatio,</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur509.Neur679_LastPercentile, FB_Neur509.Neur679_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.Neur679"</span>,</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur509.Neur679' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 14.34%"
+[1] "The last percentile (99%) of the GDI values is: 2.1308"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur507 and Cajal-Retzius cluster: Neur679</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>FB_Neur507.Neur679_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur507"</span>],</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur679"</span>]</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur507.Neur679_IsUniform, FB_Neur507.Neur679_HighGDIRatio,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur507.Neur679_LastPercentile, FB_Neur507.Neur679_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur507.Neur679"</span>,</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur507.Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur507.Neur679' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 8.6%"
+[1] "The last percentile (99%) of the GDI values is: 1.8754"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 40 cells taken from Cajal-Retzius cluster: Neur679</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur508 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur508 size: 397"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.s40oNeur679_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur679"</span>], <span class="dv">40</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.s40oNeur679_IsUniform, FB_Neur508.s40oNeur679_HighGDIRatio,</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.s40oNeur679_LastPercentile, FB_Neur508.s40oNeur679_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s40oNeur679"</span>,</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s40oNeur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.s40oNeur679' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 6.95%"
+[1] "The last percentile (99%) of the GDI values is: 1.8052"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 20 cells taken from Cajal-Retzius cluster: Neur679</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur508 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur508 size: 397"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.s20oNeur679_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur679"</span>], <span class="dv">20</span>)</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.s20oNeur679_IsUniform, FB_Neur508.s20oNeur679_HighGDIRatio,</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.s20oNeur679_LastPercentile, FB_Neur508.s20oNeur679_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s20oNeur679"</span>,</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s20oNeur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.s20oNeur679' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 4.3%"
+[1] "The last percentile (99%) of the GDI values is: 1.61"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 10 cells taken from Cajal-Retzius cluster: Neur679</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur508 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur508 size: 397"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.s10oNeur679_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur679"</span>], <span class="dv">10</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.s10oNeur679_IsUniform, FB_Neur508.s10oNeur679_HighGDIRatio,</span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.s10oNeur679_LastPercentile, FB_Neur508.s10oNeur679_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s10oNeur679"</span>,</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s10oNeur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.s10oNeur679' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 1.92%"
+[1] "The last percentile (99%) of the GDI values is: 1.4542"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 40 cells taken from all Neuron - non Cortical or hippocampal glutamatergic cells</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur508 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur508 size: 397"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.s40oNonCHGl_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"Subclass"</span>]] <span class="sc">!=</span> <span class="st">"Cortical or hippocampal glutamatergic"</span>], <span class="dv">40</span>)</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.s40oNonCHGl_IsUniform, FB_Neur508.s40oNonCHGl_HighGDIRatio,</span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.s40oNonCHGl_LastPercentile, FB_Neur508.s40oNonCHGl_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s40oNonCHGl"</span>,</span>
+<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s40oNonCHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.s40oNonCHGl' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 3.05%"
+[1] "The last percentile (99%) of the GDI values is: 1.514"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 20 cells taken from all Neuron - non Cortical or hippocampal glutamatergic cells</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur508 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur508 size: 397"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.s20oNonCHGl_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"Subclass"</span>]] <span class="sc">!=</span> <span class="st">"Cortical or hippocampal glutamatergic"</span>], <span class="dv">20</span>)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.s20oNonCHGl_IsUniform, FB_Neur508.s20oNonCHGl_HighGDIRatio,</span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.s20oNonCHGl_LastPercentile, FB_Neur508.s20oNonCHGl_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s20oNonCHGl"</span>,</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s20oNonCHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.s20oNonCHGl' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 1.15%"
+[1] "The last percentile (99%) of the GDI values is: 1.4091"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 10 cells taken from all Neuron - non Cortical or hippocampal glutamatergic cells</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur508 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur508 size: 397"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>FB_Neur508.s10oNonCHGl_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur508"</span>],</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"Subclass"</span>]] <span class="sc">!=</span> <span class="st">"Cortical or hippocampal glutamatergic"</span>], <span class="dv">10</span>)</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur508.s10oNonCHGl_IsUniform, FB_Neur508.s10oNonCHGl_HighGDIRatio,</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur508.s10oNonCHGl_LastPercentile, FB_Neur508.s10oNonCHGl_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s10oNonCHGl"</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s10oNonCHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur508.s10oNonCHGl' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0.67%"
+[1] "The last percentile (99%) of the GDI values is: 1.3853"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and 40 cells taken from Forebrain GABAergic cluster: Neur568</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur509 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur509 size: 402"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>FB_Neur509.s40oNeur568_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>],</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>], <span class="dv">40</span>)</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur509.s40oNeur568_IsUniform, FB_Neur509.s40oNeur568_HighGDIRatio,</span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur509.s40oNeur568_LastPercentile, FB_Neur509.s40oNeur568_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.s40oNeur568"</span>,</span>
+<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.s40oNeur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur509.s40oNeur568' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 4.59%"
+[1] "The last percentile (99%) of the GDI values is: 1.5904"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and 20 cells taken from Forebrain GABAergic cluster: Neur568</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur509 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur509 size: 402"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>FB_Neur509.s20oNeur568_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>],</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>], <span class="dv">20</span>)</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur509.s20oNeur568_IsUniform, FB_Neur509.s20oNeur568_HighGDIRatio,</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur509.s20oNeur568_LastPercentile, FB_Neur509.s20oNeur568_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.s20oNeur568"</span>,</span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.s20oNeur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur509.s20oNeur568' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 2.43%"
+[1] "The last percentile (99%) of the GDI values is: 1.4661"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and 10 cells taken from Forebrain GABAergic cluster: Neur568</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur509 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur509 size: 402"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>FB_Neur509.s10oNeur568_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur509"</span>],</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>], <span class="dv">10</span>)</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur509.s10oNeur568_IsUniform, FB_Neur509.s10oNeur568_HighGDIRatio,</span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur509.s10oNeur568_LastPercentile, FB_Neur509.s10oNeur568_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.s10oNeur568"</span>,</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.s10oNeur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur509.s10oNeur568' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 1.14%"
+[1] "The last percentile (99%) of the GDI values is: 1.4103"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Forebrain GABAergic cluster: Neur568 and 20 cells taken from Cortical or hippocampal glutamatergic cluster: Neur507</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur568 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur568 size: 181"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>FB_Neur568.s20oNeur507_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>],</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur507"</span>], <span class="dv">20</span>)</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb84-6"><a href="#cb84-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur568.s20oNeur507_IsUniform, FB_Neur568.s20oNeur507_HighGDIRatio,</span>
+<span id="cb84-7"><a href="#cb84-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur568.s20oNeur507_LastPercentile, FB_Neur568.s20oNeur507_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568.s20oNeur507"</span>,</span>
+<span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568.s20oNeur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur568.s20oNeur507' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 7.46%"
+[1] "The last percentile (99%) of the GDI values is: 1.7445"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Forebrain GABAergic cluster: Neur568 and 10 cells taken from Cortical or hippocampal glutamatergic cluster: Neur507</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur568 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur568 size: 181"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>FB_Neur568.s10oNeur507_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>],</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur507"</span>], <span class="dv">10</span>)</span>
+<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur568.s10oNeur507_IsUniform, FB_Neur568.s10oNeur507_HighGDIRatio,</span>
+<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur568.s10oNeur507_LastPercentile, FB_Neur568.s10oNeur507_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568.s10oNeur507"</span>,</span>
+<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568.s10oNeur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur568.s10oNeur507' is not uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 1.9%"
+[1] "The last percentile (99%) of the GDI values is: 1.4669"</code></pre>
+</div>
+</div>
+<p>Check uniformity of Forebrain GABAergic cluster: Neur568 and 5 cells taken from Cortical or hippocampal glutamatergic cluster: Neur507</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">639245</span>)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste0</span>(<span class="st">"Cluser Neur568 size: "</span>, <span class="fu">sum</span>(metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cluser Neur568 size: 181"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>FB_Neur568.s5oNeur507_Cells <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur568"</span>],</span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(<span class="fu">rownames</span>(metaNeuron)[metaNeuron[[<span class="st">"ClusterName"</span>]] <span class="sc">==</span> <span class="st">"Neur507"</span>], <span class="dv">5</span>)</span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(FB_Neur568.s5oNeur507_IsUniform, FB_Neur568.s5oNeur507_HighGDIRatio,</span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a>  FB_Neur568.s5oNeur507_LastPercentile, FB_Neur568.s5oNeur507_GDIPlot) <span class="sc">%&lt;-%</span></span>
+<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568.s5oNeur507"</span>,</span>
+<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568.s5oNeur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "The cluster 'Neur568.s5oNeur507' is uniform"
+[1] "The percentage of genes with GDI above 1.4 is: 0.48%"
+[1] "The last percentile (99%) of the GDI values is: 1.3517"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.0 (2023-04-21)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.6 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+
+locale:
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+
+time zone: Europe/Berlin
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] COTAN_2.1.5   zeallot_0.1.0 tibble_3.2.1  ggplot2_3.4.2
+
+loaded via a namespace (and not attached):
+  [1] RColorBrewer_1.1-3     rstudioapi_0.14        jsonlite_1.8.4        
+  [4] shape_1.4.6            umap_0.2.10.0          magrittr_2.0.3        
+  [7] spatstat.utils_3.0-3   farver_2.1.1           rmarkdown_2.21        
+ [10] GlobalOptions_0.1.2    vctrs_0.6.1            ROCR_1.0-11           
+ [13] spatstat.explore_3.2-1 askpass_1.1            htmltools_0.5.5       
+ [16] sctransform_0.3.5      parallelly_1.36.0      KernSmooth_2.23-20    
+ [19] htmlwidgets_1.6.2      ica_1.0-3              plyr_1.8.8            
+ [22] plotly_4.10.1          zoo_1.8-12             igraph_1.4.2          
+ [25] mime_0.12              lifecycle_1.0.3        iterators_1.0.14      
+ [28] pkgconfig_2.0.3        Matrix_1.5-4.1         R6_2.5.1              
+ [31] fastmap_1.1.1          fitdistrplus_1.1-8     future_1.32.0         
+ [34] shiny_1.7.4            clue_0.3-64            digest_0.6.31         
+ [37] colorspace_2.1-0       patchwork_1.1.2        S4Vectors_0.38.0      
+ [40] Seurat_4.3.0           tensor_1.5             RSpectra_0.16-1       
+ [43] irlba_2.3.5.1          labeling_0.4.2         progressr_0.13.0      
+ [46] RcppZiggurat_0.1.6     fansi_1.0.4            spatstat.sparse_3.0-1 
+ [49] httr_1.4.5             polyclip_1.10-4        abind_1.4-5           
+ [52] compiler_4.3.0         withr_2.5.0            doParallel_1.0.17     
+ [55] viridis_0.6.2          dendextend_1.17.1      MASS_7.3-59           
+ [58] openssl_2.0.6          rjson_0.2.21           tools_4.3.0           
+ [61] lmtest_0.9-40          httpuv_1.6.9           future.apply_1.11.0   
+ [64] goftest_1.2-3          glue_1.6.2             nlme_3.1-162          
+ [67] promises_1.2.0.1       grid_4.3.0             Rtsne_0.16            
+ [70] cluster_2.1.4          reshape2_1.4.4         generics_0.1.3        
+ [73] gtable_0.3.3           spatstat.data_3.0-1    tidyr_1.3.0           
+ [76] data.table_1.14.8      sp_1.6-0               utf8_1.2.3            
+ [79] BiocGenerics_0.46.0    spatstat.geom_3.2-1    RcppAnnoy_0.0.20      
+ [82] ggrepel_0.9.3          RANN_2.6.1             foreach_1.5.2         
+ [85] pillar_1.9.0           stringr_1.5.0          later_1.3.0           
+ [88] circlize_0.4.15        splines_4.3.0          dplyr_1.1.2           
+ [91] lattice_0.21-8         survival_3.5-5         deldir_1.0-6          
+ [94] tidyselect_1.2.0       ComplexHeatmap_2.16.0  miniUI_0.1.1.1        
+ [97] pbapply_1.7-0          knitr_1.42             gridExtra_2.3         
+[100] IRanges_2.34.0         scattermore_1.2        stats4_4.3.0          
+[103] xfun_0.39              factoextra_1.0.7       matrixStats_1.0.0     
+[106] stringi_1.7.12         lazyeval_0.2.2         yaml_2.3.7            
+[109] evaluate_0.20          codetools_0.2-19       cli_3.6.1             
+[112] RcppParallel_5.1.7     uwot_0.1.14            xtable_1.8-4          
+[115] reticulate_1.30        munsell_0.5.0          Rcpp_1.0.10           
+[118] globals_0.16.2         spatstat.random_3.1-4  png_0.1-8             
+[121] parallel_4.3.0         Rfast_2.0.7            ellipsis_0.3.2        
+[124] assertthat_0.2.1       parallelDist_0.2.6     listenv_0.9.0         
+[127] ggthemes_4.2.4         viridisLite_0.4.1      scales_1.2.1          
+[130] ggridges_0.5.4         SeuratObject_4.1.3     leiden_0.4.3          
+[133] purrr_1.0.1            crayon_1.5.2           GetoptLong_1.0.5      
+[136] rlang_1.1.0            cowplot_1.1.1         </code></pre>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

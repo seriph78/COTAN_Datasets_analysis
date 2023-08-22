@@ -31,7 +31,7 @@ sampleCondition <- "CorticalCells_GSM2861514_E175"
 cc175Obj <- COTAN(raw = dataset)
 cc175Obj <- initializeMetaDataset(cc175Obj,
                                   GEO = "GSM2861511_E135",
-                                  sequencingMethod = "Drop_seq",
+                                  sequencingMethod = "DropSeq",
                                   sampleCondition = sampleCondition)
 ```
 
@@ -62,7 +62,7 @@ genesSizePlot(cc175Obj)
 Drop cells with too high genes expession as they are probably duplets
 
 ```{r}
-genesSizeThr <- 2800
+genesSizeThr <- 3000
 cc175Obj <- addElementToMetaDataset(cc175Obj, "Num genes threshold", genesSizeThr)
 
 numExprGenes <- getNumExpressedGenes(cc175Obj)
@@ -87,7 +87,7 @@ plot(mitPlot)
 Cells with a too high percentage of mitocondrial genes are likely dead (or at the last problematic) cells. So we drop them!
 
 ```{r}
-mitPercThr <- 10.0
+mitPercThr <- 5.0
 cc175Obj <- addElementToMetaDataset(cc175Obj, "Mitoc. perc. threshold", mitPercThr)
 
 cells_to_rem <- rownames(mitSizes)[mitSizes[["mit.percentage"]] > mitPercThr]
@@ -112,10 +112,13 @@ Clean: round 1
 ```{r}
 cc175Obj <- clean(cc175Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc175Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, nuPlotZoomed) %<-%
+  cleanPlots(cc175Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
+
+cc175Obj <- addElementToMetaDataset(cc175Obj, "Num drop B group", 0)
 ```
 
 B group contains high number of hemoglobin genes: so they are not interesting
@@ -131,43 +134,25 @@ Clean: round 2
 ```{r}
 cc175Obj <- clean(cc175Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc175Obj)
-
-plot(pcaCellsPlot)
-plot(genesPlot)
-```
-
-B group contains just 3 cells quite different in the 3rd-5th components: better to drop them
-
-```{r}
-plot(pcaCellsData)
-
-cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
-
-cc175Obj <- dropGenesCells(cc175Obj, cells = cells_to_rem)
-```
-
-Clean: round 3
-
-```{r}
-cc175Obj <- clean(cc175Obj)
-
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc175Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, nuPlotZoomed) %<-%
+  cleanPlots(cc175Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
 
-cc175Obj <- addElementToMetaDataset(cc175Obj, "Num drop B group", 2)
+cc175Obj <- addElementToMetaDataset(cc175Obj, "Num drop B group", 1)
 ```
 
 Visualize if all is ok:
 
 ```{r}
+plot(pcaCellsData)
+
 plot(UDEPlot)
 
 plot(nuPlot)
 
-lowUDEThr <- 0.2 # the threshold to remove low UDE cells
+lowUDEThr <- 0.3 # the threshold to remove low UDE cells
 
 nuDf <- data.frame("nu" = sort(getNu(cc175Obj)), "n" = seq_along(getNu(cc175Obj)))
 UDEPlot_zoomed <- ggplot(nuDf, aes(x = n, y = nu)) +
@@ -186,6 +171,7 @@ plot(UDEPlot_zoomed)
 Drop very low UDE cells as they are likely outliers
 
 ```{r}
+lowUDEThr <- 0.2
 cc175Obj <- addElementToMetaDataset(cc175Obj, "Low UDE threshold", lowUDEThr)
 
 cells_to_rem <- rownames(nuDf)[nuDf[["nu"]] < lowUDEThr]
@@ -197,7 +183,8 @@ Final cleaning to check all is OK
 ```{r}
 cc175Obj <- clean(cc175Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc175Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, nuPlotZoomed) %<-%
+  cleanPlots(cc175Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -250,11 +237,11 @@ cc175Obj <- addClusterization(cc175Obj, clName = "split",
 table(splitClusters)
 ```
 
-```{r, eval=FALSE}
+```{r, eval=FALSE,echo=TRUE}
 saveRDS(cc175Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
 ```
 
-```{r, eval=FALSE,echo=TRUE}
+```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF, mergedPValueDF) %<-%
   mergeUniformCellsClusters(cc175Obj, clusters = splitClusters,
                             GDIThreshold = 1.4, cores = 13,
@@ -272,30 +259,6 @@ table(mergedClusters)
 saveRDS(cc175Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
 ```
 
-Retry dropping the unclustered cells \[spoiler: does not change anything!\]
-
-```{r eval=FALSE, echo=TRUE}
-cells_to_rem <- names(splitClusters)[splitClusters == "-1"]
-cc175Obj_2 <- dropGenesCells(cc175Obj, cells = cells_to_rem)
-
-cc175Obj_2 <- addElementToMetaDataset(cc175Obj_2, datasetTags()[["cond"]],
-                                      value = paste0(sampleCondition, "_2"))
-
-cc175Obj_2 <- clean(cc175Obj_2)
-cc175Obj_2 <- estimateDispersionBisection(cc175Obj_2, cores = 13)
-
-splitClusters_2 <- splitClusters[!names(splitClusters) %in% cells_to_rem]
-```
-
-```{r eval=FALSE, include=FALSE}
-c(mergedClusters_2, mergedCoexDF_2, mergedPValueDF_2) %<-%
-  mergeUniformCellsClusters(cc175Obj_2, clusters = splitClusters_2,
-                            GDIThreshold = 1.4, cores = 13,
-                            saveObj = TRUE, outDir = outDir)
-
-table(mergedClusters_2)
-```
-
 ```{r}
-#clustersMarkersHeatmapPlot(cc175Obj, groupMarkers, clName = "merge", kCuts = 4)
+sessionInfo()
 ```

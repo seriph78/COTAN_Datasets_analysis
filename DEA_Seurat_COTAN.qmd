@@ -1,0 +1,922 @@
+---
+title: "DEA comparison Seurat - Cotan"
+---
+
+```{r}
+library(ggplot2)
+library(tibble)
+library(zeallot)
+library(COTAN)
+library(plyr)
+library(scales) 
+library(rlang)
+library(Seurat)
+library(wordcloud)
+library(stringr)
+library(assertr)
+library(ggVennDiagram)
+library(ggplot2)
+library(tidyr)
+
+library(enrichR)
+
+websiteLive <- getOption("enrichR.live")
+if (websiteLive) dbs <- listEnrichrDbs()
+head(dbs)
+
+#dbs <- "Tabula_Muris"
+dbs <- "ARCHS4_Tissues"
+
+options(parallelly.fork.enable = TRUE)
+
+outDir <- "./e15.0_FD_CheckClustersUniformity"
+
+setLoggingLevel(1)
+setLoggingFile(file.path(outDir, "FindUniformGivenClustersInForebrainDorsal_E150.log"))
+```
+
+```{r}
+fb150ObjRaw <- readRDS(file = file.path("Data/MouseCortexFromLoom/SourceData/", "e15.0_ForebrainDorsal.cotan.RDS"))
+
+fb150Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "e15.0_ForebrainDorsal.cotan.RDS"))
+```
+
+Align to cleaned cells' list
+
+```{r}
+metaC <- getMetadataCells(fb150ObjRaw)[getCells(fb150Obj), ]
+
+#metaCDrop <- getMetadataCells(fb150ObjRaw)[!getCells(fb150ObjRaw) %in% getCells(fb150Obj), ]
+```
+
+Extract the cells of class 'Neuron'
+
+```{r}
+metaNeuron <- metaC[metaC[["Class"]] == "Neuron", ]
+
+sort(table(metaNeuron[["Subclass"]]), decreasing = TRUE)
+
+sort(table(metaNeuron[["ClusterName"]]), decreasing = TRUE)
+```
+```{r}
+cl.to.keep <- names(table(metaNeuron[["ClusterName"]])[table(metaNeuron[["ClusterName"]]) >= 20L])
+
+meta.to.keep <- metaNeuron[metaNeuron$ClusterName %in% cl.to.keep,]
+dim(meta.to.keep)
+dim(metaNeuron)
+```
+Dropped cell
+```{r}
+dim(metaNeuron)[1] - dim(meta.to.keep)[1]
+```
+Removing cells
+
+```{r}
+cell.to.drop <- getCells(fb150Obj)[!getCells(fb150Obj) %in% rownames(meta.to.keep)]
+
+fb150Obj <- dropGenesCells(fb150Obj,cells = cell.to.drop)
+
+dim(meta.to.keep)[1] == dim(getRawData(fb150Obj))[2]
+
+metaC <- getMetadataCells(fb150ObjRaw)[getCells(fb150Obj), ]
+
+```
+
+```{r}
+fb150Obj <- clean(fb150Obj)
+fb150Obj <- estimateDispersionBisection(fb150Obj)
+
+identical(rownames(fb150Obj@metaCells), rownames(metaC))
+
+fb150Obj@metaCells <- cbind(fb150Obj@metaCells,metaC)
+
+fb150Obj@metaCells[1:10,]
+```
+## Cotan differential expression
+
+DEA on Subclass groups formed by just three cell types: Cortical or hippocampal glutamatergic, Forebrain GABAergic  and Cajal-Retzius.
+
+```{r}
+clusters.cells <- set_names(fb150Obj@metaCells$Subclass,nm = rownames(fb150Obj@metaCells))
+dea.Subclass <- DEAOnClusters(fb150Obj,clusters = clusters.cells)
+
+head(dea.Subclass$coex)
+```
+
+DEA on ClusterName: 
+[1] "Neur492" "Neur493" "Neur494" "Neur497" "Neur498" "Neur499" "Neur501" "Neur502" "Neur504"
+[10] "Neur505" "Neur506" "Neur507" "Neur508" "Neur509" "Neur510" "Neur511" "Neur516" "Neur518"
+[19] "Neur519" "Neur524" "Neur525" "Neur526" "Neur560" "Neur565" "Neur566" "Neur568" "Neur573"
+[28] "Neur574" "Neur575" "Neur679"
+
+30 different cell groups.
+
+```{r}
+clusters.cells <- set_names(fb150Obj@metaCells$ClusterName,nm = rownames(fb150Obj@metaCells))
+dea.ClusterName <- DEAOnClusters(fb150Obj,clusters = clusters.cells)
+
+head(dea.ClusterName$coex)
+```
+## Seurat object creation
+
+```{r}
+seurat.obj <- CreateSeuratObject(counts = getRawData(fb150Obj), project = "fb15.0", min.cells = 3, min.features = 200)
+
+seurat.obj[["percent.mt"]] <- PercentageFeatureSet(seurat.obj, pattern = "^mt.")
+VlnPlot(seurat.obj, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
+
+```
+```{r}
+seurat.obj <- NormalizeData(seurat.obj, normalization.method = "LogNormalize", scale.factor = 10000)
+
+seurat.obj <- FindVariableFeatures(seurat.obj, selection.method = "vst", nfeatures = 2000)
+all.genes <- rownames(seurat.obj)
+seurat.obj <- ScaleData(seurat.obj, features = all.genes)
+
+seurat.obj <- RunPCA(seurat.obj, features = VariableFeatures(object = seurat.obj))
+
+DimPlot(seurat.obj)
+```
+```{r}
+ElbowPlot(seurat.obj,ndims = 50)
+```
+```{r}
+seurat.obj <- FindNeighbors(seurat.obj, dims = 1:25)
+seurat.obj <- FindClusters(seurat.obj, resolution = 0.5)
+seurat.obj <- RunUMAP(seurat.obj, dims = 1:25)
+```
+```{r}
+DimPlot(seurat.obj)
+```
+```{r}
+identical(rownames(seurat.obj@meta.data),rownames(metaC))
+seurat.obj@meta.data <- cbind(seurat.obj@meta.data, metaC)
+
+DimPlot(seurat.obj,group.by = "Subclass", label = TRUE)+NoLegend()
+```
+```{r}
+DimPlot(seurat.obj,group.by = "ClusterName", label = T, label.size = 3)+NoLegend()
+```
+
+```{r}
+seurat.obj <- SetIdent(seurat.obj,value = "Subclass")
+seurat.obj.markers.Subclass <- FindAllMarkers(seurat.obj, logfc.threshold = 0.1,min.pct = 0.01, only.pos = TRUE)
+
+head(seurat.obj.markers.Subclass)
+```
+```{r}
+ seurat.obj <- SetIdent(seurat.obj,value = "ClusterName")
+ seurat.obj.markers.ClusterName <- FindAllMarkers(seurat.obj,densify = TRUE, logfc.threshold = 0.1,min.pct = 0.01,only.pos = TRUE)
+ 
+head(seurat.obj.markers.ClusterName)
+```
+
+## Comparision COTAN-Seurat
+
+```{r}
+markers.list.names <- col_concat(crossing(colnames(dea.Subclass$coex),c("Seurat","Cotan")),sep = " ")
+
+markers.list <- vector("list", length(markers.list.names))
+names(markers.list) <- markers.list.names
+
+# I take positive coex significant genes 
+for (cl.name in colnames(dea.Subclass$coex)) {
+  genes <- rownames(dea.Subclass$coex[dea.Subclass$`p-value`[,cl.name] < 0.01 & dea.Subclass$coex[,cl.name] > 0,])
+  markers.list[[paste0(cl.name," Cotan")]] <- genes
+}
+
+#For seurat
+for (cl.name in colnames(dea.Subclass$coex)) {
+  genes <- seurat.obj.markers.Subclass[seurat.obj.markers.Subclass$cluster == cl.name & seurat.obj.markers.Subclass$p_val < 0.01,]$gene
+  markers.list[[paste0(cl.name," Seurat")]] <- genes
+}
+
+
+```
+### Cajal-Retzius subclass
+
+```{r}
+ggvenn.CR <- ggVennDiagram(markers.list[1:2])
+ggvenn.CR
+```
+
+We can observe that there is a good overlap among the detected markers.
+
+
+
+
+```{r}
+genes.to.test <- markers.list$`Cajal-Retzius Seurat`[!markers.list$`Cajal-Retzius Seurat` %in% markers.list$`Cajal-Retzius Cotan`]
+
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Seurat Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#E69F00", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 50)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+```{r}
+set.seed(111)
+genes <- sample(genes.to.test,size = 12)
+genes
+```
+```{r}
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+```
+
+Generally if we look at the genes specifically detected by Seurat, they don't seems so distinctive for CR cells.
+
+```{r}
+sum(genes.to.test %in% markers.list$`Cortical or hippocampal glutamatergic Seurat`)/length(genes.to.test)
+```
+
+
+```{r}
+genes.to.test.Cotan <- markers.list$`Cajal-Retzius Cotan`[!markers.list$`Cajal-Retzius Cotan` %in% markers.list$`Cajal-Retzius Seurat`]
+
+set.seed(11)
+genes <- sample(genes.to.test.Cotan,size = 30)
+genes
+
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+
+```
+```{r}
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test.Cotan]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Cotan Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#C69AFF", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 25)+xlim(0,4800)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+Now we can test the enrichment for the specific gene both in Seurat and in Cotan.
+
+To make a comparison more equal we select the same number of genes (depending on the smallest group)
+
+
+```{r}
+genes.to.testTop <- seurat.obj.markers.Subclass[seurat.obj.markers.Subclass$cluster == "Cajal-Retzius" & seurat.obj.markers.Subclass$gene %in% genes.to.test,]$gene[1:length(genes.to.test.Cotan)]
+
+
+enriched <- enrichr(genes.to.testTop, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+```{r, fig.height=10}
+set.seed(123)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:20],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:20])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+
+
+```{r}
+enriched <- enrichr(genes.to.test.Cotan, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+
+
+```{r, fig.height=10}
+set.seed(123)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:20],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:20])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+### Cortical or hippocampal glutamatergic subclass
+
+```{r}
+ggvenn.CHG <- ggVennDiagram(markers.list[3:4])
+ggvenn.CHG
+```
+
+
+```{r}
+genes.to.test <- markers.list$`Cortical or hippocampal glutamatergic Seurat`[!markers.list$`Cortical or hippocampal glutamatergic Seurat` %in% markers.list$`Cortical or hippocampal glutamatergic Cotan`]
+
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Seurat Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+library(plyr)
+library(scales) 
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#E69F00", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 50)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+```{r}
+set.seed(111)
+genes <- sample(genes.to.test,size = 18)
+genes
+```
+```{r}
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+```
+
+
+```{r}
+genes.to.test.Cotan <- markers.list$`Cortical or hippocampal glutamatergic Cotan`[!markers.list$`Cortical or hippocampal glutamatergic Cotan` %in% markers.list$`Cortical or hippocampal glutamatergic Seurat`]
+
+set.seed(11)
+genes <- sample(genes.to.test.Cotan,size = 30)
+genes
+
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+
+```
+```{r}
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test.Cotan]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Cotan Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#C69AFF", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 25)+xlim(0,4800)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+
+```{r}
+genes.to.testTop <- seurat.obj.markers.Subclass[seurat.obj.markers.Subclass$cluster == "Cortical or hippocampal glutamatergic" & seurat.obj.markers.Subclass$gene %in% genes.to.test,]$gene[1:length(genes.to.test.Cotan)]
+
+
+enriched <- enrichr(genes.to.testTop, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+```{r, fig.height=10}
+set.seed(12333)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:8],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:8])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(2, 0.5), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+```{r}
+enriched <- enrichr(genes.to.test.Cotan, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+
+
+```{r, fig.height=10}
+set.seed(1233)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:20],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:20])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+### Forebrain GABAergic subclass
+
+```{r}
+ggvenn.FGaba <- ggVennDiagram(markers.list[5:6])
+ggvenn.FGaba
+```
+
+
+```{r}
+genes.to.test <- markers.list$`Forebrain GABAergic Seurat`[!markers.list$`Forebrain GABAergic Seurat` %in% markers.list$`Forebrain GABAergic Cotan`]
+
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Seurat Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+library(plyr)
+library(scales) 
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#E69F00", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 50)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+```{r}
+set.seed(111)
+genes <- sample(genes.to.test,size = 18)
+genes
+```
+```{r}
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+```
+
+
+```{r}
+genes.to.test.Cotan <- markers.list$`Forebrain GABAergic Cotan`[!markers.list$`Forebrain GABAergic Cotan` %in% markers.list$`Forebrain GABAergic Seurat`]
+
+set.seed(11)
+genes <- sample(genes.to.test.Cotan,size = 30)
+genes
+
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+
+```
+```{r}
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test.Cotan]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Cotan Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#C69AFF", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 25)+xlim(0,4800)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+
+```{r}
+
+enriched <- enrichr(genes.to.test, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+```{r, fig.height=10}
+set.seed(12333)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:5],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:5])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+```{r}
+subset.pval <- dea.Subclass$`p-value`[rownames(dea.Subclass$`p-value`) %in% genes.to.test.Cotan,]
+
+genes.to.test.Cotan.Top <- rownames(subset.pval[order(subset.pval$`Forebrain GABAergic`,decreasing = F),])[1:length(genes.to.test)]
+
+enriched <- enrichr(genes.to.test.Cotan.Top, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+
+
+```{r, fig.height=10}
+set.seed(123)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term,pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score)
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+### Cluster Neur509
+
+```{r}
+# markers.list.namesNeur509 <- col_concat(crossing(colnames(dea.ClusterName$coex),c("Seurat","Cotan")),sep = " ")
+# 
+# markers.listNeur509 <- vector("list", length(markers.list.namesNeur509))
+# names(markers.listNeur509) <- markers.list.namesNeur509
+
+markers.listNeur509 <- list("Neur509 Cotan"=NA,"Neur509 Seurat"=NA)
+
+# I take positive coex significant genes 
+for (cl.name in "Neur509") {
+  genes <- rownames(dea.ClusterName$coex[dea.ClusterName$`p-value`[,cl.name] < 0.01 & dea.ClusterName$coex[,cl.name] > 0,])
+  markers.listNeur509[[paste0(cl.name," Cotan")]] <- genes
+}
+
+#For seurat
+for (cl.name in "Neur509") {
+  genes <- seurat.obj.markers.ClusterName[seurat.obj.markers.ClusterName$cluster == cl.name & seurat.obj.markers.ClusterName$p_val < 0.01,]$gene
+  markers.listNeur509[[paste0(cl.name," Seurat")]] <- genes
+}
+
+```
+
+
+```{r}
+ggVennDiagram(markers.listNeur509)
+```
+
+We can observe that there is a good overlap among the detected markers.
+
+
+```{r}
+genes.to.test <- markers.listNeur509$`Neur509 Seurat`[!markers.listNeur509$`Neur509 Seurat` %in% markers.listNeur509$`Neur509 Cotan`]
+
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Seurat Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#E69F00", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 25)+xlim(0,4800)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent of genes") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+```{r}
+set.seed(111)
+genes <- sample(genes.to.test,size = 12)
+genes
+```
+```{r}
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+```
+
+Generally if we look at the genes specifically detected by Seurat, they don't seems so distinctive for CR cells.
+
+```{r}
+sum(genes.to.test %in% markers.listNeur509$`Cortical or hippocampal glutamatergic Seurat`)/length(genes.to.test)
+```
+
+
+```{r}
+genes.to.test.Cotan <- markers.listNeur509$`Neur509 Cotan`[!markers.listNeur509$`Neur509 Cotan` %in% markers.listNeur509$`Neur509 Seurat`]
+
+set.seed(11)
+genes <- sample(genes.to.test.Cotan,size = 30)
+genes
+
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+
+```
+```{r}
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test.Cotan]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Cotan Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#C69AFF", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 25)+xlim(0,4800)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+
+Now we can test the enrichment for the specific gene both in Seurat and in Cotan.
+
+To make a comparison more equal we select the same number of genes (depending on the smallest group)
+
+
+```{r}
+genes.to.testTop <- seurat.obj.markers.ClusterName[seurat.obj.markers.ClusterName$cluster == "Neur509" & seurat.obj.markers.ClusterName$gene %in% genes.to.test,]$gene[1:length(genes.to.test.Cotan)]
+
+
+enriched <- enrichr(genes.to.testTop, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+```{r, fig.height=10}
+set.seed(123)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:20],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:20])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+
+
+```{r}
+enriched <- enrichr(genes.to.test.Cotan, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+
+
+```{r, fig.height=10}
+set.seed(123)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:20],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:20])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+### Cluster Neur508
+
+```{r}
+# markers.list.namesNeur508 <- col_concat(crossing(colnames(dea.ClusterName$coex),c("Seurat","Cotan")),sep = " ")
+# 
+# markers.listNeur508 <- vector("list", length(markers.list.namesNeur508))
+# names(markers.listNeur508) <- markers.list.namesNeur508
+
+markers.listNeur508 <- list("Neur508 Cotan"=NA,"Neur508 Seurat"=NA)
+
+# I take positive coex significant genes 
+for (cl.name in "Neur508") {
+  genes <- rownames(dea.ClusterName$coex[dea.ClusterName$`p-value`[,cl.name] < 0.01 & dea.ClusterName$coex[,cl.name] > 0,])
+  markers.listNeur508[[paste0(cl.name," Cotan")]] <- genes
+}
+
+#For seurat
+for (cl.name in "Neur508") {
+  genes <- seurat.obj.markers.ClusterName[seurat.obj.markers.ClusterName$cluster == cl.name & seurat.obj.markers.ClusterName$p_val < 0.01,]$gene
+  markers.listNeur508[[paste0(cl.name," Seurat")]] <- genes
+}
+
+```
+
+
+```{r}
+ggVennDiagram(markers.listNeur508)
+```
+
+We can observe that there is a good overlap among the detected markers.
+
+
+```{r}
+genes.to.test <- markers.listNeur508$`Neur508 Seurat`[!markers.listNeur508$`Neur508 Seurat` %in% markers.listNeur508$`Neur508 Cotan`]
+
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Seurat Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#E69F00", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 50)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+
+```
+```{r}
+set.seed(111)
+genes <- sample(genes.to.test,size = 12)
+genes
+```
+```{r}
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+```
+
+Generally if we look at the genes specifically detected by Seurat, they don't seems so distinctive for CR cells.
+
+```{r}
+sum(genes.to.test %in% markers.listNeur508$`Cortical or hippocampal glutamatergic Seurat`)/length(genes.to.test)
+```
+
+
+```{r}
+genes.to.test.Cotan <- markers.listNeur508$`Neur508 Cotan`[!markers.listNeur508$`Neur508 Cotan` %in% markers.listNeur508$`Neur508 Seurat`]
+
+
+
+set.seed(11)
+genes <- sample(genes.to.test.Cotan,size = 30)
+genes
+
+n=0
+for (g in c(0:2)) {
+  n = g*4
+  plot(FeaturePlot(seurat.obj,features = genes[n+c(1:4)], label = T))
+}
+
+```
+```{r}
+df <- getNumOfExpressingCells(fb150Obj)[genes.to.test.Cotan]
+df <- as.data.frame(df)
+colnames(df) <- "CellNumber"
+rownames(df) <- NULL
+df$type <- "Only Cotan Genes"
+
+df.bk <- as.data.frame(getNumOfExpressingCells(fb150Obj)[sample(getGenes(fb150Obj), size = length(rownames(df)))])
+rownames(df.bk) <- NULL
+colnames(df.bk) <- "CellNumber"
+df.bk$type <- "Whole dataset Genes"
+df <- rbind(df,df.bk)
+
+mu <- ddply(df, "type", summarise, grp.mean=mean(CellNumber))
+
+ggplot(df,aes(x=CellNumber,fill=type))+
+  scale_fill_manual(values=c("#C69AFF", "#56B4E9"))+
+  geom_histogram(aes(y=..density..), position="identity", alpha=0.5,bins = 25)+xlim(0,4800)+
+  geom_vline(data=mu, aes(xintercept=grp.mean, color=type),
+           linetype="dashed")+
+  geom_density(alpha=0.6)+
+  scale_y_continuous(labels = percent, name = "percent") +
+  theme_classic()+
+  theme(legend.position="bottom")
+```
+
+Now we can test the enrichment for the specific gene both in Seurat and in Cotan.
+
+To make a comparison more equal we select the same number of genes (depending on the smallest group)
+
+
+```{r}
+#genes.to.testTop <- seurat.obj.markers.ClusterName[seurat.obj.markers.ClusterName$cluster == "Neur508" & seurat.obj.markers.ClusterName$gene %in% genes.to.test,]$gene[1:length(genes.to.test.Cotan)]
+
+
+enriched <- enrichr(genes.to.test, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+```{r, fig.height=10}
+set.seed(123)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:20],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:20])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+
+```{r}
+subset.pval <- dea.ClusterName$`p-value`[rownames(dea.ClusterName$`p-value`) %in% genes.to.test.Cotan,]
+
+genes.to.test.Cotan.Top <- rownames(subset.pval[order(subset.pval$Neur492,decreasing = F),])[1:length(genes.to.test)]
+
+
+
+enriched <- enrichr(genes.to.test.Cotan.Top, dbs)
+
+plotEnrich(enriched[[1]], showTerms = 10, numChar = 40, y = "Count", orderBy = "P.value")
+```
+
+
+```{r, fig.height=10}
+set.seed(123)
+wordcloud_data <- data.frame(Terms = str_split(enriched[[1]]$Term[1:20],pattern = " CL",simplify = T )[,1],
+                             Scores = enriched[[1]]$Combined.Score[1:20])
+
+wordcloud(wordcloud_data$Terms, wordcloud_data$Scores, scale = c(3, 1), min.freq = 1, random.order=FALSE, rot.per=0.1,colors=brewer.pal(8, "Dark2"))
+```
+
+
+
+```{r}
+ggVennDiagram(markers.list[c(1,3,5)])
+```
+```{r}
+ggVennDiagram(markers.list[c(2,4,6)])
+```
+
+```{r}
+sessionInfo()
+```
+
+
+

@@ -1,0 +1,2956 @@
+Cotan analysis functions started
+Genes/cells selection done: dropped [1380] genes and [0] cells
+Working on [12477] genes and [145] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:950] to [11528:12477]
+Estimate dispersion: DONE
+dispersion | min: -0.437744140625 | max: 546 | % negative: 47.0946541636611
+Only analysis time 0.0254308025042216
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.311167990680027
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.395679918924967
+Total time 0.428774491945903
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 22 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1941] genes and [0] cells
+Working on [11916] genes and [610] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:983] to [10934:11916]
+Estimate dispersion: DONE
+dispersion | min: -0.102798461914062 | max: 486.5 | % negative: 30.580731789191
+Only analysis time 0.0386111696561178
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.177771532838059
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.709334580103556
+Total time 0.75826860666275
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 4 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1020] genes and [0] cells
+Working on [12837] genes and [3969] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:977] to [11861:12837]
+Estimate dispersion: DONE
+dispersion | min: -0.0607662200927734 | max: 463.5 | % negative: 8.42876061385059
+Only analysis time 0.567728511492411
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.0365391542836716
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 3.79655803839366
+Total time 4.38172098000844
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 3 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1725] genes and [0] cells
+Working on [12132] genes and [105] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1001] to [11132:12132]
+Estimate dispersion: DONE
+dispersion | min: -0.496337890625 | max: 397 | % negative: 50.7995384108144
+Only analysis time 0.0276211778322856
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.338955029932698
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.393380681673686
+Total time 0.431094249089559
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 48 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3589] genes and [0] cells
+Working on [10268] genes and [181] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:925] to [9344:10268]
+Estimate dispersion: DONE
+dispersion | min: -0.3292236328125 | max: 270 | % negative: 50.3992987923646
+Only analysis time 0.027123216787974
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.304769313567868
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.307524065176646
+Total time 0.342775058746338
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 19 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1412] genes and [0] cells
+Working on [12445] genes and [826] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:947] to [11499:12445]
+Estimate dispersion: DONE
+dispersion | min: -0.178955078125 | max: 575 | % negative: 28.0112494977903
+Only analysis time 0.0447049180666606
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.128095537446558
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.91951466401418
+Total time 0.973800265789032
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 8 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1811] genes and [0] cells
+Working on [12046] genes and [397] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:994] to [11053:12046]
+Estimate dispersion: DONE
+dispersion | min: -0.25341796875 | max: 567 | % negative: 39.183131329902
+Only analysis time 0.0329014539718628
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.20911044890439
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.577597995599111
+Total time 0.619159805774689
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 32 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1690] genes and [0] cells
+Working on [12167] genes and [402] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1004] to [11164:12167]
+Estimate dispersion: DONE
+dispersion | min: -0.42919921875 | max: 597 | % negative: 36.8126900632859
+Only analysis time 0.0331206520398458
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.20309860738732
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.585548325379689
+Total time 0.627341194947561
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 38 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [2489] genes and [0] cells
+Working on [11368] genes and [183] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:938] to [10431:11368]
+Estimate dispersion: DONE
+dispersion | min: -0.69921875 | max: 222 | % negative: 45.4081632653061
+Only analysis time 0.0261543432871501
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.212341543967883
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.381925634543101
+Total time 0.417209633191427
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 54 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1483] genes and [0] cells
+Working on [12374] genes and [799] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:942] to [11433:12374]
+Estimate dispersion: DONE
+dispersion | min: -0.1083984375 | max: 435.75 | % negative: 28.7376757717795
+Only analysis time 0.0424938718477885
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.143841009088787
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.911109511057536
+Total time 0.963469990094503
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 22 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1775] genes and [0] cells
+Working on [12082] genes and [580] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:997] to [11086:12082]
+Estimate dispersion: DONE
+dispersion | min: -0.1591796875 | max: 439 | % negative: 32.767753683165
+Only analysis time 0.0367710073788961
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.145413346463652
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.773559232552846
+Total time 0.819519833723704
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 28 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1616] genes and [0] cells
+Working on [12241] genes and [502] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1010] to [11232:12241]
+Estimate dispersion: DONE
+dispersion | min: -0.1475830078125 | max: 490 | % negative: 31.2882934400784
+Only analysis time 0.0343634764353434
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.143645586678508
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.700238068898519
+Total time 0.744016734759013
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 19 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1913] genes and [0] cells
+Working on [11944] genes and [578] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:986] to [10959:11944]
+Estimate dispersion: DONE
+dispersion | min: -0.1513671875 | max: 559.5 | % negative: 33.4058941728064
+Only analysis time 0.0367381453514099
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.150820474618963
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.721668942769368
+Total time 0.767575967311859
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 13 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1517] genes and [0] cells
+Working on [12340] genes and [507] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:939] to [11402:12340]
+Estimate dispersion: DONE
+dispersion | min: -0.13592529296875 | max: 309.5 | % negative: 29.4489465153971
+Only analysis time 0.0348378777503967
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.143420457325774
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.706949071089427
+Total time 0.751020805040995
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 25 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1480] genes and [0] cells
+Working on [12377] genes and [288] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:942] to [11436:12377]
+Estimate dispersion: DONE
+dispersion | min: -0.25 | max: 426 | % negative: 37.2384261129514
+Only analysis time 0.0299814701080322
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.190938939340849
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.567969930171967
+Total time 0.606675903002421
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 26 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1418] genes and [0] cells
+Working on [12439] genes and [437] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:947] to [11493:12439]
+Estimate dispersion: DONE
+dispersion | min: -0.270751953125 | max: 436.5 | % negative: 35.4690891550768
+Only analysis time 0.0327820261319478
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.203674019246075
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.65247315565745
+Total time 0.693916110197703
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 21 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1562] genes and [0] cells
+Working on [12295] genes and [417] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:936] to [11360:12295]
+Estimate dispersion: DONE
+dispersion | min: -0.27734375 | max: 595.5 | % negative: 36.567710451403
+Only analysis time 0.0332196990648905
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.207191142280571
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.687761636575063
+Total time 0.729492286841075
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 27 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1643] genes and [0] cells
+Working on [12214] genes and [407] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1008] to [11207:12214]
+Estimate dispersion: DONE
+dispersion | min: -0.263671875 | max: 581 | % negative: 37.7353856230555
+Only analysis time 0.0321614543596903
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.210772268940288
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.619292223453522
+Total time 0.660065774122874
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 29 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1464] genes and [0] cells
+Working on [12393] genes and [437] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:943] to [11451:12393]
+Estimate dispersion: DONE
+dispersion | min: -0.118698120117188 | max: 670 | % negative: 36.4722020495441
+Only analysis time 0.0338426073392232
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.208973164003411
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.656623824437459
+Total time 0.699181612332662
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 8 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1579] genes and [0] cells
+Working on [12278] genes and [417] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1013] to [11266:12278]
+Estimate dispersion: DONE
+dispersion | min: -0.268798828125 | max: 416.75 | % negative: 37.3269262094804
+Only analysis time 0.0326585094134013
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.212672338855178
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.629537864526113
+Total time 0.670975657304128
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 25 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1659] genes and [0] cells
+Working on [12198] genes and [407] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1007] to [11192:12198]
+Estimate dispersion: DONE
+dispersion | min: -0.27099609375 | max: 423 | % negative: 38.1373995737006
+Only analysis time 0.0330776929855347
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.212520020207603
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.616016376018524
+Total time 0.658186797300975
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 26 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1545] genes and [0] cells
+Working on [12312] genes and [442] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:937] to [11376:12312]
+Estimate dispersion: DONE
+dispersion | min: -0.25146484375 | max: 653 | % negative: 35.6237816764133
+Only analysis time 0.034823751449585
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.200163530232948
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.628734854857127
+Total time 0.672268827756246
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 22 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1610] genes and [0] cells
+Working on [12247] genes and [422] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1011] to [11237:12247]
+Estimate dispersion: DONE
+dispersion | min: -0.191162109375 | max: 625 | % negative: 35.9516616314199
+Only analysis time 0.0343081514040629
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.200980943786231
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.62352925936381
+Total time 0.666627736886342
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 26 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1644] genes and [0] cells
+Working on [12213] genes and [412] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1008] to [11206:12213]
+Estimate dispersion: DONE
+dispersion | min: -0.26806640625 | max: 611 | % negative: 36.2646360435601
+Only analysis time 0.034738294283549
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.202227247643558
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.619030046463013
+Total time 0.662531435489655
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 31 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3092] genes and [0] cells
+Working on [10765] genes and [201] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:970] to [9796:10765]
+Estimate dispersion: DONE
+dispersion | min: -0.282470703125 | max: 297 | % negative: 47.9424059451928
+Only analysis time 0.0273507634798686
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.283245399603558
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.33230322599411
+Total time 0.368031231562297
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 17 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3333] genes and [0] cells
+Working on [10524] genes and [191] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:949] to [9576:10524]
+Estimate dispersion: DONE
+dispersion | min: -0.346435546875 | max: 284 | % negative: 49.1543139490688
+Only analysis time 0.0260602315266927
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.298522585182517
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.310252626736959
+Total time 0.344993444283803
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 17 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3457] genes and [0] cells
+Working on [10400] genes and [186] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:937] to [9464:10400]
+Estimate dispersion: DONE
+dispersion | min: -0.34130859375 | max: 277 | % negative: 49.5673076923077
+Only analysis time 0.0272968967755636
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.300261162018445
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.297855365276337
+Total time 0.333717278639475
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 18 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1380] genes and [0] cells
+Working on [12477] genes and [145] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:950] to [11528:12477]
+Estimate dispersion: DONE
+dispersion | min: -0.437744140625 | max: 546 | % negative: 47.0946541636611
+Only analysis time 0.0201420108477275
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.311167990680027
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.397840404510498
+Total time 0.42374685605367
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 22 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1941] genes and [0] cells
+Working on [11916] genes and [610] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:983] to [10934:11916]
+Estimate dispersion: DONE
+dispersion | min: -0.102798461914062 | max: 486.5 | % negative: 30.580731789191
+Only analysis time 0.0345782438913981
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.177771532838059
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.814943766593933
+Total time 0.857641871770223
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 4 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1020] genes and [0] cells
+Working on [12837] genes and [3969] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:977] to [11861:12837]
+Estimate dispersion: DONE
+dispersion | min: -0.0607662200927734 | max: 463.5 | % negative: 8.42876061385059
+Only analysis time 0.184815359115601
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.0365391542836716
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 3.85520468552907
+Total time 4.05499420166016
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 3 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1725] genes and [0] cells
+Working on [12132] genes and [105] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1001] to [11132:12132]
+Estimate dispersion: DONE
+dispersion | min: -0.496337890625 | max: 397 | % negative: 50.7995384108144
+Only analysis time 0.0224638938903809
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.338955029932698
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.389390250047048
+Total time 0.419020660718282
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 48 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3589] genes and [0] cells
+Working on [10268] genes and [181] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:925] to [9344:10268]
+Estimate dispersion: DONE
+dispersion | min: -0.3292236328125 | max: 270 | % negative: 50.3992987923646
+Only analysis time 0.0242607911427816
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.304769313567868
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.333772623538971
+Total time 0.364951447645823
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 19 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1412] genes and [0] cells
+Working on [12445] genes and [826] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:947] to [11499:12445]
+Estimate dispersion: DONE
+dispersion | min: -0.178955078125 | max: 575 | % negative: 28.0112494977903
+Only analysis time 0.0432450373967489
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.128095537446558
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 1.03769681453705
+Total time 1.0889951745669
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 8 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1811] genes and [0] cells
+Working on [12046] genes and [397] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:994] to [11053:12046]
+Estimate dispersion: DONE
+dispersion | min: -0.25341796875 | max: 567 | % negative: 39.183131329902
+Only analysis time 0.0305099844932556
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.20911044890439
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.663037761052449
+Total time 0.701201542218526
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 32 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1690] genes and [0] cells
+Working on [12167] genes and [402] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1004] to [11164:12167]
+Estimate dispersion: DONE
+dispersion | min: -0.42919921875 | max: 597 | % negative: 36.8126900632859
+Only analysis time 0.0297585765520732
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.20309860738732
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.651348153750102
+Total time 0.688508792718251
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 38 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [2489] genes and [0] cells
+Working on [11368] genes and [183] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:938] to [10431:11368]
+Estimate dispersion: DONE
+dispersion | min: -0.69921875 | max: 222 | % negative: 45.4081632653061
+Only analysis time 0.0244572202364604
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.212341543967883
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.406210649013519
+Total time 0.437596940994263
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 54 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1483] genes and [0] cells
+Working on [12374] genes and [799] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:942] to [11433:12374]
+Estimate dispersion: DONE
+dispersion | min: -0.1083984375 | max: 435.75 | % negative: 28.7376757717795
+Only analysis time 0.0422072688738505
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.143841009088787
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.968251725037893
+Total time 1.01861828962962
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 22 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1775] genes and [0] cells
+Working on [12082] genes and [580] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:997] to [11086:12082]
+Estimate dispersion: DONE
+dispersion | min: -0.1591796875 | max: 439 | % negative: 32.767753683165
+Only analysis time 0.0344819744427999
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.145413346463652
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.778581078847249
+Total time 0.821252393722534
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 28 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1616] genes and [0] cells
+Working on [12241] genes and [502] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1010] to [11232:12241]
+Estimate dispersion: DONE
+dispersion | min: -0.1475830078125 | max: 490 | % negative: 31.2882934400784
+Only analysis time 0.0313103278477987
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.143645586678508
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.708014269669851
+Total time 0.746631451447805
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 19 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1913] genes and [0] cells
+Working on [11944] genes and [578] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:986] to [10959:11944]
+Estimate dispersion: DONE
+dispersion | min: -0.1513671875 | max: 559.5 | % negative: 33.4058941728064
+Only analysis time 0.0335759282112122
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.150820474618963
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.715913867950439
+Total time 0.757049636046092
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 13 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1517] genes and [0] cells
+Working on [12340] genes and [507] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:939] to [11402:12340]
+Estimate dispersion: DONE
+dispersion | min: -0.13592529296875 | max: 309.5 | % negative: 29.4489465153971
+Only analysis time 0.0351295630137126
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.143420457325774
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.760776404539744
+Total time 0.80400349299113
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 25 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1480] genes and [0] cells
+Working on [12377] genes and [288] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:942] to [11436:12377]
+Estimate dispersion: DONE
+dispersion | min: -0.25 | max: 426 | % negative: 37.2384261129514
+Only analysis time 0.0269984523455302
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.190938939340849
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.542103238900502
+Total time 0.57649302482605
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 26 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1418] genes and [0] cells
+Working on [12439] genes and [437] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:947] to [11493:12439]
+Estimate dispersion: DONE
+dispersion | min: -0.270751953125 | max: 436.5 | % negative: 35.4690891550768
+Only analysis time 0.0304168701171875
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.203674019246075
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.680343778928121
+Total time 0.718558096885681
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 21 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1562] genes and [0] cells
+Working on [12295] genes and [417] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:936] to [11360:12295]
+Estimate dispersion: DONE
+dispersion | min: -0.27734375 | max: 595.5 | % negative: 36.567710451403
+Only analysis time 0.0316064675649007
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.207191142280571
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.684912387530009
+Total time 0.724049433072408
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 27 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1643] genes and [0] cells
+Working on [12214] genes and [407] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1008] to [11207:12214]
+Estimate dispersion: DONE
+dispersion | min: -0.263671875 | max: 581 | % negative: 37.7353856230555
+Only analysis time 0.0301550229390462
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.210772268940288
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.67488538424174
+Total time 0.712749699751536
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 29 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1464] genes and [0] cells
+Working on [12393] genes and [437] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:943] to [11451:12393]
+Estimate dispersion: DONE
+dispersion | min: -0.118698120117188 | max: 670 | % negative: 36.4722020495441
+Only analysis time 0.0314006527264913
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.208973164003411
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.711145706971486
+Total time 0.749908765157064
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 8 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1579] genes and [0] cells
+Working on [12278] genes and [417] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1013] to [11266:12278]
+Estimate dispersion: DONE
+dispersion | min: -0.268798828125 | max: 416.75 | % negative: 37.3269262094804
+Only analysis time 0.0309915542602539
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.212672338855178
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.676444721221924
+Total time 0.715379699071248
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 25 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1659] genes and [0] cells
+Working on [12198] genes and [407] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1007] to [11192:12198]
+Estimate dispersion: DONE
+dispersion | min: -0.27099609375 | max: 423 | % negative: 38.1373995737006
+Only analysis time 0.0316270629564921
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.212520020207603
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.666886055469513
+Total time 0.706446051597595
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 26 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1545] genes and [0] cells
+Working on [12312] genes and [442] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 13 genes batches from [1:937] to [11376:12312]
+Estimate dispersion: DONE
+dispersion | min: -0.25146484375 | max: 653 | % negative: 35.6237816764133
+Only analysis time 0.0318392793337504
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.200163530232948
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.708083283901215
+Total time 0.748524113496145
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 22 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1610] genes and [0] cells
+Working on [12247] genes and [422] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1011] to [11237:12247]
+Estimate dispersion: DONE
+dispersion | min: -0.191162109375 | max: 625 | % negative: 35.9516616314199
+Only analysis time 0.0305485208829244
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.200980943786231
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.693948026498159
+Total time 0.732995903491974
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 26 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [1644] genes and [0] cells
+Working on [12213] genes and [412] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 12 genes batches from [1:1008] to [11206:12213]
+Estimate dispersion: DONE
+dispersion | min: -0.26806640625 | max: 611 | % negative: 36.2646360435601
+Only analysis time 0.031098469098409
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.202227247643558
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.664397831757863
+Total time 0.703837287425995
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 31 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3092] genes and [0] cells
+Working on [10765] genes and [201] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:970] to [9796:10765]
+Estimate dispersion: DONE
+dispersion | min: -0.282470703125 | max: 297 | % negative: 47.9424059451928
+Only analysis time 0.0253219644228617
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.283245399603558
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.381521546840668
+Total time 0.414354646205902
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 17 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3333] genes and [0] cells
+Working on [10524] genes and [191] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:949] to [9576:10524]
+Estimate dispersion: DONE
+dispersion | min: -0.346435546875 | max: 284 | % negative: 49.1543139490688
+Only analysis time 0.0241512974103292
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.298522585182517
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.341217323144277
+Total time 0.372310189406077
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 17 low GDI genes (such as the fully-expressed) in GDI plot
+Cotan analysis functions started
+Genes/cells selection done: dropped [3457] genes and [0] cells
+Working on [10400] genes and [186] cells
+Estimate dispersion: START
+Effective number of cores used: 14
+Executing 11 genes batches from [1:937] to [9464:10400]
+Estimate dispersion: DONE
+dispersion | min: -0.34130859375 | max: 277 | % negative: 49.5673076923077
+Only analysis time 0.0235019644101461
+Cotan genes' coex estimation started
+Calculate genes' coex: START
+Retrieving expected genes' contingency table
+calculating NN..
+ done
+calculating NY..
+YN..
+YY..
+ done
+Calculating genes' coex normalization factor
+Fraction of genes with very low expected contingency tables: 0.300261162018445
+Retrieving observed genes' yes/yes contingency table
+calculating YY..
+ done
+Estimating genes' coex
+Calculate genes' coex: DONE
+Only genes' coex time 0.328520524501801
+Total time 0.358562211195628
+Using S
+Calculating S: START
+Calculating S: DONE
+Calculate GDI dataframe: START
+Calculate GDI dataframe: DONE
+GDI plot
+Removed 18 low GDI genes (such as the fully-expressed) in GDI plot
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE
+Genes/cells selection done: dropped [894] genes and [0] cells
+Working on [12963] genes and [4407] cells
+Estimate dispersion: START
+Effective number of cores used: 1
+Executing 13 genes batches from [1:987] to [11977:12963]
+Estimate dispersion: DONE
+dispersion | min: -0.0713233947753906 | max: 566.625 | % negative: 7.69112088251176
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Cajal-Retzius' - START
+* analysis of cluster: 'Cajal-Retzius' - DONE
+*
+ analysis of cluster: 'Cortical or hippocampal glutamatergic' - START
+* analysis of cluster: 'Cortical or hippocampal glutamatergic' - DONE
+*
+ analysis of cluster: 'Forebrain GABAergic' - START
+* analysis of cluster: 'Forebrain GABAergic' - DONE
+
+Differential Expression Analysis - DONE
+Differential Expression Analysis - START
+*
+ analysis of cluster: 'Neur492' - START
+* analysis of cluster: 'Neur492' - DONE
+*
+ analysis of cluster: 'Neur493' - START
+* analysis of cluster: 'Neur493' - DONE
+*
+ analysis of cluster: 'Neur494' - START
+* analysis of cluster: 'Neur494' - DONE
+*
+ analysis of cluster: 'Neur497' - START
+* analysis of cluster: 'Neur497' - DONE
+*
+ analysis of cluster: 'Neur498' - START
+* analysis of cluster: 'Neur498' - DONE
+*
+ analysis of cluster: 'Neur499' - START
+* analysis of cluster: 'Neur499' - DONE
+*
+ analysis of cluster: 'Neur501' - START
+* analysis of cluster: 'Neur501' - DONE
+*
+ analysis of cluster: 'Neur502' - START
+* analysis of cluster: 'Neur502' - DONE
+*
+ analysis of cluster: 'Neur504' - START
+* analysis of cluster: 'Neur504' - DONE
+*
+ analysis of cluster: 'Neur505' - START
+* analysis of cluster: 'Neur505' - DONE
+*
+ analysis of cluster: 'Neur506' - START
+* analysis of cluster: 'Neur506' - DONE
+*
+ analysis of cluster: 'Neur507' - START
+* analysis of cluster: 'Neur507' - DONE
+*
+ analysis of cluster: 'Neur508' - START
+* analysis of cluster: 'Neur508' - DONE
+*
+ analysis of cluster: 'Neur509' - START
+* analysis of cluster: 'Neur509' - DONE
+*
+ analysis of cluster: 'Neur510' - START
+* analysis of cluster: 'Neur510' - DONE
+*
+ analysis of cluster: 'Neur511' - START
+* analysis of cluster: 'Neur511' - DONE
+*
+ analysis of cluster: 'Neur516' - START
+* analysis of cluster: 'Neur516' - DONE
+*
+ analysis of cluster: 'Neur518' - START
+* analysis of cluster: 'Neur518' - DONE
+*
+ analysis of cluster: 'Neur519' - START
+* analysis of cluster: 'Neur519' - DONE
+*
+ analysis of cluster: 'Neur524' - START
+* analysis of cluster: 'Neur524' - DONE
+*
+ analysis of cluster: 'Neur525' - START
+* analysis of cluster: 'Neur525' - DONE
+*
+ analysis of cluster: 'Neur526' - START
+* analysis of cluster: 'Neur526' - DONE
+*
+ analysis of cluster: 'Neur560' - START
+* analysis of cluster: 'Neur560' - DONE
+*
+ analysis of cluster: 'Neur565' - START
+* analysis of cluster: 'Neur565' - DONE
+*
+ analysis of cluster: 'Neur566' - START
+* analysis of cluster: 'Neur566' - DONE
+*
+ analysis of cluster: 'Neur568' - START
+* analysis of cluster: 'Neur568' - DONE
+*
+ analysis of cluster: 'Neur573' - START
+* analysis of cluster: 'Neur573' - DONE
+*
+ analysis of cluster: 'Neur574' - START
+* analysis of cluster: 'Neur574' - DONE
+*
+ analysis of cluster: 'Neur575' - START
+* analysis of cluster: 'Neur575' - DONE
+*
+ analysis of cluster: 'Neur679' - START
+* analysis of cluster: 'Neur679' - DONE
+
+Differential Expression Analysis - DONE

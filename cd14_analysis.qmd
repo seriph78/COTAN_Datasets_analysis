@@ -1,0 +1,253 @@
+---
+title: "CD14 Data-set Anaysis with cleaning"
+---
+
+```{r}
+#library(SingleCellExperiment)
+#library(DuoClustering2018)
+#library(tidyr)
+library(ggplot2)
+#library(ggsankey) # remotes::install_github("davidsjoberg/ggsankey")
+library(tibble)
+library(zeallot)
+library(COTAN)
+options(parallelly.fork.enable = TRUE)
+
+outDir <- "Data/CD14Cleaned/"
+
+setLoggingLevel(2)
+setLoggingFile(file.path(outDir, "cd14_analysis.log"))
+```
+
+```{r}
+library(Seurat)
+dataset <- Read10X(file.path(outDir, "/OrigialDatahg19"))
+```
+
+```{r}
+sampleCondition <- "CD14_Monocytes"
+cd14Obj <- COTAN(raw = dataset)
+cd14Obj <- initializeMetaDataset(cd14Obj,
+                                 GEO = "10X CD14+ Monocytes",
+                                 sequencingMethod = "10X",
+                                 sampleCondition = sampleCondition)
+
+sampleCondition
+```
+
+Inspect cells' sizes
+
+```{r}
+cellSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
+```
+
+Drop cells with too many ritz reads as they are probably duplets
+
+```{r}
+cellsSizeThr <- 2500
+cd14Obj <- addElementToMetaDataset(cd14Obj, "Cells size threshold", cellsSizeThr)
+
+cells_to_rem <- getCells(cd14Obj)[getCellsSize(cd14Obj) > cellsSizeThr]
+cd14Obj <- dropGenesCells(cd14Obj, cells = cells_to_rem)
+
+cellSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
+```
+
+Inspect the number of expressed genes per cell
+
+```{r}
+genesSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
+```
+
+Drop cells with too high genes expession as they are probably duplets
+
+```{r}
+genesSizeThr <- 800
+cd14Obj <- addElementToMetaDataset(cd14Obj, "Num genes threshold", genesSizeThr)
+
+numExprGenes <- getNumExpressedGenes(cd14Obj)
+cells_to_rem <- names(numExprGenes)[numExprGenes > genesSizeThr]
+cd14Obj <- dropGenesCells(cd14Obj, cells = cells_to_rem)
+
+genesSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
+```
+
+Check number of mitocondrial genes expressed in each cell
+
+```{r}
+mitGenesPattern <- "^[Mm][Tt]-"
+getGenes(cd14Obj)[grep(mitGenesPattern, getGenes(cd14Obj))]
+
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(cd14Obj, genePrefix = mitGenesPattern,
+                              splitPattern = "-", numCol = 2)
+
+plot(mitPlot)
+```
+
+Cells with a too high percentage of mitocondrial genes are likely dead (or at the last problematic) cells. So we drop them!
+
+```{r}
+mitPercThr <- 6.5
+cd14Obj <- addElementToMetaDataset(cd14Obj, "Mitoc. perc. threshold", mitPercThr)
+
+cells_to_rem <- rownames(mitSizes)[mitSizes[["mit.percentage"]] > mitPercThr]
+
+cd14Obj <- dropGenesCells(cd14Obj, cells = cells_to_rem)
+
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(cd14Obj, genePrefix = mitGenesPattern,
+                              splitPattern = "-", numCol = 2)
+
+plot(mitPlot)
+```
+
+Check number of ribosomial genes expressed in each cell
+
+```{r}
+ribGenesPattern <- "^RP[SL]\\d+"
+getGenes(cd14Obj)[grep(ribGenesPattern, getGenes(cd14Obj))]
+
+c(ribPlot, ribSizes) %<-%
+  mitochondrialPercentagePlot(cd14Obj, genePrefix = mitGenesPattern,
+                              splitPattern = "-", numCol = 2)
+
+plot(ribPlot)
+```
+
+Check no further outliers after all the culling
+
+```{r}
+cellSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
+genesSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
+```
+
+Clean: round 1
+
+```{r}
+cd14Obj <- clean(cd14Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(cd14Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+cd14Obj <- addElementToMetaDataset(cd14Obj, "Num drop B group", 0)
+```
+
+Visualize if all is ok:
+
+```{r}
+plot(UDEPlot)
+
+plot(nuPlot)
+plot(zoomedNuPlot)
+```
+
+Final cleaning to check all is OK
+
+```{r}
+cd14Obj <- clean(cd14Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(cd14Obj)
+
+plot(pcaCellsPlot)
+plot(pcaCellsData)
+plot(genesPlot)
+plot(UDEPlot)
+plot(nuPlot)
+plot(zoomedNuPlot)
+
+plot(cellSizePlot(cd14Obj, splitPattern = "-", numCol = 2))
+plot(genesSizePlot(cd14Obj, splitPattern = "-", numCol = 2))
+```
+
+Calculate genes' COEX
+
+```{r, eval=FALSE, echo=TRUE}
+Sys.time()
+
+cd14Obj <- proceedToCoex(cd14Obj, calcCoex = TRUE, cores = 12,
+                         saveObj = TRUE, outDir = outDir)
+
+```
+
+```{r}
+cd14Obj <- readRDS(file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+
+```{r}
+gdiData <- calculateGDI(cd14Obj)
+
+genesToLabel <- head(rownames(gdiData[order(gdiData[["GDI"]],
+                                            decreasing = TRUE), ]), n = 50L)
+
+sort(genesToLabel)
+
+gdiData[genesToLabel[[50L]], "GDI"]
+
+gdiPlot <- GDIPlot(cd14Obj, GDIIn = gdiData, GDIThreshold = 1.4,
+                   genes = list("Top 10 GDI genes" = genesToLabel[1L:10L]))
+
+plot(gdiPlot)
+
+Sys.time()
+```
+
+Save the COTAN object
+
+```{r, eval=FALSE, echo=TRUE}
+saveRDS(cd14Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r}
+cd14Obj <- readRDS(file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r, eval=FALSE, echo=TRUE}
+c(splitClusters, splitCoexDF) %<-%
+  cellsUniformClustering(cd14Obj, GDIThreshold = 1.4, cores = 13,
+                         saveObj = TRUE, outDir = outDir)
+
+cd14Obj <- addClusterization(cd14Obj, clName = "split",
+                             clusters = splitClusters,
+                             coexDF = splitCoexDF, override = TRUE)
+
+```
+
+```{r}
+splitClusters <- getClusterizationData(cd14Obj, clName = "split")[[1]]
+
+table(splitClusters)
+```
+
+```{r, echo=TRUE, eval=FALSE}
+saveRDS(cd14Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(cd14Obj, clusters = splitClusters,
+                            GDIThreshold = 1.4, cores = 13,
+                            saveObj = TRUE, outDir = outDir)
+
+cd14Obj <- addClusterization(cd14Obj, clName = "merge",
+                             clusters = mergedClusters,
+                             coexDF = mergedCoexDF,
+                             override = TRUE)
+```
+
+```{r}
+mergedClusters <- getClusterizationData(cd14Obj, clName = "merge")[[1]]
+
+table(mergedClusters)
+```
+
+```{r, eval=FALSE}
+saveRDS(cd14Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r}
+sessionInfo()
+```

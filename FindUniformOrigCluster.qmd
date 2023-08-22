@@ -1,0 +1,554 @@
+---
+title: "Find uniform given cluster in Forebrain Dorsal E15.0"
+---
+
+```{r}
+library(ggplot2)
+library(tibble)
+library(zeallot)
+library(COTAN)
+
+options(parallelly.fork.enable = TRUE)
+
+outDir <- "./e15.0_FD_CheckClustersUniformity"
+
+setLoggingLevel(1)
+setLoggingFile(file.path(outDir, "FindUniformGivenClustersInForebrainDorsal_E150.log"))
+```
+
+Relevant genes lists
+
+```{r}
+genesList <- list(
+  "NPGs"   = c("Nes", "Vim", "Sox2", "Sox1", "Notch1", "Hes1", "Hes5", "Pax6"),
+  "PNGs"   = c("Map2", "Tubb3", "Neurod1", "Nefm", "Nefl", "Dcx", "Tbr1"),
+  "hk"     = c("Calm1", "Cox6b1", "Ppia", "Rpl18", "Cox7c", "Erh", "H3f3a",
+               "Taf1", "Taf2", "Gapdh", "Actb", "Golph3", "Zfr", "Sub1",
+               "Tars", "Amacr"),
+  "layers" = c("Reln", "Lhx5", "Cux1", "Satb2", "Tle1", "Mef2c", "Rorb",
+               "Sox5", "Bcl11b", "Fezf2", "Foxp2")
+)
+```
+
+This is a version of the function `checkClusterUniformity()` adapted to be used in this markdown document
+
+```{r}
+clusterIsUniform <- function(objCOTAN, cluster, cells, GDIThreshold = 1.4) {
+
+  cores <- 14L
+  
+  cellsToDrop <- getCells(objCOTAN)[!getCells(objCOTAN) %in% cells]
+
+  objCOTAN <- dropGenesCells(objCOTAN, cells = cellsToDrop)
+
+  objCOTAN <- proceedToCoex(objCOTAN, cores = cores, saveObj = FALSE)
+  gc()
+
+  GDIData <- calculateGDI(objCOTAN)
+
+  gdi <- GDIData[["GDI"]]
+  names(gdi) <- rownames(GDIData)
+  gdi <- sort(gdi, decreasing = TRUE)
+  
+  # Plot GDI
+  genesToRemark = list("Top 10 GDI genes" = names(gdi)[1L:5L])
+  genesToRemark <- append(genesToRemark, genesList)
+  plot <- GDIPlot(objCOTAN, GDIIn = GDIData,
+                  GDIThreshold = GDIThreshold,
+                  genes = genesToRemark,
+                  condition = paste0("e15.0 cluster ", cluster))
+
+  rm(objCOTAN)
+  rm(GDIData)
+  gc()
+
+  # A cluster is deemed uniform if the number of genes
+  # with [GDI > GDIThreshold] is not more than 1%
+  
+  highGDIRatio <- sum(gdi >= GDIThreshold) / length(gdi)
+  
+  lastPercentile <- quantile(gdi, probs = 0.99)
+  
+  isUniform <- highGDIRatio <= 0.01
+
+  plot(plot)
+  
+  print(paste0("The cluster '", cluster, "' is ",
+               (if(isUniform) {""} else {"not "}), "uniform"))
+  print(paste0("The percentage of genes with GDI above ", GDIThreshold, " is: ",
+               round(highGDIRatio * 100.0, digits = 2), "%"))
+  print(paste0("The last percentile (99%) of the GDI values is: ",
+               round(lastPercentile, digits = 4)))
+  
+  return(list("isUniform" = isUniform, "highGDIRatio" = highGDIRatio,
+              "lastPercentile" = lastPercentile, "GDIPlot" = plot))
+}
+```
+
+```{r}
+fb150ObjRaw <- readRDS(file = file.path("Data/MouseCortexFromLoom/SourceData/", "e15.0_ForebrainDorsal.cotan.RDS"))
+
+fb150Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "e15.0_ForebrainDorsal.cotan.RDS"))
+```
+
+Align to cleaned cells' list
+
+```{r}
+metaC <- getMetadataCells(fb150ObjRaw)[getCells(fb150Obj), ]
+
+metaCDrop <- getMetadataCells(fb150ObjRaw)[!getCells(fb150ObjRaw) %in% getCells(fb150Obj), ]
+```
+
+Extract the cells of class 'Neuron'
+
+```{r}
+metaNeuron <- metaC[metaC[["Class"]] == "Neuron", ]
+
+sort(table(metaNeuron[["Subclass"]]), decreasing = TRUE)
+
+sort(table(metaNeuron[["ClusterName"]]), decreasing = TRUE)
+```
+
+Check uniformity of sub-class: Cajal-Retzius
+
+```{r}
+FB_CaRe_Cells <-
+  rownames(metaNeuron)[metaNeuron[["Subclass"]] == "Cajal-Retzius"]
+
+table(metaNeuron[FB_CaRe_Cells, "ClusterName"])
+
+c(FB_CaRe_IsUniform, FB_CaRe_HighGDIRatio,
+  FB_CaRe_LastPercentile, FB_CaRe_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Cajal-Retzius",
+                   cells = FB_CaRe_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of sub-class: Forebrain GABAergic
+
+```{r}
+FB_GABA_Cells <-
+  rownames(metaNeuron)[metaNeuron[["Subclass"]] == "Forebrain GABAergic"]
+
+table(metaNeuron[FB_GABA_Cells, "ClusterName"])
+
+c(FB_GABA_isUniform, FB_GABA_HighGDIRatio,
+  FB_GABA_LastPercentile, FB_GABA_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Forebrain_GABAergic",
+                   cells = FB_GABA_Cells, GDIThreshold = 1.4)
+```
+
+Check uniformity of sub-class: Cortical or hippocampal glutamatergic
+
+```{r}
+FB_CHGl_Cells <-
+  rownames(metaNeuron)[metaNeuron[["Subclass"]] == "Cortical or hippocampal glutamatergic"]
+
+table(metaNeuron[FB_CHGl_Cells, "ClusterName"])
+
+c(FB_CHGl_IsUniform, FB_CHGl_HighGDIRatio,
+  FB_CHGl_LastPercentile, FB_CHGl_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Cortical or hippocampal glutamatergic",
+                   cells = FB_CHGl_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cajal-Retzius cluster: Neur679
+
+```{r}
+FB_Neur679_Cells <-
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur679"]
+
+c(FB_Neur679_IsUniform, FB_Neur679_HighGDIRatio,
+  FB_Neur679_LastPercentile, FB_Neur679_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur679",
+                   cells = FB_Neur679_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Forebrain GABAergic cluster: Neur568
+
+```{r}
+FB_Neur568_Cells <-
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"]
+
+c(FB_Neur568_IsUniform, FB_Neur568_HighGDIRatio,
+  FB_Neur568_LastPercentile, FB_Neur568_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur568",
+                   cells = FB_Neur568_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur525
+
+```{r}
+FB_Neur525_Cells <-
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur525"]
+
+c(FB_Neur525_IsUniform, FB_Neur525_HighGDIRatio,
+  FB_Neur525_LastPercentile, FB_Neur525_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur525",
+                   cells = FB_Neur525_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508
+
+```{r}
+FB_Neur508_Cells <-
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"]
+
+c(FB_Neur508_IsUniform, FB_Neur508_HighGDIRatio,
+  FB_Neur508_LastPercentile, FB_Neur508_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508",
+                   cells = FB_Neur508_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509
+
+```{r}
+FB_Neur509_Cells <-
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur509"]
+
+c(FB_Neur509_IsUniform, FB_Neur509_HighGDIRatio,
+  FB_Neur509_LastPercentile, FB_Neur509_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur509",
+                   cells = FB_Neur509_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur507
+
+```{r}
+FB_Neur507_Cells <-
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur507"]
+
+c(FB_Neur507_IsUniform, FB_Neur507_HighGDIRatio,
+  FB_Neur507_LastPercentile, FB_Neur507_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur507",
+                   cells = FB_Neur507_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Neur509
+
+```{r}
+FB_Neur508.Neur509_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur509"]
+)
+
+c(FB_Neur508.Neur509_IsUniform, FB_Neur508.Neur509_HighGDIRatio,
+  FB_Neur508.Neur509_LastPercentile, FB_Neur508.Neur509_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.Neur509",
+                   cells = FB_Neur508.Neur509_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Neur507
+
+```{r}
+FB_Neur508.Neur507_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur507"]
+)
+
+c(FB_Neur508.Neur507_IsUniform, FB_Neur508.Neur507_HighGDIRatio,
+  FB_Neur508.Neur507_LastPercentile, FB_Neur508.Neur507_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.Neur507",
+                   cells = FB_Neur508.Neur507_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Cajal-Retzius cluster: Neur679
+
+```{r}
+FB_Neur508.Neur679_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur679"]
+)
+
+c(FB_Neur508.Neur679_IsUniform, FB_Neur508.Neur679_HighGDIRatio,
+  FB_Neur508.Neur679_LastPercentile, FB_Neur508.Neur679_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.Neur679",
+                   cells = FB_Neur508.Neur679_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and Forebrain GABAergic cluster: Neur568
+
+```{r}
+FB_Neur508.Neur568_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"]
+)
+
+c(FB_Neur508.Neur568_IsUniform, FB_Neur508.Neur568_HighGDIRatio,
+  FB_Neur508.Neur568_LastPercentile, FB_Neur508.Neur568_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.Neur568",
+                   cells = FB_Neur508.Neur568_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and Cajal-Retzius cluster: Neur679
+
+```{r}
+FB_Neur509.Neur679_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur509"],
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur679"]
+)
+
+c(FB_Neur509.Neur679_IsUniform, FB_Neur509.Neur679_HighGDIRatio,
+  FB_Neur509.Neur679_LastPercentile, FB_Neur509.Neur679_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur509.Neur679",
+                   cells = FB_Neur509.Neur679_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur507 and Cajal-Retzius cluster: Neur679
+
+```{r}
+FB_Neur507.Neur679_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur507"],
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur679"]
+)
+
+c(FB_Neur507.Neur679_IsUniform, FB_Neur507.Neur679_HighGDIRatio,
+  FB_Neur507.Neur679_LastPercentile, FB_Neur507.Neur679_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur507.Neur679",
+                   cells = FB_Neur507.Neur679_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 40 cells taken from Cajal-Retzius cluster: Neur679
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur508 size: ", sum(metaNeuron[["ClusterName"]] == "Neur508")))
+
+FB_Neur508.s40oNeur679_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur679"], 40)
+)
+
+c(FB_Neur508.s40oNeur679_IsUniform, FB_Neur508.s40oNeur679_HighGDIRatio,
+  FB_Neur508.s40oNeur679_LastPercentile, FB_Neur508.s40oNeur679_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.s40oNeur679",
+                   cells = FB_Neur508.s40oNeur679_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 20 cells taken from Cajal-Retzius cluster: Neur679
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur508 size: ", sum(metaNeuron[["ClusterName"]] == "Neur508")))
+
+FB_Neur508.s20oNeur679_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur679"], 20)
+)
+
+c(FB_Neur508.s20oNeur679_IsUniform, FB_Neur508.s20oNeur679_HighGDIRatio,
+  FB_Neur508.s20oNeur679_LastPercentile, FB_Neur508.s20oNeur679_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.s20oNeur679",
+                   cells = FB_Neur508.s20oNeur679_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 10 cells taken from Cajal-Retzius cluster: Neur679
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur508 size: ", sum(metaNeuron[["ClusterName"]] == "Neur508")))
+
+FB_Neur508.s10oNeur679_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur679"], 10)
+)
+
+c(FB_Neur508.s10oNeur679_IsUniform, FB_Neur508.s10oNeur679_HighGDIRatio,
+  FB_Neur508.s10oNeur679_LastPercentile, FB_Neur508.s10oNeur679_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.s10oNeur679",
+                   cells = FB_Neur508.s10oNeur679_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 40 cells taken from all Neuron - non Cortical or hippocampal glutamatergic cells
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur508 size: ", sum(metaNeuron[["ClusterName"]] == "Neur508")))
+
+FB_Neur508.s40oNonCHGl_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  sample(rownames(metaNeuron)[metaNeuron[["Subclass"]] != "Cortical or hippocampal glutamatergic"], 40)
+)
+
+c(FB_Neur508.s40oNonCHGl_IsUniform, FB_Neur508.s40oNonCHGl_HighGDIRatio,
+  FB_Neur508.s40oNonCHGl_LastPercentile, FB_Neur508.s40oNonCHGl_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.s40oNonCHGl",
+                   cells = FB_Neur508.s40oNonCHGl_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 20 cells taken from all Neuron - non Cortical or hippocampal glutamatergic cells
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur508 size: ", sum(metaNeuron[["ClusterName"]] == "Neur508")))
+
+FB_Neur508.s20oNonCHGl_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  sample(rownames(metaNeuron)[metaNeuron[["Subclass"]] != "Cortical or hippocampal glutamatergic"], 20)
+)
+
+c(FB_Neur508.s20oNonCHGl_IsUniform, FB_Neur508.s20oNonCHGl_HighGDIRatio,
+  FB_Neur508.s20oNonCHGl_LastPercentile, FB_Neur508.s20oNonCHGl_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.s20oNonCHGl",
+                   cells = FB_Neur508.s20oNonCHGl_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur508 and 10 cells taken from all Neuron - non Cortical or hippocampal glutamatergic cells
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur508 size: ", sum(metaNeuron[["ClusterName"]] == "Neur508")))
+
+FB_Neur508.s10oNonCHGl_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur508"],
+  sample(rownames(metaNeuron)[metaNeuron[["Subclass"]] != "Cortical or hippocampal glutamatergic"], 10)
+)
+
+c(FB_Neur508.s10oNonCHGl_IsUniform, FB_Neur508.s10oNonCHGl_HighGDIRatio,
+  FB_Neur508.s10oNonCHGl_LastPercentile, FB_Neur508.s10oNonCHGl_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur508.s10oNonCHGl",
+                   cells = FB_Neur508.s10oNonCHGl_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and 40 cells taken from Forebrain GABAergic cluster: Neur568
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur509 size: ", sum(metaNeuron[["ClusterName"]] == "Neur509")))
+
+FB_Neur509.s40oNeur568_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur509"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"], 40)
+)
+
+c(FB_Neur509.s40oNeur568_IsUniform, FB_Neur509.s40oNeur568_HighGDIRatio,
+  FB_Neur509.s40oNeur568_LastPercentile, FB_Neur509.s40oNeur568_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur509.s40oNeur568",
+                   cells = FB_Neur509.s40oNeur568_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and 20 cells taken from Forebrain GABAergic cluster: Neur568
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur509 size: ", sum(metaNeuron[["ClusterName"]] == "Neur509")))
+
+FB_Neur509.s20oNeur568_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur509"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"], 20)
+)
+
+c(FB_Neur509.s20oNeur568_IsUniform, FB_Neur509.s20oNeur568_HighGDIRatio,
+  FB_Neur509.s20oNeur568_LastPercentile, FB_Neur509.s20oNeur568_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur509.s20oNeur568",
+                   cells = FB_Neur509.s20oNeur568_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Cortical or hippocampal glutamatergic cluster: Neur509 and 10 cells taken from Forebrain GABAergic cluster: Neur568
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur509 size: ", sum(metaNeuron[["ClusterName"]] == "Neur509")))
+
+FB_Neur509.s10oNeur568_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur509"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"], 10)
+)
+
+c(FB_Neur509.s10oNeur568_IsUniform, FB_Neur509.s10oNeur568_HighGDIRatio,
+  FB_Neur509.s10oNeur568_LastPercentile, FB_Neur509.s10oNeur568_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur509.s10oNeur568",
+                   cells = FB_Neur509.s10oNeur568_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Forebrain GABAergic cluster: Neur568 and 20 cells taken from Cortical or hippocampal glutamatergic cluster: Neur507
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur568 size: ", sum(metaNeuron[["ClusterName"]] == "Neur568")))
+
+FB_Neur568.s20oNeur507_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur507"], 20)
+)
+
+c(FB_Neur568.s20oNeur507_IsUniform, FB_Neur568.s20oNeur507_HighGDIRatio,
+  FB_Neur568.s20oNeur507_LastPercentile, FB_Neur568.s20oNeur507_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur568.s20oNeur507",
+                   cells = FB_Neur568.s20oNeur507_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Forebrain GABAergic cluster: Neur568 and 10 cells taken from Cortical or hippocampal glutamatergic cluster: Neur507
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur568 size: ", sum(metaNeuron[["ClusterName"]] == "Neur568")))
+
+FB_Neur568.s10oNeur507_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur507"], 10)
+)
+
+c(FB_Neur568.s10oNeur507_IsUniform, FB_Neur568.s10oNeur507_HighGDIRatio,
+  FB_Neur568.s10oNeur507_LastPercentile, FB_Neur568.s10oNeur507_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur568.s10oNeur507",
+                   cells = FB_Neur568.s10oNeur507_Cells, GDIThreshold = 1.4)
+
+```
+
+Check uniformity of Forebrain GABAergic cluster: Neur568 and 5 cells taken from Cortical or hippocampal glutamatergic cluster: Neur507
+
+```{r}
+set.seed(639245)
+
+print(paste0("Cluser Neur568 size: ", sum(metaNeuron[["ClusterName"]] == "Neur568")))
+
+FB_Neur568.s5oNeur507_Cells <- c(
+  rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur568"],
+  sample(rownames(metaNeuron)[metaNeuron[["ClusterName"]] == "Neur507"], 5)
+)
+
+c(FB_Neur568.s5oNeur507_IsUniform, FB_Neur568.s5oNeur507_HighGDIRatio,
+  FB_Neur568.s5oNeur507_LastPercentile, FB_Neur568.s5oNeur507_GDIPlot) %<-%
+  clusterIsUniform(fb150Obj, cluster = "Neur568.s5oNeur507",
+                   cells = FB_Neur568.s5oNeur507_Cells, GDIThreshold = 1.4)
+
+```
+
+```{r}
+sessionInfo()
+```

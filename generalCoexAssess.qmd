@@ -1,0 +1,368 @@
+---
+title: "General Coex Evaluation"
+---
+
+```{r}
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(gghalves)
+library(ggstatsplot)
+library("gridExtra")
+library(cowplot)
+library(Matrix)
+library(ggstance)
+#library(COTAN)
+```
+
+```{r}
+genesList <- list(
+  "NPGs"= 
+    c("Nes", "Vim", "Sox2", "Sox1", "Notch1", "Hes1", "Hes5", "Pax6"),
+  "PNGs"= 
+    c("Map2", "Tubb3", "Neurod1", "Nefm", "Nefl", "Dcx", "Tbr1"),
+  "hk"= 
+    c("Calm1", "Cox6b1", "Ppia", "Rpl18", "Cox7c", "Erh", "H3f3a",
+      "Taf1", "Taf2", "Gapdh", "Actb", "Golph3", "Zfr", "Sub1",
+      "Tars", "Amacr"),
+  "layers" = 
+    c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2")
+)
+```
+
+## COEX and Correlations
+
+Import COTAN coex and correlations data from file
+
+```{r}
+table.tot.hk <- NA
+table.tot.neural <- NA
+for (file in list.files("CoexData/",pattern = "Corr|Coex")) {
+  corr <- readRDS(paste0("CoexData/",file))
+  corr <- as.data.frame(as.matrix(corr))
+  if(str_detect(file,pattern = "CotanCoex")){
+    code <- "COTAN coex"
+  }else if(str_detect(file,pattern = "CorrSCT")){
+    code <- "Seurat SCT corr."
+  }else if(str_detect(file,pattern = "Corr")){
+    code <- "Seurat corr."
+  }
+  
+  
+  table.hk <- as.data.frame(corr[,genesList$hk])
+  table.hk$Gene1 <- rownames(table.hk)
+  
+  table.hk <- pivot_longer(as.data.frame(table.hk),cols = c(1:(ncol(table.hk)-1)),names_to = "Gene2")
+  table.hk$Method <- code
+
+  table.tot.hk <- rbind(table.tot.hk,table.hk)
+  table.tot.hk <- table.tot.hk[! table.tot.hk$Gene1 == table.tot.hk$Gene2,]
+ 
+  #Not hk
+  table.neural <- as.data.frame(corr[rownames(corr) %in% c(genesList$NPGs,genesList$PNGs,genesList$layers),colnames(corr) %in% c(genesList$NPGs,genesList$PNGs,genesList$layers)])
+  table.neural$Gene1 <- rownames(table.neural)
+  
+  table.neural <- pivot_longer(as.data.frame(table.neural),cols = c(1:(ncol(table.neural)-1)),names_to = "Gene2")
+  table.neural$Method <- code
+  
+  table.tot.neural <- rbind(table.tot.neural,table.neural)
+  table.tot.neural <- table.tot.neural[! table.tot.neural$Gene1 == table.tot.neural$Gene2,]
+}
+```
+
+```{r}
+table.tot.hk <- table.tot.hk[2:nrow(table.tot.hk),]
+table.tot.hk$GeneType <- "Constitutive" 
+table.tot.neural <- table.tot.neural[2:nrow(table.tot.neural),]
+table.tot.neural$GeneType <- "Neural"
+
+## For ECDL
+tmp.tot <- NA
+for (method in unique(table.tot.hk$Method)) {
+  tmp <- as.data.frame(table.tot.hk[table.tot.hk$Method == method,])
+  tmp$n <- NA
+  tmp[order(abs(tmp$value)),]$n <- c(1:dim(tmp)[1])/(dim(tmp)[1]+1)
+  tmp$Y_axis <- 1-tmp$n
+  tmp.tot <- rbind(tmp.tot,tmp)
+}
+tmp.tot <- tmp.tot[2:nrow(tmp.tot),]
+table.tot.hk <- tmp.tot
+
+tmp.tot <- NA
+for (method in unique(table.tot.neural$Method)) {
+  tmp <- as.data.frame(table.tot.neural[table.tot.neural$Method == method,])
+  tmp$n <- NA
+  tmp[order(abs(tmp$value)),]$n <- c(1:dim(tmp)[1])/(dim(tmp)[1]+1)
+  tmp$Y_axis <- 1-tmp$n
+  tmp.tot <- rbind(tmp.tot,tmp)
+}
+tmp.tot <- tmp.tot[2:nrow(tmp.tot),]
+table.tot.neural <- tmp.tot
+
+############
+
+table.tot <- rbind(table.tot.hk,table.tot.neural) 
+table.tot <- table.tot[!table.tot$Gene1 == table.tot$Gene2,]
+
+identical(table.tot[table.tot$Method == "COTAN coex",]$Gene1,
+          table.tot[table.tot$Method == "Seurat corr.",]$Gene1 )
+identical(table.tot[table.tot$Method == "COTAN coex",]$Gene2,
+          table.tot[table.tot$Method == "Seurat corr.",]$Gene2 )
+
+head(table.tot)
+```
+
+```{r}
+table.tot$ValAbs <- abs(table.tot$value)
+table.tot$LogValAbs <- log(table.tot$ValAbs+0.001)
+table.tot$SqrValAbs <- table.tot$ValAbs**2
+
+ggplot(table.tot,aes(x=Method,y=LogValAbs, fill=Method)) +
+geom_half_violin(alpha=0.8) +
+  #geom_point(position = "jitter", size= 0.1,alpha = 0.3)+ 
+  geom_half_boxplot(width=0.1, alpha=0.8,side = "r") +
+  theme_bw()+   theme(legend.position="none")+#ylim(0,1)+
+  facet_grid(GeneType ~ . , space = "free_y", scales = "free")+
+  scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))
+
+```
+
+```{r, warning=FALSE}
+ggplot(table.tot[table.tot$GeneType == "Neural",], aes(x = ValAbs, y = -0.5)) +
+
+  # horizontal box plot
+  geom_boxploth(aes(fill = Method)) +
+
+  # normal density plot
+  geom_density(aes(x = ValAbs), inherit.aes = FALSE) +
+
+  # # vertical lines at Q1 / Q2 / Q3
+  # stat_boxploth(geom = "vline", aes(xintercept = ..xlower..)) +
+   stat_boxploth(geom = "vline", aes(xintercept = ..xmiddle..)) +
+  # stat_boxploth(geom = "vline", aes(xintercept = ..xupper..)) +
+  # 
+   facet_grid(Method ~ .) +
+  
+  # reproduce original chart's color scale (o/w ordered factors will result
+  # in viridis scale by default, using the current version of ggplot2)
+  scale_fill_discrete()+scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw()+   theme(legend.position="none")
+```
+
+```{r, warning=FALSE}
+ggplot(table.tot[table.tot$GeneType == "Constitutive",], aes(x = ValAbs, y = -0.5)) +
+
+  # horizontal box plot
+  geom_boxploth(aes(fill = Method), outlier.size = 0.5,width=3) +
+
+  # normal density plot
+  geom_density(aes(x = ValAbs), inherit.aes = FALSE) +
+
+  # # vertical lines at Q1 / Q2 / Q3
+  # stat_boxploth(geom = "vline", aes(xintercept = ..xlower..)) +
+   stat_boxploth(geom = "vline", aes(xintercept = ..xmiddle..)) +
+  # stat_boxploth(geom = "vline", aes(xintercept = ..xupper..)) +
+  # 
+   facet_grid(Method ~ .) +
+  
+  # reproduce original chart's color scale (o/w ordered factors will result
+  # in viridis scale by default, using the current version of ggplot2)
+  scale_fill_discrete()+scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw()+   theme(legend.position="none")
+```
+
+```{r}
+library(scales)
+ggplot(table.tot,aes(x=ValAbs, color=Method, y = Y_axis)) + 
+  geom_point(alpha=0.8) +
+  scale_color_manual(values = c("#8856A7","gray","#B3CDE3" ))+
+  scale_y_continuous(trans= "log",breaks = c(0,0.1,0.25,0.5)
+                         )+
+  scale_x_continuous(trans= "log",
+                     breaks = c(0.1,0.2,0.3, 0.4,0.5,0.8), limits = c(0.01,0.85))+
+  theme_bw()+   theme(legend.position="bottom")+ 
+  facet_grid(GeneType ~ . )
+```
+
+```{r}
+ggplot(table.tot.hk,aes(x=abs(value), color=Method))+stat_ecdf(geom = "point", size = 0.5 )+
+  scale_y_continuous(trans= "exp")
+```
+
+```{r}
+
+ggplot(table.tot,aes(x=Method,y=ValAbs, fill=Method)) +
+#geom_half_boxplot(alpha=0.8) +
+  #geom_point(position = "jitter", size= 0.1,alpha = 0.3)+ 
+  geom_boxplot(alpha=0.8,outlier.size = 0.1,outlier.colour='blue', alpha=0.1) +
+  theme_bw()+   theme(legend.position="none")+ylim(0,0.2)+
+  facet_grid(GeneType ~ . , space = "free_y", scales = "free")+
+  scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))
+```
+
+```{r}
+ggplot(table.tot,aes(x=Method,y=ValAbs, fill=GeneType)) +
+  geom_boxplot(alpha=0.8) +
+  #geom_hline(yintercept = -3.39)+
+  #geom_hline(yintercept = -1.86)+
+  #geom_point(position = "jitter", size= 0.1,alpha = 0.3)+ 
+  #geom_half_boxplot(width=0.1, alpha=0.8,side = "r") +
+  theme_bw()+   #theme(legend.position="none")+
+  scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))
+
+```
+
+```{r}
+ggplot(table.tot, aes(x=Method,y=ValAbs, fill=GeneType)) +
+  introdataviz::geom_split_violin(alpha = .4, trim = FALSE) +
+  geom_boxplot(width = .2, alpha = .6, fatten = NULL, show.legend = FALSE) +
+  stat_summary(fun.data = "mean_se", geom = "pointrange", show.legend = F, 
+               position = position_dodge(.175)) +
+ scale_fill_brewer(palette = "Dark2") +
+  theme_minimal()
+```
+
+```{r, echo=FALSE, eval=FALSE}
+table.tot.neural$AbsVal <- abs(table.tot.neural$value)
+table.tot.neural$LogAbsVal <- log(table.tot.neural$AbsVal+0.001)
+ggbetweenstats(
+  data = table.tot.neural[!table.tot.neural$Method == "Seurat SCT corr.",],type = "robust", 
+  x = Method,
+  y = LogAbsVal
+)
+```
+
+```{r, echo=FALSE, eval=FALSE}
+ggbetweenstats(
+  data = table.tot.neural[!table.tot.neural$Method == "Seurat corr.",],type = "robust", 
+  x = Method,
+  y = AbsVal
+)
+```
+
+```{r, echo=FALSE, eval=FALSE}
+ggbetweenstats(
+  data = table.tot.neural[!table.tot.neural$Method == "Seurat corr.",],type = "robust", 
+  x = Method,
+  y = AbsVal
+)
+```
+
+```{r, echo=FALSE, eval=FALSE}
+table.tot.hk$LogAbsVal <- log(abs(table.tot.hk$value)+0.001)
+
+ggbetweenstats(
+  data = table.tot.hk[!table.tot.hk$Method == "Seurat corr.",],type = "robust", 
+  x = Method,
+  y = LogAbsVal
+)
+```
+
+## p-values evaluation
+
+```{r}
+table.tot.hk <- NA
+table.tot.neural <- NA
+for (file in list.files("CoexData/",pattern = "PValue")) {
+  pval <- readRDS(paste0("CoexData/",file))
+  #pval <- as.data.frame(as.matrix(pval))
+  if(str_detect(file,pattern = "Cotan")){
+    code <- "COTAN p-val"
+    if(all(diag(pval)) == 1){
+      
+      diag(pval) = 0
+    }
+  }else if(str_detect(file,pattern = "PValuesSCT")){
+    code <- "Seurat SCT p-val."
+  }else if(str_detect(file,pattern = "SeuratPValues")){
+    code <- "Seurat p-val."
+  }
+  
+  
+  table.hk <- as.data.frame(pval[,genesList$hk])
+  table.hk$Gene1 <- rownames(table.hk)
+  
+  table.hk <- pivot_longer(as.data.frame(table.hk),cols = c(1:(ncol(table.hk)-1)),names_to = "Gene2")
+  table.hk$Method <- code
+
+  table.tot.hk <- rbind(table.tot.hk,table.hk)
+  table.tot.hk <- table.tot.hk[! table.tot.hk$Gene1 == table.tot.hk$Gene2,]
+ 
+  #Not hk
+  table.neural <- as.data.frame(pval[rownames(pval) %in% c(genesList$NPGs,genesList$PNGs,genesList$layers),colnames(pval) %in% c(genesList$NPGs,genesList$PNGs,genesList$layers)])
+  table.neural$Gene1 <- rownames(table.neural)
+  
+  table.neural <- pivot_longer(as.data.frame(table.neural),cols = c(1:(ncol(table.neural)-1)),names_to = "Gene2")
+  table.neural$Method <- code
+  
+  table.tot.neural <- rbind(table.tot.neural,table.neural)
+  table.tot.neural <- table.tot.neural[! table.tot.neural$Gene1 == table.tot.neural$Gene2,]
+}
+
+table.tot.hk <- table.tot.hk[2:nrow(table.tot.hk),]
+table.tot.hk$GeneType <- "Constitutive" 
+table.tot.neural <- table.tot.neural[2:nrow(table.tot.neural),]
+table.tot.neural$GeneType <- "Neural"
+
+## For ECDL
+tmp.tot <- NA
+for (method in unique(table.tot.hk$Method)) {
+  tmp <- as.data.frame(table.tot.hk[table.tot.hk$Method == method,])
+  tmp$n <- NA
+  tmp[order(abs(tmp$value)),]$n <- c(1:dim(tmp)[1])/(dim(tmp)[1]+1)
+  tmp$Y_axis <- 1-tmp$n
+  tmp.tot <- rbind(tmp.tot,tmp)
+}
+tmp.tot <- tmp.tot[2:nrow(tmp.tot),]
+table.tot.hk <- tmp.tot
+
+tmp.tot <- NA
+for (method in unique(table.tot.neural$Method)) {
+  tmp <- as.data.frame(table.tot.neural[table.tot.neural$Method == method,])
+  tmp$n <- NA
+  tmp[order(abs(tmp$value)),]$n <- c(1:dim(tmp)[1])/(dim(tmp)[1]+1)
+  tmp$Y_axis <- 1-tmp$n
+  tmp.tot <- rbind(tmp.tot,tmp)
+}
+tmp.tot <- tmp.tot[2:nrow(tmp.tot),]
+table.tot.neural <- tmp.tot
+
+############
+
+table.tot <- rbind(table.tot.hk,table.tot.neural) 
+table.tot <- table.tot[!table.tot$Gene1 == table.tot$Gene2,]
+
+identical(table.tot[table.tot$Method == "COTAN p-val",]$Gene1,
+          table.tot[table.tot$Method == "Seurat p-val.",]$Gene1 )
+
+
+head(table.tot)
+```
+
+```{r}
+ggplot(table.tot[table.tot$GeneType == "Constitutive",], aes(y = value)) +
+
+  # horizontal box plot
+  geom_boxplot(aes(fill = Method), outlier.size = 0.5,width=3) +
+
+  # reproduce original chart's color scale (o/w ordered factors will result
+  # in viridis scale by default, using the current version of ggplot2)
+  scale_fill_discrete()+scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw()+   theme(legend.position="none")
+```
+
+```{r}
+ggplot(table.tot[table.tot$GeneType == "Neural",], aes(y = log(value))) +
+
+  # horizontal box plot
+  geom_boxplot(aes(fill = Method), outlier.size = 0.5,width=3) +
+
+  # reproduce original chart's color scale (o/w ordered factors will result
+  # in viridis scale by default, using the current version of ggplot2)
+  scale_fill_discrete()+scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw()+   theme(legend.position="none")
+```
+
+```{r}
+sessionInfo()
+```

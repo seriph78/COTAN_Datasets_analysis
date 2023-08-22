@@ -1,5 +1,5 @@
 ---
-title: "Gene Correlation Analysis"
+title: "Gene Correlation Analysis E14.5 Mouse Cortex"
 ---
 
 ```{r}
@@ -38,13 +38,16 @@ obj <- readRDS("Data/MouseCortex/MouseCortex_E14.5.cotan.RDS")
 ```
 
 ```{r}
+coexMat.big <- getGenesCoex(obj)[c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers),c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)]
+
 coexMat <- getGenesCoex(obj)[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
 
 f1 = colorRamp2(seq(-0.5,0.5, length = 3), c("#DC0000B2", "white","#3C5488B2" ))
 
 split.genes <- factor(c(rep("NPGs",length(genesList[["NPGs"]])),
                          rep("HK",length(genesList[["hk"]])),
-                         rep("PNGs",length(genesList[["PNGs"]]))),
+                         rep("PNGs",length(genesList[["PNGs"]]))
+                        ),
                          levels = c("NPGs","HK","PNGs"))
 
 lgd = Legend(col_fun = f1, title = "COTAN coex")
@@ -71,7 +74,7 @@ draw(htmp, heatmap_legend_side="right")
 ```
 
 ```{r, echo=FALSE}
-saveRDS(coexMat,file = paste0("CoexData/CotanCoex_",
+saveRDS(coexMat.big,file = paste0("CoexData/CotanCoex_",
                               getMetadataDataset(obj)[3,2],
                               ".RDS"))
 ```
@@ -112,12 +115,15 @@ seurat.data = srat[["RNA"]]@data
 ```
 
 ```{r}
-seurat.data.cor = cora(t(as.matrix(seurat.data)[c(genesList$NPGs,genesList$hk,genesList$PNGs),]), large = T)
+seurat.data.cor.big = cora(t(as.matrix(seurat.data)[c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers),]), large = T)
 
-rownames(seurat.data.cor) <- c(genesList$NPGs,genesList$hk,genesList$PNGs)
-colnames(seurat.data.cor) <- c(genesList$NPGs,genesList$hk,genesList$PNGs)
+rownames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)
+colnames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers)
 
-diag(seurat.data.cor) <- 0
+diag(seurat.data.cor.big) <- 0
+
+seurat.data.cor <- seurat.data.cor.big[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
+
 
 f1 = colorRamp2(seq(-0.5,0.5, length = 3), c("#DC0000B2", "white","#3C5488B2" ))
 
@@ -142,7 +148,7 @@ htmp <- Heatmap(as.matrix(seurat.data.cor),
         cluster_row_slices = FALSE, 
     cluster_column_slices = FALSE,
     heatmap_legend_param = list(
-        title = "Seurat corr SCT", at = c(-0.5, 0, 0.5),direction = "horizontal",
+        title = "Seurat corr", at = c(-0.5, 0, 0.5),direction = "horizontal",
         labels = c("-0.5", "0", "0.5")
     )
    )
@@ -150,7 +156,7 @@ draw(htmp, heatmap_legend_side="right")
 ```
 
 ```{r, echo=FALSE}
-saveRDS(seurat.data.cor,file = paste0("CoexData/SeuratCorr_",
+saveRDS(seurat.data.cor.big,file = paste0("CoexData/SeuratCorr_",
                               getMetadataDataset(obj)[3,2],
                               ".RDS"))
 ```
@@ -158,11 +164,23 @@ saveRDS(seurat.data.cor,file = paste0("CoexData/SeuratCorr_",
 ```{r}
 srat <-  SCTransform(srat, method = "glmGamPoi", vars.to.regress = "percent.mt", verbose = FALSE)
 seurat.data = srat[["SCT"]]@data
-seurat.data.cor = cora(t(as.matrix(seurat.data)[c(genesList$NPGs,genesList$hk,genesList$PNGs),]), large = T)
+seurat.data.cor.big = cora(t(as.matrix(seurat.data)[c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers),]), large = T)
 
-rownames(seurat.data.cor) <- c(genesList$NPGs,genesList$hk,genesList$PNGs)
-colnames(seurat.data.cor) <- c(genesList$NPGs,genesList$hk,genesList$PNGs)
+rownames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)
+colnames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers)
 
+diag(seurat.data.cor.big) <- 0
+
+seurat.data.cor <- seurat.data.cor.big[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
+
+
+
+f1 = colorRamp2(seq(-0.5,0.5, length = 3), c("#DC0000B2", "white","#3C5488B2" ))
+
+split.genes <- factor(c(rep("NPGs",length(genesList[["NPGs"]])),
+                         rep("HK",length(genesList[["hk"]])),
+                         rep("PNGs",length(genesList[["PNGs"]]))),
+                         levels = c("NPGs","HK","PNGs"))
 diag(seurat.data.cor) <- 0
 
 f1 = colorRamp2(seq(-0.5,0.5, length = 3), c("#DC0000B2", "white","#3C5488B2" ))
@@ -196,7 +214,7 @@ draw(htmp, heatmap_legend_side="right")
 ```
 
 ```{r,echo=FALSE}
-saveRDS(seurat.data.cor,file = paste0("CoexData/SeuratCorrSCT_",
+saveRDS(seurat.data.cor.big,file = paste0("CoexData/SeuratCorrSCT_",
                               getMetadataDataset(obj)[3,2],
                               ".RDS"))
 ```
