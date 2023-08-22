@@ -284,8 +284,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Cluster evaluation</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Cluster evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ clusterizations</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
@@ -337,17 +350,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(COTAN)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">parallelly.fork.enable =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>outDir <span class="ot">&lt;-</span> <span class="st">"Data/MouseCortexFromLoom/"</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingLevel</span>(<span class="dv">1</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingFile</span>(<span class="fu">file.path</span>(outDir, <span class="st">"ForebrainDorsal_E175-analysis.log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::load_all("../COTAN/")</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">parallelly.fork.enable =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>outDir <span class="ot">&lt;-</span> <span class="st">"Data/MouseCortexFromLoom/"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(outDir)) {</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(outDir)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingLevel</span>(<span class="dv">2</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingFile</span>(<span class="fu">file.path</span>(outDir, <span class="st">"ForebrainDorsal_E175-analysis.log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Read the already created COTAN object</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/MouseCortexFromLoom/SourceData/e17.5_ForebrainDorsal.cotan.RDS"</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/SourceData/"</span>, <span class="st">"e17.5_ForebrainDorsal.cotan.RDS"</span>))</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sampleCondition <span class="ot">&lt;-</span> <span class="fu">getMetadataElement</span>(fb175Obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sampleCondition</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -362,7 +379,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Drop cells with too many ritz reads as they are probably duplets</p>
+<p>Drop cells with too many reads reads as they are probably doublets</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cellsSizeThr <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb175Obj, <span class="st">"Cells size threshold"</span>, cellsSizeThr)</span>
@@ -382,7 +399,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Drop cells with too low genes expession as they are probably dead</p>
+<p>Drop cells with too low genes expression as they are probably dead</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>genesSizeLowThr <span class="ot">&lt;-</span> <span class="dv">700</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb175Obj, <span class="st">"Num genes low threshold"</span>, genesSizeLowThr)</span>
@@ -396,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Check number of mitocondrial genes expressed in each cell</p>
+<p>Check number of mitochondrial genes expressed in each cell</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mitGenesPattern <span class="ot">&lt;-</span> <span class="st">"^mt."</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getGenes</span>(fb175Obj)[<span class="fu">grep</span>(mitGenesPattern, <span class="fu">getGenes</span>(fb175Obj))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -412,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Cells with a too high percentage of mitocondrial genes are likely dead (or at the last problematic) cells. So we drop them!</p>
+<p>Cells with a too high percentage of mitochondrial genes are likely dead (or at the last problematic) cells. So we drop them!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mitPercThr <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb175Obj, <span class="st">"Mitoc. perc. threshold"</span>, mitPercThr)</span>
@@ -430,7 +447,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Check no further outliers after all the culling</p>
+<p>Check no further outlines after all the culling</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(fb175Obj, <span class="at">splitPattern =</span> <span class="st">":"</span>, <span class="at">numCol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -445,9 +462,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb175Obj)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb175Obj)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb175Obj)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -467,20 +485,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-11-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>lowUDEThr <span class="ot">&lt;-</span> <span class="fl">0.4</span> <span class="co"># the threshold to remove low UDE cells</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>nuDf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"nu"</span> <span class="ot">=</span> <span class="fu">sort</span>(<span class="fu">getNu</span>(fb175Obj)), <span class="st">"n"</span> <span class="ot">=</span> <span class="fu">seq_along</span>(<span class="fu">getNu</span>(fb175Obj)))</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>UDEPlot_zoomed <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(nuDf, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> nu)) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#8491B4B2"</span>, <span class="at">size =</span> <span class="fl">1.0</span>) <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">xlim</span>(0L, 400L) <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ylim</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> lowUDEThr, <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>            <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> 200L, <span class="at">y =</span> <span class="fl">0.25</span>,</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"to remove cells with nu &lt; "</span>, lowUDEThr),</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="fl">4.5</span>)</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDEPlot_zoomed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNuPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-11-3.png" class="img-fluid" width="672"></p>
 </div>
@@ -489,99 +494,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb175Obj)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb175Obj)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDEPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-12-3.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nuPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-12-4.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cellSizePlot</span>(fb175Obj, <span class="at">splitPattern =</span> <span class="st">":"</span>, <span class="at">numCol =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-12-5.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">genesSizePlot</span>(fb175Obj, <span class="at">splitPattern =</span> <span class="st">":"</span>, <span class="at">numCol =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-12-6.png" class="img-fluid" width="672"></p>
-</div>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb175Obj)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDEPlot)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nuPlot)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNuPlot)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cellSizePlot</span>(fb175Obj, <span class="at">splitPattern =</span> <span class="st">":"</span>, <span class="at">numCol =</span> <span class="dv">1</span>))</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">genesSizePlot</span>(fb175Obj, <span class="at">splitPattern =</span> <span class="st">":"</span>, <span class="at">numCol =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Calculate genes’ COEX</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">proceedToCoex</span>(fb175Obj, <span class="at">calcCoex =</span> <span class="cn">TRUE</span>, <span class="at">cores =</span> <span class="dv">12</span>,</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Save the COTAN object</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(fb175Obj, <span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(sampleCondition, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">proceedToCoex</span>(fb175Obj, <span class="at">calcCoex =</span> <span class="cn">TRUE</span>, <span class="at">cores =</span> <span class="dv">12</span>,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(sampleCondition, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>gdiData <span class="ot">&lt;-</span> <span class="fu">calculateGDI</span>(fb175Obj)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>genesToLabel <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">rownames</span>(gdiData[<span class="fu">order</span>(gdiData[[<span class="st">"GDI"</span>]],</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]), <span class="at">n =</span> 10L)</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>genesToLabel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>gdiData <span class="ot">&lt;-</span> <span class="fu">calculateGDI</span>(fb175Obj)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>genesToLabel <span class="ot">&lt;-</span> <span class="fu">head</span>(<span class="fu">rownames</span>(gdiData[<span class="fu">order</span>(gdiData[[<span class="st">"GDI"</span>]],</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]), <span class="at">n =</span> 10L)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>genesToLabel</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] "Mfge8"    "Myt1l"    "Atp1a2"   "Sparc"    "Apoe"     "Phgdh"   
  [7] "Slc9a3r1" "Tnc"      "Ccdc80"   "Aldoc"   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>gdiPlot <span class="ot">&lt;-</span> <span class="fu">GDIPlot</span>(fb175Obj, <span class="at">GDIIn =</span> gdiData, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>,</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">genes =</span> <span class="fu">list</span>(<span class="st">"Top 10 GDI genes"</span> <span class="ot">=</span> genesToLabel))</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gdiPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gdiPlot <span class="ot">&lt;-</span> <span class="fu">GDIPlot</span>(fb175Obj, <span class="at">GDIIn =</span> gdiData, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">genes =</span> <span class="fu">list</span>(<span class="st">"Top 10 GDI genes"</span> <span class="ot">=</span> genesToLabel))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gdiPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E175-analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+<p>Save the COTAN object</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(fb175Obj, <span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(sampleCondition, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>splitClusters <span class="ot">&lt;-</span> <span class="fu">cellsUniformClustering</span>(fb175Obj, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>, <span class="at">cores =</span> <span class="dv">13</span>,</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                                        <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(splitCoexDF, splitPValueDF) <span class="sc">%&lt;-%</span> <span class="fu">DEAOnClusters</span>(fb175Obj, <span class="at">clusters =</span> splitClusters)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(fb175Obj, <span class="at">clName =</span> <span class="st">"split"</span>,</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">clusters =</span> splitClusters,</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">coexDF =</span> splitCoexDF, <span class="at">override =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(splitClusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(splitClusters, splitCoexDF) <span class="sc">%&lt;-%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cellsUniformClustering</span>(fb175Obj, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>, <span class="at">cores =</span> 13L,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(fb175Obj, <span class="at">clName =</span> <span class="st">"split"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">clusters =</span> splitClusters,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">coexDF =</span> splitCoexDF, <span class="at">override =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(fb175Obj, <span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(sampleCondition, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mergedClusters, mergedCoexDF, mergedPValueDF) <span class="sc">%&lt;-%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mergeUniformCellsClusters</span>(fb175Obj, <span class="at">clusters =</span> splitClusters,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>, <span class="at">cores =</span> <span class="dv">13</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(fb175Obj, <span class="at">clName =</span> <span class="st">"merge"</span>,</span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">clusters =</span> mergedClusters,</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">coexDF =</span> mergedCoexDF,</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">override =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mergedClusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(fb175Obj, <span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(sampleCondition, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>splitClusters <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(fb175Obj,<span class="at">clName =</span> <span class="st">"split"</span>)<span class="sc">$</span>clusters</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(splitClusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.0 (2023-04-21)
+<pre><code>splitClusters
+ -1  20  04  05  06  07  10  22  11  08  21  23  16  12  18  24  09  14  15  13 
+ 10 384 130 119  82  53  44  40  32  22 413 166 159  91  55  50  15 202 146  70 
+ 02  01  03  17  19 
+ 50  37  32  35  30 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mergedClusters, mergedCoexDF) <span class="sc">%&lt;-%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mergeUniformCellsClusters</span>(fb175Obj, <span class="at">clusters =</span> splitClusters,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>, <span class="at">batchSize =</span> 20L, <span class="at">cores =</span> 13L,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(fb175Obj, <span class="at">clName =</span> <span class="st">"merge"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">clusters =</span> mergedClusters,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">coexDF =</span> mergedCoexDF,</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">override =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mergedClusters <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(fb175Obj,<span class="at">clName =</span> <span class="st">"merge"</span>)<span class="sc">$</span>clusters</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mergedClusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>mergedClusters
+ 16  03  04  05  06  07  18  01  02  12  19  14  13  15  17  08  09  10  11 
+ 65  37  50  32 130 119 135  22  15  44  32 237 100 202 194 384 413  90 166 </code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2023-08-22 11:46:58 CEST"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.1 (2023-06-16)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.6 LTS
 
@@ -595,62 +599,62 @@ locale:
  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
 [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 
-time zone: Europe/Berlin
+time zone: Europe/Rome
 tzcode source: system (glibc)
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] COTAN_2.1.5   zeallot_0.1.0 tibble_3.2.1  ggplot2_3.4.2
+[1] COTAN_2.1.7   zeallot_0.1.0 tibble_3.2.1  ggplot2_3.4.2
 
 loaded via a namespace (and not attached):
-  [1] RColorBrewer_1.1-3     rstudioapi_0.14        jsonlite_1.8.4        
+  [1] RColorBrewer_1.1-3     rstudioapi_0.15.0      jsonlite_1.8.7        
   [4] shape_1.4.6            umap_0.2.10.0          magrittr_2.0.3        
-  [7] spatstat.utils_3.0-3   farver_2.1.1           rmarkdown_2.21        
- [10] GlobalOptions_0.1.2    vctrs_0.6.1            ROCR_1.0-11           
+  [7] spatstat.utils_3.0-3   farver_2.1.1           rmarkdown_2.24        
+ [10] GlobalOptions_0.1.2    vctrs_0.6.3            ROCR_1.0-11           
  [13] spatstat.explore_3.2-1 askpass_1.1            htmltools_0.5.5       
- [16] sctransform_0.3.5      parallelly_1.36.0      KernSmooth_2.23-20    
+ [16] sctransform_0.3.5      parallelly_1.36.0      KernSmooth_2.23-22    
  [19] htmlwidgets_1.6.2      ica_1.0-3              plyr_1.8.8            
- [22] plotly_4.10.1          zoo_1.8-12             igraph_1.4.2          
+ [22] plotly_4.10.2          zoo_1.8-12             igraph_1.5.1          
  [25] mime_0.12              lifecycle_1.0.3        iterators_1.0.14      
- [28] pkgconfig_2.0.3        Matrix_1.5-4.1         R6_2.5.1              
- [31] fastmap_1.1.1          fitdistrplus_1.1-8     future_1.32.0         
- [34] shiny_1.7.4            clue_0.3-64            digest_0.6.31         
- [37] colorspace_2.1-0       patchwork_1.1.2        S4Vectors_0.38.0      
- [40] Seurat_4.3.0           tensor_1.5             RSpectra_0.16-1       
- [43] irlba_2.3.5.1          labeling_0.4.2         progressr_0.13.0      
- [46] RcppZiggurat_0.1.6     fansi_1.0.4            spatstat.sparse_3.0-1 
- [49] httr_1.4.5             polyclip_1.10-4        abind_1.4-5           
- [52] compiler_4.3.0         withr_2.5.0            doParallel_1.0.17     
- [55] viridis_0.6.2          dendextend_1.17.1      MASS_7.3-59           
- [58] openssl_2.0.6          rjson_0.2.21           tools_4.3.0           
- [61] lmtest_0.9-40          httpuv_1.6.9           future.apply_1.11.0   
+ [28] pkgconfig_2.0.3        Matrix_1.6-0           R6_2.5.1              
+ [31] fastmap_1.1.1          fitdistrplus_1.1-11    future_1.33.0         
+ [34] shiny_1.7.5            clue_0.3-64            digest_0.6.33         
+ [37] colorspace_2.1-0       patchwork_1.1.2        S4Vectors_0.38.1      
+ [40] Seurat_4.3.0.1         tensor_1.5             RSpectra_0.16-1       
+ [43] irlba_2.3.5.1          labeling_0.4.2         progressr_0.14.0      
+ [46] RcppZiggurat_0.1.6     fansi_1.0.4            spatstat.sparse_3.0-2 
+ [49] httr_1.4.6             polyclip_1.10-4        abind_1.4-5           
+ [52] compiler_4.3.1         withr_2.5.0            doParallel_1.0.17     
+ [55] viridis_0.6.4          dendextend_1.17.1      MASS_7.3-60           
+ [58] openssl_2.1.0          rjson_0.2.21           tools_4.3.1           
+ [61] lmtest_0.9-40          httpuv_1.6.11          future.apply_1.11.0   
  [64] goftest_1.2-3          glue_1.6.2             nlme_3.1-162          
- [67] promises_1.2.0.1       grid_4.3.0             Rtsne_0.16            
+ [67] promises_1.2.0.1       grid_4.3.1             Rtsne_0.16            
  [70] cluster_2.1.4          reshape2_1.4.4         generics_0.1.3        
  [73] gtable_0.3.3           spatstat.data_3.0-1    tidyr_1.3.0           
- [76] data.table_1.14.8      sp_1.6-0               utf8_1.2.3            
- [79] BiocGenerics_0.46.0    spatstat.geom_3.2-1    RcppAnnoy_0.0.20      
+ [76] data.table_1.14.8      sp_2.0-0               utf8_1.2.3            
+ [79] BiocGenerics_0.46.0    spatstat.geom_3.2-4    RcppAnnoy_0.0.21      
  [82] ggrepel_0.9.3          RANN_2.6.1             foreach_1.5.2         
- [85] pillar_1.9.0           stringr_1.5.0          later_1.3.0           
- [88] circlize_0.4.15        splines_4.3.0          dplyr_1.1.2           
- [91] lattice_0.21-8         survival_3.5-5         deldir_1.0-6          
+ [85] pillar_1.9.0           stringr_1.5.0          later_1.3.1           
+ [88] circlize_0.4.15        splines_4.3.1          dplyr_1.1.2           
+ [91] lattice_0.21-8         survival_3.5-5         deldir_1.0-9          
  [94] tidyselect_1.2.0       ComplexHeatmap_2.16.0  miniUI_0.1.1.1        
- [97] pbapply_1.7-0          knitr_1.42             gridExtra_2.3         
-[100] IRanges_2.34.0         scattermore_1.1        stats4_4.3.0          
+ [97] pbapply_1.7-2          knitr_1.43             gridExtra_2.3         
+[100] IRanges_2.34.1         scattermore_1.2        stats4_4.3.1          
 [103] xfun_0.39              factoextra_1.0.7       matrixStats_1.0.0     
 [106] stringi_1.7.12         lazyeval_0.2.2         yaml_2.3.7            
-[109] evaluate_0.20          codetools_0.2-19       cli_3.6.1             
-[112] RcppParallel_5.1.7     uwot_0.1.14            xtable_1.8-4          
-[115] reticulate_1.28        munsell_0.5.0          Rcpp_1.0.10           
-[118] globals_0.16.2         spatstat.random_3.1-4  png_0.1-8             
-[121] parallel_4.3.0         Rfast_2.0.7            ellipsis_0.3.2        
+[109] evaluate_0.21          codetools_0.2-19       cli_3.6.1             
+[112] RcppParallel_5.1.7     uwot_0.1.16            xtable_1.8-4          
+[115] reticulate_1.30        munsell_0.5.0          Rcpp_1.0.11           
+[118] globals_0.16.2         spatstat.random_3.1-5  png_0.1-8             
+[121] parallel_4.3.1         Rfast_2.0.8            ellipsis_0.3.2        
 [124] assertthat_0.2.1       parallelDist_0.2.6     listenv_0.9.0         
-[127] ggthemes_4.2.4         viridisLite_0.4.1      scales_1.2.1          
+[127] ggthemes_4.2.4         viridisLite_0.4.2      scales_1.2.1          
 [130] ggridges_0.5.4         SeuratObject_4.1.3     leiden_0.4.3          
 [133] purrr_1.0.1            crayon_1.5.2           GetoptLong_1.0.5      
-[136] rlang_1.1.0            cowplot_1.1.1         </code></pre>
+[136] rlang_1.1.1            cowplot_1.1.1         </code></pre>
 </div>
 </div>
 
