@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>COTAN Datasets analysis - Forebrain Dorsal E13.5 Data-set Anaysis</title>
+<title>COTAN Datasets analysis - Forebrain Dorsal E15.0 Data-set Anaysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -323,14 +323,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#cleaning" id="toc-cleaning" class="nav-link active" data-scroll-target="#cleaning">Cleaning</a>
+  <ul class="collapse">
+  <li><a href="#clean-round-1" id="toc-clean-round-1" class="nav-link" data-scroll-target="#clean-round-1">Clean: round 1</a></li>
+  <li><a href="#clean-round-2" id="toc-clean-round-2" class="nav-link" data-scroll-target="#clean-round-2">Clean: round 2</a></li>
+  <li><a href="#clean-round-3" id="toc-clean-round-3" class="nav-link" data-scroll-target="#clean-round-3">Clean: round 3</a></li>
+  <li><a href="#clean-round-4" id="toc-clean-round-4" class="nav-link" data-scroll-target="#clean-round-4">Clean: round 4</a></li>
+  <li><a href="#clean-round-5" id="toc-clean-round-5" class="nav-link" data-scroll-target="#clean-round-5">Clean: round 5</a></li>
+  </ul></li>
+  <li><a href="#gdi" id="toc-gdi" class="nav-link" data-scroll-target="#gdi">GDI</a></li>
+  <li><a href="#consistent-transcript-cohorts-clustering" id="toc-consistent-transcript-cohorts-clustering" class="nav-link" data-scroll-target="#consistent-transcript-cohorts-clustering">Consistent Transcript Cohorts (clustering)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Forebrain Dorsal E13.5 Data-set Anaysis</h1>
+<h1 class="title">Forebrain Dorsal E15.0 Data-set Anaysis</h1>
 </div>
 
 
@@ -358,6 +373,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingLevel</span>(<span class="dv">1</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingFile</span>(<span class="fu">file.path</span>(outDir, <span class="st">"ForebrainDorsal_E150-analysis.log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="cleaning" class="level2">
+<h2 class="anchored" data-anchor-id="cleaning">Cleaning</h2>
 <p>Read the already created COTAN object</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/MouseCortexFromLoom/SourceData/e15.0_ForebrainDorsal.cotan.RDS"</span>)</span>
@@ -454,19 +471,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Clean: round 1</p>
+<section id="clean-round-1" class="level3">
+<h3 class="anchored" data-anchor-id="clean-round-1">Clean: round 1</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb150Obj)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 1-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 1-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb150Obj, <span class="st">"Num drop B group"</span>, <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -476,19 +494,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(fb150Obj, <span class="at">cells =</span> cells_to_rem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Clean: round 2</p>
+</section>
+<section id="clean-round-2" class="level3">
+<h3 class="anchored" data-anchor-id="clean-round-2">Clean: round 2</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb150Obj)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 2-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-12-2.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 2-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb150Obj, <span class="st">"Num drop B group"</span>, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -502,19 +523,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(fb150Obj, <span class="at">cells =</span> cells_to_rem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Clean: round 3</p>
+</section>
+<section id="clean-round-3" class="level3">
+<h3 class="anchored" data-anchor-id="clean-round-3">Clean: round 3</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb150Obj)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 3-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 3-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb150Obj, <span class="st">"Num drop B group"</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -528,19 +552,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(fb150Obj, <span class="at">cells =</span> cells_to_rem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Clean: round 4</p>
+</section>
+<section id="clean-round-4" class="level3">
+<h3 class="anchored" data-anchor-id="clean-round-4">Clean: round 4</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb150Obj)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 4-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-16-2.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 4-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb150Obj, <span class="st">"Num drop B group"</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -554,19 +581,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(fb150Obj, <span class="at">cells =</span> cells_to_rem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Clean: round 4</p>
+</section>
+<section id="clean-round-5" class="level3">
+<h3 class="anchored" data-anchor-id="clean-round-5">Clean: round 5</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb150Obj)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 5-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/unnamed-chunk-18-2.png" class="img-fluid" width="672"></p>
+<p><img src="ForebrainDorsal_E150-analysis_files/figure-html/Clean round 5-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(fb150Obj, <span class="st">"Num drop B group"</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -602,7 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">clean</span>(fb150Obj)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(fb150Obj)</span>
 <span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -645,6 +675,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(sampleCondition, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="gdi" class="level2">
+<h2 class="anchored" data-anchor-id="gdi">GDI</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>gdiData <span class="ot">&lt;-</span> <span class="fu">calculateGDI</span>(fb150Obj)</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -676,6 +710,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(splitClusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="consistent-transcript-cohorts-clustering" class="level2">
+<h2 class="anchored" data-anchor-id="consistent-transcript-cohorts-clustering">Consistent Transcript Cohorts (clustering)</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mergedClusters, mergedCoexDF, mergedPValueDF) <span class="sc">%&lt;-%</span></span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mergeUniformCellsClusters</span>(fb150Obj, <span class="at">clusters =</span> splitClusters,</span>
@@ -689,10 +726,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mergedClusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.0 (2023-04-21)
+<pre><code>[1] "2023-08-22 19:45:26 CEST"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.1 (2023-06-16)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.6 LTS
 
@@ -706,66 +750,67 @@ locale:
  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
 [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 
-time zone: Europe/Berlin
+time zone: Europe/Rome
 tzcode source: system (glibc)
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] COTAN_2.1.5   zeallot_0.1.0 tibble_3.2.1  ggplot2_3.4.2
+[1] COTAN_2.1.7   zeallot_0.1.0 tibble_3.2.1  ggplot2_3.4.2
 
 loaded via a namespace (and not attached):
-  [1] RColorBrewer_1.1-3     rstudioapi_0.14        jsonlite_1.8.4        
+  [1] RColorBrewer_1.1-3     rstudioapi_0.15.0      jsonlite_1.8.7        
   [4] shape_1.4.6            umap_0.2.10.0          magrittr_2.0.3        
-  [7] spatstat.utils_3.0-3   farver_2.1.1           rmarkdown_2.21        
- [10] GlobalOptions_0.1.2    vctrs_0.6.1            ROCR_1.0-11           
+  [7] spatstat.utils_3.0-3   farver_2.1.1           rmarkdown_2.24        
+ [10] GlobalOptions_0.1.2    vctrs_0.6.3            ROCR_1.0-11           
  [13] spatstat.explore_3.2-1 askpass_1.1            htmltools_0.5.5       
- [16] sctransform_0.3.5      parallelly_1.36.0      KernSmooth_2.23-20    
+ [16] sctransform_0.3.5      parallelly_1.36.0      KernSmooth_2.23-22    
  [19] htmlwidgets_1.6.2      ica_1.0-3              plyr_1.8.8            
- [22] plotly_4.10.1          zoo_1.8-12             igraph_1.4.2          
+ [22] plotly_4.10.2          zoo_1.8-12             igraph_1.5.1          
  [25] mime_0.12              lifecycle_1.0.3        iterators_1.0.14      
- [28] pkgconfig_2.0.3        Matrix_1.5-4.1         R6_2.5.1              
- [31] fastmap_1.1.1          fitdistrplus_1.1-8     future_1.32.0         
- [34] shiny_1.7.4            clue_0.3-64            digest_0.6.31         
- [37] colorspace_2.1-0       patchwork_1.1.2        S4Vectors_0.38.0      
- [40] Seurat_4.3.0           tensor_1.5             RSpectra_0.16-1       
- [43] irlba_2.3.5.1          labeling_0.4.2         progressr_0.13.0      
- [46] RcppZiggurat_0.1.6     fansi_1.0.4            spatstat.sparse_3.0-1 
- [49] httr_1.4.5             polyclip_1.10-4        abind_1.4-5           
- [52] compiler_4.3.0         withr_2.5.0            doParallel_1.0.17     
- [55] viridis_0.6.2          dendextend_1.17.1      MASS_7.3-59           
- [58] openssl_2.0.6          rjson_0.2.21           tools_4.3.0           
- [61] lmtest_0.9-40          httpuv_1.6.9           future.apply_1.11.0   
+ [28] pkgconfig_2.0.3        Matrix_1.6-0           R6_2.5.1              
+ [31] fastmap_1.1.1          fitdistrplus_1.1-11    future_1.33.0         
+ [34] shiny_1.7.5            clue_0.3-64            digest_0.6.33         
+ [37] colorspace_2.1-0       patchwork_1.1.2        S4Vectors_0.38.1      
+ [40] Seurat_4.3.0.1         tensor_1.5             RSpectra_0.16-1       
+ [43] irlba_2.3.5.1          labeling_0.4.2         progressr_0.14.0      
+ [46] RcppZiggurat_0.1.6     fansi_1.0.4            spatstat.sparse_3.0-2 
+ [49] httr_1.4.6             polyclip_1.10-4        abind_1.4-5           
+ [52] compiler_4.3.1         withr_2.5.0            doParallel_1.0.17     
+ [55] viridis_0.6.4          dendextend_1.17.1      MASS_7.3-60           
+ [58] openssl_2.1.0          rjson_0.2.21           tools_4.3.1           
+ [61] lmtest_0.9-40          httpuv_1.6.11          future.apply_1.11.0   
  [64] goftest_1.2-3          glue_1.6.2             nlme_3.1-162          
- [67] promises_1.2.0.1       grid_4.3.0             Rtsne_0.16            
+ [67] promises_1.2.0.1       grid_4.3.1             Rtsne_0.16            
  [70] cluster_2.1.4          reshape2_1.4.4         generics_0.1.3        
  [73] gtable_0.3.3           spatstat.data_3.0-1    tidyr_1.3.0           
- [76] data.table_1.14.8      sp_1.6-0               utf8_1.2.3            
- [79] BiocGenerics_0.46.0    spatstat.geom_3.2-1    RcppAnnoy_0.0.20      
+ [76] data.table_1.14.8      sp_2.0-0               utf8_1.2.3            
+ [79] BiocGenerics_0.46.0    spatstat.geom_3.2-4    RcppAnnoy_0.0.21      
  [82] ggrepel_0.9.3          RANN_2.6.1             foreach_1.5.2         
- [85] pillar_1.9.0           stringr_1.5.0          later_1.3.0           
- [88] circlize_0.4.15        splines_4.3.0          dplyr_1.1.2           
- [91] lattice_0.21-8         survival_3.5-5         deldir_1.0-6          
+ [85] pillar_1.9.0           stringr_1.5.0          later_1.3.1           
+ [88] circlize_0.4.15        splines_4.3.1          dplyr_1.1.2           
+ [91] lattice_0.21-8         survival_3.5-5         deldir_1.0-9          
  [94] tidyselect_1.2.0       ComplexHeatmap_2.16.0  miniUI_0.1.1.1        
- [97] pbapply_1.7-0          knitr_1.42             gridExtra_2.3         
-[100] IRanges_2.34.0         scattermore_1.1        stats4_4.3.0          
+ [97] pbapply_1.7-2          knitr_1.43             gridExtra_2.3         
+[100] IRanges_2.34.1         scattermore_1.2        stats4_4.3.1          
 [103] xfun_0.39              factoextra_1.0.7       matrixStats_1.0.0     
 [106] stringi_1.7.12         lazyeval_0.2.2         yaml_2.3.7            
-[109] evaluate_0.20          codetools_0.2-19       cli_3.6.1             
-[112] RcppParallel_5.1.7     uwot_0.1.14            xtable_1.8-4          
-[115] reticulate_1.28        munsell_0.5.0          Rcpp_1.0.10           
-[118] globals_0.16.2         spatstat.random_3.1-4  png_0.1-8             
-[121] parallel_4.3.0         Rfast_2.0.7            ellipsis_0.3.2        
+[109] evaluate_0.21          codetools_0.2-19       cli_3.6.1             
+[112] RcppParallel_5.1.7     uwot_0.1.16            xtable_1.8-4          
+[115] reticulate_1.30        munsell_0.5.0          Rcpp_1.0.11           
+[118] globals_0.16.2         spatstat.random_3.1-5  png_0.1-8             
+[121] parallel_4.3.1         Rfast_2.0.8            ellipsis_0.3.2        
 [124] assertthat_0.2.1       parallelDist_0.2.6     listenv_0.9.0         
-[127] ggthemes_4.2.4         viridisLite_0.4.1      scales_1.2.1          
+[127] ggthemes_4.2.4         viridisLite_0.4.2      scales_1.2.1          
 [130] ggridges_0.5.4         SeuratObject_4.1.3     leiden_0.4.3          
 [133] purrr_1.0.1            crayon_1.5.2           GetoptLong_1.0.5      
-[136] rlang_1.1.0            cowplot_1.1.1         </code></pre>
+[136] rlang_1.1.1            cowplot_1.1.1         </code></pre>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
