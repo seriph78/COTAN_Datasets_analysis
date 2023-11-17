@@ -328,7 +328,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#coex-and-correlations" id="toc-coex-and-correlations" class="nav-link active" data-scroll-target="#coex-and-correlations">COEX and Correlations</a></li>
-  <li><a href="#p-values-evaluation" id="toc-p-values-evaluation" class="nav-link" data-scroll-target="#p-values-evaluation">p-values evaluation</a></li>
+  <li><a href="#p-values" id="toc-p-values" class="nav-link" data-scroll-target="#p-values"><em>p</em>-values</a>
+  <ul class="collapse">
+  <li><a href="#constitutive-genes" id="toc-constitutive-genes" class="nav-link" data-scroll-target="#constitutive-genes">Constitutive genes</a></li>
+  <li><a href="#neural-genes" id="toc-neural-genes" class="nav-link" data-scroll-target="#neural-genes">Neural genes</a></li>
+  <li><a href="#direct-comparision" id="toc-direct-comparision" class="nav-link" data-scroll-target="#direct-comparision">Direct comparision</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -362,7 +367,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Matrix)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggstance)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#library(COTAN)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#library(COTAN)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>genesList <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
@@ -375,8 +381,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Taf1"</span>, <span class="st">"Taf2"</span>, <span class="st">"Gapdh"</span>, <span class="st">"Actb"</span>, <span class="st">"Golph3"</span>, <span class="st">"Zfr"</span>, <span class="st">"Sub1"</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tars"</span>, <span class="st">"Amacr"</span>),</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"layers"</span> <span class="ot">=</span> </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Reln"</span>,<span class="st">"Lhx5"</span>,<span class="st">"Cux1"</span>,<span class="st">"Satb2"</span>,<span class="st">"Tle1"</span>,<span class="st">"Mef2c"</span>,<span class="st">"Rorb"</span>,<span class="st">"Sox5"</span>,<span class="st">"Bcl11b"</span>,<span class="st">"Fezf2"</span>,<span class="st">"Foxp2"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Reln"</span>,<span class="st">"Lhx5"</span>,<span class="st">"Cux1"</span>,<span class="st">"Satb2"</span>,<span class="st">"Tle1"</span>,<span class="st">"Mef2c"</span>,<span class="st">"Rorb"</span>,<span class="st">"Sox5"</span>,<span class="st">"Bcl11b"</span>,<span class="st">"Fezf2"</span>,<span class="st">"Foxp2"</span>,<span class="st">"Ntf3"</span>,<span class="st">"Rasgrf2"</span>,<span class="st">"Pvrl3"</span>, <span class="st">"Cux2"</span>,<span class="st">"Slc17a6"</span>, <span class="st">"Sema3c"</span>,<span class="st">"Thsd7a"</span>, <span class="st">"Sulf2"</span>, <span class="st">"Kcnk2"</span>,<span class="st">"Grik3"</span>, <span class="st">"Etv1"</span>, <span class="st">"Tle4"</span>, <span class="st">"Tmem200a"</span>, <span class="st">"Glra2"</span>, <span class="st">"Etv1"</span>,<span class="st">"Htr1f"</span>, <span class="st">"Sulf1"</span>,<span class="st">"Rxfp1"</span>, <span class="st">"Syt6"</span>) </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># From https://www.science.org/doi/10.1126/science.aam8999</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="coex-and-correlations" class="level2">
 <h2 class="anchored" data-anchor-id="coex-and-correlations">COEX and Correlations</h2>
@@ -453,22 +460,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"COTAN coex"</span>,]<span class="sc">$</span>Gene1,</span>
 <span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>          table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Seurat corr."</span>,]<span class="sc">$</span>Gene1 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"COTAN coex"</span>,]<span class="sc">$</span>Gene2,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>          table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Seurat corr."</span>,]<span class="sc">$</span>Gene2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
+<pre><code>[1] FALSE</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table.tot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Gene1  Gene2        value     Method     GeneType         n    Y_axis
-2  Actb  Calm1 -0.046654038 COTAN coex Constitutive 0.7526141 0.2473859
-3  Actb Cox6b1  0.029446301 COTAN coex Constitutive 0.5804642 0.4195358
-4  Actb   Ppia -0.032311039 COTAN coex Constitutive 0.6179546 0.3820454
-5  Actb  Rpl18  0.022841098 COTAN coex Constitutive 0.5006376 0.4993624
-6  Actb  Cox7c  0.008585828 COTAN coex Constitutive 0.2175465 0.7824535
-7  Actb    Erh  0.012658061 COTAN coex Constitutive 0.2994134 0.7005866</code></pre>
+<pre><code>  Gene1  Gene2      value     Method     GeneType         n     Y_axis
+2   Nes  Calm1 0.07759659 COTAN coex Constitutive 0.9192519 0.08074807
+3   Nes Cox6b1 0.01041200 COTAN coex Constitutive 0.2809681 0.71903190
+4   Nes   Ppia 0.02778287 COTAN coex Constitutive 0.5916392 0.40836084
+5   Nes  Rpl18 0.11794907 COTAN coex Constitutive 0.9845985 0.01540154
+6   Nes  Cox7c 0.01694457 COTAN coex Constitutive 0.4173817 0.58261826
+7   Nes    Erh 0.06612110 COTAN coex Constitutive 0.8822882 0.11771177</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -511,6 +518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>In this case we don’t see differences between coex and correlations.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot[table.tot<span class="sc">$</span>GeneType <span class="sc">==</span> <span class="st">"Constitutive"</span>,], <span class="fu">aes</span>(<span class="at">x =</span> ValAbs, <span class="at">y =</span> <span class="sc">-</span><span class="fl">0.5</span>)) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -535,23 +543,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>We can clearly observe that the coex is generally more near to zero than the correlations.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>ValAbs, <span class="at">color=</span>Method, <span class="at">y =</span> Y_axis)) <span class="sc">+</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"gray"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span> <span class="st">"log"</span>,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                         )<span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span> <span class="st">"log"</span>,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>, <span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.8</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.85</span>))<span class="sc">+</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span>   <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"bottom"</span>)<span class="sc">+</span> </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(GeneType <span class="sc">~</span> . )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>ValAbs, <span class="at">color=</span>Method, <span class="at">y =</span> Y_axis)) <span class="sc">+</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"gray"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span> <span class="st">"log"</span>,<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                         )<span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans=</span> <span class="st">"log"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">breaks =</span> <span class="fu">c</span>(<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>, <span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.8</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.85</span>))<span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span>   <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"bottom"</span>)<span class="sc">+</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(GeneType <span class="sc">~</span> . )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot.hk,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">abs</span>(value), <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot.hk,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">abs</span>(value), <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">stat_ecdf</span>(<span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"gray"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans=</span> <span class="st">"exp"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
@@ -582,141 +590,213 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="p-values" class="level2">
+<h2 class="anchored" data-anchor-id="p-values"><em>p</em>-values</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot, <span class="fu">aes</span>(<span class="at">x=</span>Method,<span class="at">y=</span>ValAbs, <span class="at">fill=</span>GeneType)) <span class="sc">+</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  introdataviz<span class="sc">::</span><span class="fu">geom_split_violin</span>(<span class="at">alpha =</span> .<span class="dv">4</span>, <span class="at">trim =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">6</span>, <span class="at">fatten =</span> <span class="cn">NULL</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> <span class="st">"mean_se"</span>, <span class="at">geom =</span> <span class="st">"pointrange"</span>, <span class="at">show.legend =</span> F, </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">175</span>)) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">"CoexData/"</span>,<span class="at">pattern =</span> <span class="st">"PValue"</span>)) {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  pval <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">paste0</span>(<span class="st">"CoexData/"</span>,file))</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#pval &lt;- as.data.frame(as.matrix(pval))</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"Cotan"</span>)){</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"COTAN p-values"</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">diag</span>(pval)) <span class="sc">==</span> <span class="dv">1</span>){</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">diag</span>(pval) <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"PValuesSCT"</span>)){</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat SCT p-values"</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"SeuratPValues"</span>)){</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat p-values"</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[,genesList<span class="sc">$</span>hk])</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.hk)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.hk),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.hk)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.hk)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="sc">!</span> table.tot.hk<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.hk<span class="sc">$</span>Gene2,]</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Not hk</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[<span class="fu">rownames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers),<span class="fu">colnames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)])</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.neural)</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.neural),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.neural)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.neural,table.neural)</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="sc">!</span> table.tot.neural<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.neural<span class="sc">$</span>Gene2,]</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.hk),]</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>table.tot.hk<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Constitutive"</span> </span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.neural),]</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>table.tot.neural<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Neural"</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a><span class="do">## For ECDL</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.hk<span class="sc">$</span>Method)) {</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.hk[table.tot.hk<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> tmp.tot</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.neural<span class="sc">$</span>Method)) {</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.neural[table.tot.neural<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> tmp.tot</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="do">############</span></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.tot.neural) </span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> table.tot[<span class="sc">!</span>table.tot<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot<span class="sc">$</span>Gene2,]</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"COTAN p-val"</span>,]<span class="sc">$</span>Gene1,</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>          table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Seurat p-val."</span>,]<span class="sc">$</span>Gene1 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table.tot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Gene1  Gene2     value         Method     GeneType         n    Y_axis
+2  Actb  Calm1 0.1154619 COTAN p-values Constitutive 0.3496081 0.6503919
+3  Actb Cox6b1 0.3563300 COTAN p-values Constitutive 0.5415454 0.4584546
+4  Actb   Ppia 0.2790691 COTAN p-values Constitutive 0.4871221 0.5128779
+5  Actb  Rpl18 0.4733509 COTAN p-values Constitutive 0.6257559 0.3742441
+6  Actb  Cox7c 0.8035390 COTAN p-values Constitutive 0.8680851 0.1319149
+7  Actb    Erh 0.6855733 COTAN p-values Constitutive 0.7746920 0.2253080</code></pre>
+</div>
+</div>
+<section id="constitutive-genes" class="level3">
+<h3 class="anchored" data-anchor-id="constitutive-genes">Constitutive genes</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot[table.tot<span class="sc">$</span>GeneType <span class="sc">==</span> <span class="st">"Constitutive"</span>,], <span class="fu">aes</span>(<span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Method), <span class="at">outlier.size =</span> <span class="fl">0.5</span>,<span class="at">width=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>()<span class="sc">+</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="co">#+   theme(legend.position="none")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot.hk,<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>n, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"gray"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot.hk,<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>n, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="fu">log_trans</span>(<span class="at">base =</span> <span class="dv">10</span>),</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">trans_breaks</span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="sc">^</span>x),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">"log10"</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)),<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">100</span>),<span class="fl">0.05</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.4</span>) <span class="sc">+</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"gray"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can observe from this plot that COTAN has lower false positive error in fact the number of constitutive genes with <em>p-</em>values lower than 0.05 is quite smaller than from Seurat (both normalization).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot[table.tot<span class="sc">$</span>GeneType <span class="sc">==</span> <span class="st">"Constitutive"</span>,],<span class="fu">aes</span>(<span class="at">x=</span>value, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_density</span>()<span class="sc">+</span><span class="fu">xlim</span>(<span class="dv">0</span>,<span class="fl">0.05</span>)<span class="sc">+</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="p-values-evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="p-values-evaluation">p-values evaluation</h2>
+<section id="neural-genes" class="level3">
+<h3 class="anchored" data-anchor-id="neural-genes">Neural genes</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file <span class="cf">in</span> <span class="fu">list.files</span>(<span class="st">"CoexData/"</span>,<span class="at">pattern =</span> <span class="st">"PValue"</span>)) {</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  pval <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">paste0</span>(<span class="st">"CoexData/"</span>,file))</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#pval &lt;- as.data.frame(as.matrix(pval))</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"Cotan"</span>)){</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"COTAN p-val"</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">diag</span>(pval)) <span class="sc">==</span> <span class="dv">1</span>){</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">diag</span>(pval) <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"PValuesSCT"</span>)){</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat SCT p-val."</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"SeuratPValues"</span>)){</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat p-val."</span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[,genesList<span class="sc">$</span>hk])</span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.hk)</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.hk),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.hk)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.hk)</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="sc">!</span> table.tot.hk<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.hk<span class="sc">$</span>Gene2,]</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Not hk</span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[<span class="fu">rownames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers),<span class="fu">colnames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)])</span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.neural)</span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.neural),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.neural)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.neural,table.neural)</span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="sc">!</span> table.tot.neural<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.neural<span class="sc">$</span>Gene2,]</span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.hk),]</span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>table.tot.hk<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Constitutive"</span> </span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.neural),]</span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>table.tot.neural<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Neural"</span></span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="do">## For ECDL</span></span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.hk<span class="sc">$</span>Method)) {</span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.hk[table.tot.hk<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> tmp.tot</span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.neural<span class="sc">$</span>Method)) {</span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.neural[table.tot.neural<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> tmp.tot</span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="do">############</span></span>
-<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.tot.neural) </span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> table.tot[<span class="sc">!</span>table.tot<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot<span class="sc">$</span>Gene2,]</span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"COTAN p-val"</span>,]<span class="sc">$</span>Gene1,</span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>          table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Seurat p-val."</span>,]<span class="sc">$</span>Gene1 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] FALSE</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table.tot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  Gene1  Gene2     value      Method     GeneType         n    Y_axis
-2  Actb  Calm1 0.1221210 COTAN p-val Constitutive 0.3808790 0.6191210
-3  Actb Cox6b1 0.3291958 COTAN p-val Constitutive 0.5774865 0.4225135
-4  Actb   Ppia 0.2843218 COTAN p-val Constitutive 0.5350810 0.4649190
-5  Actb  Rpl18 0.4491310 COTAN p-val Constitutive 0.6437934 0.3562066
-6  Actb  Cox7c 0.7760267 COTAN p-val Constitutive 0.8681573 0.1318427
-7  Actb    Erh 0.6748957 COTAN p-val Constitutive 0.8080185 0.1919815</code></pre>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot[table.tot<span class="sc">$</span>GeneType <span class="sc">==</span> <span class="st">"Neural"</span>,], <span class="fu">aes</span>(<span class="at">y =</span> (value))) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Method), <span class="at">outlier.size =</span> <span class="fl">0.5</span>,<span class="at">width=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>()<span class="sc">+</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="co">#+ theme(legend.position="none")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot[table.tot<span class="sc">$</span>GeneType <span class="sc">==</span> <span class="st">"Constitutive"</span>,], <span class="fu">aes</span>(<span class="at">y =</span> value)) <span class="sc">+</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># horizontal box plot</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Method), <span class="at">outlier.size =</span> <span class="fl">0.5</span>,<span class="at">width=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reproduce original chart's color scale (o/w ordered factors will result</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># in viridis scale by default, using the current version of ggplot2)</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>()<span class="sc">+</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span>   <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot.neural,<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>n, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot[table.tot<span class="sc">$</span>GeneType <span class="sc">==</span> <span class="st">"Neural"</span>,], <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">log</span>(value))) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># horizontal box plot</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Method), <span class="at">outlier.size =</span> <span class="fl">0.5</span>,<span class="at">width=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># reproduce original chart's color scale (o/w ordered factors will result</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># in viridis scale by default, using the current version of ggplot2)</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_discrete</span>()<span class="sc">+</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span>   <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot.neural,<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>n, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="fu">log_trans</span>(<span class="at">base =</span> <span class="dv">10</span>),</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">trans_breaks</span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="sc">^</span>x),</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">"log10"</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.0001</span>,<span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot.neural,<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>n, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="fu">log_trans</span>(<span class="at">base =</span> <span class="dv">10</span>),</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">trans_breaks</span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="sc">^</span>x),</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">"log10"</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">10</span><span class="sc">^</span>(<span class="sc">-</span><span class="dv">300</span>),<span class="fl">0.05</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="fl">0.5</span>)<span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="direct-comparision" class="level3">
+<h3 class="anchored" data-anchor-id="direct-comparision">Direct comparision</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>value, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_density</span>()<span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(GeneType <span class="sc">~</span> .,<span class="at">scales=</span><span class="st">"free"</span>)<span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"gray"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>value,<span class="at">y=</span>n, <span class="at">color=</span>Method))<span class="sc">+</span><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span> )<span class="sc">+</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="fu">log_trans</span>(<span class="at">base =</span> <span class="dv">10</span>),</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">trans_breaks</span>(<span class="st">"log10"</span>, <span class="cf">function</span>(x) <span class="dv">10</span><span class="sc">^</span>x),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">"log10"</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.0001</span>,<span class="fl">0.05</span>)) <span class="sc">+</span> </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> GeneType ,<span class="at">scales=</span><span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"gray"</span>,<span class="st">"#B3CDE3"</span> ))<span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.1 (2023-06-16)
+<pre><code>[1] "2023-11-17 12:57:51 CET"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.2 (2023-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.6 LTS
 
@@ -737,34 +817,34 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] scales_1.2.1       ggstance_0.3.6     Matrix_1.6-0       cowplot_1.1.1     
+ [1] scales_1.2.1       ggstance_0.3.6     Matrix_1.6-2       cowplot_1.1.1     
  [5] gridExtra_2.3      ggstatsplot_0.12.0 gghalves_0.1.4     ggplot2_3.4.2     
  [9] stringr_1.5.0      tidyr_1.3.0       
 
 loaded via a namespace (and not attached):
- [1] utf8_1.2.3              generics_0.1.3          stringi_1.7.12         
- [4] lattice_0.21-8          digest_0.6.33           magrittr_2.0.3         
- [7] correlation_0.8.4       RColorBrewer_1.1-3      evaluate_0.21          
-[10] grid_4.3.1              estimability_1.4.1      mvtnorm_1.2-2          
-[13] fastmap_1.1.1           plyr_1.8.8              jsonlite_1.8.7         
-[16] rematch2_2.1.2          purrr_1.0.1             fansi_1.0.4            
-[19] introdataviz_0.0.0.9003 cli_3.6.1               rlang_1.1.1            
-[22] munsell_0.5.0           withr_2.5.0             yaml_2.3.7             
-[25] statsExpressions_1.5.1  tools_4.3.1             datawizard_0.8.0       
-[28] coda_0.19-4             dplyr_1.1.2             colorspace_2.1-0       
-[31] zeallot_0.1.0           bayestestR_0.13.1       paletteer_1.5.0        
-[34] vctrs_0.6.3             R6_2.5.1                lifecycle_1.0.3        
-[37] emmeans_1.8.7           htmlwidgets_1.6.2       insight_0.19.3         
-[40] pkgconfig_2.0.3         pillar_1.9.0            gtable_0.3.3           
-[43] Rcpp_1.0.11             glue_1.6.2              xfun_0.39              
-[46] tibble_3.2.1            tidyselect_1.2.0        rstudioapi_0.15.0      
-[49] parameters_0.21.1       knitr_1.43              farver_2.1.1           
-[52] xtable_1.8-4            patchwork_1.1.2         htmltools_0.5.5        
-[55] labeling_0.4.2          rmarkdown_2.24          compiler_4.3.1         </code></pre>
+ [1] utf8_1.2.3             generics_0.1.3         stringi_1.8.1         
+ [4] lattice_0.22-5         digest_0.6.33          magrittr_2.0.3        
+ [7] correlation_0.8.4      evaluate_0.21          grid_4.3.2            
+[10] estimability_1.4.1     mvtnorm_1.2-2          fastmap_1.1.1         
+[13] jsonlite_1.8.7         rematch2_2.1.2         purrr_1.0.1           
+[16] fansi_1.0.4            cli_3.6.1              rlang_1.1.1           
+[19] munsell_0.5.0          withr_2.5.0            yaml_2.3.7            
+[22] statsExpressions_1.5.1 tools_4.3.2            datawizard_0.9.0      
+[25] coda_0.19-4            dplyr_1.1.2            colorspace_2.1-0      
+[28] zeallot_0.1.0          bayestestR_0.13.1      paletteer_1.5.0       
+[31] vctrs_0.6.3            R6_2.5.1               lifecycle_1.0.3       
+[34] emmeans_1.8.7          htmlwidgets_1.6.2      insight_0.19.6        
+[37] pkgconfig_2.0.3        pillar_1.9.0           gtable_0.3.3          
+[40] glue_1.6.2             xfun_0.39              tibble_3.2.1          
+[43] tidyselect_1.2.0       rstudioapi_0.15.0      parameters_0.21.1     
+[46] knitr_1.43             farver_2.1.1           xtable_1.8-4          
+[49] patchwork_1.1.2        htmltools_0.5.5        labeling_0.4.2        
+[52] rmarkdown_2.24         compiler_4.3.2        </code></pre>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

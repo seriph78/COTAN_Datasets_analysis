@@ -375,8 +375,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Taf1"</span>, <span class="st">"Taf2"</span>, <span class="st">"Gapdh"</span>, <span class="st">"Actb"</span>, <span class="st">"Golph3"</span>, <span class="st">"Zfr"</span>, <span class="st">"Sub1"</span>,</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tars"</span>, <span class="st">"Amacr"</span>),</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"layers"</span> <span class="ot">=</span> </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Reln"</span>,<span class="st">"Lhx5"</span>,<span class="st">"Cux1"</span>,<span class="st">"Satb2"</span>,<span class="st">"Tle1"</span>,<span class="st">"Mef2c"</span>,<span class="st">"Rorb"</span>,<span class="st">"Sox5"</span>,<span class="st">"Bcl11b"</span>,<span class="st">"Fezf2"</span>,<span class="st">"Foxp2"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Reln"</span>,<span class="st">"Lhx5"</span>,<span class="st">"Cux1"</span>,<span class="st">"Satb2"</span>,<span class="st">"Tle1"</span>,<span class="st">"Mef2c"</span>,<span class="st">"Rorb"</span>,<span class="st">"Sox5"</span>,<span class="st">"Bcl11b"</span>,<span class="st">"Fezf2"</span>,<span class="st">"Foxp2"</span>,<span class="st">"Ntf3"</span>,<span class="st">"Rasgrf2"</span>,<span class="st">"Pvrl3"</span>, <span class="st">"Cux2"</span>,<span class="st">"Slc17a6"</span>, <span class="st">"Sema3c"</span>,<span class="st">"Thsd7a"</span>, <span class="st">"Sulf2"</span>, <span class="st">"Kcnk2"</span>,<span class="st">"Grik3"</span>, <span class="st">"Etv1"</span>, <span class="st">"Tle4"</span>, <span class="st">"Tmem200a"</span>, <span class="st">"Glra2"</span>, <span class="st">"Etv1"</span>,<span class="st">"Htr1f"</span>, <span class="st">"Sulf1"</span>,<span class="st">"Rxfp1"</span>, <span class="st">"Syt6"</span>) </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># From https://www.science.org/doi/10.1126/science.aam8999</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="cotan" class="level2">
 <h2 class="anchored" data-anchor-id="cotan">COTAN</h2>
@@ -384,39 +385,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/MouseCortexFromLoom/e15.0_ForebrainDorsal.cotan.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>coexMat.big <span class="ot">&lt;-</span> <span class="fu">getGenesCoex</span>(obj)[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)]</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers) <span class="sc">%in%</span> <span class="fu">getGenes</span>(obj)]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>coexMat <span class="ot">&lt;-</span> <span class="fu">getGenesCoex</span>(obj)[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>coexMat.big <span class="ot">&lt;-</span> <span class="fu">getGenesCoex</span>(obj)[int.genes,int.genes]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                        ),</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(coexMat),</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(coexMat)*unit(2.5, "mm"), </span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(coexMat)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"COTAN coex"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>coexMat <span class="ot">&lt;-</span> <span class="fu">getGenesCoex</span>(obj)[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                        ),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(coexMat),</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(coexMat)*unit(2.5, "mm"), </span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(coexMat)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"COTAN coex"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geneCoexAnalysisE15.0MouseBrain_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -619,7 +624,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-08-22 11:54:32 CEST"</code></pre>
+<pre><code>[1] "2023-08-25 15:16:06 CEST"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -669,7 +674,7 @@ loaded via a namespace (and not attached):
  [25] reticulate_1.30             cowplot_1.1.1              
  [27] pbapply_1.7-2               RColorBrewer_1.1-3         
  [29] zlibbioc_1.46.0             abind_1.4-5                
- [31] Rtsne_0.16                  GenomicRanges_1.52.0       
+ [31] GenomicRanges_1.52.0        Rtsne_0.16                 
  [33] purrr_1.0.1                 BiocGenerics_0.46.0        
  [35] RCurl_1.98-1.12             nnet_7.3-19                
  [37] GenomeInfoDbData_1.2.10     IRanges_2.34.1             
@@ -678,7 +683,7 @@ loaded via a namespace (and not attached):
  [43] spatstat.utils_3.0-3        umap_0.2.10.0              
  [45] goftest_1.2-3               RSpectra_0.16-1            
  [47] spatstat.random_3.1-5       fitdistrplus_1.1-11        
- [49] parallelly_1.36.0           DelayedMatrixStats_1.22.1  
+ [49] parallelly_1.36.0           DelayedMatrixStats_1.22.5  
  [51] DelayedArray_0.26.7         leiden_0.4.3               
  [53] codetools_0.2-19            tidyselect_1.2.0           
  [55] shape_1.4.6                 farver_2.1.1               
@@ -697,38 +702,38 @@ loaded via a namespace (and not attached):
  [81] digest_0.6.33               parallelDist_0.2.6         
  [83] R6_2.5.1                    mime_0.12                  
  [85] colorspace_2.1-0            scattermore_1.2            
- [87] tensor_1.5                  spatstat.data_3.0-1        
- [89] utf8_1.2.3                  tidyr_1.3.0                
- [91] generics_0.1.3              data.table_1.14.8          
- [93] S4Arrays_1.0.5              httr_1.4.6                 
- [95] htmlwidgets_1.6.2           uwot_0.1.16                
- [97] pkgconfig_2.0.3             gtable_0.3.3               
- [99] lmtest_0.9-40               XVector_0.40.0             
-[101] htmltools_0.5.5             clue_0.3-64                
-[103] Biobase_2.60.0              scales_1.2.1               
-[105] png_0.1-8                   knitr_1.43                 
-[107] rstudioapi_0.15.0           reshape2_1.4.4             
-[109] rjson_0.2.21                checkmate_2.2.0            
-[111] nlme_3.1-162                zoo_1.8-12                 
-[113] GlobalOptions_0.1.2         stringr_1.5.0              
-[115] KernSmooth_2.23-22          miniUI_0.1.1.1             
-[117] foreign_0.8-82              pillar_1.9.0               
-[119] vctrs_0.6.3                 RANN_2.6.1                 
-[121] promises_1.2.0.1            xtable_1.8-4               
-[123] cluster_2.1.4               htmlTable_2.4.1            
-[125] evaluate_0.21               zeallot_0.1.0              
-[127] cli_3.6.1                   compiler_4.3.1             
-[129] rlang_1.1.1                 crayon_1.5.2               
-[131] future.apply_1.11.0         labeling_0.4.2             
-[133] plyr_1.8.8                  stringi_1.7.12             
-[135] viridisLite_0.4.2           deldir_1.0-9               
-[137] assertthat_0.2.1            munsell_0.5.0              
-[139] lazyeval_0.2.2              spatstat.geom_3.2-4        
-[141] Matrix_1.6-0                sparseMatrixStats_1.12.2   
-[143] future_1.33.0               ggplot2_3.4.2              
-[145] shiny_1.7.5                 SummarizedExperiment_1.30.2
-[147] ROCR_1.0-11                 igraph_1.5.1               
-[149] RcppParallel_5.1.7         </code></pre>
+ [87] Cairo_1.6-1                 tensor_1.5                 
+ [89] spatstat.data_3.0-1         utf8_1.2.3                 
+ [91] tidyr_1.3.0                 generics_0.1.3             
+ [93] data.table_1.14.8           S4Arrays_1.0.5             
+ [95] httr_1.4.6                  htmlwidgets_1.6.2          
+ [97] uwot_0.1.16                 pkgconfig_2.0.3            
+ [99] gtable_0.3.3                lmtest_0.9-40              
+[101] XVector_0.40.0              htmltools_0.5.5            
+[103] clue_0.3-64                 Biobase_2.60.0             
+[105] scales_1.2.1                png_0.1-8                  
+[107] knitr_1.43                  rstudioapi_0.15.0          
+[109] reshape2_1.4.4              rjson_0.2.21               
+[111] checkmate_2.2.0             nlme_3.1-162               
+[113] zoo_1.8-12                  GlobalOptions_0.1.2        
+[115] stringr_1.5.0               KernSmooth_2.23-22         
+[117] miniUI_0.1.1.1              foreign_0.8-82             
+[119] pillar_1.9.0                vctrs_0.6.3                
+[121] RANN_2.6.1                  promises_1.2.0.1           
+[123] xtable_1.8-4                cluster_2.1.4              
+[125] htmlTable_2.4.1             evaluate_0.21              
+[127] zeallot_0.1.0               cli_3.6.1                  
+[129] compiler_4.3.1              rlang_1.1.1                
+[131] crayon_1.5.2                future.apply_1.11.0        
+[133] labeling_0.4.2              plyr_1.8.8                 
+[135] stringi_1.7.12              viridisLite_0.4.2          
+[137] deldir_1.0-9                assertthat_0.2.1           
+[139] munsell_0.5.0               lazyeval_0.2.2             
+[141] spatstat.geom_3.2-4         Matrix_1.6-0               
+[143] sparseMatrixStats_1.12.2    future_1.33.0              
+[145] ggplot2_3.4.2               shiny_1.7.5                
+[147] SummarizedExperiment_1.30.2 ROCR_1.0-11                
+[149] igraph_1.5.1                RcppParallel_5.1.7         </code></pre>
 </div>
 </div>
 
