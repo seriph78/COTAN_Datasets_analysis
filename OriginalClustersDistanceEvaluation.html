@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="seriph78">
-<meta name="dcterms.date" content="2023-11-22">
+<meta name="dcterms.date" content="2023-11-23">
 
 <title>COTAN Datasets analysis - Original Clusters Distance Evaluation</title>
 <style>
@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 22, 2023</p>
+      <p class="date">November 23, 2023</p>
     </div>
   </div>
   
@@ -509,116 +509,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(tot.Df.Lambda)[<span class="fu">ncol</span>(tot.Df.Lambda)] <span class="ot">&lt;-</span> cl</span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  tot.Df.Lambda <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(tot.Df.Lambda,<span class="at">var =</span> <span class="st">"Row.names"</span>)</span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Cl184e13.5_ForebrainDorsalRawData.RDS"
-[1] "Cl187e13.5_ForebrainDorsalRawData.RDS"
-[1] "Cl428e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl432e13.5_ForebrainDorsalRawData.RDS"
-[1] "Cl432e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl434e13.5_ForebrainDorsalRawData.RDS"
-[1] "Cl434e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl437e13.5_ForebrainDorsalRawData.RDS"
-[1] "Cl437e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl505e17.5_ForebrainDorsalRawData.RDS"
-[1] "Cl508e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl509e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl510e13.5_ForebrainDorsalRawData.RDS"
-[1] "Cl510e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl516e17.5_ForebrainDorsalRawData.RDS"</code></pre>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>tot.Df.Lambda <span class="ot">&lt;-</span> tot.Df.Lambda[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(tot.Df.Lambda)]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>tot.Df.ZeroOne <span class="ot">&lt;-</span> tot.Df.ZeroOne[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(tot.Df.ZeroOne)]</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>tot.Df.Lambda <span class="ot">&lt;-</span> tot.Df.Lambda[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tot.Df.Lambda),]</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>tot.Df.ZeroOne <span class="ot">&lt;-</span> tot.Df.ZeroOne[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tot.Df.Lambda),]</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tot.Df.Lambda)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tot.Df.ZeroOne)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>tot.Df.Lambda <span class="ot">&lt;-</span> tot.Df.Lambda[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(tot.Df.Lambda)]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tot.Df.ZeroOne <span class="ot">&lt;-</span> tot.Df.ZeroOne[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(tot.Df.ZeroOne)]</span>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(tot.Df.Lambda, <span class="st">"Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.Lambda.RDS"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(tot.Df.ZeroOne, <span class="st">"Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.ZeroOne.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>distance.df.Lambda <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(<span class="fu">t</span>(tot.Df.Lambda),<span class="at">diag =</span> T,<span class="at">upper =</span> T))</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tot.Df.Lambda <span class="ot">&lt;-</span> tot.Df.Lambda[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tot.Df.Lambda),]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>tot.Df.ZeroOne <span class="ot">&lt;-</span> tot.Df.ZeroOne[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tot.Df.Lambda),]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tot.Df.Lambda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              Cl184e13.5  Cl187e13.5  Cl428e15.0  Cl432e13.5  Cl432e15.0
-a             0.03366680 0.035290389 0.012499836 0.027597120 0.020269569
-A030001D20Rik 0.03035177 0.066544769 0.009389602 0.033024471 0.031903211
-A130010J15Rik 0.05332035 0.058122673 0.015600305 0.059710210 0.046657997
-A230006K03Rik 0.00000000 0.000000000 0.000000000 0.000000000 0.000000000
-A230050P20Rik 0.00000000 0.002989534 0.000000000 0.005581381 0.001705029
-A230057D06Rik 0.05655686 0.094078295 0.246494429 0.282576927 0.260697261
-               Cl434e13.5 Cl434e15.0 Cl437e13.5 Cl437e15.0  Cl505e17.5
-a             0.012194970 0.02531509 0.04158178 0.04544654 0.019511570
-A030001D20Rik 0.018236572 0.01814832 0.01911987 0.01919326 0.019511570
-A130010J15Rik 0.053718063 0.02173826 0.07073290 0.05648172 0.024329685
-A230006K03Rik 0.000000000 0.00000000 0.00000000 0.00000000 0.004913995
-A230050P20Rik 0.003062785 0.00000000 0.00000000 0.00000000 0.000000000
-A230057D06Rik 0.203074329 0.25945309 0.21288604 0.20749633 0.329019215
-               Cl508e15.0 Cl509e15.0 Cl510e13.5  Cl510e15.0  Cl516e17.5
-a             0.027327468 0.03662587 0.02390323 0.034226429 0.023293443
-A030001D20Rik 0.039500932 0.03422643 0.09589200 0.043788465 0.026576488
-A130010J15Rik 0.086690169 0.07421609 0.10315387 0.090197161 0.042826917
-A230006K03Rik 0.000000000 0.00000000 0.00000000 0.017262206 0.003361341
-A230050P20Rik 0.002515722 0.00000000 0.00000000 0.002484471 0.010050166
-A230057D06Rik 0.264573581 0.32499476 0.35565187 0.402454814 0.290669948</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tot.Df.ZeroOne)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              Cl184e13.5  Cl187e13.5  Cl428e15.0  Cl432e13.5  Cl432e15.0
-a             0.03424658 0.035928144 0.012578616 0.026119403 0.020477816
-A030001D20Rik 0.03082192 0.062874251 0.009433962 0.033582090 0.032423208
-A130010J15Rik 0.05479452 0.056886228 0.015723270 0.057835821 0.047781570
-A230006K03Rik 0.00000000 0.000000000 0.000000000 0.000000000 0.000000000
-A230050P20Rik 0.00000000 0.002994012 0.000000000 0.003731343 0.001706485
-A230057D06Rik 0.05136986 0.083832335 0.229559748 0.253731343 0.230375427
-               Cl434e13.5 Cl434e15.0 Cl437e13.5 Cl437e15.0  Cl505e17.5
-a             0.009202454 0.02197802 0.03861004 0.04651163 0.019704433
-A030001D20Rik 0.018404908 0.01831502 0.01930502 0.01937984 0.019704433
-A130010J15Rik 0.055214724 0.02197802 0.06949807 0.05813953 0.024630542
-A230006K03Rik 0.000000000 0.00000000 0.00000000 0.00000000 0.004926108
-A230050P20Rik 0.003067485 0.00000000 0.00000000 0.00000000 0.000000000
-A230057D06Rik 0.180981595 0.24175824 0.18918919 0.18217054 0.285714286
-               Cl508e15.0 Cl509e15.0 Cl510e13.5  Cl510e15.0  Cl516e17.5
-a             0.020151134 0.03482587 0.02419355 0.034825871 0.023569024
-A030001D20Rik 0.037783375 0.03233831 0.09274194 0.044776119 0.026936027
-A130010J15Rik 0.070528967 0.07462687 0.10887097 0.082089552 0.043771044
-A230006K03Rik 0.000000000 0.00000000 0.00000000 0.009950249 0.003367003
-A230050P20Rik 0.002518892 0.00000000 0.00000000 0.002487562 0.010101010
-A230057D06Rik 0.229219144 0.28358209 0.32661290 0.368159204 0.245791246</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(tot.Df.Lambda, <span class="st">"Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.Lambda.RDS"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(tot.Df.ZeroOne, <span class="st">"Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.ZeroOne.RDS"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ComplexHeatmap)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>distance.df.Lambda <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(<span class="fu">t</span>(tot.Df.Lambda),<span class="at">diag =</span> T,<span class="at">upper =</span> T))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(distance.df.Lambda,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">"Lambda</span><span class="sc">\n</span><span class="st">distance"</span>, </span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">cell_fun =</span> <span class="cf">function</span>(j, i, x, y, width, height, fill) </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">grid.text</span>(<span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, distance.df.Lambda[i, j]), x, y, <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">10</span>))</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_dend =</span> F, </span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(distance.df.Lambda,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">"Lambda</span><span class="sc">\n</span><span class="st">distance"</span>, </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">cell_fun =</span> <span class="cf">function</span>(j, i, x, y, width, height, fill) </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>          <span class="fu">grid.text</span>(<span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, distance.df.Lambda[i, j]), x, y, <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">10</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_dend =</span> F, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="OriginalClustersDistanceEvaluation_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>distance.df.ZeroOne <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(<span class="fu">t</span>(tot.Df.ZeroOne),<span class="at">diag =</span> T,<span class="at">upper =</span> T))</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(distance.df.ZeroOne,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">"ZeroOne</span><span class="sc">\n</span><span class="st">distance"</span>, </span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">cell_fun =</span> <span class="cf">function</span>(j, i, x, y, width, height, fill) </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        {</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">grid.text</span>(<span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, distance.df.ZeroOne[i, j]), x, y, <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">10</span>))</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        },</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_dend =</span> F, </span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>distance.df.ZeroOne <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">dist</span>(<span class="fu">t</span>(tot.Df.ZeroOne),<span class="at">diag =</span> T,<span class="at">upper =</span> T))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">Heatmap</span>(distance.df.ZeroOne,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">name =</span> <span class="st">"ZeroOne</span><span class="sc">\n</span><span class="st">distance"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">cell_fun =</span> <span class="cf">function</span>(j, i, x, y, width, height, fill) </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        {</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">grid.text</span>(<span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, distance.df.ZeroOne[i, j]), x, y, <span class="at">gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">10</span>))</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        },</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_dend =</span> F, </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">show_row_names =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="OriginalClustersDistanceEvaluation_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The distances are very similar with the Zero One a little lower as values…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>distance.df.Lambda.Plot <span class="ot">&lt;-</span> <span class="fu">rownames_to_column</span>(<span class="fu">as.data.frame</span>(distance.df.Lambda),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">var =</span> <span class="st">"Cl.1"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>distance.df.Lambda.Plot <span class="ot">&lt;-</span><span class="fu">pivot_longer</span>(distance.df.Lambda.Plot,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">cols =</span> <span class="sc">!</span>Cl<span class="fl">.1</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">names_to =</span> <span class="st">"Cl.2"</span>, </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">values_to =</span> <span class="st">"Lambda.Dist"</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>distance.df.ZeroOne.Plot <span class="ot">&lt;-</span> <span class="fu">rownames_to_column</span>(<span class="fu">as.data.frame</span>(distance.df.ZeroOne),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">var =</span> <span class="st">"Cl.1"</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>distance.df.ZeroOne.Plot <span class="ot">&lt;-</span><span class="fu">pivot_longer</span>(distance.df.ZeroOne.Plot,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">cols =</span> <span class="sc">!</span>Cl<span class="fl">.1</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">names_to =</span> <span class="st">"Cl.2"</span>, </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">values_to =</span> <span class="st">"ZeroOne.Dist"</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>distance.df.Tot <span class="ot">&lt;-</span> <span class="fu">merge</span>(distance.df.ZeroOne.Plot,distance.df.Lambda.Plot,<span class="at">by=</span> <span class="fu">c</span>(<span class="st">"Cl.1"</span>,<span class="st">"Cl.2"</span>),<span class="at">all=</span>T)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(distance.df.Tot),<span class="fu">aes</span>(<span class="at">x=</span>ZeroOne.Dist, <span class="at">y=</span>Lambda.Dist))<span class="sc">+</span><span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="OriginalClustersDistanceEvaluation_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <p>So for what we are using it is the same.</p>
 <p>The key information is that we can define couple of, in one case, triplets of very near clusters:</p>
 <ol type="1">
@@ -633,21 +592,21 @@ A230057D06Rik 0.229219144 0.28358209 0.32661290 0.368159204 0.245791246</code></
 <ol type="1">
 <li><p>less than 7 (first quartile)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(distance.df.ZeroOne <span class="sc">&lt;</span> <span class="fl">7.1</span> <span class="sc">&amp;</span> distance.df.ZeroOne <span class="sc">&gt;</span> <span class="dv">0</span>)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(distance.df.ZeroOne <span class="sc">&lt;</span> <span class="fl">7.1</span> <span class="sc">&amp;</span> distance.df.ZeroOne <span class="sc">&gt;</span> <span class="dv">0</span>)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 19</code></pre>
 </div>
 </div></li>
 <li><p>between 9 and 11 (around median)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(distance.df.ZeroOne <span class="sc">&gt;</span> <span class="dv">9</span> <span class="sc">&amp;</span> distance.df.ZeroOne <span class="sc">&lt;</span> <span class="dv">11</span>)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(distance.df.ZeroOne <span class="sc">&gt;</span> <span class="dv">9</span> <span class="sc">&amp;</span> distance.df.ZeroOne <span class="sc">&lt;</span> <span class="dv">11</span>)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20</code></pre>
 </div>
 </div></li>
 <li><p>more than 13 (3rd quartile)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(distance.df.ZeroOne <span class="sc">&gt;</span> <span class="dv">13</span>)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(distance.df.ZeroOne <span class="sc">&gt;</span> <span class="dv">13</span>)<span class="sc">/</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 32</code></pre>
 </div>
@@ -655,7 +614,7 @@ A230057D06Rik 0.229219144 0.28358209 0.32661290 0.368159204 0.245791246</code></
 </ol>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.2 (2023-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
@@ -709,57 +668,58 @@ loaded via a namespace (and not attached):
  [43] parallelly_1.36.0         DelayedMatrixStats_1.22.5
  [45] leiden_0.4.3              codetools_0.2-19         
  [47] DelayedArray_0.26.7       tidyselect_1.2.0         
- [49] shape_1.4.6               ScaledMatrix_1.8.1       
- [51] viridis_0.6.4             matrixStats_1.1.0        
- [53] stats4_4.3.2              spatstat.explore_3.2-1   
- [55] jsonlite_1.8.7            GetoptLong_1.0.5         
- [57] ellipsis_0.3.2            progressr_0.14.0         
- [59] ggridges_0.5.4            survival_3.5-7           
- [61] iterators_1.0.14          foreach_1.5.2            
- [63] tools_4.3.2               ica_1.0-3                
- [65] Rcpp_1.0.11               glue_1.6.2               
- [67] gridExtra_2.3             xfun_0.39                
- [69] MatrixGenerics_1.12.3     ggthemes_4.2.4           
- [71] withr_2.5.0               fastmap_1.1.1            
- [73] fansi_1.0.4               openssl_2.1.0            
- [75] digest_0.6.33             rsvd_1.0.5               
- [77] timechange_0.2.0          parallelDist_0.2.6       
- [79] R6_2.5.1                  mime_0.12                
- [81] colorspace_2.1-0          Cairo_1.6-1              
- [83] scattermore_1.2           tensor_1.5               
- [85] spatstat.data_3.0-1       utf8_1.2.3               
- [87] generics_0.1.3            data.table_1.14.8        
- [89] httr_1.4.6                htmlwidgets_1.6.2        
- [91] S4Arrays_1.2.0            uwot_0.1.16              
- [93] pkgconfig_2.0.3           gtable_0.3.3             
- [95] lmtest_0.9-40             htmltools_0.5.5          
- [97] dotCall64_1.1-0           clue_0.3-64              
- [99] SeuratObject_5.0.0        scales_1.2.1             
-[101] png_0.1-8                 knitr_1.43               
-[103] rstudioapi_0.15.0         tzdb_0.4.0               
-[105] reshape2_1.4.4            rjson_0.2.21             
-[107] nlme_3.1-163              zoo_1.8-12               
-[109] GlobalOptions_0.1.2       KernSmooth_2.23-22       
-[111] parallel_4.3.2            miniUI_0.1.1.1           
-[113] RcppZiggurat_0.1.6        pillar_1.9.0             
-[115] vctrs_0.6.3               RANN_2.6.1               
-[117] promises_1.2.0.1          BiocSingular_1.16.0      
-[119] beachmat_2.16.0           xtable_1.8-4             
-[121] cluster_2.1.4             evaluate_0.21            
-[123] zeallot_0.1.0             cli_3.6.1                
-[125] compiler_4.3.2            rlang_1.1.1              
-[127] crayon_1.5.2              future.apply_1.11.0      
-[129] plyr_1.8.8                stringi_1.8.1            
-[131] viridisLite_0.4.2         deldir_1.0-9             
-[133] BiocParallel_1.34.2       assertthat_0.2.1         
-[135] munsell_0.5.0             lazyeval_0.2.2           
-[137] spatstat.geom_3.2-4       PCAtools_2.14.0          
-[139] Matrix_1.6-2              RcppHNSW_0.5.0           
-[141] hms_1.1.3                 patchwork_1.1.2          
-[143] sparseMatrixStats_1.12.2  future_1.33.0            
-[145] shiny_1.7.5               ROCR_1.0-11              
-[147] Rfast_2.1.0               igraph_1.5.1             
-[149] RcppParallel_5.1.7       </code></pre>
+ [49] shape_1.4.6               farver_2.1.1             
+ [51] ScaledMatrix_1.8.1        viridis_0.6.4            
+ [53] matrixStats_1.1.0         stats4_4.3.2             
+ [55] spatstat.explore_3.2-1    jsonlite_1.8.7           
+ [57] GetoptLong_1.0.5          ellipsis_0.3.2           
+ [59] progressr_0.14.0          ggridges_0.5.4           
+ [61] survival_3.5-7            iterators_1.0.14         
+ [63] foreach_1.5.2             tools_4.3.2              
+ [65] ica_1.0-3                 Rcpp_1.0.11              
+ [67] glue_1.6.2                gridExtra_2.3            
+ [69] xfun_0.39                 MatrixGenerics_1.12.3    
+ [71] ggthemes_4.2.4            withr_2.5.0              
+ [73] fastmap_1.1.1             fansi_1.0.4              
+ [75] openssl_2.1.0             digest_0.6.33            
+ [77] rsvd_1.0.5                timechange_0.2.0         
+ [79] parallelDist_0.2.6        R6_2.5.1                 
+ [81] mime_0.12                 colorspace_2.1-0         
+ [83] Cairo_1.6-1               scattermore_1.2          
+ [85] tensor_1.5                spatstat.data_3.0-1      
+ [87] utf8_1.2.3                generics_0.1.3           
+ [89] data.table_1.14.8         httr_1.4.6               
+ [91] htmlwidgets_1.6.2         S4Arrays_1.2.0           
+ [93] uwot_0.1.16               pkgconfig_2.0.3          
+ [95] gtable_0.3.3              lmtest_0.9-40            
+ [97] htmltools_0.5.5           dotCall64_1.1-0          
+ [99] clue_0.3-64               SeuratObject_5.0.0       
+[101] scales_1.2.1              png_0.1-8                
+[103] knitr_1.43                rstudioapi_0.15.0        
+[105] tzdb_0.4.0                reshape2_1.4.4           
+[107] rjson_0.2.21              nlme_3.1-163             
+[109] zoo_1.8-12                GlobalOptions_0.1.2      
+[111] KernSmooth_2.23-22        parallel_4.3.2           
+[113] miniUI_0.1.1.1            RcppZiggurat_0.1.6       
+[115] pillar_1.9.0              vctrs_0.6.3              
+[117] RANN_2.6.1                promises_1.2.0.1         
+[119] BiocSingular_1.16.0       beachmat_2.16.0          
+[121] xtable_1.8-4              cluster_2.1.4            
+[123] evaluate_0.21             zeallot_0.1.0            
+[125] cli_3.6.1                 compiler_4.3.2           
+[127] rlang_1.1.1               crayon_1.5.2             
+[129] future.apply_1.11.0       labeling_0.4.2           
+[131] plyr_1.8.8                stringi_1.8.1            
+[133] viridisLite_0.4.2         deldir_1.0-9             
+[135] BiocParallel_1.34.2       assertthat_0.2.1         
+[137] munsell_0.5.0             lazyeval_0.2.2           
+[139] spatstat.geom_3.2-4       PCAtools_2.14.0          
+[141] Matrix_1.6-2              RcppHNSW_0.5.0           
+[143] hms_1.1.3                 patchwork_1.1.2          
+[145] sparseMatrixStats_1.12.2  future_1.33.0            
+[147] shiny_1.7.5               ROCR_1.0-11              
+[149] Rfast_2.1.0               igraph_1.5.1             
+[151] RcppParallel_5.1.7       </code></pre>
 </div>
 </div>
 
