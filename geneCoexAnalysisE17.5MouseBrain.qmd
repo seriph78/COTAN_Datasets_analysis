@@ -26,7 +26,8 @@ genesList <- list(
       "Taf1", "Taf2", "Gapdh", "Actb", "Golph3", "Zfr", "Sub1",
       "Tars", "Amacr"),
   "layers" = 
-    c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2")
+    c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2","Ntf3","Rasgrf2","Pvrl3", "Cux2","Slc17a6", "Sema3c","Thsd7a", "Sulf2", "Kcnk2","Grik3", "Etv1", "Tle4", "Tmem200a", "Glra2", "Etv1","Htr1f", "Sulf1","Rxfp1", "Syt6") 
+  # From https://www.science.org/doi/10.1126/science.aam8999
 )
 ```
 
@@ -38,7 +39,10 @@ obj <- readRDS("Data/MouseCortexFromLoom/e17.5_ForebrainDorsal.cotan.RDS")
 ```
 
 ```{r}
-coexMat.big <- getGenesCoex(obj)[c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers),c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)]
+int.genes <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)[c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers) %in% getGenes(obj)]
+
+
+coexMat.big <- getGenesCoex(obj)[int.genes,int.genes]
 
 coexMat <- getGenesCoex(obj)[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
 
@@ -74,9 +78,17 @@ draw(htmp, heatmap_legend_side="right")
 ```
 
 ```{r, echo=FALSE}
+int.genes <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)[c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers) %in% getGenes(obj)]
+
+pvalueMat.big <- calculatePValue(obj, geneSubsetCol = int.genes, geneSubsetRow = int.genes)
+```
+
+```{r, echo=FALSE}
 saveRDS(coexMat.big,file = paste0("CoexData/CotanCoex_",
                               getMetadataDataset(obj)[3,2],
                               ".RDS"))
+saveRDS(pvalueMat.big,file = paste0("CoexData/CotanPValues_",
+                              getMetadataElement(obj, datasetTags()[["cond"]]),".RDS"))
 ```
 
 ```{r}
@@ -87,9 +99,12 @@ GDIPlot(obj,genes = genesList,GDIThreshold = 1.4)
 
 ```{r}
 library(dplyr)
+library(Hmisc)
 library(Seurat)
 library(patchwork)
 library(Rfast)
+library(parallel)
+library(doParallel)
 ```
 
 ```{r}
@@ -115,10 +130,37 @@ seurat.data = srat[["RNA"]]@data
 ```
 
 ```{r}
-seurat.data.cor.big = cora(t(as.matrix(seurat.data)[c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers),]), large = T)
+int.genes <- rownames(seurat.data)[rownames(seurat.data) %in% c(genesList$NPGs, genesList$hk, genesList$PNGs, genesList$layers)]
+subset_data <- t(as.matrix(seurat.data)[int.genes,])
 
-rownames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)
-colnames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers)
+# Get gene names for the subset
+subset_gene_names <- colnames(subset_data)
+
+num_cores <- 12  # Change this to the desired number of cores
+cl <- parallel::makeCluster(num_cores)
+registerDoParallel(cl)
+
+cor_p_values <- foreach(i = 1:ncol(subset_data), .combine = "cbind") %dopar% {
+  p_values <- numeric(ncol(subset_data))
+  for (j in 1:ncol(subset_data)) {
+    if (i == j) {
+      p_values[j] <- 1
+    } else {
+      cor_result <- cor.test(subset_data[, i], subset_data[, j], method = "pearson")
+      p_values[j] <- cor_result$p.value
+    }
+  }
+  return(p_values)
+}
+
+# Stop the parallel backend
+stopCluster(cl)
+# Extract correlation coefficients and p-values
+seurat.data.cor.big <- cor(subset_data, method = "pearson")
+
+# Create a named matrix for p-values
+rownames(cor_p_values) <- colnames(cor_p_values) <- subset_gene_names
+p_values <- cor_p_values
 
 diag(seurat.data.cor.big) <- 0
 
@@ -157,17 +199,47 @@ draw(htmp, heatmap_legend_side="right")
 
 ```{r, echo=FALSE}
 saveRDS(seurat.data.cor.big,file = paste0("CoexData/SeuratCorr_",
-                              getMetadataDataset(obj)[3,2],
+                              getMetadataElement(obj, datasetTags()[["cond"]]),
                               ".RDS"))
+saveRDS(pvalueMat.big,file = paste0("CoexData/SeuratPValues_",
+                              getMetadataElement(obj, datasetTags()[["cond"]]),".RDS"))
 ```
 
 ```{r}
 srat <-  SCTransform(srat, method = "glmGamPoi", vars.to.regress = "percent.mt", verbose = FALSE)
 seurat.data = srat[["SCT"]]@data
-seurat.data.cor.big = cora(t(as.matrix(seurat.data)[c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers),]), large = T)
 
-rownames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)
-colnames(seurat.data.cor.big) <- c(genesList$NPGs,genesList$hk,genesList$PNGs, genesList$layers)
+int.genes <- rownames(seurat.data)[rownames(seurat.data) %in% c(genesList$NPGs, genesList$hk, genesList$PNGs, genesList$layers)]
+subset_data <- t(as.matrix(seurat.data)[int.genes,])
+
+# Get gene names for the subset
+subset_gene_names <- colnames(subset_data)
+
+num_cores <- 12  # Change this to the desired number of cores
+cl <- makeCluster(num_cores)
+registerDoParallel(cl)
+
+cor_p_values <- foreach(i = 1:ncol(subset_data), .combine = "cbind") %dopar% {
+  p_values <- numeric(ncol(subset_data))
+  for (j in 1:ncol(subset_data)) {
+    if (i == j) {
+      p_values[j] <- 1
+    } else {
+      cor_result <- cor.test(subset_data[, i], subset_data[, j], method = "pearson")
+      p_values[j] <- cor_result$p.value
+    }
+  }
+  return(p_values)
+}
+
+# Stop the parallel backend
+stopCluster(cl)
+# Extract correlation coefficients and p-values
+seurat.data.cor.big <- cor(subset_data, method = "pearson")
+
+# Create a named matrix for p-values
+rownames(cor_p_values) <- colnames(cor_p_values) <- subset_gene_names
+p_values <- cor_p_values
 
 diag(seurat.data.cor.big) <- 0
 
@@ -215,8 +287,17 @@ draw(htmp, heatmap_legend_side="right")
 
 ```{r,echo=FALSE}
 saveRDS(seurat.data.cor.big,file = paste0("CoexData/SeuratCorrSCT_",
-                              getMetadataDataset(obj)[3,2],
+                              getMetadataElement(obj, datasetTags()[["cond"]]),
                               ".RDS"))
+
+saveRDS(pvalueMat.big,file = paste0("CoexData/SeuratPValuesSCT_",
+                              getMetadataElement(obj, datasetTags()[["cond"]]),".RDS"))
+```
+
+------------------------------------------------------------------------
+
+```{r}
+Sys.time()
 ```
 
 ```{r}

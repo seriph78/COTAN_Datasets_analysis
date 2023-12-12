@@ -1,0 +1,282 @@
+---
+title: "Mouse Cortex E14.5 data-set Anaysis with cleaning"
+---
+
+```{r}
+#library(SingleCellExperiment)
+#library(DuoClustering2018)
+#library(tidyr)
+library(ggplot2)
+#library(ggsankey) # remotes::install_github("davidsjoberg/ggsankey")
+library(tibble)
+library(zeallot)
+devtools::load_all("~/dev/COTAN/COTAN/")
+
+options(parallelly.fork.enable = TRUE)
+
+outDir <- "."
+
+setLoggingLevel(2)
+setLoggingFile(file.path(outDir, "MouseCortex_E14.5_analysis.log"))
+```
+
+Loading raw datatset
+```{r}
+e14.5_raw = read.table(file.path(".", "E14_combined_matrix.txt.gz"),
+                       header = TRUE, sep = "\t", row.names = 1)
+
+logThis(dim(e14.5_raw))
+```
+
+Creating the COTAN object
+```{r}
+sampleCondition <- "MouseCortex_E14.5"
+mc145Obj <- COTAN(raw = e14.5_raw)
+mc145Obj <- initializeMetaDataset(mc145Obj,
+                                  GEO = "GSE123335",
+                                  sequencingMethod = "Drop_seq",
+                                  sampleCondition = sampleCondition)
+
+sampleCondition
+```
+
+Inspect cells' sizes
+```{r}
+cellSizePlot(mc145Obj, splitPattern = "_", numCol = 1)
+```
+
+Drop cells with too many ritz reads as they are probably duplets
+```{r}
+cellsSizeThr <- 15000
+mc145Obj <- addElementToMetaDataset(mc145Obj, "Cells size threshold", cellsSizeThr)
+
+cells_to_rem <- getCells(mc145Obj)[getCellsSize(mc145Obj) > cellsSizeThr]
+mc145Obj <- dropGenesCells(mc145Obj, cells = cells_to_rem)
+
+cellSizePlot(mc145Obj, splitPattern = "_", numCol = 1)
+```
+
+
+Inspect the number of expressed genes per cell
+```{r}
+genesSizePlot(mc145Obj, splitPattern = "_", numCol = 1)
+```
+
+Drop cells with too high genes expession as they are probably duplets
+```{r}
+genesSizeThr <- 5500
+mc145Obj <- addElementToMetaDataset(mc145Obj, "Num genes threshold", genesSizeThr)
+
+numExprGenes <- getNumExpressedGenes(mc145Obj)
+cells_to_rem <- names(numExprGenes)[numExprGenes > genesSizeThr]
+mc145Obj <- dropGenesCells(mc145Obj, cells = cells_to_rem)
+
+genesSizePlot(mc145Obj, splitPattern = "_", numCol = 1)
+```
+
+Check number of mitocondrial genes expressed in each cell
+```{r}
+mitGenesPattern <- "^[Mm][Tt]-"
+getGenes(mc145Obj)[grep(mitGenesPattern, getGenes(mc145Obj))]
+
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(mc145Obj, genePrefix = mitGenesPattern,
+                              splitPattern = "_", numCol = 1)
+
+plot(mitPlot)
+```
+
+Cells with a too high percentage of mitocondrial genes are
+likely dead (or at the last problematic) cells. So we drop them!
+```{r}
+mitPercThr <- 7.5
+mc145Obj <- addElementToMetaDataset(mc145Obj, "Mitoc. perc. threshold", mitPercThr)
+
+cells_to_rem <- rownames(mitSizes)[mitSizes[["mit.percentage"]] > mitPercThr]
+
+mc145Obj <- dropGenesCells(mc145Obj, cells = cells_to_rem)
+
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(mc145Obj, genePrefix = mitGenesPattern,
+                              splitPattern = "_", numCol = 1)
+
+plot(mitPlot)
+```
+
+Check number of ribosomial genes expressed in each cell
+```{r}
+ribGenesPattern <- "^RP[SL]\\d+"
+getGenes(mc145Obj)[grep(ribGenesPattern, getGenes(mc145Obj))]
+
+c(ribPlot, ribSizes) %<-%
+  mitochondrialPercentagePlot(mc145Obj, genePrefix = mitGenesPattern,
+                              splitPattern = "_", numCol = 1)
+
+plot(ribPlot)
+```
+
+Check no further outliers after all the culling
+```{r}
+cellSizePlot(mc145Obj, splitPattern = "_", numCol = 1)
+genesSizePlot(mc145Obj, splitPattern = "_", numCol = 1)
+```
+
+Clean: round 1
+```{r}
+mc145Obj <- clean(mc145Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(mc145Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+mc145Obj <- addElementToMetaDataset(mc145Obj, "Num drop B group", 0)
+```
+
+B group contains high number of hemoglobin genes: so they are not interesting
+```{r}
+cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
+
+mc145Obj <- dropGenesCells(mc145Obj, cells = cells_to_rem)
+```
+
+Clean: round 2
+```{r}
+mc145Obj <- clean(mc145Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(mc145Obj)
+
+plot(pcaCellsPlot)
+plot(genesPlot)
+
+mc145Obj <- addElementToMetaDataset(mc145Obj, "Num drop B group", 1)
+```
+
+Visualize if all is ok:
+```{r}
+plot(UDEPlot)
+
+plot(nuPlot)
+plot(zoomedNuPlot)
+```
+
+Drop very low UDE cells as they are likely outliers
+```{r}
+lowUDEThr <- 0.18
+mc145Obj <- addElementToMetaDataset(mc145Obj, "Low UDE threshold", lowUDEThr)
+
+nuDf <- data.frame("nu" = sort(getNu(mc145Obj)), "n" = seq_along(getNu(mc145Obj)))
+
+cells_to_rem <- rownames(nuDf)[nuDf[["nu"]] < lowUDEThr]
+mc145Obj <- dropGenesCells(mc145Obj, cells = cells_to_rem)
+```
+
+
+Final cleaning to check all is OK
+```{r}
+mc145Obj <- clean(mc145Obj)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(mc145Obj)
+
+plot(pcaCellsPlot)
+plot(pcaCellsData)
+plot(genesPlot)
+plot(UDEPlot)
+plot(nuPlot)
+plot(zoomedNuPlot)
+
+plot(cellSizePlot(mc145Obj, splitPattern = "_", numCol = 1))
+plot(genesSizePlot(mc145Obj, splitPattern = "_", numCol = 1))
+```
+
+
+Calculate genes' COEX
+```{r}
+Sys.time()
+
+mc145Obj <- proceedToCoex(mc145Obj, calcCoex = TRUE, cores = 7,
+                          saveObj = TRUE, outDir = outDir)
+
+gdiData <- calculateGDI(mc145Obj)
+
+genesToLabel <- head(rownames(gdiData[order(gdiData[["GDI"]],
+                                            decreasing = TRUE), ]), n = 50L)
+
+sort(genesToLabel)
+
+gdiData[genesToLabel[[50L]], "GDI"]
+
+gdiPlot <- GDIPlot(mc145Obj, GDIIn = gdiData, GDIThreshold = 1.4,
+                   genes = list("Top 10 GDI genes" = genesToLabel[1L:10L]))
+
+plot(gdiPlot)
+
+Sys.time()
+```
+
+
+Save the COTAN object
+```{r}
+saveRDS(mc145Obj, file = file.path(".", paste0(sampleCondition, ".cotan.RDS")))
+```
+
+
+```{r}
+c(splitClusters, splitCoexDF) %<-%
+  cellsUniformClustering(mc145Obj, GDIThreshold = 1.4, cores = 7,
+                         saveObj = TRUE, outDir = outDir)
+
+mc145Obj <- addClusterization(mc145Obj, clName = "split",
+                              clusters = splitClusters,
+                              coexDF = splitCoexDF, override = TRUE)
+
+table(splitClusters)
+```
+
+
+```{r}
+saveRDS(mc145Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+
+```{r}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(mc145Obj, clusters = splitClusters,
+                            GDIThreshold = 1.4, batchSize = 35L,
+                            cores = 7, saveObj = TRUE, outDir = outDir)
+
+mc145Obj <- addClusterization(mc145Obj, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+table(mergedClusters)
+```
+
+
+```{r}
+saveRDS(mc145Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+
+```{r}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(mc145Obj, clusters = splitClusters,
+                            GDIThreshold = 1.5, batchSize = 25L,
+                            cores = 7, saveObj = TRUE, outDir = outDir)
+
+mc145Obj <- addClusterization(mc145Obj, clName = "merge_1.5",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+table(mergedClusters)
+```
+
+
+```{r}
+saveRDS(mc145Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```

@@ -26,7 +26,8 @@ genesList <- list(
       "Taf1", "Taf2", "Gapdh", "Actb", "Golph3", "Zfr", "Sub1",
       "Tars", "Amacr"),
   "layers" = 
-    c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2")
+     c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2","Ntf3","Rasgrf2","Pvrl3", "Cux2","Slc17a6", "Sema3c","Thsd7a", "Sulf2", "Kcnk2","Grik3", "Etv1", "Tle4", "Tmem200a", "Glra2", "Etv1","Htr1f", "Sulf1","Rxfp1", "Syt6") 
+  # From https://www.science.org/doi/10.1126/science.aam8999
 )
 ```
 
@@ -38,8 +39,9 @@ obj <- readRDS("Data/Yuzwa_MouseCortex/CorticalCells_GSM2861511_E135.cotan.RDS")
 ```
 
 ```{r}
-coexMat.big <- getGenesCoex(obj)[rownames(getGenesCoex(obj)) %in% c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers),
-                                 colnames(getGenesCoex(obj)) %in% c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)]
+int.genes <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)[c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers) %in% getGenes(obj)]
+
+coexMat.big <- getGenesCoex(obj)[int.genes,int.genes]
 
 coexMat <- getGenesCoex(obj)[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
 
@@ -289,6 +291,12 @@ saveRDS(seurat.data.cor.big,file = paste0("CoexData/SeuratCorrSCT_",
 
 saveRDS(pvalueMat.big,file = paste0("CoexData/SeuratPValuesSCT_",
                               getMetadataElement(obj, datasetTags()[["cond"]]),".RDS"))
+```
+
+------------------------------------------------------------------------
+
+```{r}
+Sys.time()
 ```
 
 ```{r}

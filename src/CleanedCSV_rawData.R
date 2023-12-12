@@ -36,8 +36,16 @@ fb175Obj.cl <- readRDS("Data/MouseCortexFromLoom/e17.5_ForebrainDorsal.cotan.RDS
 
 sampleCondition <- getMetadataElement(fb175Obj, datasetTags()[["cond"]])
 
-write.csv(getRawData(fb175Obj),file = paste0(outDir,sampleCondition, "_cleaned.csv"))
+write.csv(getRawData(fb175Obj)[,getCells(fb175Obj.cl)],file = paste0(outDir,sampleCondition, "_cleaned.csv"))
 
+# Mouse Brain Le Manno - Loom file E13.5
+outDir <- "Data/MouseCortexFromLoom/"
+fb135Obj <- readRDS("Data/MouseCortexFromLoom/SourceData/e13.5_ForebrainDorsal.cotan.RDS")
+fb135Obj.cl <- readRDS("Data/MouseCortexFromLoom/e13.5_ForebrainDorsal.cotan.RDS")
+
+sampleCondition <- getMetadataElement(fb135Obj, datasetTags()[["cond"]])
+
+write.csv(getRawData(fb135Obj)[,getCells(fb135Obj.cl)],file = paste0(outDir,sampleCondition, "_cleaned.csv"))
 
 # Cortical cells DGE E17.5 
 outDir <- "Data/Yuzwa_MouseCortex/"
@@ -51,7 +59,6 @@ write.csv(dataset[,getCells(cc175Obj)],file = paste0(outDir,sampleCondition, "_c
 
 
 # Cortical cells DGE E13.5 
-
 outDir <- "Data/Yuzwa_MouseCortex/"
 cc135Obj <- readRDS("Data/Yuzwa_MouseCortex/CorticalCells_GSM2861511_E135.cotan.RDS")
 sampleCondition <- getMetadataElement(cc135Obj, datasetTags()[["cond"]])

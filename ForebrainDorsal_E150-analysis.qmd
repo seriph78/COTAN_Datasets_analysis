@@ -1,5 +1,5 @@
 ---
-title: "Forebrain Dorsal E13.5 Data-set Anaysis"
+title: "Forebrain Dorsal E15.0 Data-set Anaysis"
 ---
 
 ```{r}
@@ -15,6 +15,8 @@ outDir <- "Data/MouseCortexFromLoom/"
 setLoggingLevel(1)
 setLoggingFile(file.path(outDir, "ForebrainDorsal_E150-analysis.log"))
 ```
+
+## Cleaning
 
 Read the already created COTAN object
 
@@ -99,12 +101,13 @@ cellSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
 genesSizePlot(fb150Obj, splitPattern = ":", numCol = 1)
 ```
 
-Clean: round 1
+### Clean: round 1
 
 ```{r}
+#| label: Clean round 1
 fb150Obj <- clean(fb150Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(fb150Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -120,12 +123,14 @@ cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
 fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
 ```
 
-Clean: round 2
+### Clean: round 2
 
 ```{r}
+#| label: Clean round 2
 fb150Obj <- clean(fb150Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(fb150Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -143,12 +148,14 @@ cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
 fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
 ```
 
-Clean: round 3
+### Clean: round 3
 
 ```{r}
+#| label: Clean round 3
 fb150Obj <- clean(fb150Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(fb150Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -166,12 +173,14 @@ cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
 fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
 ```
 
-Clean: round 4
+### Clean: round 4
 
 ```{r}
+#| label: Clean round 4
 fb150Obj <- clean(fb150Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(fb150Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -189,12 +198,14 @@ cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
 fb150Obj <- dropGenesCells(fb150Obj, cells = cells_to_rem)
 ```
 
-Clean: round 4
+### Clean: round 5
 
 ```{r}
+#| label: Clean round 5
 fb150Obj <- clean(fb150Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(fb150Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -230,7 +241,7 @@ Final cleaning to check all is OK
 ```{r}
 fb150Obj <- clean(fb150Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(fb150Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(fb150Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -261,6 +272,8 @@ saveRDS(fb150Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")
 ```{r}
 fb150Obj <- readRDS(file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
 ```
+
+## GDI
 
 ```{r}
 gdiData <- calculateGDI(fb150Obj)
@@ -293,6 +306,8 @@ table(splitClusters)
 saveRDS(fb150Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
 ```
 
+## Consistent Transcript Cohorts (clustering)
+
 ```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF, mergedPValueDF) %<-%
   mergeUniformCellsClusters(fb150Obj, clusters = splitClusters,
@@ -309,6 +324,12 @@ table(mergedClusters)
 
 ```{r, eval=FALSE, echo=FALSE}
 saveRDS(fb150Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+------------------------------------------------------------------------
+
+```{r}
+Sys.time()
 ```
 
 ```{r}

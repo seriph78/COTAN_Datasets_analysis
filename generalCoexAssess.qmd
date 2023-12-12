@@ -12,6 +12,7 @@ library("gridExtra")
 library(cowplot)
 library(Matrix)
 library(ggstance)
+library(scales)
 #library(COTAN)
 ```
 
@@ -26,7 +27,8 @@ genesList <- list(
       "Taf1", "Taf2", "Gapdh", "Actb", "Golph3", "Zfr", "Sub1",
       "Tars", "Amacr"),
   "layers" = 
-    c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2")
+    c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2","Ntf3","Rasgrf2","Pvrl3", "Cux2","Slc17a6", "Sema3c","Thsd7a", "Sulf2", "Kcnk2","Grik3", "Etv1", "Tle4", "Tmem200a", "Glra2", "Etv1","Htr1f", "Sulf1","Rxfp1", "Syt6") 
+  # From https://www.science.org/doi/10.1126/science.aam8999
 )
 ```
 
@@ -149,6 +151,8 @@ ggplot(table.tot[table.tot$GeneType == "Neural",], aes(x = ValAbs, y = -0.5)) +
   theme_bw()+   theme(legend.position="none")
 ```
 
+In this case we don't see differences between coex and correlations.
+
 ```{r, warning=FALSE}
 ggplot(table.tot[table.tot$GeneType == "Constitutive",], aes(x = ValAbs, y = -0.5)) +
 
@@ -171,8 +175,10 @@ ggplot(table.tot[table.tot$GeneType == "Constitutive",], aes(x = ValAbs, y = -0.
   theme_bw()+   theme(legend.position="none")
 ```
 
+We can clearly observe that the coex is generally more near to zero than the correlations.
+
 ```{r}
-library(scales)
+
 ggplot(table.tot,aes(x=ValAbs, color=Method, y = Y_axis)) + 
   geom_point(alpha=0.8) +
   scale_color_manual(values = c("#8856A7","gray","#B3CDE3" ))+
@@ -185,7 +191,7 @@ ggplot(table.tot,aes(x=ValAbs, color=Method, y = Y_axis)) +
 ```
 
 ```{r}
-ggplot(table.tot.hk,aes(x=abs(value), color=Method))+stat_ecdf(geom = "point", size = 0.5 )+
+ggplot(table.tot.hk,aes(x=abs(value), color=Method))+stat_ecdf(geom = "point", size = 0.5 )+scale_color_manual(values = c("#8856A7","gray","#B3CDE3" ))+
   scale_y_continuous(trans= "exp")
 ```
 
@@ -212,53 +218,7 @@ ggplot(table.tot,aes(x=Method,y=ValAbs, fill=GeneType)) +
 
 ```
 
-```{r}
-ggplot(table.tot, aes(x=Method,y=ValAbs, fill=GeneType)) +
-  introdataviz::geom_split_violin(alpha = .4, trim = FALSE) +
-  geom_boxplot(width = .2, alpha = .6, fatten = NULL, show.legend = FALSE) +
-  stat_summary(fun.data = "mean_se", geom = "pointrange", show.legend = F, 
-               position = position_dodge(.175)) +
- scale_fill_brewer(palette = "Dark2") +
-  theme_minimal()
-```
-
-```{r, echo=FALSE, eval=FALSE}
-table.tot.neural$AbsVal <- abs(table.tot.neural$value)
-table.tot.neural$LogAbsVal <- log(table.tot.neural$AbsVal+0.001)
-ggbetweenstats(
-  data = table.tot.neural[!table.tot.neural$Method == "Seurat SCT corr.",],type = "robust", 
-  x = Method,
-  y = LogAbsVal
-)
-```
-
-```{r, echo=FALSE, eval=FALSE}
-ggbetweenstats(
-  data = table.tot.neural[!table.tot.neural$Method == "Seurat corr.",],type = "robust", 
-  x = Method,
-  y = AbsVal
-)
-```
-
-```{r, echo=FALSE, eval=FALSE}
-ggbetweenstats(
-  data = table.tot.neural[!table.tot.neural$Method == "Seurat corr.",],type = "robust", 
-  x = Method,
-  y = AbsVal
-)
-```
-
-```{r, echo=FALSE, eval=FALSE}
-table.tot.hk$LogAbsVal <- log(abs(table.tot.hk$value)+0.001)
-
-ggbetweenstats(
-  data = table.tot.hk[!table.tot.hk$Method == "Seurat corr.",],type = "robust", 
-  x = Method,
-  y = LogAbsVal
-)
-```
-
-## p-values evaluation
+## *p*-values
 
 ```{r}
 table.tot.hk <- NA
@@ -267,15 +227,15 @@ for (file in list.files("CoexData/",pattern = "PValue")) {
   pval <- readRDS(paste0("CoexData/",file))
   #pval <- as.data.frame(as.matrix(pval))
   if(str_detect(file,pattern = "Cotan")){
-    code <- "COTAN p-val"
+    code <- "COTAN p-values"
     if(all(diag(pval)) == 1){
       
       diag(pval) = 0
     }
   }else if(str_detect(file,pattern = "PValuesSCT")){
-    code <- "Seurat SCT p-val."
+    code <- "Seurat SCT p-values"
   }else if(str_detect(file,pattern = "SeuratPValues")){
-    code <- "Seurat p-val."
+    code <- "Seurat p-values"
   }
   
   
@@ -339,30 +299,97 @@ identical(table.tot[table.tot$Method == "COTAN p-val",]$Gene1,
 head(table.tot)
 ```
 
+### Constitutive genes
+
 ```{r}
 ggplot(table.tot[table.tot$GeneType == "Constitutive",], aes(y = value)) +
-
-  # horizontal box plot
   geom_boxplot(aes(fill = Method), outlier.size = 0.5,width=3) +
-
-  # reproduce original chart's color scale (o/w ordered factors will result
-  # in viridis scale by default, using the current version of ggplot2)
   scale_fill_discrete()+scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
-  theme_bw()+   theme(legend.position="none")
+  theme_bw()#+   theme(legend.position="none")
 ```
 
 ```{r}
-ggplot(table.tot[table.tot$GeneType == "Neural",], aes(y = log(value))) +
+ggplot(table.tot.hk,aes(x=value,y=n, color=Method))+geom_point(size = 0.5 )+
+  scale_color_manual(values = c("#8856A7","gray","#B3CDE3" ))+
+  theme_bw()
+```
 
-  # horizontal box plot
+```{r}
+ggplot(table.tot.hk,aes(x=value,y=n, color=Method))+geom_point(size = 0.5 )+ scale_x_continuous(trans = log_trans(base = 10),
+    breaks = trans_breaks("log10", function(x) 10^x),
+    labels = trans_format("log10", math_format(10^.x)),limits = c(10^(-100),0.05)) + ylim(0,0.4) +scale_color_manual(values = c("#8856A7","gray","#B3CDE3" ))+
+  theme_bw()
+```
+
+We can observe from this plot that COTAN has lower false positive error in fact the number of constitutive genes with *p-*values lower than 0.05 is quite smaller than from Seurat (both normalization).
+
+```{r}
+ggplot(table.tot[table.tot$GeneType == "Constitutive",],aes(x=value, color=Method))+geom_density()+xlim(0,0.05)+
+  scale_color_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw() 
+```
+
+### Neural genes
+
+```{r}
+ggplot(table.tot[table.tot$GeneType == "Neural",], aes(y = (value))) +
   geom_boxplot(aes(fill = Method), outlier.size = 0.5,width=3) +
-
-  # reproduce original chart's color scale (o/w ordered factors will result
-  # in viridis scale by default, using the current version of ggplot2)
   scale_fill_discrete()+scale_fill_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
-  theme_bw()+   theme(legend.position="none")
+  theme_bw() #+ theme(legend.position="none")
+```
+
+```{r}
+ggplot(table.tot.neural,aes(x=value,y=n, color=Method))+geom_point(size = 0.5 )+scale_color_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw()
+```
+
+```{r}
+ggplot(table.tot.neural,aes(x=value,y=n, color=Method))+geom_point(size = 0.5 )+ 
+  scale_x_continuous(trans = log_trans(base = 10),
+    breaks = trans_breaks("log10", function(x) 10^x),
+    labels = trans_format("log10", math_format(10^.x)),
+    limits = c(0.0001,0.05)) +
+  scale_color_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw()
+```
+
+```{r}
+ggplot(table.tot.neural,aes(x=value,y=n, color=Method))+geom_point(size = 0.5 )+ 
+  scale_x_continuous(trans = log_trans(base = 10),
+    breaks = trans_breaks("log10", function(x) 10^x),
+    labels = trans_format("log10", math_format(10^.x)),
+    limits = c(10^(-300),0.05)) + ylim(0,0.5)+
+  scale_color_manual(values = c("#8856A7","#EDF8FB","#B3CDE3" ))+
+  theme_bw()
+```
+
+### Direct comparision
+
+```{r}
+ggplot(table.tot,aes(x=value, color=Method))+geom_density()+
+  facet_grid(GeneType ~ .,scales="free")+
+  scale_color_manual(values = c("#8856A7","gray","#B3CDE3" ))+
+  theme_bw()
+```
+
+```{r}
+ggplot(table.tot,aes(x=value,y=n, color=Method))+geom_point(size = 0.5 )+ 
+  scale_x_continuous(trans = log_trans(base = 10),
+    breaks = trans_breaks("log10", function(x) 10^x),
+    labels = trans_format("log10", math_format(10^.x)),
+    limits = c(0.0001,0.05)) + 
+  facet_grid(. ~ GeneType ,scales="free") +
+  scale_color_manual(values = c("#8856A7","gray","#B3CDE3" ))+
+  theme_bw()+ theme(legend.position="bottom")
+```
+
+------------------------------------------------------------------------
+
+```{r}
+Sys.time()
 ```
 
 ```{r}
 sessionInfo()
+
 ```

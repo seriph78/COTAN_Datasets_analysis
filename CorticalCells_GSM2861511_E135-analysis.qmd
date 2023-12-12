@@ -24,6 +24,8 @@ dataset <- read.csv(file.path("Data/Yuzwa_MouseCortex/", "GSM2861511_E135_Only_C
                     row.names = 1)
 ```
 
+## Cleaning
+
 Crate the COTAN object
 
 ```{r}
@@ -44,7 +46,7 @@ cellSizePlot(cc135Obj)
 Drop cells with too many ritz reads as they are probably duplets
 
 ```{r}
-cellsSizeThr <- 7500
+cellsSizeThr <- 8000
 cc135Obj <- addElementToMetaDataset(cc135Obj, "Cells size threshold", cellsSizeThr)
 
 cells_to_rem <- getCells(cc135Obj)[getCellsSize(cc135Obj) > cellsSizeThr]
@@ -62,7 +64,7 @@ genesSizePlot(cc135Obj)
 Drop cells with too high genes expession as they are probably duplets
 
 ```{r}
-genesSizeThr <- 3000
+genesSizeThr <- 3300
 cc135Obj <- addElementToMetaDataset(cc135Obj, "Num genes threshold", genesSizeThr)
 
 numExprGenes <- getNumExpressedGenes(cc135Obj)
@@ -107,12 +109,13 @@ cellSizePlot(cc135Obj)
 genesSizePlot(cc135Obj)
 ```
 
-Clean: round 1
+### Clean: round 1
 
 ```{r}
 cc135Obj <- clean(cc135Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc135Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(cc135Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -126,33 +129,34 @@ cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
 cc135Obj <- dropGenesCells(cc135Obj, cells = cells_to_rem)
 ```
 
-Clean: round 2
+### Clean: round 2
 
 ```{r}
 cc135Obj <- clean(cc135Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc135Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot,
+  UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(cc135Obj)
 
 plot(pcaCellsPlot)
+plot(pcaCellsData)
 plot(genesPlot)
 ```
 
-B group contains just 3 cells quite different in the 3rd-5th components: better to drop them
+B group contains just 3 cells quite different in the 3rd and 4th components: better to drop them
 
 ```{r}
-plot(pcaCellsData)
 
 cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
 
 cc135Obj <- dropGenesCells(cc135Obj, cells = cells_to_rem)
 ```
 
-Clean: round 3
+### Clean: round 3
 
 ```{r}
 cc135Obj <- clean(cc135Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc135Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(cc135Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
@@ -166,27 +170,21 @@ Visualize if all is ok:
 plot(UDEPlot)
 
 plot(nuPlot)
+```
 
-lowUDEThr <- 0.17 # the threshold to remove low UDE cells
-
-nuDf <- data.frame("nu" = sort(getNu(cc135Obj)), "n" = seq_along(getNu(cc135Obj)))
-UDEPlot_zoomed <- ggplot(nuDf, aes(x = n, y = nu)) +
-            geom_point(colour = "#8491B4B2", size = 1.0) +
-            xlim(0L, 400L) +
-            ylim(0.0, 1.0) +
-            geom_hline(yintercept = lowUDEThr, linetype = "dashed",
-                       color = "darkred") +
-            annotate(geom = "text", x = 200L, y = 0.25,
-                     label = paste0("to remove cells with nu < ", lowUDEThr),
-                     color = "darkred", size = 4.5)
-
-plot(UDEPlot_zoomed)
+```{r}
+plot(zoomedNuPlot)
 ```
 
 Drop very low UDE cells as they are likely outliers
 
 ```{r}
+lowUDEThr <- 0.14 # the threshold to remove low UDE cells
+
 cc135Obj <- addElementToMetaDataset(cc135Obj, "Low UDE threshold", lowUDEThr)
+
+nuDf <- data.frame("nu" = sort(getNu(cc135Obj)), "n" = seq_along(getNu(cc135Obj)))
+
 
 cells_to_rem <- rownames(nuDf)[nuDf[["nu"]] < lowUDEThr]
 cc135Obj <- dropGenesCells(cc135Obj, cells = cells_to_rem)
@@ -197,12 +195,13 @@ Final cleaning to check all is OK
 ```{r}
 cc135Obj <- clean(cc135Obj)
 
-c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot) %<-% cleanPlots(cc135Obj)
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(cc135Obj)
 
 plot(pcaCellsPlot)
 plot(genesPlot)
 plot(UDEPlot)
 plot(nuPlot)
+plot(zoomedNuPlot)
 
 plot(cellSizePlot(cc135Obj))
 plot(genesSizePlot(cc135Obj))
@@ -223,6 +222,7 @@ saveRDS(cc135Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")
 cc135Obj <- readRDS("Data/Yuzwa_MouseCortex/CorticalCells_GSM2861511_E135.cotan.RDS")
 ```
 
+## GDI
 
 ```{r}
 gdiData <- calculateGDI(cc135Obj)
@@ -236,19 +236,27 @@ gdiPlot <- GDIPlot(cc135Obj, GDIIn = gdiData, GDIThreshold = 1.4,
                    genes = list("Top 10 GDI genes" = genesToLabel))
 
 plot(gdiPlot)
+
 ```
 
+## Consistent Transcript Cohorts
 
 ```{r, eval=FALSE, echo=TRUE}
-splitClusters <- cellsUniformClustering(cc135Obj, GDIThreshold = 1.4, cores = 13,
-                                        saveObj = TRUE, outDir = outDir)
+c(splitClusters, splitCoexDF) %<-% 
+  cellsUniformClustering(cc135Obj, GDIThreshold = 1.4, cores = 13,
+                         saveObj = TRUE, outDir = outDir)
 
-c(splitCoexDF, splitPValueDF) %<-% DEAOnClusters(cc135Obj, clusters = splitClusters)
 
 cc135Obj <- addClusterization(cc135Obj, clName = "split",
                               clusters = splitClusters,
                               coexDF = splitCoexDF, override = TRUE)
+```
 
+```{r, echo=FALSE, eval=TRUE}
+splitClusters <- getClusterizationData(cc135Obj,clName = "split")$clusters
+```
+
+```{r}
 table(splitClusters)
 ```
 
@@ -257,7 +265,7 @@ saveRDS(cc135Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")
 ```
 
 ```{r, eval=FALSE, echo=TRUE}
-c(mergedClusters, mergedCoexDF, mergedPValueDF) %<-%
+c(mergedClusters, mergedCoexDF) %<-%
   mergeUniformCellsClusters(cc135Obj, clusters = splitClusters,
                             GDIThreshold = 1.4, cores = 13,
                             saveObj = TRUE, outDir = outDir)
@@ -266,7 +274,13 @@ cc135Obj <- addClusterization(cc135Obj, clName = "merge",
                               clusters = mergedClusters,
                               coexDF = mergedCoexDF,
                               override = TRUE)
+```
 
+```{r, echo=FALSE, eval=TRUE}
+mergedClusters <- getClusterizationData(cc135Obj,clName = "merge")$clusters
+```
+
+```{r}
 table(mergedClusters)
 ```
 
@@ -274,6 +288,11 @@ table(mergedClusters)
 saveRDS(cc135Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
 ```
 
+------------------------------------------------------------------------
+
+```{r}
+Sys.time()
+```
 
 ```{r}
 sessionInfo()

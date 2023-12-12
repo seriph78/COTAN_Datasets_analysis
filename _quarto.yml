@@ -1,6 +1,10 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
+    - "!src/"
+
 
 website:
   title: "COTAN Datasets analysis"
@@ -12,51 +16,64 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - section: "Mouse Cortex Loo 2019"
-        contents:
-        - href: Dataset1.qmd
-          text: "Cleaning and cell clustering"
-        - href: geneCoexAnalysisDataset1.qmd
-          text: "Coexpression analaysis"
-          
-      - section: "Mouse Cortex Yuzwa 2017"
+      - section: "Datasets"
         contents: 
-        - href: CorticalCells_GSM2861511_E135-analysis.qmd
-          text: "E13.5 Cleaning and cell clustering"
-        - href: geneCoexAnalysisE13.5Yuzwa.qmd
-          text: "Correlation analysis for E13.5"
-        - href: CorticalCells_GSM2861514_E175-analysis.qmd
-          text: "E17.5 Cleaning and cell clustering"
-        - href: geneCoexAnalysisE17.5Yuzwa.qmd
-          text: "Correlation analysis for E17.5"
-          
-      - section: "Mouse Brain "
-        contents: 
-        - href: ForebrainDorsal_E135-analysis.qmd
-          text: "E13.5 Cleaning and cell clustering"
-        - href: geneCoexAnalysisE13.5MouseBrain.qmd
-          text: "Correlation analysis for E13.5"
-        - href: ForebrainDorsal_E150-analysis.qmd
-          text: "E15.0 Cleaning and cell clustering"
-        - href: geneCoexAnalysisE15.0MouseBrain.qmd
-          text: "Correlation analysis for E15.0"
-        - href: ForebrainDorsal_E175-analysis.qmd
-          text: "E17.5 Cleaning and cell clustering"
-        - href: geneCoexAnalysisE17.5MouseBrain.qmd
-          text: "Correlation analysis for E17.5"
-      
+        
+        - section: "Mouse Cortex Loo 2019"
+          contents:
+          - href: Dataset1.qmd
+            text: "Cleaning and cell clustering"
+          - href: geneCoexAnalysisDataset1.qmd
+            text: "Coexpression analaysis"
+            
+        - section: "Mouse Cortex Yuzwa 2017"
+          contents: 
+          - href: CorticalCells_GSM2861511_E135-analysis.qmd
+            text: "E13.5 Cleaning and cell clustering"
+          - href: geneCoexAnalysisE13.5Yuzwa.qmd
+            text: "Correlation analysis for E13.5"
+          - href: CorticalCells_GSM2861514_E175-analysis.qmd
+            text: "E17.5 Cleaning and cell clustering"
+          - href: geneCoexAnalysisE17.5Yuzwa.qmd
+            text: "Correlation analysis for E17.5"
+            
+        - section: "Mouse Brain LaManno 2021"
+          contents: 
+          - href: ForebrainDorsal_E135-analysis.qmd
+            text: "E13.5 Cleaning and cell clustering"
+          - href: geneCoexAnalysisE13.5MouseBrain.qmd
+            text: "Correlation analysis for E13.5"
+          - href: ForebrainDorsal_E150-analysis.qmd
+            text: "E15.0 Cleaning and cell clustering"
+          - href: geneCoexAnalysisE15.0MouseBrain.qmd
+            text: "Correlation analysis for E15.0"
+          - href: ForebrainDorsal_E175-analysis.qmd
+            text: "E17.5 Cleaning and cell clustering"
+          - href: geneCoexAnalysisE17.5MouseBrain.qmd
+            text: "Correlation analysis for E17.5"
+          - href: ForebrainLaManno2021ClustersGDI.qmd
+            text: "Original Clusters GDI evaluation"
+            
+        - section: "CD14+"
+          contents: 
+          - href: cd14_analysis.qmd
+            text: "CD14+ Cleaning and cell clustering"
+            
       - section: "Coex score evaluation"
         contents: 
         - href: generalCoexAssess.qmd
         
       - section: "GDI sensitivity"
         contents: 
-        - href: cd14_analysis.qmd
-          text: "CD14+ Cleaning and cell clustering"
+        - href: OriginalClustersDistanceEvaluation.qmd
+          text: "Clusters Distance Evaluation"
         - href: FindUniformOrigCluster.qmd
           text: "Cluster Unifomity and GDI score"
           
       - section: "Cluster evaluation"
+        contents: 
+        - href: cd14_clusterizations_comparisons.qmd
+          text: "CD14+ clusterizations"
           
       - section: "DEA evaluation"
         contents: 
@@ -75,4 +92,5 @@ execute:
   freeze: auto
   warning: false
   
+
 

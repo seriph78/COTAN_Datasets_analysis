@@ -1,0 +1,296 @@
+
+---
+  title: "Compare the various clusterizations of Forebrain Dorsal E13.5"
+---
+
+```{r}
+#library(SingleCellExperiment)
+#library(DuoClustering2018)
+#library(tidyr)
+library(rlang)
+library(testthat)
+library(ggplot2)
+library(ggsankey) # remotes::install_github("davidsjoberg/ggsankey")
+library(tibble)
+library(zeallot)
+library(Seurat)
+library(aricode)
+library(funtimes)
+library(monocle3)
+#library(COTAN)
+devtools::load_all("~/dev/COTAN/COTAN/")
+
+options(parallelly.fork.enable = TRUE)
+
+setLoggingLevel(2)
+setLoggingFile(file.path(".", "CompareClusterizations_ForebrainDorsal_E135.log"))
+```
+This function creates a sankey plot, given a COTAN object and the names
+of 2 (or 3) clusterizations stored in the cells' metadata
+
+```{r}
+createSankey <- function(objCOTAN, clName1, clName2, clName3 = NULL,
+                         space = 2, size = 4) {
+  useThirdCluster <- !is.null(clName3)
+
+  cl1 <- getClusters(objCOTAN, clName = clName1)
+  if (!is.character(levels(cl1))) {
+    cl1 <- niceFactorLevels(cl1)
+  }
+
+  cl2 <- getClusters(objCOTAN, clName = clName2)
+  if (!is.character(levels(cl2))) {
+    cl2 <- niceFactorLevels(cl2)
+  }
+
+  cl3 <- NULL
+  if (useThirdCluster) {
+    cl3 <- getClusters(objCOTAN, clName = clName3)
+    if (!is.character(levels(cl3))) {
+      cl3 <- niceFactorLevels(cl3)
+    }
+  }
+
+  logThis(paste("Clusterization: ", clName1))
+  logThis(paste("Number of clusters: ",
+                nlevels(as.factor(cl1))), logLevel = 1L)
+  logThis(paste("Top 10 clusters: ",
+                paste0(head(sort(table(cl1), decreasing = TRUE), 10L),
+                         collapse = ", ")), logLevel = 1L)
+
+  logThis(paste("Clusterization: ", clName2))
+  logThis(paste("Number of clusters: ",
+                nlevels(as.factor(cl2))), logLevel = 1L)
+  logThis(paste("Top 10 clusters: ",
+                paste0(head(sort(table(cl2), decreasing = TRUE), 10L),
+                         collapse = ", ")), logLevel = 1L)
+
+  if (useThirdCluster) {
+    logThis(paste("Clusterization: ", clName3))
+    logThis(paste("Number of clusters: ",
+                  nlevels(as.factor(cl3))), logLevel = 1L)
+    logThis(paste("Top 10 clusters: ",
+                  paste0(head(sort(table(cl3), decreasing = TRUE), 10L),
+                           collapse = ", ")), logLevel = 1L)
+  }
+
+  df <- data.frame(cbind(factorToVector(cl1), factorToVector(cl2)))
+  colnames(df) <- paste0(c(clName1, clName2), ".clusters")
+  if (useThirdCluster) {
+    df <- cbind(df, factorToVector(cl3))
+    colnames(df)[[3]] <- paste0(clName3, ".clusters")
+  }
+
+  crossTable <- list(table(df[, c(1,2)]))
+  if (useThirdCluster) {
+    crossTable <- append(crossTable, list(table(df[, c(1,3)]), table(df[, c(2,3)])))
+  }
+
+  table2 <- df %>% make_long(1:ncol(df))
+
+  sankeyPlot <-
+    ggplot(table2,
+           aes(x = x,
+               next_x = next_x,
+               node = node,
+               next_node = next_node,
+               fill = factor(node),
+               label = node)) +
+    geom_alluvial(flow.alpha = 0.75, node.color = 0, space = space) +
+    geom_alluvial_text(space = space) +
+#    geom_alluvial_label(space = space) +
+    scale_fill_viridis_d(option = "H", alpha = 0.95, begin = 0.2, end = 0.8) +
+    theme_alluvial(base_size = 16, base_line_size = size) +
+    theme(legend.position = "none")
+#    theme(plot.margin = unit(c(0,0,0,0), "mm"))
+#    theme(legend.box.spacing = unit(0, "mm"))
+#    labs(title = "Alluvial diagram using ggplot")
+#    labs(subtitle = "using  David Sjoberg's ggsankey package")
+#    labs(caption = "@techanswers88")
+
+  return(list("tables" = crossTable, "plot" = sankeyPlot))
+}
+```
+
+
+Loading the COTAN object
+
+```{r}
+fb135Obj <- readRDS(file = file.path(".", "e13.5_ForebrainDorsal.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(fb135Obj, datasetTags()[["cond"]])
+
+logThis(sampleCondition)
+
+allClust <- getClusterizations(fb135Obj)
+
+logThis("")
+logThis(paste("Number of cells:", getNumCells(fb135Obj)))
+
+logThis("")
+logThis("Available clusterizations:")
+logThis(paste0(allClust, collapse = ", "))
+
+clSizes <- vapply(allClust, function(x) { nlevels(getClusters(fb135Obj, x))}, integer(1L))
+clSizes
+logThis(paste(names(clSizes), clSizes, sep = ": ", collapse = ", "))
+```
+
+Load CellTypist clusterization
+
+```{r}
+probMatrixDF <- read.csv(file.path(".", "Labeling", "E135_Devel_Mouse_Brain_probability_matrix.csv"), header = TRUE)
+probMatrixDF <- column_to_rownames(probMatrixDF, var = "X")
+rownames(probMatrixDF) <- gsub("[.]", ":", rownames(probMatrixDF))
+rownames(probMatrixDF) <- gsub("X10X", "10X", rownames(probMatrixDF))
+
+cells_to_keep <- rownames(probMatrixDF)[rownames(probMatrixDF) %in% getCells(fb135Obj)]
+assert_that(identical(cells_to_keep, getCells(fb135Obj)))
+```
+
+Estimate number of dimensions
+
+```{r}
+prc <- irlba::prcomp_irlba(probMatrixDF, n = 50)
+
+nDims <- 20
+plot(prc$sdev[10:nDims])
+prc$totalvar - sum(prc$sdev[1:nDims]^2)
+```
+
+Calculate the projection to spherical distribution [Malahanobis distance]
+
+```{r}
+pca <- irlba::prcomp_irlba(probMatrixDF, n = nDims)
+
+logThis(paste("Residual variance: ", prc$totalvar - sum(prc$sdev[1:nDims]^2)))
+
+normMatrix <- scale(x = pca$x, center = TRUE, scale = TRUE)
+rownames(normMatrix) <- rownames(probMatrixDF)
+
+logThis(paste("Final dimensions:", paste0(dim(normMatrix), collapse = ", ")))
+```
+
+The sum of square distances from center of sub-cluster in pca-projected space
+
+```{r}
+squareDistanceFromCellTypist <- function(subMatrix) {
+  subMatrix <- scale(subMatrix, scale = FALSE, center = TRUE)
+  return(sum(rowSums(subMatrix^2)))
+}
+```
+
+
+```{r}
+averageClustersDistance <- function(normMatrix, clusterization) {
+  clustersList <- toClustersList(clusterization)
+  sumDist <- 0.0
+  for (cl in clustersList) {
+    sumDist <- sumDist + squareDistanceFromCellTypist(normMatrix[cl, , drop = FALSE])
+  }
+  return(sumDist / ncol(normMatrix) / (nrow(normMatrix) - length(clustersList)))
+}
+```
+
+
+```{r eval=FALSE}
+set.seed(155)
+shuffledCells <- sample(getCells(fb135Obj))
+
+rndDist <- function(n) {
+  clusters <- set_names(rep(1:n, ceiling(3000/n))[1:getNumCells(fb135Obj)], shuffledCells)
+  d <- averageClustersDistance(normMatrix, clusters)
+  return(d)
+}
+
+sizes <- c(1:15, seq(20, 50, by = 5), seq(60, 100, by = 10),
+           seq(150, 1000, by = 50), seq(1500, 5000, by = 500))
+
+sizesToDists <- vapply(sizes, rndDist, numeric(1))
+names(sizesToDists) <- sizes
+
+sizesToDists
+
+plot(names(sizesToDists), sizesToDists)
+```
+
+
+
+```{r}
+avgDists <- vapply(allClust, function(clName) {
+  averageClustersDistance(normMatrix, getClusters(fb135Obj, clName))
+}, numeric(1))
+
+avgDists
+```
+
+
+
+```{r}
+tableAndPlot <- createSankey(fb135Obj, "cell.typist", "merge", space = 2, size = 2)
+
+tableAndPlot
+```
+
+```{r}
+allMutualScores <- function(objCOTAN, clName) {
+  cbind(
+    "NMI" = vapply(allClust, function(clName2) {
+        NMI(getClusters(objCOTAN, clName = clName),
+            getClusters(objCOTAN, clName = clName2),
+            variant = "sum")
+      }, numeric(1)),
+  
+    "AMI" = vapply(allClust, function(clName2) {
+        AMI(getClusters(objCOTAN, clName = clName),
+            getClusters(objCOTAN, clName = clName2))
+      }, numeric(1)),
+
+    "ARI" = vapply(allClust, function(clName2) {
+        ARI(getClusters(objCOTAN, clName = clName),
+            getClusters(objCOTAN, clName = clName2))
+      }, numeric(1)),
+
+    "purity" = vapply(allClust, function(clName2) {
+        purity(getClusters(objCOTAN, clName = clName),
+               getClusters(objCOTAN, clName = clName2))[["pur"]]
+      }, numeric(1))
+  )
+}
+```
+
+
+```{r}
+cellTypistScores <- allMutualScores(fb135Obj, clName = "cell.typist")
+
+cellTypistScores
+```
+
+```{r}
+originalSubclassScores <- allMutualScores(fb135Obj, clName = "original.subclass")
+
+originalSubclassScores
+```
+
+
+```{r}
+originalClusterScores <- allMutualScores(fb135Obj, clName = "original.clusters")
+
+originalClusterScores
+```
+
+
+```{r}
+
+comparativeScores <- cbind(clSizes, avgDists,
+                           originalClusterScores[, "AMI"], originalClusterScores[ , "ARI"],
+                           cellTypistScores[ , "AMI"], cellTypistScores[ , "ARI"])
+
+colnames(comparativeScores) <- c("NumClusters", "NPD",
+                                 "AMI_OriginalClusters", "ARI_OriginalClusters",
+                                 "AMI_CellTypist", "ARI_CellTypist")
+
+comparativeScores
+
+write.csv(comparativeScores, file = "./ForebrainDorsal_E135_ClustersComparativeScores.csv")
+```

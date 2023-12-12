@@ -1,0 +1,222 @@
+---
+title: "Original Clusters Distance Evaluation"
+author: "seriph78"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(COTAN)
+library(stringr)
+library(tidyverse)
+```
+
+## Extract the row matrix for each cluster
+
+This is done on the La Manno Mouse Brain dataset (2021)
+
+### E13.5
+
+```{r, echo=TRUE, eval=FALSE}
+E13.5Clusters.code <- c(432,187,434,184,437,510)
+
+fb135Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "e13.5_ForebrainDorsal.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(fb135Obj, datasetTags()[["cond"]])
+
+for (cl in E13.5Clusters.code) {
+  cells <- names(getClusters(fb135Obj, 
+      clName = "original.clusters")[getClusters(fb135Obj, 
+                          clName = "original.clusters") == cl])
+
+CLRawData <- getRawData(fb135Obj)[,cells]
+
+saveRDS(CLRawData,file = paste0("Data/MouseCortexFromLoom/SingleClusterRawData/Cl",cl,sampleCondition,"RawData.RDS"))  
+}
+
+```
+
+### E15.0
+
+```{r, echo=TRUE, eval=FALSE}
+E15.0Clusters.code <- c(432,509,510,508,428,434,437)
+
+fb150Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "e15.0_ForebrainDorsal.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(fb150Obj, datasetTags()[["cond"]])
+
+for (cl in E15.0Clusters.code) {
+  cells <- names(getClusters(fb150Obj, 
+      clName = "original.clusters")[getClusters(fb150Obj, 
+                          clName = "original.clusters") == cl])
+
+CLRawData <- getRawData(fb150Obj)[,cells]
+
+saveRDS(CLRawData,file = paste0("Data/MouseCortexFromLoom/SingleClusterRawData/Cl",cl,sampleCondition,"RawData.RDS"))  
+}
+```
+
+### E17.5
+
+```{r, echo=TRUE, eval=FALSE}
+E17.5Clusters.code <- c(516,505)
+
+fb175Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "E17.5_ForebrainDorsal.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(fb175Obj, datasetTags()[["cond"]])
+
+for (cl in E17.5Clusters.code) {
+  cells <- names(getClusters(fb175Obj, 
+      clName = "original.clusters")[getClusters(fb175Obj, 
+                          clName = "original.clusters") == cl])
+
+CLRawData <- getRawData(fb175Obj)[,cells]
+
+saveRDS(CLRawData,file = paste0("Data/MouseCortexFromLoom/SingleClusterRawData/Cl",cl,sampleCondition,"RawData.RDS"))  
+}
+```
+
+## Defining the two distances
+
+To roughly determine the cluster distances we decided to test two simple Euclidean distances:
+
+1.  over the mean of the 0/1 raw matrix
+
+2.  over the $1-e^{-\lambda}$ where $\lambda$ is the average expression for the genes.
+
+```{r, echo=TRUE, eval=FALSE}
+ClFiles <- list.files("Data/MouseCortexFromLoom/SingleClusterRawData/")
+
+tot.Df.ZeroOne <- NA
+tot.Df.Lambda <- NA
+for(Fl in ClFiles) {
+  print(Fl)
+  cl <- str_split(Fl,pattern = "_",simplify = T)[1]
+  data <- readRDS(paste0("Data/MouseCortexFromLoom/SingleClusterRawData/",
+                         Fl))
+  
+  obj <- COTAN(data)
+  
+  ZeroOne <- rowMeans(as.matrix(getZeroOneProj(obj)))
+  tot.Df.ZeroOne <- merge(tot.Df.ZeroOne,ZeroOne,by = 0,all = T)
+  tot.Df.ZeroOne[is.na(tot.Df.ZeroOne)] <- 0
+  colnames(tot.Df.ZeroOne)[ncol(tot.Df.ZeroOne)] <- cl
+  tot.Df.ZeroOne <- column_to_rownames(tot.Df.ZeroOne,var = "Row.names")
+  
+  obj <- estimateLambdaLinear(obj)
+  Lambda <- getLambda(obj)
+  tot.Df.Lambda <- merge(tot.Df.Lambda,1-exp(-Lambda),by = 0, all = T)
+  tot.Df.Lambda[is.na(tot.Df.Lambda)] <- 0
+  colnames(tot.Df.Lambda)[ncol(tot.Df.Lambda)] <- cl
+  tot.Df.Lambda <- column_to_rownames(tot.Df.Lambda,var = "Row.names")
+  
+}
+tot.Df.Lambda <- tot.Df.Lambda[,2:ncol(tot.Df.Lambda)]
+tot.Df.ZeroOne <- tot.Df.ZeroOne[,2:ncol(tot.Df.ZeroOne)]
+
+tot.Df.Lambda <- tot.Df.Lambda[2:nrow(tot.Df.Lambda),]
+tot.Df.ZeroOne <- tot.Df.ZeroOne[2:nrow(tot.Df.Lambda),]
+
+
+head(tot.Df.Lambda)
+head(tot.Df.ZeroOne)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+saveRDS(tot.Df.Lambda, "Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.Lambda.RDS")
+saveRDS(tot.Df.ZeroOne, "Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.ZeroOne.RDS")
+
+```
+
+```{r, echo=FALSE, eval=TRUE}
+tot.Df.Lambda <- readRDS("Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.Lambda.RDS")
+tot.Df.ZeroOne <- readRDS("Data/MouseCortexFromLoom/ClustersDistances/Tot.Df.ZeroOne.RDS")
+
+```
+
+```{r}
+library(ComplexHeatmap)
+distance.df.Lambda <- as.matrix(dist(t(tot.Df.Lambda),diag = T,upper = T))
+
+Heatmap(distance.df.Lambda,
+        name = "Lambda\ndistance", 
+        cell_fun = function(j, i, x, y, width, height, fill) 
+        {
+          grid.text(sprintf("%.1f", distance.df.Lambda[i, j]), x, y, gp = gpar(fontsize = 10))
+        },
+        show_row_dend = F, 
+        show_row_names = F)
+```
+
+```{r}
+
+distance.df.ZeroOne <- as.matrix(dist(t(tot.Df.ZeroOne),diag = T,upper = T))
+
+Heatmap(distance.df.ZeroOne,
+        name = "ZeroOne\ndistance", 
+        cell_fun = function(j, i, x, y, width, height, fill) 
+        {
+          grid.text(sprintf("%.1f", distance.df.ZeroOne[i, j]), x, y, gp = gpar(fontsize = 10))
+        },
+        show_row_dend = F, 
+        show_row_names = F)
+```
+
+The distances are very similar with the Zero One a little lower as values...
+
+```{r}
+distance.df.Lambda.Plot <- rownames_to_column(as.data.frame(distance.df.Lambda),
+                                              var = "Cl.1")
+distance.df.Lambda.Plot <-pivot_longer(distance.df.Lambda.Plot,
+                                       cols = !Cl.1,
+                                       names_to = "Cl.2", 
+                                       values_to = "Lambda.Dist")
+
+distance.df.ZeroOne.Plot <- rownames_to_column(as.data.frame(distance.df.ZeroOne),
+                                              var = "Cl.1")
+distance.df.ZeroOne.Plot <-pivot_longer(distance.df.ZeroOne.Plot,
+                                       cols = !Cl.1,
+                                       names_to = "Cl.2", 
+                                       values_to = "ZeroOne.Dist")
+
+distance.df.Tot <- merge(distance.df.ZeroOne.Plot,distance.df.Lambda.Plot,by= c("Cl.1","Cl.2"),all=T)
+
+ggplot(as.data.frame(distance.df.Tot),aes(x=ZeroOne.Dist, y=Lambda.Dist))+geom_point()
+```
+
+So for what we are using it is the same.
+
+The key information is that we can define couple of, in one case, triplets of very near clusters:
+
+1.  Cl510e13.5 and Cl510e15.0
+2.  Cl516e17.5 and Cl505e17.5
+3.  Cl509e15.0 and Cl508e15.0 which are also similar to Cl432e13.5 and Cl432e15.0
+4.  Cl432e13.5 and Cl432e15.0
+5.  Cl437e13.5 and Cl437e15.0
+6.  Cl428e15.0, Cl434e15.0 and Cl434e13.5
+
+Based on these distances we can consider three thresholds (with number of cluster pair):
+
+1.  less than 7 (first quartile)
+
+    ```{r}
+    sum(distance.df.ZeroOne < 7.1 & distance.df.ZeroOne > 0)/2
+    ```
+
+2.  between 9 and 11 (around median)
+
+    ```{r}
+    sum(distance.df.ZeroOne > 9 & distance.df.ZeroOne < 11)/2
+    ```
+
+3.  more than 13 (3rd quartile)
+
+    ```{r}
+    sum(distance.df.ZeroOne > 13)/2
+    ```
+
+------------------------------------------------------------------------
+
+```{r}
+sessionInfo()
+```

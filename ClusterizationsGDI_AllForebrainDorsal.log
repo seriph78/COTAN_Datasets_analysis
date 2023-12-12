@@ -1,0 +1,102 @@
+[2023-11-17 16:27:37] e13.5_ForebrainDorsal
+[2023-11-17 16:27:39] 
+[2023-11-17 16:27:44] Number of cells: 4981
+[2023-11-22 09:37:07] e13.5_ForebrainDorsal
+[2023-11-22 09:37:07] 
+[2023-11-22 09:37:07] Number of cells: 4981
+[2023-11-22 09:37:07] 
+[2023-11-22 09:37:07] Available clusterizations:
+[2023-11-22 09:37:07] split, merge, original.clusters, original.subclass, original.class, cell.typist, seurat, seurat.high.res, monocle, monocle.high.res
+[2023-11-22 09:37:07] split: 35, merge: 31, original.clusters: 159, original.subclass: 40, original.class: 13, cell.typist: 13, seurat: 19, seurat.high.res: 36, monocle: 11, monocle.high.res: 27
+[2023-11-22 09:37:07] Asked to drop 0 genes and 4930 cells
+[2023-11-22 09:37:07] Cotan analysis functions started
+[2023-11-22 09:37:07] Asked to drop 2688 genes and 0 cells
+[2023-11-22 09:37:07] Genes/cells selection done: dropped [2688] genes and [0] cells
+[2023-11-22 09:37:07] Working on [11284] genes and [51] cells
+[2023-11-22 09:37:07] Estimate dispersion: START
+[2023-11-22 09:37:07] Effective number of cores used: 6
+[2023-11-22 09:37:08] Executing 12 genes batches from [1:931] to [10354:11284]
+[2023-11-22 09:37:08] Estimate dispersion: DONE
+[2023-11-22 09:37:08] dispersion | min: -0.6884765625 | max: 180 | % negative: 55.450194966324
+[2023-11-22 09:37:09] Only analysis time 0.0228683869043986
+[2023-11-22 09:37:09] Cotan genes' coex estimation started
+[2023-11-22 09:37:09] Calculate genes' coex: START
+[2023-11-22 09:37:09] Retrieving expected genes' contingency table
+[2023-11-22 09:37:09] calculating NN..[2023-11-22 09:37:17]  done
+[2023-11-22 09:37:17] calculating NY..[2023-11-22 09:37:17] YN..[2023-11-22 09:37:19] YY..[2023-11-22 09:37:21]  done
+[2023-11-22 09:37:21] Calculating genes' coex normalization factor
+[2023-11-22 09:37:22] Fraction of genes with very low expected contingency tables: 0.459156302413838
+[2023-11-22 09:37:24] Retrieving observed genes' yes/yes contingency table
+[2023-11-22 09:37:24] calculating YY..[2023-11-22 09:37:28]  done
+[2023-11-22 09:37:29] Estimating genes' coex
+[2023-11-22 09:37:30] Calculate genes' coex: DONE
+[2023-11-22 09:37:30] Only genes' coex time 0.360514076550802
+[2023-11-22 09:37:30] Total time 0.390779006481171
+[2023-11-22 09:37:31] Checking uniformity for the cluster '181' with 51 cells
+[2023-11-22 09:37:31] Calculate GDI dataframe: START
+[2023-11-22 09:37:31] Using S
+[2023-11-22 09:37:31] Calculating S: START
+[2023-11-22 09:37:31] Calculating S: DONE
+[2023-11-22 09:41:14] e13.5_ForebrainDorsal
+[2023-11-22 09:41:14] 
+[2023-11-22 09:41:14] Number of cells: 4981
+[2023-11-22 09:41:14] 
+[2023-11-22 09:41:14] Available clusterizations:
+[2023-11-22 09:41:14] split, merge, original.clusters, original.subclass, original.class, cell.typist, seurat, seurat.high.res, monocle, monocle.high.res
+[2023-11-22 09:41:14] split: 35, merge: 31, original.clusters: 159, original.subclass: 40, original.class: 13, cell.typist: 13, seurat: 19, seurat.high.res: 36, monocle: 11, monocle.high.res: 27
+[2023-11-22 09:41:25] e15.0_ForebrainDorsal
+[2023-11-22 09:41:25] 
+[2023-11-22 09:41:25] Number of cells: 8562
+[2023-11-22 09:41:25] 
+[2023-11-22 09:41:25] Available clusterizations:
+[2023-11-22 09:41:25] split, merge, seurat, seurat.high.res, original.clusters, original.subclass, original.class, monocle, monocle.high.res, cell.typist
+[2023-11-22 09:41:25] split: 57, merge: 50, seurat: 21, seurat.high.res: 40, original.clusters: 229, original.subclass: 47, original.class: 14, monocle: 11, monocle.high.res: 46, cell.typist: 13
+[2023-11-22 09:41:35] e17.5_ForebrainDorsal
+[2023-11-22 09:41:35] 
+[2023-11-22 09:41:35] Number of cells: 2467
+[2023-11-22 09:41:35] 
+[2023-11-22 09:41:35] Available clusterizations:
+[2023-11-22 09:41:35] split, merge, original.clusters, original.subclass, original.class, cell.typist, seurat, seurat.high.res, monocle, monocle.high.res
+[2023-11-22 09:41:35] split: 25, merge: 19, original.clusters: 136, original.subclass: 27, original.class: 9, cell.typist: 10, seurat: 19, seurat.high.res: 21, monocle: 7, monocle.high.res: 24
+[2023-11-22 09:46:08] e13.5_ForebrainDorsal
+[2023-11-22 09:46:08] 
+[2023-11-22 09:46:08] Number of cells: 4981
+[2023-11-22 09:46:08] 
+[2023-11-22 09:46:08] Available clusterizations:
+[2023-11-22 09:46:08] split, merge, original.clusters, original.subclass, original.class, cell.typist, seurat, seurat.high.res, monocle, monocle.high.res
+[2023-11-22 09:46:08] split: 35, merge: 31, original.clusters: 159, original.subclass: 40, original.class: 13, cell.typist: 13, seurat: 19, seurat.high.res: 36, monocle: 11, monocle.high.res: 27
+[2023-11-22 09:46:16] e15.0_ForebrainDorsal
+[2023-11-22 09:46:16] 
+[2023-11-22 09:46:16] Number of cells: 8562
+[2023-11-22 09:46:16] 
+[2023-11-22 09:46:16] Available clusterizations:
+[2023-11-22 09:46:16] split, merge, seurat, seurat.high.res, original.clusters, original.subclass, original.class, monocle, monocle.high.res, cell.typist
+[2023-11-22 09:46:16] split: 57, merge: 50, seurat: 21, seurat.high.res: 40, original.clusters: 229, original.subclass: 47, original.class: 14, monocle: 11, monocle.high.res: 46, cell.typist: 13
+[2023-11-22 09:46:24] e17.5_ForebrainDorsal
+[2023-11-22 09:46:24] 
+[2023-11-22 09:46:24] Number of cells: 2467
+[2023-11-22 09:46:24] 
+[2023-11-22 09:46:24] Available clusterizations:
+[2023-11-22 09:46:24] split, merge, original.clusters, original.subclass, original.class, cell.typist, seurat, seurat.high.res, monocle, monocle.high.res
+[2023-11-22 09:46:24] split: 25, merge: 19, original.clusters: 136, original.subclass: 27, original.class: 9, cell.typist: 10, seurat: 19, seurat.high.res: 21, monocle: 7, monocle.high.res: 24
+[2023-11-22 09:53:03] e13.5_ForebrainDorsal
+[2023-11-22 09:53:03] 
+[2023-11-22 09:53:03] Number of cells: 4981
+[2023-11-22 09:53:03] 
+[2023-11-22 09:53:03] Available clusterizations:
+[2023-11-22 09:53:03] split, merge, original.clusters, original.subclass, original.class, cell.typist, seurat, seurat.high.res, monocle, monocle.high.res
+[2023-11-22 09:53:03] split: 35, merge: 31, original.clusters: 159, original.subclass: 40, original.class: 13, cell.typist: 13, seurat: 19, seurat.high.res: 36, monocle: 11, monocle.high.res: 27
+[2023-11-22 09:53:12] e15.0_ForebrainDorsal
+[2023-11-22 09:53:12] 
+[2023-11-22 09:53:12] Number of cells: 8562
+[2023-11-22 09:53:12] 
+[2023-11-22 09:53:12] Available clusterizations:
+[2023-11-22 09:53:12] split, merge, seurat, seurat.high.res, original.clusters, original.subclass, original.class, monocle, monocle.high.res, cell.typist
+[2023-11-22 09:53:12] split: 57, merge: 50, seurat: 21, seurat.high.res: 40, original.clusters: 229, original.subclass: 47, original.class: 14, monocle: 11, monocle.high.res: 46, cell.typist: 13
+[2023-11-22 09:53:19] e17.5_ForebrainDorsal
+[2023-11-22 09:53:19] 
+[2023-11-22 09:53:19] Number of cells: 2467
+[2023-11-22 09:53:19] 
+[2023-11-22 09:53:19] Available clusterizations:
+[2023-11-22 09:53:19] split, merge, original.clusters, original.subclass, original.class, cell.typist, seurat, seurat.high.res, monocle, monocle.high.res
+[2023-11-22 09:53:19] split: 25, merge: 19, original.clusters: 136, original.subclass: 27, original.class: 9, cell.typist: 10, seurat: 19, seurat.high.res: 21, monocle: 7, monocle.high.res: 24

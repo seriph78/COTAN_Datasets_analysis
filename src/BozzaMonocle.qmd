@@ -1,0 +1,91 @@
+```{r}
+library(monocle3)
+```
+
+```{r}
+library(COTAN)
+obj <- readRDS("../Data/MouseCortexFromLoom/e13.5_ForebrainDorsal.cotan.RDS")
+```
+
+```{r}
+# Provide the path to the Cell Ranger output.
+#cds <- load_cellranger_data("~/Downloads/10x_data")
+# From cotan
+cds <- new_cell_data_set(getRawData(obj),
+                         cell_metadata = getMetadataCells(obj),
+                         gene_metadata = getMetadataGenes(obj))
+#cds <- load_mm_data(
+#  mat_path = paste(DATA_DIR, "matrix.mtx", sep = "/"), 
+#  feature_anno_path = paste(DATA_DIR, "genes.tsv", sep = "/"),
+#cell_anno_path = paste(DATA_DIR, "barcodes.tsv", sep = "/")
+#)
+```
+
+```{r}
+cds <- preprocess_cds(cds, num_dim = 50, method = "PCA")
+plot_pc_variance_explained(cds)
+```
+
+```{r}
+cds <- reduce_dimension(cds)
+plot_cells(cds)
+```
+
+Di default i cluster sono calcolati sull'UMAP ma si possono usare anche quelli basati sulla PCA
+
+```{r}
+resolution=0.008 #this is the clustering resolution
+cds <- cluster_cells(cds#, resolution=resolution,
+                     #reduction_method = "PCA"
+                     )
+print(paste("Clusters:", length(levels(clusters(cds,#reduction_method = "PCA"
+                                                )))))
+```
+
+```{r}
+label_df = data.frame(clusters(cds, reduction_method = "UMAP"))
+label_df$cell <- rownames(label_df)
+rownames(label_df) <- 1:nrow(label_df)
+colnames(label_df)[1] <- "computed_id"
+label_df$computed_id <- as.numeric(label_df$computed_id)
+
+head(label_df)
+```
+
+```{r}
+marker_test_res <- top_markers(cds,
+                               group_cells_by="cluster",
+                               genes_to_test_per_group = 1000,#How many  genes to use as markers
+                               #reduction_method='UMAP',
+                               cores=10)
+
+head(marker_test_res)
+```
+
+Direi di testare tipo i primi mille geni e poi tenere solo quelli significativi come p-value
+
+To explore the cell metadata
+
+```{r}
+colData(cds)
+```
+
+```{r}
+plot_cells(cds,group_cells_by = "CL_merge")
+```
+
+```{r}
+plot_cells(cds,group_cells_by = "CL_split")
+```
+
+```{r}
+marker_test_res <- top_markers(cds,
+                               group_cells_by="CL_merge",
+                               genes_to_test_per_group = 1000,#How many  genes to use as markers
+                               #reduction_method='UMAP',
+                               cores=10)
+
+head(marker_test_res)
+```
+
+Salverei le tabelle dei marker genes sia con la sua cluster nativa che con la nostra

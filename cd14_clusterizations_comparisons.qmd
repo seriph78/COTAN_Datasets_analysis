@@ -1,0 +1,150 @@
+---
+title: "CD14+ clusterizations comparisons with CellTypist"
+---
+
+```{r}
+#library(SingleCellExperiment)
+#library(DuoClustering2018)
+#library(tidyr)
+library(rlang)
+library(ggplot2)
+library(ggsankey) # remotes::install_github("davidsjoberg/ggsankey")
+library(tibble)
+library(zeallot)
+library(assertthat)
+library(COTAN)
+#devtools::load_all("~/dev/COTAN/COTAN/")
+
+options(parallelly.fork.enable = TRUE)
+
+outDir <- "Results/Clusterization/"
+
+setLoggingLevel(2)
+setLoggingFile(file.path(outDir, "CD14_Monocytes_ClusterizationsComparisons.log"))
+```
+
+```{r}
+cd14Obj <- readRDS(file = file.path("Data/CD14Cleaned/", "CD14_Monocytes.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(cd14Obj, datasetTags()[["cond"]])
+
+sampleCondition
+
+getClusterizations(cd14Obj)
+
+metaC <- getMetadataCells(cd14Obj)
+```
+
+```{r}
+splitClusters <- getClusters(cd14Obj, "split")
+mergedClusters <- getClusters(cd14Obj, "merge")
+```
+
+```{r, echo=TRUE,eval=FALSE}
+labelsDF <- read.csv(file.path("Data/CD14Cleaned/", "CD14Cleaned_Immune_All_Low_predicted_labels.csv"), header = TRUE)
+labelsDF <- column_to_rownames(labelsDF, var = "X")
+rownames(labelsDF) <- gsub("[.]", "-", rownames(labelsDF))
+
+cells_to_keep <- rownames(labelsDF)[rownames(labelsDF) %in% getCells(cd14Obj)]
+assert_that(identical(cells_to_keep, getCells(cd14Obj)))
+
+majorityVotingClusters <- labelsDF[cells_to_keep, "majority_voting"]
+names(majorityVotingClusters) <- cells_to_keep
+
+majorityVotingCoexDF <- DEAOnClusters(cd14Obj, majorityVotingClusters)
+
+cd14Obj <- addClusterization(cd14Obj, clName = "majority-voting",
+                             clusters = majorityVotingClusters,
+                             coexDF = majorityVotingCoexDF)
+```
+```{r,echo=FALSE}
+majorityVotingClusters <- getClusterizationData(cd14Obj,clName = "majority-voting")$clusters
+```
+
+Save the COTAN object
+
+```{r,eval=FALSE, echo=TRUE}
+saveRDS(cd14Obj, file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
+```
+
+```{r eval=FALSE}
+nlevels(splitClusters)
+head(sort(table(splitClusters), decreasing = TRUE), 10L)
+
+nlevels(mergedClusters)
+head(sort(table(mergedClusters), decreasing = TRUE), 10L)
+
+nlevels(majorityVotingClusters)
+head(sort(table(majorityVotingClusters), decreasing = TRUE), 10L)
+```
+
+```{r}
+splitClustersDF <- as.data.frame(splitClusters)
+splitClustersDF[["cell"]] <- rownames(splitClustersDF)
+colnames(splitClustersDF)[[1]] <- "COTAN.split.cluster"
+splitClustersDF <- splitClustersDF[order(splitClustersDF[["COTAN.split.cluster"]]), ]
+
+mergedClustersDF <- as.data.frame(mergedClusters)
+mergedClustersDF[["cell"]] <- rownames(mergedClustersDF)
+colnames(mergedClustersDF)[[1]] <- "COTAN.merged.cluster"
+mergedClustersDF <- mergedClustersDF[order(mergedClustersDF[["COTAN.merged.cluster"]]), ]
+
+majorityVotingClustersDF <- as.data.frame(majorityVotingClusters)
+majorityVotingClustersDF[["cell"]] <- rownames(majorityVotingClustersDF)
+colnames(majorityVotingClustersDF)[[1]] <- "majority.voting.cluster"
+majorityVotingClustersDF <- majorityVotingClustersDF[order(majorityVotingClustersDF[["majority.voting.cluster"]]), ]
+```
+
+```{r}
+mjvt_split.table <- merge.data.frame(x = majorityVotingClustersDF, y = splitClustersDF,
+                                         by = "cell", all.x = TRUE, all.y = TRUE)
+
+table(mjvt_split.table[,c(2L, 3L)])
+```
+
+```{r}
+#| label: COTAN.split.cluster.sankey.maj.voting
+mjvt_split.table2 <- mjvt_split.table %>% make_long(majority.voting.cluster, COTAN.split.cluster)
+
+ggplot(mjvt_split.table2,
+       aes(x = x,
+           next_x = next_x,
+           node = node,
+           next_node = next_node,
+           fill = factor(node),
+           label = node)) +
+  geom_sankey(flow.alpha = 0.75, node.color = 1) +
+  geom_sankey_label(size = 3.5, color = 1, fill = "white") +
+  scale_fill_viridis_d(option = "A", alpha = 0.95) +
+  theme_sankey(base_size = 16) +
+  theme(legend.position = "none")
+```
+
+```{r}
+#| label: COTAN.merged.cluster.sankey.maj.voting
+mjvt_merged.table <- merge.data.frame(x = majorityVotingClustersDF, y = mergedClustersDF,
+                                         by = "cell", all.x = TRUE, all.y = TRUE)
+
+table(mjvt_merged.table[,c(2L, 3L)])
+```
+
+```{r}
+mjvt_merged.table2 <- mjvt_merged.table %>% make_long(majority.voting.cluster, COTAN.merged.cluster)
+
+ggplot(mjvt_merged.table2,
+       aes(x = x,
+           next_x = next_x,
+           node = node,
+           next_node = next_node,
+           fill = factor(node),
+           label = node)) +
+  geom_sankey(flow.alpha = 0.75, node.color = 1) +
+  geom_sankey_label(size = 3.5, color = 1, fill = "white") +
+  scale_fill_viridis_d(option = "A", alpha = 0.95) +
+  theme_sankey(base_size = 16) +
+  theme(legend.position = "none")
+```
+
+```{r}
+sessionInfo()
+```

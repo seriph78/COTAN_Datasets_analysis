@@ -1,0 +1,286 @@
+---
+title: "Forebrain La Manno 2021 Clusters GDI"
+author: "trinetra75 & seriph78"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Preamble
+
+For the evaluation of GDI sensitivity and also to test type I error and FDR for the differential expressed gene in a cluster we need to have some Coherent Transcript Cell Cluster (cluster formed by cells as similar as possible). So we tested all clusters defined in the original paper for this data set (focusing on E13.5, E15.0, and E17.5).
+
+```{r}
+library(rlang)
+library(zeallot)
+library(data.table)
+library(COTAN)
+#devtools::load_all("~/dev/COTAN/COTAN/")
+
+options(parallelly.fork.enable = TRUE)
+
+setLoggingLevel(2)
+setLoggingFile(file.path(".", "ClusterizationsGDI_AllForebrainDorsal.log"))
+```
+
+### Definition of functions to extract data from clustersList
+
+```{r}
+getClData <- function(objCOTAN, clList, cl) {
+  cluster <- names(clList)[[cl]]
+  cells <- clList[[cl]]
+  res <- checkClusterUniformity(objCOTAN, cluster = cluster, cells = cells,
+                                GDIThreshold = 1.4, cores = 6, saveObj = FALSE)
+  res <- c(list("cluster" = cluster, "size" = length(cells)), res)
+  res <- as.data.frame(res)
+  rownames(res) <- cluster
+  colnames(res)
+  return(res)
+}
+
+clDataVal <- list("cluster" = NULL, "size" = NULL, "isUniform" = NULL,
+                  "fractionAbove" = NULL, "1stPercentile" = NULL)
+```
+
+## Forebrain Dorsal E13.5
+
+### Load dataset
+
+```{r}
+fb135Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "e13.5_ForebrainDorsal.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(fb135Obj, datasetTags()[["cond"]])
+
+logThis(sampleCondition)
+
+allClust <- getClusterizations(fb135Obj)
+
+logThis("")
+logThis(paste("Number of cells:", getNumCells(fb135Obj)))
+
+logThis("")
+logThis("Available clusterizations:")
+logThis(paste0(allClust, collapse = ", "))
+
+clSizes <- vapply(allClust, function(x) { nlevels(getClusters(fb135Obj, x))}, integer(1L))
+clSizes
+logThis(paste(names(clSizes), clSizes, sep = ": ", collapse = ", "))
+```
+
+### Extract original cluster
+
+```{r}
+originalFB135 <- getClusters(fb135Obj, clName = "original.clusters")
+
+nlevels(originalFB135)
+
+sort(table(originalFB135), decreasing = TRUE)
+
+# drop too small clusters: those whose size is less than 15
+largeClFB135 <- which(table(originalFB135) >= 50)
+largeOrigFB135 <- originalFB135[(originalFB135 %in% names(largeClFB135)),
+                                drop = TRUE]
+
+largeOrigFB135 <- toClustersList(largeOrigFB135)
+```
+
+### Calculate GDI for each cluster in E13.5
+
+```{r,echo=TRUE,eval=FALSE}
+print("Length larger clusters")
+vapply(largeOrigFB135, length, integer(1))
+
+resDataFB135 <- lapply(seq_along(largeOrigFB135), FUN = getClData,
+                       objCOTAN = fb135Obj, clList = largeOrigFB135)
+```
+
+```{r, echo=TRUE,eval=FALSE}
+clDataFB135 <- data.table::rbindlist(resDataFB135)
+clDataFB135 <- column_to_rownames(clDataFB135, var = "cluster")
+```
+
+```{r, echo=TRUE, eval=FALSE}
+saveRDS(clDataFB135,
+        file = file.path("Data/MouseCortexFromLoom/ClustersGDI/", "e13.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"))
+```
+
+```{r}
+clDataFB135 <- readRDS("Data/MouseCortexFromLoom/ClustersGDI/e13.5_ForebrainDorsal_GDI_of_original_clusterization.RDS")
+clDataFB135[order(clDataFB135$size, decreasing = T),]
+```
+
+So we can use the following clusters (at least 100 cells - cell number in the parenthesis - and GDI lower than 1.5):
+
+-   cl432 (n.cells 536),
+
+-   cl187 (334),
+
+-   cl434 (326),
+
+-   cl184 (292),
+
+-   cl437 (259),
+
+-   cl510 (248)
+
+## Forebrain Dorsal E15.0
+
+### Load dataset
+
+```{r}
+fb150Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "e15.0_ForebrainDorsal.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(fb150Obj, datasetTags()[["cond"]])
+
+logThis(sampleCondition)
+
+allClust <- getClusterizations(fb150Obj)
+
+logThis("")
+logThis(paste("Number of cells:", getNumCells(fb150Obj)))
+
+logThis("")
+logThis("Available clusterizations:")
+logThis(paste0(allClust, collapse = ", "))
+
+clSizes <- vapply(allClust, function(x) { nlevels(getClusters(fb150Obj, x))}, integer(1L))
+clSizes
+logThis(paste(names(clSizes), clSizes, sep = ": ", collapse = ", "))
+```
+
+### Extract original cluster
+
+```{r}
+originalFB150 <- getClusters(fb150Obj, clName = "original.clusters")
+
+nlevels(originalFB150)
+
+sort(table(originalFB150), decreasing = TRUE)
+
+# drop too small clusters: those whose size is less than 15
+largeClFB150 <- which(table(originalFB150) >= 50)
+largeOrigFB150 <- originalFB150[(originalFB150 %in% names(largeClFB150)),
+                                drop = TRUE]
+
+largeOrigFB150 <- toClustersList(largeOrigFB150)
+```
+
+### Calculate GDI for each cluster
+
+```{r,echo=TRUE,eval=FALSE}
+print("Length larger clusters")
+vapply(largeOrigFB150, length, integer(1))
+
+resDataFB150 <- lapply(seq_along(largeOrigFB150), FUN = getClData,
+                       objCOTAN = fb150Obj, clList = largeOrigFB150)
+```
+
+```{r,echo=TRUE,eval=FALSE}
+clDataFB150 <- data.table::rbindlist(resDataFB150)
+clDataFB150 <- column_to_rownames(clDataFB150, var = "cluster")
+```
+
+```{r,echo=TRUE,eval=FALSE}
+saveRDS(clDataFB150,
+        file = file.path("Data/MouseCortexFromLoom/ClustersGDI/", "e15.0_ForebrainDorsal_GDI_of_original_clusterization.RDS"))
+```
+
+```{r}
+clDataFB150 <- readRDS("Data/MouseCortexFromLoom/ClustersGDI/e15.0_ForebrainDorsal_GDI_of_original_clusterization.RDS")
+
+clDataFB150[order(clDataFB150$size,decreasing = T),]
+```
+
+So we can use the following clusters (at least 100 cells - cell number in the parenthesis - and GDI lower than 1.5):
+
+-   cl432 (586),
+
+-   cl509 (402),
+
+-   cl510 (402),
+
+-   cl508 (397),
+
+-   cl428 (318),
+
+-   cl434 (273),
+
+-   cl437 (258)
+
+## Forebrain Dorsal E17.5
+
+### Load dataset
+
+```{r}
+fb175Obj <- readRDS(file = file.path("Data/MouseCortexFromLoom/", "e17.5_ForebrainDorsal.cotan.RDS"))
+
+sampleCondition <- getMetadataElement(fb175Obj, datasetTags()[["cond"]])
+
+logThis(sampleCondition)
+
+allClust <- getClusterizations(fb175Obj)
+
+logThis("")
+logThis(paste("Number of cells:", getNumCells(fb175Obj)))
+
+logThis("")
+logThis("Available clusterizations:")
+logThis(paste0(allClust, collapse = ", "))
+
+clSizes <- vapply(allClust, function(x) { nlevels(getClusters(fb175Obj, x))}, integer(1L))
+clSizes
+logThis(paste(names(clSizes), clSizes, sep = ": ", collapse = ", "))
+```
+
+### Extract original cluster
+
+```{r}
+originalFB175 <- getClusters(fb175Obj, clName = "original.clusters")
+
+nlevels(originalFB175)
+
+sort(table(originalFB175), decreasing = TRUE)
+
+# drop too small clusters: those whose size is less than 15
+largeClFB175 <- which(table(originalFB175) >= 50)
+largeOrigFB175 <- originalFB175[(originalFB175 %in% names(largeClFB175)),
+                                drop = TRUE]
+
+largeOrigFB175 <- toClustersList(largeOrigFB175)
+```
+
+### Calculate GDI for each cluster
+
+```{r, eval=FALSE, echo=TRUE}
+print("Length larger clusters")
+vapply(largeOrigFB175, length, integer(1))
+
+resDataFB175 <- lapply(seq_along(largeOrigFB175), FUN = getClData,
+                       objCOTAN = fb175Obj, clList = largeOrigFB175)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+clDataFB175 <- data.table::rbindlist(resDataFB175)
+clDataFB175 <- column_to_rownames(clDataFB175, var = "cluster")
+```
+
+```{r, eval=FALSE, echo=TRUE}
+saveRDS(clDataFB175,
+        file = file.path("Data/MouseCortexFromLoom/ClustersGDI/", "e17.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"))
+```
+
+```{r}
+clDataFB175 <- readRDS("Data/MouseCortexFromLoom/ClustersGDI/e17.5_ForebrainDorsal_GDI_of_original_clusterization.RDS")
+clDataFB175[order(clDataFB175$size,decreasing = T),]
+```
+
+So we can use the following clusters (at least 100 cells - cell number in the parenthesis - and GDI lower than 1.5):
+
+-   cl516 (297),
+
+-   cl505 (203)
+
+    ------------------------------------------------------------------------
+
+```{r}
+sessionInfo()
+```
