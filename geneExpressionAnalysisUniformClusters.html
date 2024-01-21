@@ -494,35 +494,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  cluster.name <span class="ot">&lt;-</span> <span class="fu">str_split</span>(name,<span class="at">pattern =</span> <span class="st">"e"</span>, <span class="at">simplify =</span> T)[<span class="dv">1</span>]</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  time.point <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"E"</span>,<span class="fu">str_split</span>(name,<span class="at">pattern =</span> <span class="st">"e"</span>, <span class="at">simplify =</span> T)[<span class="dv">2</span>])</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  dataSet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">paste0</span>(dataSetDir,dataSetName))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="fu">dim</span>(dataSet))</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  df.temp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">list</span>(<span class="st">"RowSums"</span><span class="ot">=</span><span class="fu">rowSums</span>(dataSet)))</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>N.cells <span class="ot">&lt;-</span> <span class="fu">dim</span>(dataSet)[<span class="dv">2</span>]</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df.temp)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>log10_exp <span class="ot">&lt;-</span> <span class="fu">log10</span>((df.temp<span class="sc">$</span>RowSums<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>df.temp<span class="sc">$</span>N.cells)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>cluster <span class="ot">&lt;-</span> cluster.name</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>time.point <span class="ot">&lt;-</span> time.point</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df,df.temp)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">dim</span>(dataSet))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="fu">dim</span>(dataSet))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  df.temp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">list</span>(<span class="st">"RowSums"</span><span class="ot">=</span><span class="fu">rowSums</span>(dataSet)))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>N.cells <span class="ot">&lt;-</span> <span class="fu">dim</span>(dataSet)[<span class="dv">2</span>]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df.temp)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>log10_exp <span class="ot">&lt;-</span> <span class="fu">log10</span>((df.temp<span class="sc">$</span>RowSums<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>df.temp<span class="sc">$</span>N.cells)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>cluster <span class="ot">&lt;-</span> cluster.name</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>time.point <span class="ot">&lt;-</span> time.point</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df,df.temp)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Cl184e13.5_ForebrainDorsalRawData.RDS"
+NULL
 [1] "Cl187e13.5_ForebrainDorsalRawData.RDS"
+[1] 13972   334
 [1] "Cl428e15.0_ForebrainDorsalRawData.RDS"
+[1] 13857   318
 [1] "Cl432e13.5_ForebrainDorsalRawData.RDS"
+[1] 13972   536
 [1] "Cl432e15.0_ForebrainDorsalRawData.RDS"
+[1] 13857   586
 [1] "Cl434e13.5_ForebrainDorsalRawData.RDS"
+[1] 13972   326
 [1] "Cl434e15.0_ForebrainDorsalRawData.RDS"
+[1] 13857   273
 [1] "Cl437e13.5_ForebrainDorsalRawData.RDS"
+[1] 13972   259
 [1] "Cl437e15.0_ForebrainDorsalRawData.RDS"
+[1] 13857   258
 [1] "Cl505e17.5_ForebrainDorsalRawData.RDS"
+[1] 13971   203
 [1] "Cl508e15.0_ForebrainDorsalRawData.RDS"
+[1] 13857   397
 [1] "Cl509e15.0_ForebrainDorsalRawData.RDS"
+[1] 13857   402
 [1] "Cl510e13.5_ForebrainDorsalRawData.RDS"
+[1] 13972   248
 [1] "Cl510e15.0_ForebrainDorsalRawData.RDS"
-[1] "Cl516e17.5_ForebrainDorsalRawData.RDS"</code></pre>
+[1] 13857   402
+[1] "Cl516e17.5_ForebrainDorsalRawData.RDS"
+[1] 13971   297</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(df),]</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> df <span class="ot">&lt;-</span> df[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(df),]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>cl_time <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>cluster,<span class="st">"_"</span>,df<span class="sc">$</span>time.point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -531,10 +547,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df[df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span>,], </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> log10_exp, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg[d_bg<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span>,], </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">8</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span><span class="sc">/</span><span class="dv">6</span>) <span class="sc">+</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">2500</span>)<span class="sc">+</span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># to remove the legend</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -544,10 +560,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df[df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E15.0"</span>,], </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> log10_exp, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg[d_bg<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E15.0"</span>,], </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">8</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span><span class="sc">/</span><span class="dv">6</span>) <span class="sc">+</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">2500</span>)<span class="sc">+</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># to remove the legend</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -557,10 +573,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df[df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E17.5"</span>,], </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> log10_exp, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg[d_bg<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E17.5"</span>,], </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">8</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span><span class="sc">/</span><span class="dv">6</span>) <span class="sc">+</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span><span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">2500</span>)<span class="sc">+</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># to remove the legend</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -582,7 +598,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stroke_size =</span> <span class="fl">0.5</span>, <span class="at">set_name_size =</span> <span class="dv">4</span></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geneExpressionAnalysisUniformClusters_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="960"></p>
+<p><img src="geneExpressionAnalysisUniformClusters_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <div class="cell">
