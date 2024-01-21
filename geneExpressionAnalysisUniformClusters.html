@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Silvia Galfrè">
+<meta name="dcterms.date" content="2024-01-21">
 
-<title>COTAN Datasets analysis – clustering_comparison</title>
+<title>COTAN Datasets analysis - Explorative analysis of gene expression</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -107,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cd14_clusterizations_comparisons.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./clustering_comparison.html">Clustering comparison</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DEA_Type1Error.html">DEA evaluation</a></li><li class="breadcrumb-item"><a href="./geneExpressionAnalysisUniformClusters.html">Explorative analysis of gene expression</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -366,13 +368,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
  <span class="menu-text">Cluster evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
@@ -387,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link active">
+  <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Clustering comparison</span></a>
   </div>
 </li>
@@ -401,13 +403,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./DEA_Type1Error.html" class="sidebar-item-text sidebar-link">
@@ -416,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./geneExpressionAnalysisUniformClusters.html" class="sidebar-item-text sidebar-link">
+  <a href="./geneExpressionAnalysisUniformClusters.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Explorative analysis of gene expression</span></a>
   </div>
 </li>
@@ -439,122 +441,189 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Explorative analysis of gene expression</h1>
+</div>
 
 
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Silvia Galfrè </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 21, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">FIXME</span><span class="co">:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - SANKEY PLOTS: colorare link? definire ordinamento migliore tra i tool per visualizzare meglio? fare plot due a due?</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - SILHOUETTE: calcolarla nel feature space della PCA?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(COTAN)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#options(parallelly.fork.enable = TRUE)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#library(Seurat)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#library(monocle3)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#library(reticulate)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>dirOut <span class="ot">&lt;-</span> <span class="st">"Results/GeneExpressionExploration/"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">exists</span>(dirOut)) {</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(dirOut)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>dataSetDir <span class="ot">&lt;-</span> <span class="st">"Data/MouseCortexFromLoom/SingleClusterRawData/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scanpy <span class="im">as</span> sc</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics.cluster <span class="im">import</span> normalized_mutual_info_score, adjusted_rand_score</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> homogeneity_score, completeness_score, v_measure_score, fowlkes_mallows_score, silhouette_score</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> sankey_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (dataSetName <span class="cf">in</span> <span class="fu">list.files</span>(dataSetDir)) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(dataSetName)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  name <span class="ot">&lt;-</span> <span class="fu">str_split</span>(dataSetName,<span class="at">pattern =</span> <span class="st">"_"</span>, <span class="at">simplify =</span> T)[<span class="dv">1</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  cluster.name <span class="ot">&lt;-</span> <span class="fu">str_split</span>(name,<span class="at">pattern =</span> <span class="st">"e"</span>, <span class="at">simplify =</span> T)[<span class="dv">1</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  time.point <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"E"</span>,<span class="fu">str_split</span>(name,<span class="at">pattern =</span> <span class="st">"e"</span>, <span class="at">simplify =</span> T)[<span class="dv">2</span>])</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  dataSet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">paste0</span>(dataSetDir,dataSetName))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="fu">dim</span>(dataSet))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  df.temp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">list</span>(<span class="st">"RowSums"</span><span class="ot">=</span><span class="fu">rowSums</span>(dataSet)))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>N.cells <span class="ot">&lt;-</span> <span class="fu">dim</span>(dataSet)[<span class="dv">2</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(df.temp)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>log10_exp <span class="ot">&lt;-</span> <span class="fu">log10</span>((df.temp<span class="sc">$</span>RowSums<span class="sc">+</span><span class="dv">1</span>)<span class="sc">/</span>df.temp<span class="sc">$</span>N.cells)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>cluster <span class="ot">&lt;-</span> cluster.name</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  df.temp<span class="sc">$</span>time.point <span class="ot">&lt;-</span> time.point</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df,df.temp)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Cl184e13.5_ForebrainDorsalRawData.RDS"
+[1] "Cl187e13.5_ForebrainDorsalRawData.RDS"
+[1] "Cl428e15.0_ForebrainDorsalRawData.RDS"
+[1] "Cl432e13.5_ForebrainDorsalRawData.RDS"
+[1] "Cl432e15.0_ForebrainDorsalRawData.RDS"
+[1] "Cl434e13.5_ForebrainDorsalRawData.RDS"
+[1] "Cl434e15.0_ForebrainDorsalRawData.RDS"
+[1] "Cl437e13.5_ForebrainDorsalRawData.RDS"
+[1] "Cl437e15.0_ForebrainDorsalRawData.RDS"
+[1] "Cl505e17.5_ForebrainDorsalRawData.RDS"
+[1] "Cl508e15.0_ForebrainDorsalRawData.RDS"
+[1] "Cl509e15.0_ForebrainDorsalRawData.RDS"
+[1] "Cl510e13.5_ForebrainDorsalRawData.RDS"
+[1] "Cl510e15.0_ForebrainDorsalRawData.RDS"
+[1] "Cl516e17.5_ForebrainDorsalRawData.RDS"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(df),]</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>cl_time <span class="ot">&lt;-</span> <span class="fu">paste0</span>(df<span class="sc">$</span>cluster,<span class="st">"_"</span>,df<span class="sc">$</span>time.point)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>DIR <span class="op">=</span> <span class="st">'./Data/'</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>DATASET_NAMES <span class="op">=</span> [<span class="st">'PBMC1'</span>, <span class="st">'PBMC2'</span>, <span class="st">'PBMC3'</span>, <span class="st">'PBMC4'</span>]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>TOOLS <span class="op">=</span> [<span class="st">'monocle'</span>, <span class="st">'scanpy'</span>, <span class="st">'scvi-tools'</span>, <span class="st">'seurat'</span>] <span class="co">#'COTAN'</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>PARAMS_TUNING <span class="op">=</span> [<span class="st">'default'</span>, <span class="st">'celltypist'</span>, <span class="st">'antibody'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d_bg <span class="ot">&lt;-</span> df[,<span class="sc">-</span><span class="dv">5</span>] </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df[df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span>,], </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> log10_exp, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg[d_bg<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span>,], </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># to remove the legend</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geneExpressionAnalysisUniformClusters_files/figure-html/plot E13.5-1.png" class="img-fluid" width="960"></p>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> compute_scores(<span class="bu">dir</span>, dataset, labels_df, labels_matched, ground_truth_labels):</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> {}</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    scores[<span class="st">'NMI'</span>] <span class="op">=</span> {}</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    scores[<span class="st">'ARI'</span>] <span class="op">=</span> {}</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    scores[<span class="st">'homogeneity'</span>] <span class="op">=</span> {}</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    scores[<span class="st">'completeness'</span>] <span class="op">=</span> {}</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    scores[<span class="st">'v_measure'</span>] <span class="op">=</span> {}</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    scores[<span class="st">'fowlkes_mallows'</span>] <span class="op">=</span> {}</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> tool <span class="kw">in</span> TOOLS:</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'NMI'</span>][tool] <span class="op">=</span> normalized_mutual_info_score(labels_pred<span class="op">=</span>labels_df[<span class="st">'cluster_'</span><span class="op">+</span>tool], labels_true<span class="op">=</span>labels_df[<span class="ss">f'cluster_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">'</span>], average_method<span class="op">=</span><span class="st">'arithmetic'</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'ARI'</span>][tool] <span class="op">=</span> adjusted_rand_score(labels_pred<span class="op">=</span>labels_df[<span class="st">'cluster_'</span><span class="op">+</span>tool], labels_true<span class="op">=</span>labels_df[<span class="ss">f'cluster_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">'</span>])</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'homogeneity'</span>][tool] <span class="op">=</span> homogeneity_score(labels_pred<span class="op">=</span>labels_df[<span class="st">'cluster_'</span><span class="op">+</span>tool], labels_true<span class="op">=</span>labels_df[<span class="ss">f'cluster_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">'</span>])</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'completeness'</span>][tool] <span class="op">=</span> completeness_score(labels_pred<span class="op">=</span>labels_df[<span class="st">'cluster_'</span><span class="op">+</span>tool], labels_true<span class="op">=</span>labels_df[<span class="ss">f'cluster_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">'</span>])</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'v_measure'</span>][tool] <span class="op">=</span> v_measure_score(labels_pred<span class="op">=</span>labels_df[<span class="st">'cluster_'</span><span class="op">+</span>tool], labels_true<span class="op">=</span>labels_df[<span class="ss">f'cluster_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">'</span>])</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        scores[<span class="st">'fowlkes_mallows'</span>][tool] <span class="op">=</span> fowlkes_mallows_score(labels_pred<span class="op">=</span>labels_df[<span class="st">'cluster_'</span><span class="op">+</span>tool], labels_true<span class="op">=</span>labels_df[<span class="ss">f'cluster_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">'</span>])</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    scores_df <span class="op">=</span> pd.DataFrame(scores)</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    scores_df.to_csv(<span class="ss">f'</span><span class="sc">{</span><span class="bu">dir</span><span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/scores_</span><span class="sc">{</span>labels_matched<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">.csv'</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    scores_df.to_latex(<span class="ss">f'</span><span class="sc">{</span><span class="bu">dir</span><span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/scores_</span><span class="sc">{</span>labels_matched<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>ground_truth_labels<span class="sc">}</span><span class="ss">.tex'</span>)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    display(scores_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df[df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E15.0"</span>,], </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> log10_exp, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg[d_bg<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E15.0"</span>,], </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span><span class="sc">/</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>,<span class="at">binwidth =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># to remove the legend</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geneExpressionAnalysisUniformClusters_files/figure-html/plot E15.0-1.png" class="img-fluid" width="960"></p>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> tuning <span class="kw">in</span> PARAMS_TUNING:</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dataset <span class="kw">in</span> DATASET_NAMES:</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">'------------------------------'</span>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss"> - matching </span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss"> labels'</span> <span class="cf">if</span> tuning <span class="op">!=</span> <span class="st">'default'</span> <span class="cf">else</span> <span class="ss">f'</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss"> - default labels'</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># concat tools labels</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        labels_df <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/COTAN/</span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss">/clustering_labels.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        labels_df.rename(columns<span class="op">=</span>{<span class="st">"cluster"</span>: <span class="st">"cluster_COTAN"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> tool <span class="kw">in</span> [t <span class="cf">for</span> t <span class="kw">in</span> TOOLS <span class="cf">if</span> t <span class="op">!=</span> <span class="st">'COTAN'</span>]:</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>            tool_labels_df <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>tool<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss">/clustering_labels.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>            labels_df <span class="op">=</span> labels_df.merge(tool_labels_df, how<span class="op">=</span><span class="st">'inner'</span>, on<span class="op">=</span><span class="st">'cell'</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            labels_df.rename(columns<span class="op">=</span>{<span class="st">"cluster"</span>: <span class="ss">f"cluster_</span><span class="sc">{</span>tool<span class="sc">}</span><span class="ss">"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># load and concat celltypist labels</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        celltypist_df <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/celltypist/celltypist_labels.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        celltypist_df.index <span class="op">=</span> celltypist_df.index.<span class="bu">str</span>[:<span class="op">-</span><span class="dv">2</span>]</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        celltypist_df <span class="op">=</span> labels_df.merge(celltypist_df, how<span class="op">=</span><span class="st">'inner'</span>, on<span class="op">=</span><span class="st">'cell'</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>        celltypist_df.rename(columns<span class="op">=</span>{<span class="st">"cluster.ids"</span>: <span class="ss">f"cluster_celltypist"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        celltypist_mapping_df <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/celltypist/celltypist_mapping.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># load and concat protein surface labels</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        antibody_df <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/antibody_annotation/antibody_labels.csv'</span>, index_col<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>        antibody_df <span class="op">=</span> labels_df.merge(antibody_df, how<span class="op">=</span><span class="st">'inner'</span>, on<span class="op">=</span><span class="st">'cell'</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        antibody_df.rename(columns<span class="op">=</span>{<span class="st">"cluster.ids"</span>: <span class="ss">f"cluster_antibody"</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        antibody_mapping_df <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/antibody_annotation/antibody_mapping.csv'</span>, index_col<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># read dataset</span></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>        adata <span class="op">=</span> sc.read_10x_mtx(</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>            <span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/filtered/10X/'</span>,</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>            var_names<span class="op">=</span><span class="st">'gene_symbols'</span>,</span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>            cache<span class="op">=</span><span class="va">False</span></span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># keep only labelled cells</span></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>        adata.var_names_make_unique()</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>        subset_cells <span class="op">=</span> adata.obs_names.isin(labels_df.index)</span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>        adata <span class="op">=</span> adata[subset_cells, :]</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute silhouette score</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>        silhouette <span class="op">=</span> {}</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> tool <span class="kw">in</span> TOOLS:</span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>            silhouette[tool] <span class="op">=</span> silhouette_score(adata.X, labels_df[<span class="ss">f'cluster_</span><span class="sc">{</span>tool<span class="sc">}</span><span class="ss">'</span>])</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> tuning<span class="op">==</span><span class="st">'celltypist'</span>:</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>            silhouette[<span class="st">'celltypist'</span>] <span class="op">=</span> silhouette_score(adata.X, celltypist_df[<span class="ss">f'cluster_celltypist'</span>])</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">elif</span> tuning<span class="op">==</span><span class="st">'antibody'</span>:</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>            silhouette[<span class="st">'antibody'</span>] <span class="op">=</span> silhouette_score(adata.X, antibody_df[<span class="ss">f'cluster_antibody'</span>])</span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>        silhouette_df <span class="op">=</span> pd.DataFrame(silhouette, index<span class="op">=</span>[<span class="dv">0</span>])</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>        silhouette_df.to_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/silhouette.csv'</span>)</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>        silhouette_df.to_latex(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/silhouette.tex'</span>)</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute scores comparing each tool labels with celltypist labels</span></span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> tuning <span class="op">==</span> <span class="st">'celltypist'</span> <span class="kw">or</span> tuning <span class="op">==</span> <span class="st">'default'</span>:</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>            compute_scores(DIR, dataset, celltypist_df, tuning, <span class="st">'celltypist'</span>)</span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>            labels <span class="op">=</span> []</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>            labels_titles <span class="op">=</span> []</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> tool <span class="kw">in</span> TOOLS:</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>                labels.append(celltypist_df[<span class="ss">f'cluster_</span><span class="sc">{</span>tool<span class="sc">}</span><span class="ss">'</span>].to_list())</span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>                labels_titles.append(tool)</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>            labels.append(celltypist_df[<span class="ss">f'cluster_celltypist'</span>].<span class="bu">map</span>(celltypist_mapping_df[<span class="st">'go'</span>].to_dict()).to_list())</span>
-<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>            labels_titles.append(<span class="st">'celltypist'</span>)</span>
-<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss"> - matching </span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss"> labels'</span> <span class="cf">if</span> tuning <span class="op">!=</span> <span class="st">'default'</span> <span class="cf">else</span> <span class="ss">f'</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss"> - default labels'</span></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>            sankey_plot(labels<span class="op">=</span>labels, labels_titles<span class="op">=</span>labels_titles, title<span class="op">=</span>title, path<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss">_celltypist.html'</span>)</span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>        <span class="co"># compute scores comparing each tool labels with protein labels</span></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> tuning <span class="op">==</span> <span class="st">'antibody'</span> <span class="kw">or</span> tuning <span class="op">==</span> <span class="st">'default'</span>:</span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>            compute_scores(DIR, dataset, antibody_df, tuning, <span class="st">'antibody'</span>)</span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>            labels <span class="op">=</span> []</span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>            labels_titles <span class="op">=</span> []</span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> tool <span class="kw">in</span> TOOLS:</span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>                labels.append(antibody_df[<span class="ss">f'cluster_</span><span class="sc">{</span>tool<span class="sc">}</span><span class="ss">'</span>].to_list())</span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>                labels_titles.append(tool)</span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>            labels.append(antibody_df[<span class="ss">f'cluster_antibody'</span>].<span class="bu">map</span>(antibody_mapping_df[<span class="st">'go'</span>].to_dict()).to_list())</span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>            labels_titles.append(<span class="st">'antibody'</span>)</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>            title <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss"> - matching </span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss"> labels'</span> <span class="cf">if</span> tuning <span class="op">!=</span> <span class="st">'default'</span> <span class="cf">else</span> <span class="ss">f'</span><span class="sc">{</span>dataset<span class="sc">}</span><span class="ss"> - default labels'</span></span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>            sankey_plot(labels<span class="op">=</span>labels, labels_titles<span class="op">=</span>labels_titles, title<span class="op">=</span>title, path<span class="op">=</span><span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss">_antibody.html'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df[df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E17.5"</span>,], </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> log10_exp, <span class="at">fill =</span> cluster)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">data =</span> d_bg[d_bg<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E17.5"</span>,], </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">fill =</span> <span class="st">"grey"</span>, <span class="at">alpha =</span> .<span class="dv">5</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> cluster) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="cn">FALSE</span>) <span class="sc">+</span>  <span class="co"># to remove the legend</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geneExpressionAnalysisUniformClusters_files/figure-html/plot E17.5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>venn <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"Cl184"</span> <span class="ot">=</span> df[df<span class="sc">$</span>log10_exp <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>cluster <span class="sc">==</span> <span class="st">"Cl184"</span>,]<span class="sc">$</span>genes,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Cl187"</span> <span class="ot">=</span> df[df<span class="sc">$</span>log10_exp <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>cluster <span class="sc">==</span> <span class="st">"Cl187"</span>,]<span class="sc">$</span>genes,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Cl432"</span> <span class="ot">=</span> df[df<span class="sc">$</span>log10_exp <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>cluster <span class="sc">==</span> <span class="st">"Cl432"</span>,]<span class="sc">$</span>genes,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Cl434"</span> <span class="ot">=</span> df[df<span class="sc">$</span>log10_exp <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>cluster <span class="sc">==</span> <span class="st">"Cl434"</span>,]<span class="sc">$</span>genes,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Cl437"</span> <span class="ot">=</span> df[df<span class="sc">$</span>log10_exp <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>cluster <span class="sc">==</span> <span class="st">"Cl437"</span>,]<span class="sc">$</span>genes,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>             <span class="st">"Cl510"</span> <span class="ot">=</span> df[df<span class="sc">$</span>log10_exp <span class="sc">&gt;</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">&amp;</span> df<span class="sc">$</span>time.point <span class="sc">==</span> <span class="st">"E13.5"</span> <span class="sc">&amp;</span> df<span class="sc">$</span>cluster <span class="sc">==</span> <span class="st">"Cl510"</span>,]<span class="sc">$</span>genes)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggVennDiagram)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggVennDiagram</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  venn,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">#fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF","#009E73","#993E83","#007310FF"),</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">stroke_size =</span> <span class="fl">0.5</span>, <span class="at">set_name_size =</span> <span class="dv">4</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span> <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geneExpressionAnalysisUniformClusters_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="960"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.2 (2023-10-31)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 20.04.6 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+
+locale:
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+
+time zone: Europe/Rome
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] ggVennDiagram_1.5.0 Matrix_1.6-3        dplyr_1.1.2        
+[4] stringr_1.5.0       ggplot2_3.4.2      
+
+loaded via a namespace (and not attached):
+ [1] vctrs_0.6.3        cli_3.6.1          knitr_1.43         rlang_1.1.1       
+ [5] xfun_0.39          stringi_1.8.1      generics_0.1.3     jsonlite_1.8.7    
+ [9] labeling_0.4.2     glue_1.6.2         colorspace_2.1-0   htmltools_0.5.7   
+[13] scales_1.3.0       fansi_1.0.4        rmarkdown_2.24     grid_4.3.2        
+[17] evaluate_0.21      munsell_0.5.0      tibble_3.2.1       fastmap_1.1.1     
+[21] yaml_2.3.7         lifecycle_1.0.3    compiler_4.3.2     RColorBrewer_1.1-3
+[25] htmlwidgets_1.6.2  pkgconfig_2.0.3    rstudioapi_0.15.0  farver_2.1.1      
+[29] lattice_0.22-5     digest_0.6.33      R6_2.5.1           tidyselect_1.2.0  
+[33] utf8_1.2.3         pillar_1.9.0       magrittr_2.0.3     withr_2.5.0       
+[37] tools_4.3.2        gtable_0.3.3      </code></pre>
+</div>
 </div>
 
 
