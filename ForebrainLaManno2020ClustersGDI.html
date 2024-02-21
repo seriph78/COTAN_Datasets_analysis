@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="trinetra75 &amp; seriph78">
+<meta name="dcterms.date" content="2023-11-22">
+
+<title>COTAN Datasets analysis - Forebrain La Manno 2021Clusters GDI</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">
+      COTAN Datasets analysis
+      </li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">COTAN Datasets analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Datasets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Loo 2019</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Dataset1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDataset1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coexpression analaysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861511_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861514_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Mouse Brain</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E150-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E15.0 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE15.0MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E15.0</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">CD14+</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ Cleaning and cell clustering</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Coex score evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalCoexAssess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Coex Evaluation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+ <span class="menu-text">GDI sensitivity</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FindUniformOrigCluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cluster Unifomity and GDI score</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+ <span class="menu-text">Cluster evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ clusterizations</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+ <span class="menu-text">DEA evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DEA_Seurat_COTAN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DEA comparison Seurat - Cotan</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a>
+  <ul class="collapse">
+  <li><a href="#definition-of-functions-to-extract-data-from-clusterslist" id="toc-definition-of-functions-to-extract-data-from-clusterslist" class="nav-link" data-scroll-target="#definition-of-functions-to-extract-data-from-clusterslist">Definition of functions to extract data from clustersList</a></li>
+  </ul></li>
+  <li><a href="#forebrain-dorsal-e13.5" id="toc-forebrain-dorsal-e13.5" class="nav-link" data-scroll-target="#forebrain-dorsal-e13.5">Forebrain Dorsal E13.5</a>
+  <ul class="collapse">
+  <li><a href="#load-dataset" id="toc-load-dataset" class="nav-link" data-scroll-target="#load-dataset">Load dataset</a></li>
+  <li><a href="#extract-original-cluster" id="toc-extract-original-cluster" class="nav-link" data-scroll-target="#extract-original-cluster">Extract original cluster</a></li>
+  <li><a href="#calculate-gdi-for-each-cluster-in-e13.5" id="toc-calculate-gdi-for-each-cluster-in-e13.5" class="nav-link" data-scroll-target="#calculate-gdi-for-each-cluster-in-e13.5">Calculate GDI for each cluster in E13.5</a></li>
+  </ul></li>
+  <li><a href="#forebrain-dorsal-e15.0" id="toc-forebrain-dorsal-e15.0" class="nav-link" data-scroll-target="#forebrain-dorsal-e15.0">Forebrain Dorsal E15.0</a>
+  <ul class="collapse">
+  <li><a href="#load-dataset-1" id="toc-load-dataset-1" class="nav-link" data-scroll-target="#load-dataset-1">Load dataset</a></li>
+  <li><a href="#extract-original-cluster-1" id="toc-extract-original-cluster-1" class="nav-link" data-scroll-target="#extract-original-cluster-1">Extract original cluster</a></li>
+  <li><a href="#calculate-gdi-for-each-cluster" id="toc-calculate-gdi-for-each-cluster" class="nav-link" data-scroll-target="#calculate-gdi-for-each-cluster">Calculate GDI for each cluster</a></li>
+  </ul></li>
+  <li><a href="#forebrain-dorsal-e17.5" id="toc-forebrain-dorsal-e17.5" class="nav-link" data-scroll-target="#forebrain-dorsal-e17.5">Forebrain Dorsal E17.5</a>
+  <ul class="collapse">
+  <li><a href="#load-dataset-2" id="toc-load-dataset-2" class="nav-link" data-scroll-target="#load-dataset-2">Load dataset</a></li>
+  <li><a href="#extract-original-cluster-2" id="toc-extract-original-cluster-2" class="nav-link" data-scroll-target="#extract-original-cluster-2">Extract original cluster</a></li>
+  <li><a href="#calculate-gdi-for-each-cluster-1" id="toc-calculate-gdi-for-each-cluster-1" class="nav-link" data-scroll-target="#calculate-gdi-for-each-cluster-1">Calculate GDI for each cluster</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Forebrain La Manno 2021Clusters GDI</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>trinetra75 &amp; seriph78 </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 22, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<p>For the evaluation of GDI sensitivity and also to test type I error and FDR for the differential expressed gene in a cluster we need to have some Choerent Transcript Cell Cluster (cluster formed by cells as similar as possible). So we tested all clusters defined in the original paper for this data set (focusing on E13.5, E15.0 and E17.5).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(COTAN)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::load_all("~/dev/COTAN/COTAN/")</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">parallelly.fork.enable =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingLevel</span>(<span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingFile</span>(<span class="fu">file.path</span>(<span class="st">"."</span>, <span class="st">"ClusterizationsGDI_AllForebrainDorsal.log"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="definition-of-functions-to-extract-data-from-clusterslist" class="level3">
+<h3 class="anchored" data-anchor-id="definition-of-functions-to-extract-data-from-clusterslist">Definition of functions to extract data from clustersList</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>getClData <span class="ot">&lt;-</span> <span class="cf">function</span>(objCOTAN, clList, cl) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  cluster <span class="ot">&lt;-</span> <span class="fu">names</span>(clList)[[cl]]</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  cells <span class="ot">&lt;-</span> clList[[cl]]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">checkClusterUniformity</span>(objCOTAN, <span class="at">cluster =</span> cluster, <span class="at">cells =</span> cells,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>, <span class="at">cores =</span> <span class="dv">6</span>, <span class="at">saveObj =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">list</span>(<span class="st">"cluster"</span> <span class="ot">=</span> cluster, <span class="st">"size"</span> <span class="ot">=</span> <span class="fu">length</span>(cells)), res)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(res)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(res) <span class="ot">&lt;-</span> cluster</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(res)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>clDataVal <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"cluster"</span> <span class="ot">=</span> <span class="cn">NULL</span>, <span class="st">"size"</span> <span class="ot">=</span> <span class="cn">NULL</span>, <span class="st">"isUniform"</span> <span class="ot">=</span> <span class="cn">NULL</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"fractionAbove"</span> <span class="ot">=</span> <span class="cn">NULL</span>, <span class="st">"1stPercentile"</span> <span class="ot">=</span> <span class="cn">NULL</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="forebrain-dorsal-e13.5" class="level2">
+<h2 class="anchored" data-anchor-id="forebrain-dorsal-e13.5">Forebrain Dorsal E13.5</h2>
+<section id="load-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="load-dataset">Load dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fb135Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/"</span>, <span class="st">"e13.5_ForebrainDorsal.cotan.RDS"</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sampleCondition <span class="ot">&lt;-</span> <span class="fu">getMetadataElement</span>(fb135Obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(sampleCondition)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>allClust <span class="ot">&lt;-</span> <span class="fu">getClusterizations</span>(fb135Obj)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">""</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste</span>(<span class="st">"Number of cells:"</span>, <span class="fu">getNumCells</span>(fb135Obj)))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">""</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">"Available clusterizations:"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste0</span>(allClust, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>clSizes <span class="ot">&lt;-</span> <span class="fu">vapply</span>(allClust, <span class="cf">function</span>(x) { <span class="fu">nlevels</span>(<span class="fu">getClusters</span>(fb135Obj, x))}, <span class="fu">integer</span>(1L))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>clSizes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            split             merge original.clusters original.subclass 
+               35                31               159                40 
+   original.class       cell.typist            seurat   seurat.high.res 
+               13                13                19                36 
+          monocle  monocle.high.res 
+               11                27 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste</span>(<span class="fu">names</span>(clSizes), clSizes, <span class="at">sep =</span> <span class="st">": "</span>, <span class="at">collapse =</span> <span class="st">", "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="extract-original-cluster" class="level3">
+<h3 class="anchored" data-anchor-id="extract-original-cluster">Extract original cluster</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>originalFB135 <span class="ot">&lt;-</span> <span class="fu">getClusters</span>(fb135Obj, <span class="at">clName =</span> <span class="st">"original.clusters"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nlevels</span>(originalFB135)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 159</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(originalFB135), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>originalFB135
+432 186 187 434 184 437 510 509 183 185 438 433 525 443 446 192 568 188 441 565 
+536 423 334 326 292 259 248 239 178 168 155 141 130  82  74  65  65  63  56  53 
+428 181 679 440 189 118 507 431 442 445 497 444 193 426 511 439 178 436 508 135 
+ 52  51  49  46  39  36  35  32  30  29  29  26  25  25  23  22  20  20  20  19 
+ 68 177 427 435 175 225 120 271  67 173 430 494 524 176 429 493 496 502 566 117 
+ 17  14  14  13  12  12  11  11  11  10  10  10  10   9   9   9   9   9   9   8 
+136 161 194 332 504 112 174 222 228 675 115 158 270 505 670 114 133 159 227 267 
+  8   8   8   8   8   7   7   6   6   6   5   5   5   5   5   4   4   4   4   4 
+359  41 470 564 162 179 329 447 492 519 535 671 119 130 146 163 168 195 224 226 
+  4   4   4   4   3   3   3   3   3   3   3   3   2   2   2   2   2   2   2   2 
+251 263 273 326 453 516 520 528 538 569 575 672 676 677 683 691 793 107 113 125 
+  2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   1   1   1 
+137 138 144 180 182 196 216 254 259 269 333 355 358 374  40 420 454 458 468 471 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+495 498 499 523 549  55 559 658 666 673 678 686 688 689 731 744 760 795  82 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop too small clusters: those whose size is less than 15</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>largeClFB135 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">table</span>(originalFB135) <span class="sc">&gt;=</span> <span class="dv">50</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>largeOrigFB135 <span class="ot">&lt;-</span> originalFB135[(originalFB135 <span class="sc">%in%</span> <span class="fu">names</span>(largeClFB135)),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                                drop <span class="ot">=</span> <span class="cn">TRUE</span>]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>largeOrigFB135 <span class="ot">&lt;-</span> <span class="fu">toClustersList</span>(largeOrigFB135)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculate-gdi-for-each-cluster-in-e13.5" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-gdi-for-each-cluster-in-e13.5">Calculate GDI for each cluster in E13.5</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Length larger clusters"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(largeOrigFB135, length, <span class="fu">integer</span>(<span class="dv">1</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>resDataFB135 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(largeOrigFB135), <span class="at">FUN =</span> getClData,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">objCOTAN =</span> fb135Obj, <span class="at">clList =</span> largeOrigFB135)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>clDataFB135 <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">rbindlist</span>(resDataFB135)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>clDataFB135 <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(clDataFB135, <span class="at">var =</span> <span class="st">"cluster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(clDataFB135,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/ClustersGDI/"</span>, <span class="st">"e13.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>clDataFB135 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/MouseCortexFromLoom/ClustersGDI/e13.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>clDataFB135[<span class="fu">order</span>(clDataFB135<span class="sc">$</span>size, <span class="at">decreasing =</span> T),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    size isUniform fractionAbove X1stPercentile
+432  536     FALSE  3.770380e-02       1.484698
+186  423     FALSE  4.307131e-02       1.609718
+187  334     FALSE  1.303433e-02       1.423035
+434  326      TRUE  4.379562e-03       1.376828
+184  292     FALSE  1.170610e-02       1.414304
+437  259      TRUE  4.410239e-03       1.364885
+510  248      TRUE  9.610563e-03       1.397472
+509  239      TRUE  4.471580e-03       1.373229
+183  178     FALSE  1.458630e-02       1.427795
+185  168     FALSE  1.630482e-02       1.428907
+438  155      TRUE  1.080901e-03       1.320271
+433  141      TRUE  4.997501e-03       1.363220
+525  130      TRUE  1.488711e-03       1.329041
+443   82      TRUE  2.276508e-03       1.344695
+446   74      TRUE  8.701706e-05       1.300874
+192   65      TRUE  2.597852e-04       1.310808
+568   65      TRUE  0.000000e+00       1.233130
+188   63      TRUE  1.147802e-03       1.314789
+441   56      TRUE  0.000000e+00       1.277716
+565   53      TRUE  0.000000e+00       1.232690
+428   52      TRUE  0.000000e+00       1.263561
+181   51      TRUE  3.013116e-03       1.330148</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="forebrain-dorsal-e15.0" class="level2">
+<h2 class="anchored" data-anchor-id="forebrain-dorsal-e15.0">Forebrain Dorsal E15.0</h2>
+<section id="load-dataset-1" class="level3">
+<h3 class="anchored" data-anchor-id="load-dataset-1">Load dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fb150Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/"</span>, <span class="st">"e15.0_ForebrainDorsal.cotan.RDS"</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>sampleCondition <span class="ot">&lt;-</span> <span class="fu">getMetadataElement</span>(fb150Obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]])</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(sampleCondition)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>allClust <span class="ot">&lt;-</span> <span class="fu">getClusterizations</span>(fb150Obj)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">""</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste</span>(<span class="st">"Number of cells:"</span>, <span class="fu">getNumCells</span>(fb150Obj)))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">""</span>)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">"Available clusterizations:"</span>)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste0</span>(allClust, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>clSizes <span class="ot">&lt;-</span> <span class="fu">vapply</span>(allClust, <span class="cf">function</span>(x) { <span class="fu">nlevels</span>(<span class="fu">getClusters</span>(fb150Obj, x))}, <span class="fu">integer</span>(1L))</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>clSizes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            split             merge            seurat   seurat.high.res 
+               57                50                21                40 
+original.clusters original.subclass    original.class           monocle 
+              229                47                14                11 
+ monocle.high.res       cell.typist 
+               46                13 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste</span>(<span class="fu">names</span>(clSizes), clSizes, <span class="at">sep =</span> <span class="st">": "</span>, <span class="at">collapse =</span> <span class="st">", "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="extract-original-cluster-1" class="level3">
+<h3 class="anchored" data-anchor-id="extract-original-cluster-1">Extract original cluster</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>originalFB150 <span class="ot">&lt;-</span> <span class="fu">getClusters</span>(fb150Obj, <span class="at">clName =</span> <span class="st">"original.clusters"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nlevels</span>(originalFB150)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 229</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(originalFB150), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>originalFB150
+525 432 511 509 510 508 184 428 434 437 507 568 433 504 426 185 187 505 516 565 
+826 586 540 402 402 397 322 318 273 258 183 181 176 174 173 172 163 147 137 133 
+427 524 679 439 436 493 498 446 438 441 183 497 192 506 188 443 502 494 574 575 
+120 108 105 102  93  93  79  66  63  60  54  51  46  46  43  42  42  41  41  41 
+492 118 177 519 526 566 182 181 501 573 193 429 445 499 518 440 560 178 442 514 
+ 38  36  31  31  28  28  27  26  24  24  23  23  23  23  22  21  20  19  19  19 
+523 186 569 444 557 271 452 495 520 535 542 677 527 431 135 455 458 496 512 676 
+ 19  18  18  17  16  15  15  15  15  14  14  14  13  12  11  11  11  11  11  11 
+120 159 517 145 161 174 179 558 227 332 457 470 503 739 117 175 176 189 559 564 
+ 10  10  10   9   9   9   9   9   8   8   8   8   8   8   7   7   7   7   7   7 
+180 225 538 549 561 671  68 695 738 747 136 144 222 226 273 500 536 678 112 114 
+  6   6   6   6   6   6   6   6   6   6   5   5   5   5   5   5   5   5   4   4 
+115 157 267 328 453 456 534 550 570 686 731 737 133 146 147 158 172 173 270 326 
+  4   4   4   4   4   4   4   4   4   4   4   4   3   3   3   3   3   3   3   3 
+430 513 515 528 533 539 544 571 674 675 732 113 125 130 143 152 162 163 195 259 
+  3   3   3   3   3   3   3   3   3   3   3   2   2   2   2   2   2   2   2   2 
+435 451 454 531 543 548 552 554 562 670 689 740 119 122 134 137 142 151 156 191 
+  2   2   2   2   2   2   2   2   2   2   2   2   1   1   1   1   1   1   1   1 
+194 223 224 228 234 240 262 268 269 275 286 296 308 314 329 333 359  41 448 450 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+468 529 530 532 537 540 553 567 572 601 614 634 647 649  67 672 680 681 684 693 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+696 726 734 749 750 751 760 771  88 
+  1   1   1   1   1   1   1   1   1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop too small clusters: those whose size is less than 15</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>largeClFB150 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">table</span>(originalFB150) <span class="sc">&gt;=</span> <span class="dv">50</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>largeOrigFB150 <span class="ot">&lt;-</span> originalFB150[(originalFB150 <span class="sc">%in%</span> <span class="fu">names</span>(largeClFB150)),</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                                drop <span class="ot">=</span> <span class="cn">TRUE</span>]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>largeOrigFB150 <span class="ot">&lt;-</span> <span class="fu">toClustersList</span>(largeOrigFB150)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculate-gdi-for-each-cluster" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-gdi-for-each-cluster">Calculate GDI for each cluster</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Length larger clusters"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(largeOrigFB150, length, <span class="fu">integer</span>(<span class="dv">1</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>resDataFB150 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(largeOrigFB150), <span class="at">FUN =</span> getClData,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">objCOTAN =</span> fb150Obj, <span class="at">clList =</span> largeOrigFB150)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>clDataFB150 <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">rbindlist</span>(resDataFB150)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>clDataFB150 <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(clDataFB150, <span class="at">var =</span> <span class="st">"cluster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(clDataFB150,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/ClustersGDI/"</span>, <span class="st">"e15.0_ForebrainDorsal_GDI_of_original_clusterization.RDS"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>clDataFB150 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/MouseCortexFromLoom/ClustersGDI/e15.0_ForebrainDorsal_GDI_of_original_clusterization.RDS"</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>clDataFB150[<span class="fu">order</span>(clDataFB150<span class="sc">$</span>size,<span class="at">decreasing =</span> T),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    size isUniform fractionAbove X1stPercentile
+525  826     FALSE  0.3016472479       2.352178
+432  586     FALSE  0.0254880232       1.459100
+511  540     FALSE  0.1510725315       1.913734
+509  402      TRUE  0.0067395414       1.381121
+510  402     FALSE  0.0152561426       1.420390
+508  397      TRUE  0.0046488461       1.370125
+184  322     FALSE  0.0268745853       1.498304
+428  318      TRUE  0.0012377332       1.342660
+434  273      TRUE  0.0004509380       1.329601
+437  258      TRUE  0.0025343004       1.342904
+507  183      TRUE  0.0094123856       1.393946
+568  181      TRUE  0.0000000000       1.305810
+433  176      TRUE  0.0011034483       1.336980
+504  174      TRUE  0.0039181957       1.361682
+426  173      TRUE  0.0004750143       1.330498
+185  172     FALSE  0.0101354303       1.400158
+187  163      TRUE  0.0054207120       1.359734
+505  147      TRUE  0.0001728011       1.293017
+516  137      TRUE  0.0014539856       1.328445
+565  133      TRUE  0.0073304826       1.385537
+427  120      TRUE  0.0000000000       1.274314
+524  108     FALSE  0.0187910535       1.439259
+679  105      TRUE  0.0023903726       1.339173
+439  102      TRUE  0.0000000000       1.267754
+436   93      TRUE  0.0000000000       1.253222
+493   93      TRUE  0.0007476325       1.324079
+498   79      TRUE  0.0010643016       1.321372
+446   66      TRUE  0.0000000000       1.296987
+438   63      TRUE  0.0000000000       1.265541
+441   60      TRUE  0.0000000000       1.277497
+183   54      TRUE  0.0002659810       1.305260
+497   51      TRUE  0.0003751993       1.301691</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="forebrain-dorsal-e17.5" class="level2">
+<h2 class="anchored" data-anchor-id="forebrain-dorsal-e17.5">Forebrain Dorsal E17.5</h2>
+<section id="load-dataset-2" class="level3">
+<h3 class="anchored" data-anchor-id="load-dataset-2">Load dataset</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fb175Obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/"</span>, <span class="st">"e17.5_ForebrainDorsal.cotan.RDS"</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>sampleCondition <span class="ot">&lt;-</span> <span class="fu">getMetadataElement</span>(fb175Obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]])</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(sampleCondition)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>allClust <span class="ot">&lt;-</span> <span class="fu">getClusterizations</span>(fb175Obj)</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">""</span>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste</span>(<span class="st">"Number of cells:"</span>, <span class="fu">getNumCells</span>(fb175Obj)))</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">""</span>)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="st">"Available clusterizations:"</span>)</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste0</span>(allClust, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>clSizes <span class="ot">&lt;-</span> <span class="fu">vapply</span>(allClust, <span class="cf">function</span>(x) { <span class="fu">nlevels</span>(<span class="fu">getClusters</span>(fb175Obj, x))}, <span class="fu">integer</span>(1L))</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>clSizes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            split             merge original.clusters original.subclass 
+               25                19               136                27 
+   original.class       cell.typist            seurat   seurat.high.res 
+                9                10                19                21 
+          monocle  monocle.high.res 
+                7                24 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">logThis</span>(<span class="fu">paste</span>(<span class="fu">names</span>(clSizes), clSizes, <span class="at">sep =</span> <span class="st">": "</span>, <span class="at">collapse =</span> <span class="st">", "</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="extract-original-cluster-2" class="level3">
+<h3 class="anchored" data-anchor-id="extract-original-cluster-2">Extract original cluster</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>originalFB175 <span class="ot">&lt;-</span> <span class="fu">getClusters</span>(fb175Obj, <span class="at">clName =</span> <span class="st">"original.clusters"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nlevels</span>(originalFB175)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 136</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(originalFB175), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>originalFB175
+516 505 515 427 504 514 428 493 506 513 508 517 523 177 436 498 512 507 524 172 
+297 203 159 147 135 119 110  80  72  69  58  58  55  38  38  38  37  36  29  28 
+568 439 492 495 503 574 575 179 426 526 521 441 433 442 494 497 502 178 501 565 
+ 27  26  23  22  22  22  20  18  17  17  16  15  13  13  13  13  13  12  12  12 
+678 446 518 677 180 536 573 135 159 174 309 564 225 452 453 522 525 676 679 161 
+ 11  10  10  10   9   8   8   7   7   7   7   7   6   6   6   6   6   6   6   5 
+176 184 277 437 458 520 535 539 144 175 182 187 457 499 519 537 569 117 185 262 
+  5   5   5   5   5   5   5   5   4   4   4   4   4   4   4   4   4   3   3   3 
+355 359 425 509 511 689 142 158 189 307 315 429 432 434 443 448 538 543 690 737 
+  3   3   3   3   3   3   2   2   2   2   2   2   2   2   2   2   2   2   2   2 
+115 120 124 132 136 151 160 173 183 188 227 245 261 273 286 298 306 308 310 316 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 
+317 438 440 455 500 510 557 560 562 570 572 671 673 688 740 796 
+  1   1   1   1   1   1   1   1   1   1   1   1   1   1   1   1 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop too small clusters: those whose size is less than 15</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>largeClFB175 <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">table</span>(originalFB175) <span class="sc">&gt;=</span> <span class="dv">50</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>largeOrigFB175 <span class="ot">&lt;-</span> originalFB175[(originalFB175 <span class="sc">%in%</span> <span class="fu">names</span>(largeClFB175)),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                                drop <span class="ot">=</span> <span class="cn">TRUE</span>]</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>largeOrigFB175 <span class="ot">&lt;-</span> <span class="fu">toClustersList</span>(largeOrigFB175)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="calculate-gdi-for-each-cluster-1" class="level3">
+<h3 class="anchored" data-anchor-id="calculate-gdi-for-each-cluster-1">Calculate GDI for each cluster</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Length larger clusters"</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(largeOrigFB175, length, <span class="fu">integer</span>(<span class="dv">1</span>))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>resDataFB175 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(largeOrigFB175), <span class="at">FUN =</span> getClData,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>                       <span class="at">objCOTAN =</span> fb175Obj, <span class="at">clList =</span> largeOrigFB175)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>clDataFB175 <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">rbindlist</span>(resDataFB175)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>clDataFB175 <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(clDataFB175, <span class="at">var =</span> <span class="st">"cluster"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(clDataFB175,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">"Data/MouseCortexFromLoom/ClustersGDI/"</span>, <span class="st">"e17.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>clDataFB175 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"Data/MouseCortexFromLoom/ClustersGDI/e17.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>clDataFB175[<span class="fu">order</span>(clDataFB175<span class="sc">$</span>size,<span class="at">decreasing =</span> T),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    size isUniform fractionAbove X1stPercentile
+516  297      TRUE  5.787234e-03       1.380640
+505  203      TRUE  7.261505e-04       1.330011
+515  159     FALSE  8.098331e-02       1.736907
+427  147      TRUE  0.000000e+00       1.275390
+504  135      TRUE  0.000000e+00       1.265854
+514  119     FALSE  3.665886e-02       1.517923
+428  110      TRUE  0.000000e+00       1.263149
+493   80      TRUE  1.512224e-03       1.331605
+506   72      TRUE  8.827684e-05       1.285308
+513   69     FALSE  7.475535e-02       1.649405
+508   58      TRUE  0.000000e+00       1.255277
+517   58      TRUE  8.074475e-03       1.383811
+523   55     FALSE  1.395007e-02       1.416125</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
