@@ -1,0 +1,237 @@
+---
+title: "Filtering of PBMC4 using COTAN"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Library import
+
+```{r}
+library(dplyr)
+library(COTAN)
+library(Seurat)
+library(tibble)
+library(ggplot2)
+library(zeallot)
+library(DropletUtils)
+```
+
+Settings
+
+```{r}
+datasetName = 'PBMC4'
+datasetFolder = './Data/'
+
+inDir  = paste(datasetFolder, datasetName, '/raw/10X/', sep='')
+outDir = paste(datasetFolder, datasetName, '/filtered/', sep='')
+dir10X = paste(outDir, '10X/', sep='')
+
+if (!dir.exists(outDir)) {
+  dir.create(outDir, recursive = TRUE, showWarnings = FALSE)
+}
+
+setLoggingLevel(2)
+setLoggingFile(paste(outDir, "logfile.log", sep=""))
+options(parallelly.fork.enable = TRUE)
+```
+
+Data loading
+
+```{r}
+dataset = Read10X(data.dir = inDir, strip.suffix = TRUE)
+dataset = dataset[[1]]
+sampleCond <- datasetName
+PBMC4 <- COTAN(raw = dataset)
+PBMC4 <- initializeMetaDataset(
+  PBMC4,
+  GEO = paste("10X ", datasetName, sep=""),
+  sequencingMethod = "10X",
+  sampleCond = sampleCond
+)
+```
+
+Inspect cells' sizes
+
+```{r}
+cellSizePlot(PBMC4)
+```
+
+Drop cells with too many reads as they are probably doublets
+
+```{r}
+cellsSizeThr <- 20000
+PBMC4 <- addElementToMetaDataset(PBMC4, "Cells size threshold", cellsSizeThr)
+
+cellsToRem <- getCells(PBMC4)[getCellsSize(PBMC4) > cellsSizeThr]
+PBMC4 <- dropGenesCells(PBMC4, cells = cellsToRem)
+
+cellSizePlot(PBMC4, splitPattern = "-", numCol = 2)
+```
+
+Inspect the number of expressed genes per cell
+
+```{r}
+genesSizePlot(PBMC4, splitPattern = "-", numCol = 2)
+```
+
+Drop cells with too high genes expression as they are probably doublets
+
+```{r}
+geneSizeThr <- 3500
+PBMC4 <- addElementToMetaDataset(PBMC4, "Num genes threshold", geneSizeThr)
+
+numExprGenes <- getNumExpressedGenes(PBMC4)
+cellsToRem <- names(numExprGenes)[numExprGenes > geneSizeThr]
+PBMC4 <- dropGenesCells(PBMC4, cells = cellsToRem)
+
+genesSizePlot(PBMC4, splitPattern = "-", numCol = 2)
+```
+
+Check number of mithocondrial genes expressed in each cell
+
+```{r}
+mitGenesPattern <- "^[Mm][Tt]-"
+getGenes(PBMC4)[grep(mitGenesPattern, getGenes(PBMC4))]
+```
+
+```{r}
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(PBMC4, genePrefix = mitGenesPattern,
+                              splitPattern = "-", numCol = 2)
+
+plot(mitPlot)
+```
+
+We drop cells with a too high percentage of mitocondrial genes (are likely dead)
+
+```{r}
+mitPercThr <- 10
+PBMC4 <- addElementToMetaDataset(PBMC4, "Mitoc. perc. threshold", mitPercThr)
+
+cellsToRem <- rownames(mitSizes)[mitSizes[["mit.percentage"]] > mitPercThr]
+
+PBMC4 <- dropGenesCells(PBMC4, cells = cellsToRem)
+
+c(mitPlot, mitSizes) %<-%
+  mitochondrialPercentagePlot(PBMC4, genePrefix = mitGenesPattern,
+                              splitPattern = "-", numCol = 2)
+
+plot(mitPlot)
+```
+
+Check number of ribosomial genes expressed in each cell
+
+```{r}
+ribGenesPattern <- "^RP[SL]\\d+"
+getGenes(PBMC4)[grep(ribGenesPattern, getGenes(PBMC4))]
+```
+
+```{r}
+c(ribPlot, ribSizes) %<-%
+  mitochondrialPercentagePlot(PBMC4, genePrefix = ribGenesPattern,
+                              splitPattern = "-", numCol = 2)
+
+plot(ribPlot)
+```
+
+Check no further outliers after all the culling
+
+```{r}
+cellSizePlot(PBMC4, splitPattern = "-", numCol = 2)
+```
+
+```{r}
+genesSizePlot(PBMC4, splitPattern = "-", numCol = 2)
+```
+
+Cleaning, round 1
+
+```{r}
+PBMC4 <- clean(PBMC4)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(PBMC4)
+
+plot(pcaCellsPlot)
+```
+
+```{r}
+plot(genesPlot)
+```
+
+```{r}
+PBMC4 <- addElementToMetaDataset(PBMC4, "Num drop B group", 0)
+```
+
+```{r}
+plot(UDEPlot)
+```
+
+```{r}
+plot(nuPlot)
+```
+
+```{r}
+plot(zoomedNuPlot)  
+```
+
+```{r}
+yset=0.16
+nuDf <- data.frame("nu" = sort(getNu(PBMC4)), "n" = seq_along(getNu(PBMC4)))
+PBMC4 <- addElementToMetaDataset(PBMC4, "Threshold low UDE cells:", yset)
+cellsToRem <-rownames(nuDf)[nuDf[["nu"]] < yset]
+PBMC4 <- dropGenesCells(PBMC4, cells = cellsToRem)
+```
+
+Cleaning, round 2
+
+```{r}
+PBMC4 <- clean(PBMC4)
+
+c(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) %<-% cleanPlots(PBMC4)
+
+plot(pcaCellsPlot)
+```
+
+```{r}
+plot(pcaCellsData)
+```
+
+```{r}
+plot(genesPlot)
+```
+
+```{r}
+plot(UDEPlot)
+```
+
+```{r}
+plot(nuPlot)
+```
+
+```{r}
+plot(zoomedNuPlot)
+```
+
+```{r}
+plot(cellSizePlot(PBMC4, splitPattern = "-", numCol = 2))
+```
+
+```{r}
+plot(genesSizePlot(PBMC4, splitPattern = "-", numCol = 2))
+```
+
+Save the filtered dataset
+
+```{r}
+if (!dir.exists(dir10X)) {
+  write10xCounts(dir10X, getRawData(PBMC4))
+}
+```
+
+```{r, echo=TRUE, eval=FALSE}
+saveRDS(PBMC4, file = paste0(outDir, sampleCond, ".cotan.RDS"))
+```
+
+```{r}
+sessionInfo()
+```

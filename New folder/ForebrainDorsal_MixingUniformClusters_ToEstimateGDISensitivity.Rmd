@@ -1,0 +1,476 @@
+---
+title: "Mixing Uniform Clusters To Estimate GDI Sensitivity"
+author: "Marco Fantozzi"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preamble
+
+```{r preamble}
+library(assertthat)
+library(rlang)
+library(scales)
+library(ggplot2)
+library(zeallot)
+library(data.table)
+library(COTAN)
+
+options(parallelly.fork.enable = TRUE)
+
+inDir <- file.path(".")
+
+setLoggingLevel(2)
+setLoggingFile(file.path(inDir, "MixingClustersGDI_ForebrainDorsal.log"))
+
+outDir <- file.path(inDir, "GDI_Sensitivity")
+if (!file.exists(outDir)) {
+  dir.create(outDir)
+}
+```
+
+## Loading all COTAN Objects
+
+```{r eval=FALSE echo=TRUE}
+fb135Obj <- readRDS(file = file.path(inDir, "e13.5_ForebrainDorsal.cotan.RDS"))
+getMetadataElement(fb135Obj, datasetTags()[["cond"]])
+
+fb150Obj <- readRDS(file = file.path(inDir, "e15.0_ForebrainDorsal.cotan.RDS"))
+getMetadataElement(fb150Obj, datasetTags()[["cond"]])
+
+
+fb175Obj <- readRDS(file = file.path(inDir, "e17.5_ForebrainDorsal.cotan.RDS"))
+getMetadataElement(fb175Obj, datasetTags()[["cond"]])
+```
+
+## Relevant clusters lists
+
+```{r eval=TRUE, echo=FALSE}
+selected <- list(
+    "E13.5" = c("432", "187", "434", "184", "437", "510"),
+    "E15.0" = c("432", "509", "510", "508", "428", "434", "437"),
+    "E17.5" = c("516", "505")
+)
+
+objSelector <- function(dsName) {
+  if (dsName == "E13.5") {
+    return(fb135Obj)
+  } else if (dsName == "E15.0") {
+    return(fb150Obj)
+  } else if (dsName == "E17.5") {
+    return(fb175Obj)
+  } else {
+   stop("Wrong dataset name") 
+  }
+}
+```
+
+## Merge clusters from different datasets
+
+```{r eval=FALSE echo=TRUE}
+allGenes <- union(union(getGenes(fb135Obj), getGenes(fb150Obj)), getGenes(fb175Obj))
+
+# This function completes the raw data so that the genes list
+# matches the `allGenes` above
+fillGenes <- function(m, prefixName) {
+  # find the missing genes in the given matrix m
+  missingGenes <- !(allGenes %in% rownames(m))
+  # create a matrix with the right sizes for the missing genes
+  # and set their values all to zero
+  fillM <- matrix(0, nrow = sum(missingGenes), ncol = ncol(m))
+  rownames(fillM) <- allGenes[missingGenes]
+  # append the new matrix to the original and reorder the rows
+  # to match overall genes order
+  retM <- rbind(m, fillM)
+  retM <- retM[allGenes, ]
+  # assign unique identifiers to the columns, so that one can discriminate
+  # the source even after merging with other matrices
+  colnames(retM) <- paste0(prefixName, "_", colnames(retM))
+  return(retM)
+}
+```
+
+## Create all raw data for each cluster compatible with the full genes' list
+
+```{r eval=FALSE echo=TRUE}
+allClustersRawData <- list()
+for (dsName in names(selected)) {
+  clList <- toClustersList(getClusters(objSelector(dsName),
+                                       clName = "original.clusters"))
+  for (clName in selected[[dsName]]) {
+    fullName <- paste0(dsName, ":", clName)
+    fullRawData <- fillGenes(getRawData(objSelector(dsName))[, clList[[clName]]],
+                             fullName)
+    allClustersRawData <- append(allClustersRawData, list(fullRawData))
+    names(allClustersRawData)[length(allClustersRawData)] <- fullName
+  }
+}
+
+assert_that(identical(rownames(allClustersRawData[[1]]), allGenes))
+
+# delete the COTAN objects
+rm(fb135Obj, fb150Obj, fb175Obj)
+```
+
+## Collect `size` and `GDI` for all selected clusters (baseline data)
+
+```{r eval=FALSE, echo=TRUE}
+clDataFB135 <- readRDS(file.path(inDir, "e13.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"))
+clDataFB150 <- readRDS(file.path(inDir, "e15.0_ForebrainDorsal_GDI_of_original_clusterization.RDS"))
+clDataFB175 <- readRDS(file.path(inDir, "e17.5_ForebrainDorsal_GDI_of_original_clusterization.RDS"))
+
+df1 <- clDataFB135[selected[["E13.5"]], c("size", "X1stPercentile"), drop = FALSE]
+rownames(df1) <- paste0("E13.5:", rownames(df1))
+
+df2 <- clDataFB150[selected[["E15.0"]], c("size", "X1stPercentile"), drop = FALSE]
+rownames(df2) <- paste0("E15.0:", rownames(df2))
+
+df3 <- clDataFB175[selected[["E17.5"]], c("size", "X1stPercentile"), drop = FALSE]
+rownames(df3) <- paste0("E17.5:", rownames(df3))
+
+baselineGDI <- rbind(df1, df2, df3)
+colnames(baselineGDI) <- c("size", "GDI")
+
+rm(clDataFB135, clDataFB150, clDataFB175)
+rm(df1, df2, df3)
+
+saveRDS(baselineGDI,
+        file = file.path(outDir, "ForebrainDorsal_ClusterizationMixing_BaselineGDI.RDS"))
+```
+
+## Load baseline data
+
+```{r eval=TRUE, echo=FALSE}
+baselineGDI <- readRDS(file.path(outDir, "ForebrainDorsal_ClusterizationMixing_BaselineGDI.RDS"))
+
+# check good alignment of data
+assert_that(identical(rownames(baselineGDI), names(allClustersRawData)))
+assert_that(identical(baselineGDI[, "size"],
+                      vapply(allClustersRawData, ncol,
+                             FUN.VALUE = integer(1L), USE.NAMES = FALSE)))
+```
+
+## Calculate the GDI of the mixtures of clusters
+### This is to be run once per wanted *mixing-fraction*
+
+```{r eval=FALSE, echo=TRUE}
+# small run
+# 
+set.seed(137)
+
+mixingFraction <- 0.80
+mixingStr <- str_pad(scales::label_percent()(mixingFraction), 3, pad = "0")
+
+results <- data.frame()
+
+for (mainName in rownames(baselineGDI)) {
+  mainSize <- baselineGDI[mainName, "size"]
+  mainGDI  <- baselineGDI[mainName, "GDI"]
+
+  for (clName in rownames(baselineGDI)) {
+    if (clName == mainName) next
+
+    logThis(paste("Mixing", mainName, "with extra",
+                  mixingStr, "cells from", clName), logLevel = 1)
+
+    clSize <- baselineGDI[clName, "size"]
+    actuallyMixedCells <- min(ceiling(mixingFraction * mainSize), clSize)
+    actualFraction <- actuallyMixedCells / mainSize
+    sampleRawData <- allClustersRawData[[clName]][, sample(clSize, actuallyMixedCells)]
+    mergedRawData <- cbind(allClustersRawData[[mainName]], sampleRawData)
+    rm(sampleRawData)
+
+    # Calculate the merged COEX
+    cond <- paste0(mainName, "|", mixingStr, "|", clName)
+    mergedObj <- automaticCOTANObjectCreation(raw = mergedRawData,
+                                              GEO = "MergedClusters",
+                                              sequencingMethod = "10X",
+                                              sampleCondition = cond,
+                                              calcCoex = TRUE, cores = 10L,
+                                              saveObj = FALSE, outDir = outDir)
+    rm(mergedRawData)
+
+    # Extract the GDI quantile
+    mergedGDIData <- calculateGDI(mergedObj)
+    rm(mergedObj)
+
+    gdi <- mergedGDIData[["GDI"]]
+    names(gdi) <- rownames(mergedGDIData)
+    rm(mergedGDIData)
+
+    gdi <- sort(gdi, decreasing = TRUE)
+    lastPercentile <- quantile(gdi, probs = 0.99)
+    rm(gdi)
+
+    results <- rbind(results,
+                     data.frame("MainCluster" = mainName, "OtherCluster" = clName,
+                                "MixingFraction" = actualFraction, "GDI" = lastPercentile,
+                                "GDIIncrement" = lastPercentile - mainGDI))
+
+    logThis(paste("Mixing", mainName, "with", clName,
+                  "accomplished with GDI", lastPercentile), logLevel = 1)
+  }
+}
+
+rownames(results) <- NULL
+
+saveRDS(results, file.path(outDir, paste0("GDI_with_", mixingStr, "_Mixing.RDS")))
+```
+
+## Load calculated data for analysis
+
+```{r echo=FALSE, eval=TRUE}
+resMix05 <- readRDS(file.path(outDir, paste0("GDI_with_05%_Mixing.RDS")))
+resMix10 <- readRDS(file.path(outDir, paste0("GDI_with_10%_Mixing.RDS")))
+resMix20 <- readRDS(file.path(outDir, paste0("GDI_with_20%_Mixing.RDS")))
+resMix40 <- readRDS(file.path(outDir, paste0("GDI_with_40%_Mixing.RDS")))
+resMix80 <- readRDS(file.path(outDir, paste0("GDI_with_80%_Mixing.RDS")))
+```
+
+
+## Merge all results and calculate the fitting regression for each cluster pair
+
+```{r eval=FALSE, include=FALSE, echo=FALSE}
+allRes2 <- cbind(resMix05, resMix10[, c(3:5)], resMix20[, c(3:5)], resMix40[, c(3:5)], resMix80[, c(3:5)])
+colnames(allRes2) <- c(colnames(allRes2)[1:2], paste0(colnames(allRes2)[3:17], "_", rep(c(5,10,20,40,80), each = 3)))
+
+coeffs <- data.frame(matrix(ncol = 2))
+colnames(coeffs) <- c("Deg_0", "Deg_1")
+
+sel <- seq.int(3, by = 3, length.out = 5)
+
+for (r in c(1:nrow(allRes))) {
+  
+  mix1 <- unlist(allRes2[r, sel])
+#  mix2 <- mixings1^2
+#  mix3 <- mixings1^3
+  lmix <- log(mix1 + 1)
+  
+#  GDIIncr <- unlist(allRes[r, sel + 2])
+  GDIZero <- baselineGDI[which(rownames(baselineGDI) == allRes2[r, "MainCluster"]), "GDI"] 
+  GDILogIncr <- unlist(allRes2[r, sel + 1]) / GDIZero
+  
+  lm_1 <- lm(logGDIIncr ~ lmix)
+#  print(summary(lm_1))
+
+  coeffs <- rbind(coeffs, lm_1$coefficients)
+}
+```
+
+## Recall cluster distance and add it to the results
+
+```{r}
+zeroOneAvg <- readRDS(file.path(inDir, "ClustersDistances", "allZeroOne.RDS"))
+distZeroOne <- as.matrix(parDist(t(zeroOneAvg), method = "hellinger", diag = TRUE, upper = TRUE))^2
+
+distZeroOneLong <- rownames_to_column(as.data.frame(distZeroOne), var = "MainCluster")
+distZeroOneLong <-pivot_longer(distZeroOneLong,
+                               cols = !MainCluster,
+                               names_to = "OtherCluster", 
+                               values_to = "Distance")
+
+distZeroOneLong <- as.data.frame(distZeroOneLong[distZeroOneLong[["Distance"]] != 0.0, ])
+
+assert_that(identical(distZeroOneLong[, 1:2], resMix20[, 1:2]))
+
+perm <- order(distZeroOneLong[["Distance"]])
+```
+
+```{r}
+# Scatter plot of the effective increment [Y] against estimated increment [X]
+distDF <- cbind(distZeroOneLong[, "Distance", drop = FALSE],
+                sqrt(distZeroOneLong[, "Distance", drop = FALSE]))
+colnames(distDF) <- c("Distance", "DistanceSqrt")
+
+D2IPlot <- ggplot(cbind(resMix40, distDF),
+                  aes(x=Distance, y=GDIIncrement)) +
+             geom_point() +
+             geom_smooth(method=lm, formula = y ~ x) 
+           # +  xlim(0, 1.5) + ylim(0, 1.5) + coord_fixed()
+
+plot(D2IPlot)
+```
+
+## Merge all data and plot it using *a-priory* (squared) distance as discriminant
+
+```{r}
+allRes <- rbind(resMix05[perm, ], resMix10[perm, ], resMix20[perm, ], resMix40[perm, ], resMix80[perm, ])
+rownames(allRes) <- NULL
+allRes <- cbind(allRes, "ClusterPair" = rep.int(c(1:210),5))
+allRes <- cbind(allRes, "Distance" = rep(distZeroOneLong[["Distance"]][perm], 5))
+```
+
+
+
+```{r}
+mg <- function(mixing) { ceiling(log2(round(mixing*40))) }
+IScPlot <- ggplot(allRes, aes(x=mg(MixingFraction), y=GDIIncrement, color=Distance,
+                              group = mg(MixingFraction))) +
+#  geom_point() +
+  geom_boxplot()
+#  scale_color_continuous(type = "viridis") +
+# geom_point(aes(size=log10(GDIIncrement+10))) +
+#  scale_x_log10()
+
+plot(IScPlot)
+```
+
+```{r}
+perm2 <- rep(1:210, each = 5) + rep(seq(1, 5 * 210, by = 210), times = 5) - 1
+allRes2 <- allRes[perm2, ]
+# c(1,44) - c(84,127) - c(167,210)
+ILinesPLot <- ggplot(allRes2[allRes2[["ClusterPair"]] %between% c(1,210), ],
+                     aes(x = MixingFraction, y = GDIIncrement,
+                         color = (ClusterPair - 1) %/% 42 + 0.5)) + 
+  geom_path(aes(group = ClusterPair)) +
+  theme(legend.position = "none") +
+  #scale_x_log10() + 
+  scale_colour_stepsn(colours = hcl.colors(5, palette = "Dark 2")[5:1])
+
+
+plot(ILinesPLot)
+```
+
+## Calculate the GDI of the mixtures of three clusters
+### the total mixture is 20%
+
+```{r eval=FALSE, echo=TRUE}
+# small run
+# 
+set.seed(137)
+
+numPairsPerCluster <- 10
+
+mixingFraction <- 0.20
+
+results <- data.frame()
+
+for (mainName in rownames(baselineGDI)) {
+  mainSize <- baselineGDI[mainName, "size"]
+  mainGDI  <- baselineGDI[mainName, "GDI"]
+
+  executedPairs <- NULL
+  
+  for (i in c(1:numPairsPerCluster)) {
+    repeat {
+      clPair <- rownames(baselineGDI)[sample(nrow(baselineGDI), 2)]
+      clPair <- clPair[order(clPair)]
+      clPairName <- paste0(clPair[[1L]], ":", clPair[[2L]])
+      if (!(mainName %in% clPair) && !(clPairName %in% executedPairs)) break
+    }
+
+    logThis(paste("Mixing", mainName, "with extra 20% cells from",
+                  clPair[[1L]], "and", clPair[[2L]]), logLevel = 1)
+
+    mixingFraction1 <- runif(1L, 0.25 * mixingFraction, 0.75 * mixingFraction)
+    mixingFraction2 <- mixingFraction - mixingFraction1
+    
+    clSize1 <- baselineGDI[clPair[[1L]], "size"]
+    clSize2 <- baselineGDI[clPair[[2L]], "size"]
+    actuallyMixedCells1 <- min(ceiling(mixingFraction1 * mainSize), clSize1)
+    actuallyMixedCells2 <- min(ceiling(mixingFraction2 * mainSize), clSize2)
+    actualFraction1 <- actuallyMixedCells1 / mainSize
+    actualFraction2 <- actuallyMixedCells2 / mainSize
+    sampleRawData1 <- allClustersRawData[[clPair[[1L]]]][, sample(clSize1, actuallyMixedCells1)]
+    sampleRawData2 <- allClustersRawData[[clPair[[2L]]]][, sample(clSize2, actuallyMixedCells2)]
+    mergedRawData <- cbind(allClustersRawData[[mainName]], sampleRawData1, sampleRawData2)
+    rm(sampleRawData1, sampleRawData2)
+
+    # Calculate the merged COEX
+    cond <- paste0(mainName, "|20%|", clPairName)
+    mergedObj <- automaticCOTANObjectCreation(raw = mergedRawData,
+                                              GEO = "MergedClusters",
+                                              sequencingMethod = "10X",
+                                              sampleCondition = cond,
+                                              calcCoex = TRUE, cores = 10L,
+                                              saveObj = FALSE, outDir = outDir)
+    rm(mergedRawData)
+
+    # Extract the GDI quantile
+    mergedGDIData <- calculateGDI(mergedObj)
+    rm(mergedObj)
+
+    gdi <- mergedGDIData[["GDI"]]
+    names(gdi) <- rownames(mergedGDIData)
+    rm(mergedGDIData)
+
+    gdi <- sort(gdi, decreasing = TRUE)
+    lastPercentile <- quantile(gdi, probs = 0.99)
+    rm(gdi)
+
+    results <- rbind(results,
+                     data.frame("MainCluster" = mainName,
+                                "OtherCluster1" = clPair[[1L]],
+                                "MixingFraction1" = actualFraction1,
+                                "OtherCluster2" = clPair[[2L]],
+                                "MixingFraction2" = actualFraction2,
+                                "GDI" = lastPercentile,
+                                "GDIIncrement" = lastPercentile - mainGDI))
+
+    logThis(paste("Mixing", mainName, "with", clPairName,
+                  "accomplished with GDI", lastPercentile), logLevel = 1)
+  }
+}
+
+rownames(results) <- NULL
+
+saveRDS(results, file.path(outDir, paste0("GDI_with_20%_Mixing_from_Pairs.RDS")))
+```
+## Estimate predicted `GDI` increment using resultts from two-clusters mixings
+### The estimates *assume* GDI increment proportional to mixture
+
+```{r eval=FALSE, echo=TRUE}
+resMix20_2 <- readRDS(file.path(outDir, paste0("GDI_with_20%_Mixing_from_Pairs.RDS")))
+
+resMix20_2 <- cbind(resMix20_2, NA)
+colnames(resMix20_2)[ncol(resMix20_2)] <- "PredictedGDIIncrement"
+
+for (r in c(1:nrow(resMix20_2))) {
+  mainName <- resMix20_2[r, "MainCluster"]
+  
+  mainMatch20 <- resMix20[resMix20[, "MainCluster"] == mainName, ]
+
+  pos1 <- which(mainMatch20[, "OtherCluster"] == resMix20_2[r, "OtherCluster1"])
+  pos2 <- which(mainMatch20[, "OtherCluster"] == resMix20_2[r, "OtherCluster2"])
+  
+  GDIIncr1 <- mainMatch20[pos1, "GDIIncrement"]
+  GDIIncr2 <- mainMatch20[pos2, "GDIIncrement"]
+
+  w1 <- resMix20_2[r, "MixingFraction1"] / mainMatch20[pos1, "MixingFraction"]
+  w2 <- resMix20_2[r, "MixingFraction2"] / mainMatch20[pos2, "MixingFraction"]
+  
+  predictedGDIIncr <- (w1 * GDIIncr1 + w2 * GDIIncr2)
+
+  resMix20_2[r, "PredictedGDIIncrement"] <- predictedGDIIncr
+}
+
+saveRDS(resMix20_2, file.path(outDir, paste0("GDI_with_20%_Mixing_from_Pairs.RDS")))
+```
+
+## Load calculated data for analysis
+
+```{r eval=TRUE, echo=FALSE}
+resMix20_2 <- readRDS(file.path(outDir, paste0("GDI_with_20%_Mixing_from_Pairs.RDS")))
+```
+
+## Compare estimated vs real GDI increment
+
+```{r}
+# Scatter plot of the effective increment [Y] against estimated increment [X]
+pg <- ggplot(resMix20_2, aes(x=PredictedGDIIncrement, y=GDIIncrement)) +
+  geom_point() +
+  geom_smooth(method=lm, formula = y ~ x + 0) +
+  coord_fixed() +
+  xlim(0, 1.5) + ylim(0, 1.5)
+  #scale_x_log10() + scale_y_log10() 
+
+plot(pg)
+```
+
+The plot shows that having the 20% extraneous cells in the mixture coming from 
+multiple clusters does not affect significantly the sensitivity of the GDI to
+score cluster uniformity.

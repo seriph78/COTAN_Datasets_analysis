@@ -1,0 +1,241 @@
+---
+title: "FDR analysis - define DE genes"
+author: "Silvia Giulia Galfrè"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+## Automatic functions
+
+```{r}
+library(COTAN)
+options(parallelly.fork.enable = TRUE)
+library(Seurat)
+library(monocle3)
+library(reticulate)
+library(stringr)
+library(dplyr)
+
+dirOut <- "Results/FDR/"
+if (!dir.exists(dirOut)) {
+  dir.create(dirOut)
+}
+
+dataSetDir <- "Data/MouseCortexFromLoom/FDR/MergedClusters_For_FDR/"
+```
+
+```{r functions, echo=TRUE, eval=FALSE}
+
+Seurat.DEA <- function(dataSet,clusters.list, project, dirOut#,percentage
+                       ){
+  pbmc <- CreateSeuratObject(counts = dataSet,
+                             project = project, min.cells = 3, min.features = 20)
+  
+  stopifnot(length(clusters.list)==length(pbmc$orig.ident))
+  
+  
+  pbmc <- NormalizeData(pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
+  pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
+  all.genes <- rownames(pbmc)
+  pbmc <- ScaleData(pbmc, features = all.genes)
+  
+  pbmc <- RunPCA(pbmc)
+  pbmc <- RunUMAP(pbmc, dims = 1:20)
+  
+  pbmc@meta.data$TestCl <- NA
+  pbmc@meta.data[names(clusters.list),]$TestCl <- factor(clusters.list)
+  
+  pbmc <- SetIdent(pbmc,value = "TestCl")
+  
+  pbmc.markers <- FindAllMarkers(pbmc, only.pos = TRUE)
+  
+  
+  
+  n.genes.DEA <- sum(pbmc.markers$p_val_adj < 0.05)
+  
+  print(n.genes.DEA)
+  
+  #write.csv(pbmc.markers, file = paste0(dirOut,project,"_de_genes_Seurat_",percentage,".csv"))
+  
+  return(list("n.genes.DEA"=n.genes.DEA,"markers"= pbmc.markers))
+  }
+
+Monocle.DEA <- function(dataSet,clusters.list,project, dirOut#,percentage
+                        ){
+  
+  cell_metadata = as.data.frame(clusters.list[colnames(dataSet)])
+  colnames(cell_metadata) <- "Clusters"
+  cds <- new_cell_data_set(dataSet[rowSums(dataSet) > 3,],
+                         cell_metadata = cell_metadata
+                         )
+  colData(cds)$cluster <- clusters.list[rownames(colData(cds))]
+
+  #cds <- preprocess_cds(cds, num_dim = 100)
+  #cds <- reduce_dimension(cds)
+  #cds <- cluster_cells(cds, resolution=1e-5)
+  marker_test_res <- top_markers(cds, 
+                                 group_cells_by="Clusters", 
+                                 genes_to_test_per_group = dim(cds)[1],
+                                  cores=10)
+  
+  # de_results <- fit_models(cds,model_formula_str = " ~ cluster",cores = 10,verbose = T)
+  # fit_coefs <- coefficient_table(de_results)
+  # 
+  # fit_coefs <- fit_coefs %>% filter(grepl("cluster",term))
+  # fit_coefs <- as.data.frame(fit_coefs)
+  #write.csv(as.data.frame(fit_coefs[,c("num_cells_expressed" ,"gene_id","p_value","q_value")]), file = paste0(dirOut,project,"_de_genes_Monocle_",percentage,".csv"))
+  
+  return(list("n.genes.DEA"=sum(marker_test_res$marker_test_q_value < 0.05, na.rm = T),
+              "marker_test_res"= marker_test_res
+              ))
+}
+
+
+ScamPy.DEA <- function(dataSet,
+                       clusters.list, 
+                       project, 
+                       dirOut,
+                       percentage){
+  pbmc <- CreateSeuratObject(counts = dataSet, project = project, min.cells = 3, min.features = 20)
+  
+  
+  pbmc@meta.data$TestCl <- NA
+  pbmc@meta.data[names(clusters.list),]$TestCl <- clusters.list
+  
+  exprs <- pbmc@assays$RNA$counts
+  
+  meta <- pbmc[[]]
+  #feature_meta <- GetAssay(pbmc)[[]]
+  tmp <- as.data.frame(matrix(data = NA, 
+                              ncol = 1, 
+                              nrow = nrow(pbmc@assays$RNA$counts)))
+  rownames(tmp) <- rownames(pbmc@assays$RNA$counts)
+  
+  feature_meta <- tmp
+  #embedding <- Embeddings(pbmc, "umap")
+  
+  Sys.setenv(RETICULATE_PYTHON = "../../../bin/python3")
+  py <- import("sys")
+  
+  source_python("src/scanpyFDR.py")
+  scanpyFDR(exprs, 
+                   meta, 
+                   feature_meta, 
+                   "mt", 
+                   dirOut, 
+                   project)
+
+  out <- read.csv(file = paste0(dirOut,
+                                project,
+                                "_Scampy_DEA_all_genes.csv"
+                               ),
+                  header = T,
+                  row.names = 1)
+
+  gc()
+
+  return(out)
+}
+
+```
+
+## Cluster Gene Enrichment
+
+```{r}
+datasets_csv <- read.csv(file.path(dataSetDir,"Cells_Usage_DataFrame.csv"),
+                         row.names = 1
+                        ) 
+
+datasets_csv
+```
+
+### DEA genes for COTAN
+
+```{r cotan, echo=TRUE, eval=FALSE}
+for (ind in 1:dim(datasets_csv)[1]) {
+  #print(ind)
+  file.code <- paste0(datasets_csv$Group[ind],"_",datasets_csv$Collection[ind])
+  dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
+  deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
+  pvalCOTAN <- pValueFromDEA(deaCOTAN,
+              numCells = getNumCells(dataset),method = "bonferroni")
+
+  df.genes <- deaCOTAN[rowMin(as.matrix(pvalCOTAN)) < 0.05,]
+  
+  write.csv(df.genes,file.path(dirOut,paste0(file.code,"COTAN_DEA_genes.csv")))
+  
+  }
+
+
+```
+
+
+### DEA genes for Seurat
+
+```{r seurat, echo=TRUE, eval=FALSE}
+for (ind in 1:dim(datasets_csv)[1]) {
+  #print(ind)
+  file.code <- paste0(datasets_csv$Group[ind],"_",datasets_csv$Collection[ind])
+  dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
+
+  clusters <- getClusterizationData(dataset,clName = "mergedClusters")[[1]]
+  deaSeurat <- Seurat.DEA(getRawData(dataset),
+                          clusters.list = clusters,
+                          project = file.code,
+                          dirOut = dirOut)
+  write.csv(deaSeurat$markers,
+          file.path(dirOut,paste0(file.code,"Seurat_DEA_genes.csv")))
+}
+```
+### DEA from Monocle
+
+```{r monocle, echo=TRUE, eval=FALSE}
+for (ind in 1:dim(datasets_csv)[1]) {
+  file.code <- paste0(datasets_csv$Group[ind],"_",datasets_csv$Collection[ind])
+  dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
+  print(file.code)
+  clusters <- getClusterizationData(dataset,clName = "mergedClusters")[[1]]
+  
+  deaMonocle <- Monocle.DEA(dataSet = getRawData(dataset),
+                          clusters.list = clusters,
+                          project = file.code,
+                          dirOut = dirOut)
+  
+  # deaMonocleOut <- deaMonocle$fit_coefs[,c("num_cells_expressed", 
+  #                                         "gene_id","term","estimate",
+  #                                         "std_err", "test_val","p_value", 
+  #                                         "normalized_effect","q_value")]
+  
+  
+  write.csv(deaMonocle$marker_test_res,
+          file.path(dirOut,paste0(file.code,"Monocle_DEA_genes.csv"))) 
+  
+  #rm(deaMonocleOut)
+  rm(deaMonocle)
+  gc()
+}
+```
+### DEA from ScamPy
+```{r scampy, echo=TRUE, eval=FALSE}
+for (ind in 1:dim(datasets_csv)[1]) {
+  file.code <- paste0(datasets_csv$Group[ind],"_",datasets_csv$Collection[ind])
+  dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
+
+  clusters <- getClusterizationData(dataset,clName = "mergedClusters")[[1]]
+  
+  deaScamPy <- ScamPy.DEA(dataSet = getRawData(dataset),
+                          clusters.list = clusters,
+                          project = file.code,
+                          dirOut = dirOut)
+  
+  write.csv(deaScamPy,
+          file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv"))) 
+  
+}
+```
+## Footer
+
+```{r}
+sessionInfo()
+```
+

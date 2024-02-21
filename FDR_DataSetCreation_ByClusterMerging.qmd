@@ -1,0 +1,405 @@
+---
+title: "False Discovery Rate: data-sets creation"
+author: "Marco Fantozzi"
+format: html
+editor: source
+date: "`r Sys.Date()`"
+---
+
+## Preamble
+
+```{r, preamble}
+# Load the libraries
+library(stringr)
+library(assertthat)
+library(rlang)
+library(scales)
+library(ggplot2)
+library(zeallot)
+library(data.table)
+library(COTAN)
+```
+
+```{r}
+assert_that(packageVersion("COTAN") >= package_version("2.3.3"),
+            msg = "Error: The required version of the 'COTAN' library is 2.3.3")
+
+inDir <- file.path("Data/MouseCortexFromLoom/")
+inRawDataDir <- file.path(inDir, "SingleClusterRawData/")
+
+outDir <- file.path("Data/MouseCortexFromLoom/FDR/MergedClusters_For_FDR/")
+if (!dir.exists(outDir)) {
+  dir.create(outDir)
+}
+
+outMergedRawDataDir <- outDir
+if (!dir.exists(outMergedRawDataDir)) {
+  dir.create(outMergedRawDataDir)
+}
+
+options(parallelly.fork.enable = TRUE)
+
+setLoggingLevel(2)
+setLoggingFile(file.path(outDir, "MixingClusters_FDR_ForebrainDorsal.log"))
+```
+
+
+## Loading all COTAN Objects
+
+```{r, eval=FALSE, echo=TRUE}
+fb135Obj <- readRDS(file = file.path(inRawDataDir, "e13.5_ForebrainDorsal.cotan.RDS"))
+getMetadataElement(fb135Obj, datasetTags()[["cond"]])
+
+fb150Obj <- readRDS(file = file.path(inRawDataDir, "e15.0_ForebrainDorsal.cotan.RDS"))
+getMetadataElement(fb150Obj, datasetTags()[["cond"]])
+
+fb175Obj <- readRDS(file = file.path(inRawDataDir, "e17.5_ForebrainDorsal.cotan.RDS"))
+getMetadataElement(fb175Obj, datasetTags()[["cond"]])
+```
+
+## Relevant clusters lists
+
+```{r, eval=TRUE, echo=FALSE}
+relevant <- list(
+    "E13.5" = c("432", "187", "434", "184", "437", "510"),
+    "E15.0" = c("432", "509", "510", "508", "428", "434", "437"),
+    "E17.5" = c("516", "505")
+)
+
+objSelector <- function(dsName) {
+  if (dsName == "E13.5") {
+    return(fb135Obj)
+  } else if (dsName == "E15.0") {
+    return(fb150Obj)
+  } else if (dsName == "E17.5") {
+    return(fb175Obj)
+  } else {
+   stop("Wrong dataset name") 
+  }
+}
+
+fullClusterName <- function(dsName, clName) {
+  paste0(dsName, "-", clName)
+}
+
+parseClusterGroupStr <- function(clGroupNames) {
+  # parse names like XXXEYY.Y + ZZZEWW.W [+ ...]
+  parsedNames <- str_split(str_split_1(clGroupNames, pattern = " [+] "), pattern = "E")
+  parsedNames <- lapply(parsedNames, function(p) {
+      fullClusterName(dsName = paste0("E", p[[2]]), clName = p[[1]])
+    })
+  return(unlist(parsedNames))
+}
+```
+
+## Align clusters from different datasets
+
+```{r, eval=FALSE, echo=TRUE}
+allGenes <- union(union(getGenes(fb135Obj), getGenes(fb150Obj)), getGenes(fb175Obj))
+
+# This function completes the raw data so that the genes list
+# matches the `allGenes` above
+fillGenes <- function(m, prefixName) {
+  # find the missing genes in the given matrix m
+  missingGenes <- !(allGenes %in% rownames(m))
+  # create a matrix with the right sizes for the missing genes
+  # and set their values all to zero
+  fillM <- matrix(0, nrow = sum(missingGenes), ncol = ncol(m))
+  rownames(fillM) <- allGenes[missingGenes]
+  # append the new matrix to the original and reorder the rows
+  # to match overall genes order
+  retM <- rbind(m, fillM)
+  retM <- retM[allGenes, ]
+  # assign unique identifiers to the columns, so that one can discriminate
+  # the source even after merging with other matrices
+  colnames(retM) <- paste0(prefixName, "_", colnames(retM))
+  return(retM)
+}
+```
+
+## Create all raw data for each cluster compatible with the full genes' list
+
+```{r, eval=FALSE, echo=TRUE}
+allClustersRawData <- list()
+for (dsName in names(relevant)) {
+  clList <- toClustersList(getClusters(objSelector(dsName),
+                                       clName = "original.clusters"))
+  for (clName in relevant[[dsName]]) {
+    fullName <- fullClusterName(dsName = dsName, clName = clName)
+    fullRawData <- fillGenes(getRawData(objSelector(dsName))[, clList[[clName]]],
+                             fullName)
+    allClustersRawData <- append(allClustersRawData, list(fullRawData))
+    names(allClustersRawData)[length(allClustersRawData)] <- fullName
+  }
+}
+
+assert_that(identical(rownames(allClustersRawData[[1]]), allGenes))
+
+# delete the COTAN objects
+rm(fb135Obj, fb150Obj, fb175Obj)
+```
+
+## Calculate ritz average for each cluster
+
+```{r, eval=FALSE, echo=FALSE}
+ritzMeans <- as.data.frame(lapply(allClustersRawData, function(data) {
+    log10(pmax(rowMeans(data), 1.4e-3))
+  }))
+colnames(ritzMeans) <- names(allClustersRawData)
+
+saveRDS(ritzMeans, file = file.path(outDir, "RitzAverageCount_PerCluster.RDS"))
+
+# These are in log10 scale
+absentThreshold  <- -2.0
+presentThreshold <- -1.0
+
+genesPresence <- factor((ritzMeans > absentThreshold) +
+                          (ritzMeans >= presentThreshold))
+levels(genesPresence) <- c("Absent", "Uncertain", "Present")
+
+genesPresence <- as.data.frame(matrix(genesPresence, ncol = ncol(ritzMeans)),
+                               row.names = rownames(ritzMeans))
+colnames(genesPresence) <- colnames(ritzMeans)
+
+saveRDS(genesPresence, file = file.path(outDir, "GenePresence_PerCluster.RDS"))
+
+print("Number of genes considered Present")
+print(colSums(genesPresence == "Present"))
+
+print("Number of genes considered Uncertain")
+print(colSums(genesPresence == "Uncertain"))
+
+print("Number of genes considered Absent")
+print(colSums(genesPresence == "Absent"))
+```
+
+## Parse selected clusters' collections
+
+```{r, echo=FALSE}
+
+allCombAsStr <- c(
+  ## 2 cluster (near): 50%, 50% - 90%, 10% 
+  "434E13.5 + 428E15.0",
+  "432E13.5 + 432E15.0",
+  "508E15.0 + 509E15.0",
+  
+  ## 2 cluster (medium): 50%, 50% - 90%, 10% 
+  "187E13.5 + 184E13.5",
+  "516E17.5 + 434E15.0",
+  "437E15.0 + 508E15.0",
+  
+  ## 2 cluster (far): 50%, 50% - 90%, 10% 
+  "516E17.5 + 187E13.5",
+  "437E13.5 + 510E15.0",
+  "184E13.5 + 509E15.0",
+  
+  ## 3 cluster (near pair + far cluster): 33%, 33%, 33%
+  "437E15.0 + 437E13.5 + 510E13.5",
+  "516E17.5 + 505E17.5 + 437E13.5",
+  "510E13.5 + 510E15.0 + 428E15.0",
+  
+  ## 3 cluster (near pair + far cluster): 70%, 20%, 10%:
+  "434E13.5 + 428E15.0 + 510E15.0",
+  "432E13.5 + 432E15.0 + 187E13.5",
+  "508E15.0 + 509E15.0 + 184E13.5",
+  
+  ## 5 clusters: 40%, 30%, 20%, 5%, 5%
+  "510E13.5 + 510E15.0 + 437E13.5 + 437E15.0 + 432E13.5",
+  "428E15.0 + 434E15.0 + 434E13.5 + 505E17.5 + 184E13.5",
+  "509E15.0 + 508E15.0 + 432E13.5 + 432E15.0 + 187E13.5"
+)
+
+allComb <- vapply(allCombAsStr,
+                  function(s) list(parseClusterGroupStr(s)),
+                  FUN.VALUE = list(NULL))
+names(allComb) <- NULL
+
+pairCombs <- list(
+  "near"   = allComb[1:3],
+  "medium" = allComb[4:6],
+  "far"    = allComb[7:9]
+)
+
+tripletCombs <- list(
+  "even"   = allComb[10:12],
+  "uneven" = allComb[13:15]
+)
+
+pentupletCombs <- list(
+  "uneven" = allComb[16:18]
+)
+
+allComb <- list(
+  "2_Clusters_even"   = pairCombs,
+  "2_Clusters_uneven" = pairCombs,
+  "3_Clusters"        = tripletCombs,
+  "5_Clusters"        = pentupletCombs
+)
+
+# ensure mixings preferences are aligned the the above structure
+allMixtures <- list(
+  "2_Clusters_even"   = rep.int(list(rep.int(list(c(0.5, 0.5)), 3L)), 3L),
+  "2_Clusters_uneven" = rep.int(list(rep.int(list(c(0.9, 0.1)), 3L)), 3L),
+  "3_Clusters"        = c(list(rep.int(list(rep.int(1.0/3.0, 3L)), 3L)),
+                          list(rep.int(list(c(0.7, 0.2, 0.1)), 3L))),
+  "5_Clusters"        = list(rep.int(list(c(0.4, 0.3, 0.2, 0.05, 0.05)), 3L))
+)
+```
+
+## Create merged clusters cells' collections
+
+```{r, eval=FALSE}
+set.seed(137L)
+
+cellsUsed <- as.data.frame(x = matrix(list(), ncol = 2 + length(allClustersRawData)))
+
+for (i in (1:length(allComb))) {
+  metaGroup <- allComb[[i]]
+  metaMix <- allMixtures[[i]]
+  metaGroupName <- names(allComb)[[i]]
+  print(paste0("Meta: ", metaGroupName))
+  
+  for (j in 1:length(metaGroup)) {
+    group <- metaGroup[[j]]
+    groupMix <- metaMix[[j]]
+    groupName <- paste0(metaGroupName, "_", names(metaGroup)[[j]])
+    print(paste0("Group: ", groupName))
+
+    for (k in 1:length(group)) {
+      coll <- group[[k]]
+      mix <- groupMix[[k]]
+      collName <- paste0(groupName, "_", k)
+      print(paste0("Coll: ", collName))
+      
+      pos <- names(allClustersRawData) %in% coll
+      collRawData <- allClustersRawData[pos]
+      
+      len <- unlist(lapply(collRawData, ncol))
+      perm <- order(len, decreasing = TRUE)
+
+      ratios <- len[perm] / mix
+      
+      cellsToPickUp <- set_names(ceiling(mix * min(ratios)),
+                                 nm = names(len)[perm])
+
+      collAsStr <- paste0(coll[perm], collapse = "_+_")
+      
+      numUsedCells <- set_names(rep(0L, length(allClustersRawData)),
+                             nm = names(allClustersRawData))
+      numUsedCells[names(cellsToPickUp)] <- cellsToPickUp
+      
+      cellsUsed <- rbind(cellsUsed, c(groupName, collAsStr, numUsedCells))
+
+      mergedRawData <- data.frame(row.names = allGenes)
+      mergedClusters <- c()
+      for (clName in names(cellsToPickUp)) {
+        cells <- sample(colnames(allClustersRawData[[clName]]),
+                        size = cellsToPickUp[[clName]],
+                        replace = FALSE)
+        mergedClusters <- c(mergedClusters,
+                            rep.int(max(0, mergedClusters) + 1L,
+                                    times = length(cells)))
+        mergedRawData <- cbind(mergedRawData,
+                               as.data.frame(allClustersRawData[[clName]][, cells]))
+      }
+      names(mergedClusters) <- colnames(mergedRawData)
+      mergedClusters <- niceFactorLevels(mergedClusters)
+      
+      mergedObj <- automaticCOTANObjectCreation(mergedRawData,
+                                         GEO = groupName,
+                                         sequencingMethod = "10X",
+                                         sampleCondition = collAsStr,
+                                         calcCoex = FALSE,
+                                         cores = 5L,
+                                         saveObj = FALSE)
+      mergedObj <- addClusterization(mergedObj, clName = "mergedClusters",
+                                     clusters = mergedClusters,
+                                     override = FALSE)
+
+      lfcDF <- logFoldChangeOnClusters(mergedObj, clusters = mergedClusters)
+      mergedObj <- addClusterization(mergedObj,
+                                     clName = "Contains_LogFoldChange",
+                                     clusters = mergedClusters,
+                                     coexDF = lfcDF, override = FALSE)
+
+      outFileName <- file.path(outMergedRawDataDir,
+                               paste0(collName, "_", collAsStr, ".RDS"))
+      print(outFileName)
+      saveRDS(mergedObj, file = outFileName)
+    }
+  }
+}
+colnames(cellsUsed) <- c("Group", "Collection", names(allClustersRawData))
+
+head(cellsUsed, n = 10)
+
+write.csv(cellsUsed, file = file.path(outMergedRawDataDir, "Cells_Usage_DataFrame.csv"))
+```
+
+## Loader
+
+```{r, eval=FALSE,echo=TRUE}
+cellsUsed <- read.csv(file = file.path(outMergedRawDataDir, "Cells_Usage_DataFrame.csv"))
+
+numTopGenes <- 100
+
+for(i in (1:nrow(cellsUsed))) {
+  collName <- cellsUsed[i, "Group"]
+  collAsStr <- cellsUsed[i, "Collection"]
+  fileName <- file.path(outMergedRawDataDir,
+                        paste0(collName, "_", (i - 1) %% 3 + 1,
+                               "_", collAsStr, ".RDS"))
+  print(paste("Analisys of", collName, "consisting of clusters", collAsStr))
+  
+  obj <- readRDS(fileName)
+  
+  cm1DF <- findClustersMarkers(obj, n = numTopGenes, clName = "mergedClusters")
+  
+  lfcDF <- getClusterizationData(obj, clName = "Contains_LogFoldChange")[["coex"]]
+
+  cm2DF <- as.data.frame(matrix(data = NA, nrow = 0L, ncol = 3L))
+  colnames(cm2DF) <- c("CL", "Gene", "LFC")
+
+  for(cl in colnames(lfcDF)) {
+    for (type in c("min", "max")) {
+        tmpDF <- as.data.frame(matrix(data = NA, nrow = numTopGenes, ncol = ncol(cm2DF)))
+        colnames(tmpDF) <- colnames(cm2DF)
+
+        # Get the first numTopGenes minimum/maximum scores for each cluster
+        sortedPos <- order(lfcDF[, cl], decreasing = (type == "max"))[1L:numTopGenes]
+  
+        tmpDF[["CL"]]   <- cl
+        tmpDF[["Gene"]] <- rownames(lfcDF)[sortedPos]
+        tmpDF[["LFC"]]  <- lfcDF[sortedPos, cl]
+
+        cm2DF <- rbind(cm2DF, tmpDF)
+        rm(tmpDF)
+    }
+  }
+
+  assert_that(identical(cm1DF$CL, cm2DF$CL))
+  
+  print("fraction of matching genes per cluster")
+  
+  ## to be finished, debugged...
+  for (bl in c(0:(nrow(cm1DF) %/% numTopGenes -1))) {
+    r <- bl * numTopGenes
+    genes1 <- cm1DF[(r + 1):(r + numTopGenes), "Gene"]
+    genes2 <- cm2DF[(r + 1):(r + numTopGenes), "Gene"]
+
+    msg <- paste0("Cluster ", cm1DF[r + 1, "CL"], ": ", 
+                 100.0 * length(intersect(genes1, genes2)) / numTopGenes, "%")
+    print(msg)
+  }
+}
+
+```
+
+
+## Footer
+
+```{r}
+sessionInfo()
+```
+
+

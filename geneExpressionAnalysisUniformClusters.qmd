@@ -1,0 +1,166 @@
+---
+title: "Explorative analysis of gene expression"
+date: "`r Sys.Date()`"
+output: html_document
+author: "Silvia Galfrè"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#library(COTAN)
+#options(parallelly.fork.enable = TRUE)
+#library(Seurat)
+#library(monocle3)
+#library(reticulate)
+library(ggplot2)
+library(stringr)
+library(dplyr)
+
+dirOut <- "Results/GeneExpressionExploration/"
+if (!exists(dirOut)) {
+  dir.create(dirOut)
+}
+dataSetDir <- "Data/MouseCortexFromLoom/SingleClusterRawData/"
+```
+
+```{r}
+df <- NA
+for (dataSetName in list.files(dataSetDir)) {
+  print(dataSetName)
+  name <- str_split(dataSetName,pattern = "_", simplify = T)[1]
+  cluster.name <- str_split(name,pattern = "e", simplify = T)[1]
+  time.point <- paste0("E",str_split(name,pattern = "e", simplify = T)[2])
+  dataSet <- readRDS(paste0(dataSetDir,dataSetName))
+  print(dim(dataSet))
+  message(dim(dataSet))
+  df.temp <- as.data.frame(list("RowSums"=rowSums(dataSet)))
+  df.temp$N.cells <- dim(dataSet)[2]
+  df.temp$genes <- rownames(df.temp)
+  df.temp$log10_exp <- log10((df.temp$RowSums+1)/df.temp$N.cells)
+  df.temp$cluster <- cluster.name
+  df.temp$time.point <- time.point
+  
+  df <- rbind(df,df.temp)
+  
+}
+ df <- df[2:nrow(df),]
+
+df$cl_time <- paste0(df$cluster,"_",df$time.point)
+
+```
+
+```{r plot E13.5,fig.width=10,fig.height=6}
+d_bg <- df[,-5] 
+
+ggplot(df[df$time.point == "E13.5",], 
+       aes(x = log10_exp, fill = cluster)) +
+  geom_histogram(data = d_bg, 
+                 fill = "grey", alpha = .8,binwidth = 0.1/6) +
+  geom_histogram(colour = "black",binwidth = 0.1) +
+  facet_wrap(~ cluster) + ylim(0,2500)+
+  guides(fill = FALSE) +  # to remove the legend
+  theme_bw()  
+```
+
+```{r plot E15.0,fig.width=10,fig.height=9}
+ggplot(df[df$time.point == "E15.0",], 
+       aes(x = log10_exp, fill = cluster)) +
+  geom_histogram(data = d_bg, 
+                 fill = "grey", alpha = .8,binwidth = 0.1/6) +
+  geom_histogram(colour = "black",binwidth = 0.1) +
+  facet_wrap(~ cluster) + ylim(0,2500)+
+  guides(fill = FALSE) +  # to remove the legend
+  theme_bw()  
+```
+
+```{r plot E17.5,fig.height=3}
+ggplot(df[df$time.point == "E17.5",], 
+       aes(x = log10_exp, fill = cluster)) +
+  geom_histogram(data = d_bg, 
+                 fill = "grey", alpha = .8,binwidth = 0.1/6) +
+  geom_histogram(colour = "black") +
+  facet_wrap(~ cluster) +ylim(0,2500)+
+  guides(fill = FALSE) +  # to remove the legend
+  theme_bw()  
+```
+
+```{r,fig.height=8, fig.width=8}
+venn <- list("Cl184" = df[df$log10_exp > -1 & df$time.point == "E13.5" & df$cluster == "Cl184",]$genes,
+             "Cl187" = df[df$log10_exp > -1 & df$time.point == "E13.5" & df$cluster == "Cl187",]$genes,
+             "Cl432" = df[df$log10_exp > -1 & df$time.point == "E13.5" & df$cluster == "Cl432",]$genes,
+             "Cl434" = df[df$log10_exp > -1 & df$time.point == "E13.5" & df$cluster == "Cl434",]$genes,
+             "Cl437" = df[df$log10_exp > -1 & df$time.point == "E13.5" & df$cluster == "Cl437",]$genes,
+             "Cl510" = df[df$log10_exp > -1 & df$time.point == "E13.5" & df$cluster == "Cl510",]$genes)
+library(ggVennDiagram)
+
+ggVennDiagram(
+  venn,
+  #fill_color = c("#0073C2FF", "#EFC000FF", "#868686FF","#009E73","#993E83","#007310FF"),
+  stroke_size = 0.5, set_name_size = 4
+  )+ scale_fill_distiller(palette = "RdBu")
+
+
+```
+
+```{r, eval=FALSE, echo=FALSE}
+df <- NA
+for (dataSetName in list.files(dataSetDir)) {
+  print(dataSetName)
+  name <- str_split(dataSetName,pattern = "_", simplify = T)[1]
+  cluster.name <- str_split(name,pattern = "e", simplify = T)[1]
+  time.point <- paste0("E",str_split(name,pattern = "e", simplify = T)[2])
+  dataSet <- readRDS(paste0(dataSetDir,dataSetName))
+  dataSet <- t(t(dataSet+1)/(colSums(dataSet)))
+  
+  print(dim(dataSet))
+  message(dim(dataSet))
+  df.temp <- as.data.frame(list("RowSums"=rowSums(dataSet)))
+  
+  df.temp$N.cells <- dim(dataSet)[2]
+  df.temp$RowMeansLog <- rowMeans(log10(dataSet))
+  df.temp$genes <- rownames(df.temp)
+  df.temp$log10_exp <- log10((df.temp$RowSums)/df.temp$N.cells)
+  df.temp$cluster <- cluster.name
+  df.temp$time.point <- time.point
+  
+  df <- rbind(df,df.temp)
+  
+}
+ df <- df[2:nrow(df),]
+
+df$cl_time <- paste0(df$cluster,"_",df$time.point)
+
+```
+
+```{r,fig.width=10,fig.height=6, eval=FALSE, echo=FALSE}
+d_bg <- df[,-6] 
+
+ggplot(df[df$time.point == "E13.5",], 
+       aes(x = log10_exp, fill = cluster)) +
+  geom_histogram(data = d_bg, 
+                 fill = "grey", alpha = .8,binwidth = 0.01) +
+  geom_histogram(colour = "black",binwidth = 0.05) +
+  facet_wrap(~ cluster) + #ylim(0,2500)+
+  guides(fill = FALSE) +  # to remove the legend
+  theme_bw()  
+```
+
+```{r , eval=FALSE, echo=FALSE}
+ggplot(df[df$time.point == "E13.5",], 
+       aes(x = RowMeansLog, fill = cluster)) +
+  geom_histogram(data = d_bg, 
+                 fill = "grey", alpha = .8,binwidth = 0.01) +
+  geom_histogram(colour = "black",binwidth = 0.02) +
+  facet_wrap(~ cluster) + #ylim(0,2500)+
+  guides(fill = FALSE) +  # to remove the legend
+  theme_bw()  
+
+```
+
+
+
+```{r}
+sessionInfo()
+```
+
