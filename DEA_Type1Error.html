@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Silvia Giulia Galfrè">
-<meta name="dcterms.date" content="2024-02-21">
+<meta name="dcterms.date" content="2024-02-26">
 
 <title>COTAN Datasets analysis - Differential expression analisys: type I error</title>
 <style>
@@ -369,12 +369,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">FDR analysis - define DE genes</span></a>
   </div>
 </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+ <span class="menu-text">FDR and TPR - ROC curves</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./FDR_analisysResults.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">FDR and TPR - ROC curves</span></a>
+  <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 3% 10%</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5_20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5% 20%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5%</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
     </ul>
@@ -414,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 21, 2024</p>
+      <p class="date">February 26, 2024</p>
     </div>
   </div>
   
@@ -534,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>ScamPy.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>ScanPy.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,</span>
 <span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>                       clusters.list, </span>
 <span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>                       project, </span>
 <span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>                       dirOut,</span>
@@ -566,27 +589,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>                   feature_meta, </span>
 <span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"mt"</span>, </span>
 <span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>                   dirOut, </span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>                   project,</span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>                   percentage)</span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(dirOut,</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>                                project,</span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"_Scampy_de_genes_"</span>,</span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>                                percentage,</span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>                                <span class="st">".csv"</span>),</span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> T, </span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>                   percentage,project)</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(dirOut,</span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>                                project,</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"_ScanPy_de_genes_"</span>,</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>                                percentage,</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>                                <span class="st">".csv"</span>),</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> T, </span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We would evaluate the Type I error and to do so, we consider some transcriptionally uniform clusters from the Loom dataset. We splitted these cluster in two partitions (with three different dimensions: 1/2, 1/3 and 1/4) one containing the cells with higher library size and the other with the lower library size. On these two clusters we than tested the four different software.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (perc <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.33</span>, <span class="fl">0.25</span>,<span class="fl">0.67</span>, <span class="fl">0.75</span>)) {</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (perc <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.75</span>)) { <span class="co">#0.5, 0.33, 0.25,0.67, </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">1</span>,<span class="at">ncol =</span> <span class="dv">4</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(outPutMatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Cotan"</span>,<span class="st">"Seurat"</span>, <span class="st">"Monocle"</span>, <span class="st">"ScamPy"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(outPutMatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Cotan"</span>,<span class="st">"Seurat"</span>, <span class="st">"Monocle"</span>, <span class="st">"ScanPy"</span>)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (dataSet <span class="cf">in</span> <span class="fu">list.files</span>(dataSetDir)) {</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -640,31 +662,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(monocle.dea.out)</span>
 <span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
 <span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    scampy.dea.out <span class="ot">&lt;-</span> <span class="fu">ScamPy.DEA</span>(<span class="at">dataSet =</span> dataSet, </span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    ScanPy.dea.out <span class="ot">&lt;-</span> <span class="fu">ScanPy.DEA</span>(<span class="at">dataSet =</span> dataSet, </span>
 <span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">clusters.list =</span> clusters.list, </span>
 <span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">project =</span> cluster.name, </span>
 <span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">dirOut =</span> dirOut, <span class="at">percentage =</span> perc</span>
 <span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                                  )</span>
 <span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    scampy.dea.out.filterd <span class="ot">&lt;-</span> scampy.dea.out[scampy.dea.out<span class="sc">$</span>pval_adj_cl1 <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,<span class="fu">dim</span>(scampy.dea.out.filterd)[<span class="dv">1</span>])</span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(scampy.dea.out.filterd)</span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> outTemp[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(outTemp)]</span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    outPutMatrix <span class="ot">&lt;-</span> <span class="fu">rbind</span>(outPutMatrix,outTemp)</span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(outPutMatrix)[<span class="fu">nrow</span>(outPutMatrix)] <span class="ot">&lt;-</span> cluster.name</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span>   outPutMatrix[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(outPutMatrix),]</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    ScanPy.dea.out.filterd <span class="ot">&lt;-</span> ScanPy.dea.out[ScanPy.dea.out<span class="sc">$</span>pval_adj <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                                             <span class="sc">&amp;</span> ScanPy.dea.out<span class="sc">$</span>clusters <span class="sc">==</span> <span class="st">"cl1.0"</span>,]</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,<span class="fu">dim</span>(ScanPy.dea.out.filterd)[<span class="dv">1</span>])</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(ScanPy.dea.out.filterd)</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> outTemp[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(outTemp)]</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    outPutMatrix <span class="ot">&lt;-</span> <span class="fu">rbind</span>(outPutMatrix,outTemp)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(outPutMatrix)[<span class="fu">nrow</span>(outPutMatrix)] <span class="ot">&lt;-</span> cluster.name</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span>   outPutMatrix[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(outPutMatrix),]</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="summarize-the-output" class="level3">
