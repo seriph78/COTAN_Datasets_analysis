@@ -481,7 +481,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#library(COTAN)</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Define colors</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>colors.methods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#ed5537"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>colors.methods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#ed5537"</span>,<span class="st">"#95ba8f"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>genesList <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
@@ -515,29 +515,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"MonocleCorr"</span>)){</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Monocle corr."</span></span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print("ok")</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"Corr"</span>)){</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat corr."</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corr[,genesList<span class="sc">$</span>hk])</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.hk)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"ScanPyCorr"</span>)){</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"ScanPy corr."</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print("ok")</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"Corr"</span>)){</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat corr."</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.hk),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.hk)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.hk)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="sc">!</span> table.tot.hk<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.hk<span class="sc">$</span>Gene2,]</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Not hk</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corr[<span class="fu">rownames</span>(corr) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers),<span class="fu">colnames</span>(corr) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)])</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.neural)</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.neural),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.neural)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corr[,genesList<span class="sc">$</span>hk])</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.hk)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.hk),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.hk)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.hk)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="sc">!</span> table.tot.hk<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.hk<span class="sc">$</span>Gene2,]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Not hk</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(corr[<span class="fu">rownames</span>(corr) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers),<span class="fu">colnames</span>(corr) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)])</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.neural)</span>
 <span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.neural,table.neural)</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="sc">!</span> table.tot.neural<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.neural<span class="sc">$</span>Gene2,]</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.neural),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.neural)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.neural,table.neural)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="sc">!</span> table.tot.neural<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.neural<span class="sc">$</span>Gene2,]</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.hk),]</span>
@@ -727,64 +730,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat p-values"</span></span>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"MonoclePValues"</span>)){</span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Monocle p-values"</span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[,genesList<span class="sc">$</span>hk])</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.hk)</span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.hk),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.hk)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.hk)</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="sc">!</span> table.tot.hk<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.hk<span class="sc">$</span>Gene2,]</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Not hk</span></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[<span class="fu">rownames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers),<span class="fu">colnames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)])</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.neural)</span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.neural),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.neural)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.neural,table.neural)</span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="sc">!</span> table.tot.neural<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.neural<span class="sc">$</span>Gene2,]</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.hk),]</span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>table.tot.hk<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Constitutive"</span> </span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.neural),]</span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>table.tot.neural<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Neural"</span></span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="do">## For ECDL</span></span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.hk<span class="sc">$</span>Method)) {</span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.hk[table.tot.hk<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> tmp.tot</span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.neural<span class="sc">$</span>Method)) {</span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.neural[table.tot.neural<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> tmp.tot</span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a><span class="do">############</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"ScanPyPValues"</span>)){</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"ScanPy p-values"</span></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[,genesList<span class="sc">$</span>hk])</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.hk)</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  table.hk <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.hk),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.hk)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  table.hk<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.hk)</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="sc">!</span> table.tot.hk<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.hk<span class="sc">$</span>Gene2,]</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Not hk</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pval[<span class="fu">rownames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers),<span class="fu">colnames</span>(pval) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers)])</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Gene1 <span class="ot">&lt;-</span> <span class="fu">rownames</span>(table.neural)</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  table.neural <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="fu">as.data.frame</span>(table.neural),<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span>(<span class="fu">ncol</span>(table.neural)<span class="sc">-</span><span class="dv">1</span>)),<span class="at">names_to =</span> <span class="st">"Gene2"</span>)</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  table.neural<span class="sc">$</span>Method <span class="ot">&lt;-</span> code</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.neural,table.neural)</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="sc">!</span> table.tot.neural<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot.neural<span class="sc">$</span>Gene2,]</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.hk),]</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>table.tot.hk<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Constitutive"</span> </span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.neural),]</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>table.tot.neural<span class="sc">$</span>GeneType <span class="ot">&lt;-</span> <span class="st">"Neural"</span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="do">## For ECDL</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.hk<span class="sc">$</span>Method)) {</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.hk[table.tot.hk<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> tmp.tot</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (method <span class="cf">in</span> <span class="fu">unique</span>(table.tot.neural<span class="sc">$</span>Method)) {</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(table.tot.neural[table.tot.neural<span class="sc">$</span>Method <span class="sc">==</span> method,])</span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>  tmp[<span class="fu">order</span>(<span class="fu">abs</span>(tmp<span class="sc">$</span>value)),]<span class="sc">$</span>n <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tmp)[<span class="dv">1</span>])<span class="sc">/</span>(<span class="fu">dim</span>(tmp)[<span class="dv">1</span>]<span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  tmp<span class="sc">$</span>Y_axis <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span>tmp<span class="sc">$</span>n</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>  tmp.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tmp.tot,tmp)</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>tmp.tot <span class="ot">&lt;-</span> tmp.tot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(tmp.tot),]</span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> tmp.tot</span>
 <span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.tot.neural) </span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> table.tot[<span class="sc">!</span>table.tot<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot<span class="sc">$</span>Gene2,]</span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"COTAN p-val"</span>,]<span class="sc">$</span>Gene1,</span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>          table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Seurat p-val."</span>,]<span class="sc">$</span>Gene1 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="do">############</span></span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.tot.neural) </span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> table.tot[<span class="sc">!</span>table.tot<span class="sc">$</span>Gene1 <span class="sc">==</span> table.tot<span class="sc">$</span>Gene2,]</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"COTAN p-val"</span>,]<span class="sc">$</span>Gene1,</span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>          table.tot[table.tot<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Seurat p-val."</span>,]<span class="sc">$</span>Gene1 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -913,7 +918,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-03-10 16:44:13 CET"</code></pre>
+<pre><code>[1] "2024-03-17 19:40:59 CET"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -941,7 +946,7 @@ attached base packages:
 
 other attached packages:
  [1] scales_1.3.0       ggstance_0.3.6     Matrix_1.6-3       cowplot_1.1.1     
- [5] gridExtra_2.3      ggstatsplot_0.12.0 gghalves_0.1.4     ggplot2_3.4.2     
+ [5] gridExtra_2.3      ggstatsplot_0.12.0 gghalves_0.1.4     ggplot2_3.5.0     
  [9] stringr_1.5.0      tidyr_1.3.0       
 
 loaded via a namespace (and not attached):
