@@ -484,19 +484,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>colors.methods <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#8856A7"</span>,<span class="st">"#ed5537"</span>,<span class="st">"#95ba8f"</span>,<span class="st">"#EDF8FB"</span>,<span class="st">"#B3CDE3"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>genesList <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NPGs"</span><span class="ot">=</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Nes"</span>, <span class="st">"Vim"</span>, <span class="st">"Sox2"</span>, <span class="st">"Sox1"</span>, <span class="st">"Notch1"</span>, <span class="st">"Hes1"</span>, <span class="st">"Hes5"</span>, <span class="st">"Pax6"</span>),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PNGs"</span><span class="ot">=</span> </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Map2"</span>, <span class="st">"Tubb3"</span>, <span class="st">"Neurod1"</span>, <span class="st">"Nefm"</span>, <span class="st">"Nefl"</span>, <span class="st">"Dcx"</span>, <span class="st">"Tbr1"</span>),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"hk"</span><span class="ot">=</span> </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Calm1"</span>, <span class="st">"Cox6b1"</span>, <span class="st">"Ppia"</span>, <span class="st">"Rpl18"</span>, <span class="st">"Cox7c"</span>, <span class="st">"Erh"</span>, <span class="st">"H3f3a"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Taf1"</span>, <span class="st">"Taf2"</span>, <span class="st">"Gapdh"</span>, <span class="st">"Actb"</span>, <span class="st">"Golph3"</span>, <span class="st">"Zfr"</span>, <span class="st">"Sub1"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tars"</span>, <span class="st">"Amacr"</span>),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"layers"</span> <span class="ot">=</span> </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Reln"</span>,<span class="st">"Lhx5"</span>,<span class="st">"Cux1"</span>,<span class="st">"Satb2"</span>,<span class="st">"Tle1"</span>,<span class="st">"Mef2c"</span>,<span class="st">"Rorb"</span>,<span class="st">"Sox5"</span>,<span class="st">"Bcl11b"</span>,<span class="st">"Fezf2"</span>,<span class="st">"Foxp2"</span>,<span class="st">"Ntf3"</span>,<span class="st">"Rasgrf2"</span>,<span class="st">"Pvrl3"</span>, <span class="st">"Cux2"</span>,<span class="st">"Slc17a6"</span>, <span class="st">"Sema3c"</span>,<span class="st">"Thsd7a"</span>, <span class="st">"Sulf2"</span>, <span class="st">"Kcnk2"</span>,<span class="st">"Grik3"</span>, <span class="st">"Etv1"</span>, <span class="st">"Tle4"</span>, <span class="st">"Tmem200a"</span>, <span class="st">"Glra2"</span>, <span class="st">"Etv1"</span>,<span class="st">"Htr1f"</span>, <span class="st">"Sulf1"</span>,<span class="st">"Rxfp1"</span>, <span class="st">"Syt6"</span>) </span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># From https://www.science.org/doi/10.1126/science.aam8999</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>layer.genes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"CoexData/some_layer_maerkers.csv"</span>, <span class="at">header =</span> T,<span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>genesList <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NPGs"</span><span class="ot">=</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Nes"</span>, <span class="st">"Vim"</span>, <span class="st">"Sox2"</span>, <span class="st">"Sox1"</span>, <span class="st">"Notch1"</span>, <span class="st">"Hes1"</span>, <span class="st">"Hes5"</span>, <span class="st">"Pax6"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"PNGs"</span><span class="ot">=</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Map2"</span>, <span class="st">"Tubb3"</span>, <span class="st">"Neurod1"</span>, <span class="st">"Nefm"</span>, <span class="st">"Nefl"</span>, <span class="st">"Dcx"</span>, <span class="st">"Tbr1"</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"hk"</span><span class="ot">=</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"Calm1"</span>, <span class="st">"Cox6b1"</span>, <span class="st">"Ppia"</span>, <span class="st">"Rpl18"</span>, <span class="st">"Cox7c"</span>, <span class="st">"Erh"</span>, <span class="st">"H3f3a"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Taf1"</span>, <span class="st">"Taf2"</span>, <span class="st">"Gapdh"</span>, <span class="st">"Actb"</span>, <span class="st">"Golph3"</span>, <span class="st">"Zfr"</span>, <span class="st">"Sub1"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tars"</span>, <span class="st">"Amacr"</span>),</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"layers"</span> <span class="ot">=</span> <span class="fu">unique</span>(<span class="fu">unlist</span>(<span class="fu">str_split</span>(layer.genes<span class="sc">$</span>supertype.markers.combo,<span class="at">pattern =</span> <span class="st">","</span>))) </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2","Ntf3","Rasgrf2","Pvrl3", "Cux2","Slc17a6", "Sema3c","Thsd7a", "Sulf2", "Kcnk2","Grik3", "Etv1", "Tle4", "Tmem200a", "Glra2", "Etv1","Htr1f", "Sulf1","Rxfp1", "Syt6") </span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># From https://www.science.org/doi/10.1126/science.aam8999</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="coex-and-correlations" class="level2">
 <h2 class="anchored" data-anchor-id="coex-and-correlations">COEX and Correlations</h2>
@@ -719,19 +721,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  pval <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">paste0</span>(<span class="st">"CoexData/"</span>,file))</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#pval &lt;- as.data.frame(as.matrix(pval))</span></span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"Cotan"</span>)){</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"COTAN p-values"</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"COTAN"</span></span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="fu">all</span>(<span class="fu">diag</span>(pval)) <span class="sc">==</span> <span class="dv">1</span>){</span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>      </span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">diag</span>(pval) <span class="ot">=</span> <span class="dv">0</span></span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    }</span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"PValuesSCT"</span>)){</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat SCT p-values"</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat SCT"</span></span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"SeuratPValues"</span>)){</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat p-values"</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat"</span></span>
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"MonoclePValues"</span>)){</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Monocle p-values"</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Monocle"</span></span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"ScanPyPValues"</span>)){</span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"ScanPy p-values"</span></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"ScanPy"</span></span>
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -800,13 +802,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table.tot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  Gene1  Gene2     value         Method     GeneType         n    Y_axis
-2  Actb  Calm1 0.1154619 COTAN p-values Constitutive 0.3496081 0.6503919
-3  Actb Cox6b1 0.3563300 COTAN p-values Constitutive 0.5415454 0.4584546
-4  Actb   Ppia 0.2790691 COTAN p-values Constitutive 0.4871221 0.5128779
-5  Actb  Rpl18 0.4733509 COTAN p-values Constitutive 0.6257559 0.3742441
-6  Actb  Cox7c 0.8035390 COTAN p-values Constitutive 0.8680851 0.1319149
-7  Actb    Erh 0.6855733 COTAN p-values Constitutive 0.7746920 0.2253080</code></pre>
+<pre><code>  Gene1  Gene2     value Method     GeneType         n    Y_axis
+2  Actb  Calm1 0.1154619  COTAN Constitutive 0.3496081 0.6503919
+3  Actb Cox6b1 0.3563300  COTAN Constitutive 0.5415454 0.4584546
+4  Actb   Ppia 0.2790691  COTAN Constitutive 0.4871221 0.5128779
+5  Actb  Rpl18 0.4733509  COTAN Constitutive 0.6257559 0.3742441
+6  Actb  Cox7c 0.8035390  COTAN Constitutive 0.8680851 0.1319149
+7  Actb    Erh 0.6855733  COTAN Constitutive 0.7746920 0.2253080</code></pre>
 </div>
 </div>
 <section id="constitutive-genes" class="level3">
@@ -908,8 +910,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">trans_format</span>(<span class="st">"log10"</span>, <span class="fu">math_format</span>(<span class="dv">10</span><span class="sc">^</span>.x)),</span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.0001</span>,<span class="fl">0.05</span>)) <span class="sc">+</span> </span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> GeneType ,<span class="at">scales=</span><span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors.methods)<span class="sc">+</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> colors.methods)<span class="sc">+</span><span class="fu">xlab</span>(<span class="st">"p-values"</span>)<span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="generalCoexAssess_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -918,7 +920,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-03-17 19:40:59 CET"</code></pre>
+<pre><code>[1] "2024-03-22 17:29:02 CET"</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -953,7 +955,7 @@ loaded via a namespace (and not attached):
  [1] utf8_1.2.3             generics_0.1.3         stringi_1.8.1         
  [4] lattice_0.22-5         digest_0.6.33          magrittr_2.0.3        
  [7] correlation_0.8.4      evaluate_0.21          grid_4.3.2            
-[10] estimability_1.4.1     mvtnorm_1.2-2          fastmap_1.1.1         
+[10] estimability_1.5       mvtnorm_1.2-2          fastmap_1.1.1         
 [13] jsonlite_1.8.7         rematch2_2.1.2         purrr_1.0.1           
 [16] fansi_1.0.4            cli_3.6.1              rlang_1.1.1           
 [19] munsell_0.5.0          withr_3.0.0            yaml_2.3.7            
