@@ -158,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Dataset1.html" class="sidebar-item-text sidebar-link">
+  <a href="./Mouse_Cortex_E14.5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cleaning and cell clustering</span></a>
   </div>
 </li>
@@ -584,309 +584,289 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GDIPlot</span>(obj,<span class="at">genes =</span> genesList,<span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>GDI_DF <span class="ot">&lt;-</span> <span class="fu">calculateGDI</span>(obj)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>GDI_DF<span class="sc">$</span>geneType <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (cat <span class="cf">in</span> <span class="fu">names</span>(genesList)) {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  GDI_DF[<span class="fu">rownames</span>(GDI_DF) <span class="sc">%in%</span> genesList[[cat]],]<span class="sc">$</span>geneType <span class="ot">&lt;-</span> cat</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(GDI_DF[<span class="fu">unlist</span>(int.genes),],<span class="fu">paste0</span>(<span class="st">"CoexData/"</span>,<span class="st">"Variance_GDI_genes"</span>,<span class="fu">getMetadataElement</span>(obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]]),<span class="st">".csv"</span>))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>GDI_DF[<span class="fu">unlist</span>(int.genes),]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         sum.raw.norm       GDI  exp.cells geneType
+Nes          5.220644 1.9759151 13.9588101     NPGs
+Vim          5.707954 2.4316257 13.3867277     NPGs
+Sox2         5.049686 2.4580921  9.2677346     NPGs
+Sox1         2.596456 1.5372902  1.7162471     NPGs
+Notch1       2.548442 1.2912127  1.2585812     NPGs
+Hes1         3.815307 2.0026215  3.0892449     NPGs
+Hes5         5.005001 2.3956230  6.5217391     NPGs
+Pax6         3.925807 1.7927127  4.0045767     NPGs
+Calm1        8.420630 1.9599507 89.4736842       hk
+Cox6b1       7.396777 1.6401134 75.9725400       hk
+Ppia         4.938416 1.5230935 15.4462243       hk
+Rpl18        6.336462 1.4146625 44.1647597       hk
+Cox7c        6.144064 1.3937240 39.0160183       hk
+Erh          5.116709 1.2996389 17.9633867       hk
+H3f3a        6.883043 1.5810893 61.7848970       hk
+Taf1         5.356496 1.3000061 16.4759725       hk
+Taf2         4.784093 1.3661691 11.5560641       hk
+Gapdh        2.027649 1.0309864  0.9153318       hk
+Actb         9.168400 1.2795919 98.3981693       hk
+Golph3       4.401339 1.2584072  8.6956522       hk
+Zfr          6.134988 1.4748224 35.0114416       hk
+Sub1         6.778528 1.6575142 56.9794050       hk
+Tars         4.622981 1.3112605 10.4118993       hk
+Amacr        3.001914 1.0595608  1.7162471       hk
+Map2         7.165812 1.5519874 65.3318078     PNGs
+Tubb3        8.735578 2.3871787 90.9610984     PNGs
+Neurod1      5.979697 1.4115723 20.8237986     PNGs
+Nefm         5.247537 1.8040041 11.4416476     PNGs
+Nefl         4.397731 1.6537969  5.2631579     PNGs
+Dcx          7.063133 1.6738575 63.1578947     PNGs
+Tbr1         5.930953 1.5543822 26.6590389     PNGs
+Reln         4.630042 1.3624092  4.1189931   layers
+Lhx5         3.288483 1.4261767  1.4874142   layers
+Cux1         6.104752 1.4098312 32.6086957   layers
+Satb2        6.545260 1.7564615 38.9016018   layers
+Tle1         4.942203 1.2576091 12.4713959   layers
+Mef2c        7.176654 2.0319404 50.2288330   layers
+Rorb         4.038835 1.4237173  5.0343249   layers
+Sox5         5.686965 1.4932040 18.0778032   layers
+Bcl11b       5.827814 1.3788500 22.6544622   layers
+Fezf2        5.060242 1.8449393 10.0686499   layers
+Foxp2        3.715673 1.2017254  2.6315789   layers
+Ntf3         3.517345 1.3707172  2.5171625   layers
+Pvrl3        4.638048 1.4248249  8.6956522   layers
+Cux2         5.235976 1.3303178 14.6453089   layers
+Slc17a6      4.833627 1.3393122  9.9542334   layers
+Sema3c       5.091768 1.3767920 11.8993135   layers
+Thsd7a       4.340644 1.2252121  4.9199085   layers
+Sulf2        3.014381 1.2499911  1.7162471   layers
+Kcnk2        5.256674 1.3228860 19.1075515   layers
+Grik3        3.920478 1.3638079  2.8604119   layers
+Etv1         3.994692 1.5185054  4.1189931   layers
+Tle4         4.873726 1.4669420  8.4668192   layers
+Tmem200a     2.962816 1.1818921  2.0594966   layers
+Glra2        4.613463 1.3419476  9.7254005   layers
+Etv1.1       3.994692 1.5185054  4.1189931   layers
+Htr1f        2.004839 0.9689532  0.6864989   layers
+Syt6         3.750383 1.3359728  3.6613272   layers</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">GDIPlot</span>(obj,<span class="at">GDIIn =</span> GDI_DF, <span class="at">genes =</span> genesList,<span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="seurat-correlation" class="level2">
 <h2 class="anchored" data-anchor-id="seurat-correlation">Seurat correlation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rfast)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Rfast)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallel)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(doParallel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>srat<span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> <span class="fu">getRawData</span>(obj), <span class="at">project =</span> <span class="st">"E14.5"</span>, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">200</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>srat[[<span class="st">"percent.mt"</span>]] <span class="ot">&lt;-</span> <span class="fu">PercentageFeatureSet</span>(srat, <span class="at">pattern =</span> <span class="st">"^mt-"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(srat)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(srat, <span class="at">selection.method =</span> <span class="st">"vst"</span>, <span class="at">nfeatures =</span> <span class="dv">2000</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot variable features with and without labels</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">VariableFeaturePlot</span>(srat)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">LabelPoints</span>(<span class="at">plot =</span> plot1, <span class="at">points =</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers), <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">LabelPoints</span>(<span class="at">plot =</span> plot1, <span class="at">points =</span> <span class="fu">c</span>(genesList<span class="sc">$</span>hk), <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>srat<span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> <span class="fu">getRawData</span>(obj), <span class="at">project =</span> <span class="st">"E14.5"</span>, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">200</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>srat[[<span class="st">"percent.mt"</span>]] <span class="ot">&lt;-</span> <span class="fu">PercentageFeatureSet</span>(srat, <span class="at">pattern =</span> <span class="st">"^mt-"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(srat)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(srat, <span class="at">selection.method =</span> <span class="st">"vst"</span>, <span class="at">nfeatures =</span> <span class="dv">2000</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># plot variable features with and without labels</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">VariableFeaturePlot</span>(srat)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(plot1<span class="sc">$</span>data[<span class="fu">rownames</span>(plot1<span class="sc">$</span>data) <span class="sc">%in%</span> <span class="fu">unlist</span>(genesList),],</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>          <span class="fu">paste0</span>(<span class="st">"CoexData/"</span>,<span class="st">"Variance_Seurat_genes"</span>,<span class="fu">getMetadataElement</span>(obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]]),<span class="st">".csv"</span>))</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">LabelPoints</span>(<span class="at">plot =</span> plot1, <span class="at">points =</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>PNGs,genesList<span class="sc">$</span>layers), <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>all.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(srat)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(srat, <span class="at">features =</span> all.genes)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>seurat.data <span class="ot">=</span> <span class="fu">GetAssayData</span>(srat,<span class="at">layer =</span> <span class="st">"data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(seurat.data)[<span class="fu">rownames</span>(seurat.data) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs, genesList<span class="sc">$</span>hk, genesList<span class="sc">$</span>PNGs, genesList<span class="sc">$</span>layers)]</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(seurat.data)[int.genes,])</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gene names for the subset</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>subset_gene_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(subset_data)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># Change this to the desired number of cores</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(num_cores)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>cor_p_values <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data), <span class="at">.combine =</span> <span class="st">"cbind"</span>) <span class="sc">%dopar%</span> {</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(subset_data))</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data)) {</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> j) {</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>      cor_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(subset_data[, i], subset_data[, j], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> cor_result<span class="sc">$</span>p.value</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop the parallel backend</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract correlation coefficients and p-values</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>seurat.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named matrix for p-values</span></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cor_p_values) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cor_p_values) <span class="ot">&lt;-</span> subset_gene_names</span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> cor_p_values</span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(seurat.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>seurat.data.cor <span class="ot">&lt;-</span> seurat.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
-<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
-<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(seurat.data.cor),</span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(seurat.corMat)*unit(2.5, "mm"), </span></span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(seurat.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
-<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Seurat corr"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
-<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">LabelPoints</span>(<span class="at">plot =</span> plot1, <span class="at">points =</span> <span class="fu">c</span>(genesList<span class="sc">$</span>hk), <span class="at">repel =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span>  <span class="fu">SCTransform</span>(srat, <span class="at">method =</span> <span class="st">"glmGamPoi"</span>, <span class="at">vars.to.regress =</span> <span class="st">"percent.mt"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>seurat.data <span class="ot">=</span> srat[[<span class="st">"SCT"</span>]]<span class="sc">@</span>data</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(seurat.data)[<span class="fu">rownames</span>(seurat.data) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs, genesList<span class="sc">$</span>hk, genesList<span class="sc">$</span>PNGs, genesList<span class="sc">$</span>layers)]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(seurat.data)[int.genes,])</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gene names for the subset</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>subset_gene_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(subset_data)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># Change this to the desired number of cores</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(num_cores)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>cor_p_values <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data), <span class="at">.combine =</span> <span class="st">"cbind"</span>) <span class="sc">%dopar%</span> {</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(subset_data))</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data)) {</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> j) {</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>      cor_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(subset_data[, i], subset_data[, j], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> cor_result<span class="sc">$</span>p.value</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop the parallel backend</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract correlation coefficients and p-values</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>seurat.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named matrix for p-values</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cor_p_values) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cor_p_values) <span class="ot">&lt;-</span> subset_gene_names</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> cor_p_values</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(seurat.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>seurat.data.cor <span class="ot">&lt;-</span> seurat.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(seurat.data.cor) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(seurat.data.cor),</span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(seurat.corMat)*unit(2.5, "mm"), </span></span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(seurat.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
-<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Seurat corr SCT"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>all.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(srat)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(srat, <span class="at">features =</span> all.genes)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>seurat.data <span class="ot">=</span> <span class="fu">GetAssayData</span>(srat,<span class="at">layer =</span> <span class="st">"data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(seurat.data)[<span class="fu">rownames</span>(seurat.data) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs, genesList<span class="sc">$</span>hk, genesList<span class="sc">$</span>PNGs, genesList<span class="sc">$</span>layers)]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(seurat.data)[int.genes,])</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gene names for the subset</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>subset_gene_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(subset_data)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># Change this to the desired number of cores</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(num_cores)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>cor_p_values <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data), <span class="at">.combine =</span> <span class="st">"cbind"</span>) <span class="sc">%dopar%</span> {</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(subset_data))</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data)) {</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> j) {</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>      cor_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(subset_data[, i], subset_data[, j], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> cor_result<span class="sc">$</span>p.value</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop the parallel backend</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract correlation coefficients and p-values</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>seurat.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named matrix for p-values</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cor_p_values) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cor_p_values) <span class="ot">&lt;-</span> subset_gene_names</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> cor_p_values</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(seurat.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>seurat.data.cor <span class="ot">&lt;-</span> seurat.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(seurat.data.cor),</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(seurat.corMat)*unit(2.5, "mm"), </span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(seurat.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Seurat corr"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>srat <span class="ot">&lt;-</span>  <span class="fu">SCTransform</span>(srat, <span class="at">method =</span> <span class="st">"glmGamPoi"</span>, <span class="at">vars.to.regress =</span> <span class="st">"percent.mt"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>seurat.data <span class="ot">=</span> srat[[<span class="st">"SCT"</span>]]<span class="sc">@</span>data</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(seurat.data)[<span class="fu">rownames</span>(seurat.data) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs, genesList<span class="sc">$</span>hk, genesList<span class="sc">$</span>PNGs, genesList<span class="sc">$</span>layers)]</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(seurat.data)[int.genes,])</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gene names for the subset</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>subset_gene_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(subset_data)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># Change this to the desired number of cores</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">makeCluster</span>(num_cores)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>cor_p_values <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data), <span class="at">.combine =</span> <span class="st">"cbind"</span>) <span class="sc">%dopar%</span> {</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(subset_data))</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data)) {</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> j) {</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>      cor_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(subset_data[, i], subset_data[, j], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> cor_result<span class="sc">$</span>p.value</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop the parallel backend</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract correlation coefficients and p-values</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>seurat.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named matrix for p-values</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cor_p_values) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cor_p_values) <span class="ot">&lt;-</span> subset_gene_names</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> cor_p_values</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(seurat.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>seurat.data.cor <span class="ot">&lt;-</span> seurat.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(seurat.data.cor) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(seurat.data.cor),</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(seurat.corMat)*unit(2.5, "mm"), </span></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(seurat.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Seurat corr SCT"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
 <section id="monocle" class="level2">
 <h2 class="anchored" data-anchor-id="monocle">Monocle</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(monocle3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(monocle3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cds <span class="ot">&lt;-</span> <span class="fu">new_cell_data_set</span>(<span class="fu">getRawData</span>(obj),</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cell_metadata =</span> <span class="fu">getMetadataCells</span>(obj),</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">gene_metadata =</span> <span class="fu">getMetadataGenes</span>(obj)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                         )</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>cds <span class="ot">&lt;-</span> <span class="fu">preprocess_cds</span>(cds, <span class="at">num_dim =</span> <span class="dv">100</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">normalized_counts</span>(cds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(normalized_counts)[<span class="fu">rownames</span>(normalized_counts) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs, genesList<span class="sc">$</span>hk, genesList<span class="sc">$</span>PNGs, genesList<span class="sc">$</span>layers)]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(normalized_counts)[int.genes,])</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gene names for the subset</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>subset_gene_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(subset_data)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># Change this to the desired number of cores</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(num_cores)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>cor_p_values <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data), <span class="at">.combine =</span> <span class="st">"cbind"</span>) <span class="sc">%dopar%</span> {</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(subset_data))</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data)) {</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> j) {</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>      cor_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(subset_data[, i], subset_data[, j], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> cor_result<span class="sc">$</span>p.value</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop the parallel backend</span></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract correlation coefficients and p-values</span></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>monocle.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named matrix for p-values</span></span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cor_p_values) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cor_p_values) <span class="ot">&lt;-</span> subset_gene_names</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> cor_p_values</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(monocle.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>monocle.data.cor <span class="ot">&lt;-</span> monocle.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(monocle.data.cor),</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(monocle.corMat)*unit(2.5, "mm"), </span></span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(monocle.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"monocle corr"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="scanpy" class="level2">
-<h2 class="anchored" data-anchor-id="scanpy">ScanPy</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>dirOut <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CoexData/ScanPy/"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(dirOut)) {</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(dirOut)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cds <span class="ot">&lt;-</span> <span class="fu">new_cell_data_set</span>(<span class="fu">getRawData</span>(obj),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cell_metadata =</span> <span class="fu">getMetadataCells</span>(obj),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">gene_metadata =</span> <span class="fu">getMetadataGenes</span>(obj)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                         )</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>cds <span class="ot">&lt;-</span> <span class="fu">preprocess_cds</span>(cds, <span class="at">num_dim =</span> <span class="dv">100</span>)</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> <span class="st">"../../../bin/python3"</span>)</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  py <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"sys"</span>)</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source_python</span>(<span class="st">"src/scanpyGenesExpression.py"</span>)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scanpyFDR</span>(<span class="fu">getRawData</span>(obj), </span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">getMetadataCells</span>(obj), </span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">getMetadataGenes</span>(obj), </span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"mt"</span>, </span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>                   dirOut, </span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">getMetadataElement</span>(obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]]),</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>            int.genes)</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(dirOut,</span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                                     <span class="fu">getMetadataElement</span>(obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]]),<span class="st">"_Scampy_expression_all_genes.gz"</span>),<span class="at">header =</span> T,<span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">t</span>(normalized_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">normalized_counts</span>(cds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(normalized_counts)[<span class="fu">rownames</span>(normalized_counts) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs, genesList<span class="sc">$</span>hk, genesList<span class="sc">$</span>PNGs, genesList<span class="sc">$</span>layers)]</span>
@@ -894,7 +874,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gene names for the subset</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>subset_gene_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(subset_data)</span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># Change this to the desired number of cores</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">12</span>  <span class="co"># Change this to the desired number of cores</span></span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(num_cores)</span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -914,15 +894,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop the parallel backend</span></span>
 <span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
 <span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract correlation coefficients and p-values</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>ScanPy.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>monocle.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
 <span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named matrix for p-values</span></span>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cor_p_values) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cor_p_values) <span class="ot">&lt;-</span> subset_gene_names</span>
 <span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> cor_p_values</span>
 <span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(ScanPy.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(monocle.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
 <span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>ScanPy.data.cor <span class="ot">&lt;-</span> ScanPy.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>monocle.data.cor <span class="ot">&lt;-</span> monocle.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
 <span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
@@ -934,9 +914,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
 <span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(ScanPy.data.cor),</span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(ScanPy.corMat)*unit(2.5, "mm"), </span></span>
-<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(ScanPy.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(monocle.data.cor),</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(monocle.corMat)*unit(2.5, "mm"), </span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(monocle.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
 <span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
@@ -948,38 +928,131 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
 <span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
 <span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"ScanPy corr"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"monocle corr"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
 <span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
 <span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>   )</span>
 <span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="scanpy" class="level2">
+<h2 class="anchored" data-anchor-id="scanpy">ScanPy</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>dirOut <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CoexData/ScanPy/"</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(dirOut)) {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(dirOut)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> <span class="st">"../../../bin/python3"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  py <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"sys"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source_python</span>(<span class="st">"src/scanpyGenesExpression.py"</span>)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scanpyFDR</span>(<span class="fu">getRawData</span>(obj), </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">getMetadataCells</span>(obj), </span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">getMetadataGenes</span>(obj), </span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"mt"</span>, </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>                   dirOut, </span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">getMetadataElement</span>(obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]]),</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>            int.genes)</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(dirOut,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>                                     <span class="fu">getMetadataElement</span>(obj, <span class="fu">datasetTags</span>()[[<span class="st">"cond"</span>]]),<span class="st">"_Scampy_expression_all_genes.gz"</span>),<span class="at">header =</span> T,<span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">t</span>(normalized_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>int.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(normalized_counts)[<span class="fu">rownames</span>(normalized_counts) <span class="sc">%in%</span> <span class="fu">c</span>(genesList<span class="sc">$</span>NPGs, genesList<span class="sc">$</span>hk, genesList<span class="sc">$</span>PNGs, genesList<span class="sc">$</span>layers)]</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>subset_data <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(normalized_counts)[int.genes,])</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get gene names for the subset</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>subset_gene_names <span class="ot">&lt;-</span> <span class="fu">colnames</span>(subset_data)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>num_cores <span class="ot">&lt;-</span> <span class="dv">10</span>  <span class="co"># Change this to the desired number of cores</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> parallel<span class="sc">::</span><span class="fu">makeCluster</span>(num_cores)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">registerDoParallel</span>(cl)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>cor_p_values <span class="ot">&lt;-</span> <span class="fu">foreach</span>(<span class="at">i =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data), <span class="at">.combine =</span> <span class="st">"cbind"</span>) <span class="sc">%dopar%</span> {</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  p_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">ncol</span>(subset_data))</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(subset_data)) {</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> j) {</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>      cor_result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(subset_data[, i], subset_data[, j], <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>      p_values[j] <span class="ot">&lt;-</span> cor_result<span class="sc">$</span>p.value</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(p_values)</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop the parallel backend</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="fu">stopCluster</span>(cl)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract correlation coefficients and p-values</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>ScanPy.data.cor.big <span class="ot">&lt;-</span> <span class="fu">cor</span>(subset_data, <span class="at">method =</span> <span class="st">"pearson"</span>)</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a named matrix for p-values</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(cor_p_values) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(cor_p_values) <span class="ot">&lt;-</span> subset_gene_names</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>p_values <span class="ot">&lt;-</span> cor_p_values</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(ScanPy.data.cor.big) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>ScanPy.data.cor <span class="ot">&lt;-</span> ScanPy.data.cor.big[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]</span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"NPGs"</span>]])),</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">length</span>(genesList[[<span class="st">"hk"</span>]])),</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">length</span>(genesList[[<span class="st">"PNGs"</span>]]))),</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>lgd <span class="ot">=</span> <span class="fu">Legend</span>(<span class="at">col_fun =</span> f1, <span class="at">title =</span> <span class="st">"COTAN coex"</span>)</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(ScanPy.data.cor),</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(ScanPy.corMat)*unit(2.5, "mm"), </span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(ScanPy.data.cor)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"ScanPy corr"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),<span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>        <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="geneCoexAnalysisE17.5Yuzwa_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-03-17 19:23:48 CET"</code></pre>
+<pre><code>[1] "2024-04-26 16:29:04 CEST"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.3.2 (2023-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.6 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
 
 locale:
- [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+[1] C.UTF-8
 
 time zone: Europe/Rome
 tzcode source: system (glibc)
@@ -989,7 +1062,7 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] reticulate_1.35.0           monocle3_1.3.4             
+ [1] reticulate_1.36.1           monocle3_1.3.4             
  [3] SingleCellExperiment_1.22.0 SummarizedExperiment_1.30.2
  [5] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
  [7] IRanges_2.34.1              S4Vectors_0.38.1           
@@ -1002,7 +1075,7 @@ other attached packages:
 [21] Seurat_5.0.0                SeuratObject_5.0.0         
 [23] sp_2.1-1                    Hmisc_5.1-0                
 [25] dplyr_1.1.2                 circlize_0.4.15            
-[27] ComplexHeatmap_2.16.0       COTAN_2.3.3                
+[27] ComplexHeatmap_2.16.0       COTAN_2.5.0                
 
 loaded via a namespace (and not attached):
   [1] RcppAnnoy_0.0.21          splines_4.3.2            
@@ -1020,15 +1093,15 @@ loaded via a namespace (and not attached):
  [25] minqa_1.2.5               cowplot_1.1.1            
  [27] pbapply_1.7-2             RColorBrewer_1.1-3       
  [29] zlibbioc_1.46.0           abind_1.4-5              
- [31] Rtsne_0.16                purrr_1.0.1              
+ [31] Rtsne_0.17                purrr_1.0.1              
  [33] RCurl_1.98-1.12           nnet_7.3-19              
- [35] GenomeInfoDbData_1.2.10   ggrepel_0.9.3            
+ [35] GenomeInfoDbData_1.2.10   ggrepel_0.9.5            
  [37] irlba_2.3.5.1             listenv_0.9.0            
  [39] spatstat.utils_3.0-3      terra_1.7-39             
  [41] umap_0.2.10.0             goftest_1.2-3            
  [43] RSpectra_0.16-1           spatstat.random_3.2-1    
  [45] dqrng_0.3.0               fitdistrplus_1.1-11      
- [47] parallelly_1.36.0         DelayedMatrixStats_1.22.5
+ [47] parallelly_1.37.1         DelayedMatrixStats_1.22.5
  [49] leiden_0.4.3              codetools_0.2-19         
  [51] DelayedArray_0.26.7       tidyselect_1.2.0         
  [53] shape_1.4.6               farver_2.1.1             
@@ -1040,7 +1113,7 @@ loaded via a namespace (and not attached):
  [65] ggridges_0.5.4            survival_3.5-8           
  [67] tools_4.3.2               ica_1.0-3                
  [69] glue_1.7.0                gridExtra_2.3            
- [71] xfun_0.39                 ggthemes_5.0.0           
+ [71] xfun_0.39                 ggthemes_5.1.0           
  [73] withr_3.0.0               fastmap_1.1.1            
  [75] boot_1.3-28               fansi_1.0.4              
  [77] openssl_2.1.0             digest_0.6.33            
@@ -1054,7 +1127,7 @@ loaded via a namespace (and not attached):
  [93] htmlwidgets_1.6.2         S4Arrays_1.2.0           
  [95] uwot_0.1.16               pkgconfig_2.0.3          
  [97] gtable_0.3.3              lmtest_0.9-40            
- [99] XVector_0.40.0            htmltools_0.5.7          
+ [99] XVector_0.40.0            htmltools_0.5.8          
 [101] dotCall64_1.1-0           clue_0.3-64              
 [103] scales_1.3.0              png_0.1-8                
 [105] knitr_1.43                rstudioapi_0.15.0        
@@ -1080,7 +1153,7 @@ loaded via a namespace (and not attached):
 [145] Matrix_1.6-3              RcppHNSW_0.6.0           
 [147] sparseMatrixStats_1.12.2  future_1.33.0            
 [149] ggplot2_3.5.0             shiny_1.8.0              
-[151] ROCR_1.0-11               igraph_1.6.0             </code></pre>
+[151] ROCR_1.0-11               igraph_2.0.3             </code></pre>
 </div>
 </div>
 
