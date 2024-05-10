@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marco Fantozzi">
-<meta name="dcterms.date" content="2024-03-22">
+<meta name="dcterms.date" content="2024-05-08">
 
 <title>COTAN Datasets analysis - GDI Increment From Mixing</title>
 <style>
@@ -383,6 +383,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PBMCs clustering comparison</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">CD14+ clusterizations</span></a>
   </div>
@@ -517,7 +523,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 22, 2024</p>
+      <p class="date">May 8, 2024</p>
     </div>
   </div>
   
@@ -709,7 +715,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(allRes<span class="sc">$</span>Group) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Distance bin "</span>,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>))</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>allRes<span class="sc">$</span>discreteMixing <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">mg</span>(allRes<span class="sc">$</span>MixingFraction))</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(allRes<span class="sc">$</span>discreteMixing) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0%"</span>,<span class="st">"5%"</span>,<span class="st">"10%"</span>,<span class="st">"20%"</span>,<span class="st">"40%"</span>,<span class="st">"80%"</span>)</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(allRes<span class="sc">$</span>discreteMixing) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"5%"</span>,<span class="st">"10%"</span>,<span class="st">"20%"</span>,<span class="st">"40%"</span>,<span class="st">"80%"</span>)</span>
 <span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>IBoxPlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(allRes, <span class="fu">aes</span>(<span class="at">x=</span>discreteMixing, </span>
 <span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y=</span>GDIIncrement, </span>
@@ -779,8 +785,8 @@ Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.6 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -810,7 +816,7 @@ loaded via a namespace (and not attached):
 [25] vctrs_0.6.3        R6_2.5.1           lifecycle_1.0.3    htmlwidgets_1.6.2 
 [29] pkgconfig_2.0.3    RcppParallel_5.1.7 pillar_1.9.0       gtable_0.3.3      
 [33] glue_1.7.0         Rcpp_1.0.11        xfun_0.39          tidyselect_1.2.0  
-[37] rstudioapi_0.15.0  knitr_1.43         farver_2.1.1       htmltools_0.5.7   
+[37] rstudioapi_0.15.0  knitr_1.43         farver_2.1.1       htmltools_0.5.8   
 [41] nlme_3.1-163       labeling_0.4.2     rmarkdown_2.24     compiler_4.3.2    </code></pre>
 </div>
 </div>
