@@ -384,6 +384,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ clusterizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PBMCs clustering comparison</span></a>
   </div>
@@ -392,12 +398,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./probability_score.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PBMCs probability score</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CD14+ clusterizations</span></a>
   </div>
 </li>
       </ul>
@@ -563,11 +563,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Tars"</span>, <span class="st">"Amacr"</span>,<span class="st">"Tbp"</span>),</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"layers"</span> <span class="ot">=</span> <span class="fu">unique</span>(<span class="fu">c</span>(layer.genes[<span class="fu">str_detect</span>(layer.genes<span class="sc">$</span>Cluster,<span class="at">pattern =</span> <span class="st">"CTX PyrL5|CTX PyrL6"</span>),<span class="st">"Gene"</span>],</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co">#c(</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Rasgrf2"</span>, <span class="st">"Slc17a6"</span>, <span class="st">"Satb2"</span>, <span class="st">"Sema3c"</span>,<span class="st">"Thsd7a"</span>, <span class="st">"Rorb"</span>, <span class="st">"Cux2"</span>, <span class="st">"Pvrl3"</span>,<span class="st">"Rasgrf2"</span>,<span class="st">"Syt6"</span>, <span class="st">"Grik3"</span>, <span class="st">"Foxp2"</span>, <span class="st">"Tle4"</span>, <span class="st">"Htr1f"</span>,<span class="st">"Rxfp1"</span>,</span>
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="co">#others</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Pax3"</span>, <span class="st">"Mki67"</span>,<span class="st">"Lhx6"</span>,<span class="st">"Trdn"</span>, <span class="st">"Cpa6"</span>,<span class="st">"Adarb2"</span>,<span class="st">"Pbx3"</span>,<span class="st">"Trp73"</span>, <span class="st">"Reln"</span>))</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">#c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2","Ntf3","Rasgrf2","Pvrl3", "Cux2","Trp73")</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#  "Pax3", "Mki67","Lhx6","Trdn", "Cpa6","Adarb2","Pbx3","Trp73", "Reln"))</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Reln"</span>,<span class="st">"Lhx5"</span>,<span class="st">"Cux1"</span>,<span class="st">"Satb2"</span>,<span class="st">"Tle1"</span>,<span class="st">"Mef2c"</span>,<span class="st">"Rorb"</span>,<span class="st">"Sox5"</span>,<span class="st">"Bcl11b"</span>,<span class="st">"Fezf2"</span>,<span class="st">"Foxp2"</span>,<span class="st">"Ntf3"</span>,<span class="st">"Rasgrf2"</span>,<span class="st">"Pvrl3"</span>, <span class="st">"Cux2"</span>,<span class="st">"Trp73"</span>))</span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">#sample(unique(unlist(str_split(layer.genes$supertype.markers.combo,pattern = ","))),size = 50)</span></span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#c("Reln","Lhx5","Cux1","Satb2","Tle1","Mef2c","Rorb","Sox5","Bcl11b","Fezf2","Foxp2","Ntf3","Rasgrf2","Pvrl3", "Cux2","Slc17a6", "Sema3c","Thsd7a", "Sulf2", "Kcnk2","Grik3", "Etv1", "Tle4", "Tmem200a", "Glra2", "Etv1","Htr1f", "Sulf1","Rxfp1", "Syt6") </span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># From https://www.science.org/doi/10.1126/science.aam8999</span></span>
@@ -583,21 +583,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file <span class="cf">in</span> <span class="fu">list.files</span>(InDir,<span class="at">pattern =</span> <span class="st">"Variance"</span>)) {</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(file)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(InDir,file),<span class="at">row.names =</span> <span class="dv">1</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#data &lt;- as.data.frame(as.matrix(data))</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"GDI"</span>)){</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"COTAN GDI"</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(data)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">#data &lt;- data[,c("genes","GDI","sum.raw.norm")]</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"GDI_centered"</span>,<span class="st">"sum.raw.norm"</span>)]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"GDI"</span>,<span class="st">"sum.raw.norm"</span>)]</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"GDI_Variance"</span>,<span class="st">"sum.raw.norm"</span>)</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#data$GDI_Variance &lt;- scale(data$GDI_Variance,center = T)</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    }<span class="cf">else</span> <span class="cf">if</span>(<span class="fu">str_detect</span>(file,<span class="at">pattern =</span> <span class="st">"SeuratSCT"</span>)){</span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat SCT variance"</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(data)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">#data &lt;- data[,c("genes","residual_variance")]</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"centered_variance"</span>)]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"residual_variance"</span>)]</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"GDI_Variance"</span>)</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>sum.raw.norm <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#data$GDI_Variance &lt;- scale(data$GDI_Variance,center = T)</span></span>
@@ -605,7 +605,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    code <span class="ot">&lt;-</span> <span class="st">"Seurat variance"</span></span>
 <span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(data)</span>
 <span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">#data &lt;- data[,c("genes","variance.standardized")]</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"centered_variance"</span>)]</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    data <span class="ot">&lt;-</span> data[,<span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"variance.standardized"</span>)]</span>
 <span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"GDI_Variance"</span>)</span>
 <span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    data<span class="sc">$</span>sum.raw.norm <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -630,30 +630,67 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  table.tot.neural <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.neural,table.neural)</span>
 <span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  <span class="co">#table.tot.neural &lt;- table.tot.neural[! table.tot.neural$Gene1 == table.tot.neural$Gene2,]</span></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>table.tot.neural<span class="sc">$</span>Type <span class="ot">&lt;-</span> <span class="st">"Neural"</span></span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>table.tot.hk<span class="sc">$</span>Type <span class="ot">&lt;-</span> <span class="st">"Constitutive"</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.neural),]</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.hk),]</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.tot.neural)</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>table.tot<span class="sc">$</span>Method_Type <span class="ot">&lt;-</span> <span class="fu">paste0</span>(table.tot<span class="sc">$</span>Method,<span class="st">":"</span>,table.tot<span class="sc">$</span>Type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Variance_GDI_genesCorticalCells_GSM2861511_E135.csv"
+[1] "Variance_GDI_genesCorticalCells_GSM2861514_E175.csv"
+[1] "Variance_GDI_genese13.5_ForebrainDorsal.csv"
+[1] "Variance_GDI_genese15.0_ForebrainDorsal.csv"
+[1] "Variance_GDI_genese17.5_ForebrainDorsal.csv"
+[1] "Variance_GDI_genesMouseCortex_E14.5.csv"
+[1] "Variance_Seurat_genesCorticalCells_GSM2861511_E135.csv"
+[1] "Variance_Seurat_genesCorticalCells_GSM2861514_E175.csv"
+[1] "Variance_Seurat_genese13.5_ForebrainDorsal.csv"
+[1] "Variance_Seurat_genese15.0_ForebrainDorsal.csv"
+[1] "Variance_Seurat_genese17.5_ForebrainDorsal.csv"
+[1] "Variance_Seurat_genesMouseCortex_E14.5.csv"
+[1] "Variance_SeuratSCT_genesCorticalCells_GSM2861511_E135.csv"
+[1] "Variance_SeuratSCT_genesCorticalCells_GSM2861514_E175.csv"
+[1] "Variance_SeuratSCT_genese13.5_ForebrainDorsal.csv"
+[1] "Variance_SeuratSCT_genese15.0_ForebrainDorsal.csv"
+[1] "Variance_SeuratSCT_genese17.5_ForebrainDorsal.csv"
+[1] "Variance_SeuratSCT_genesMouseCortex_E14.5.csv"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>table.tot.neural<span class="sc">$</span>Type <span class="ot">&lt;-</span> <span class="st">"Neural"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>table.tot.hk<span class="sc">$</span>Type <span class="ot">&lt;-</span> <span class="st">"Constitutive"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>table.tot.neural <span class="ot">&lt;-</span> table.tot.neural[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.neural),]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>table.tot.hk <span class="ot">&lt;-</span> table.tot.hk[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(table.tot.hk),]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>table.tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(table.tot.hk,table.tot.neural)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>table.tot<span class="sc">$</span>Method_Type <span class="ot">&lt;-</span> <span class="fu">paste0</span>(table.tot<span class="sc">$</span>Method,<span class="st">":"</span>,table.tot<span class="sc">$</span>Type)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(table.tot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        genes GDI_Variance sum.raw.norm    Method                  Dataset
+Actb     Actb     0.894289     9.921265 COTAN GDI CorticalCells_GSM2861511
+Amacr   Amacr     1.096773     3.191098 COTAN GDI CorticalCells_GSM2861511
+Amfr     Amfr     1.314979     4.792456 COTAN GDI CorticalCells_GSM2861511
+Apmap   Apmap     1.292071     4.029402 COTAN GDI CorticalCells_GSM2861511
+Brd1     Brd1     1.367249     4.936363 COTAN GDI CorticalCells_GSM2861511
+Cactin Cactin     1.215138     4.624020 COTAN GDI CorticalCells_GSM2861511
+               Type            Method_Type
+Actb   Constitutive COTAN GDI:Constitutive
+Amacr  Constitutive COTAN GDI:Constitutive
+Amfr   Constitutive COTAN GDI:Constitutive
+Apmap  Constitutive COTAN GDI:Constitutive
+Brd1   Constitutive COTAN GDI:Constitutive
+Cactin Constitutive COTAN GDI:Constitutive</code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>(GDI_Variance), <span class="at">fill=</span>Method_Type))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">alpha=</span><span class="fl">0.7</span>,<span class="at">position =</span> <span class="st">"dodge"</span>)<span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span> Method,<span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>(GDI_Variance), <span class="at">fill=</span>Method_Type))<span class="sc">+</span><span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">50</span>, <span class="at">alpha=</span><span class="fl">0.7</span>,<span class="at">position =</span> <span class="st">"dodge"</span>)<span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span> Method,<span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>(GDI_Variance), <span class="at">fill=</span>Method_Type))<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span> Method)<span class="sc">+</span><span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">x=</span>(GDI_Variance), <span class="at">fill=</span>Method_Type))<span class="sc">+</span><span class="fu">geom_density</span>(<span class="at">alpha=</span><span class="fl">0.5</span>)<span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span> Method)<span class="sc">+</span><span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">3</span>,<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">log</span>(<span class="fu">abs</span>(GDI_Variance)),<span class="at">x=</span>Method_Type, <span class="at">fill=</span>Method_Type))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span> Method,<span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(table.tot,<span class="fu">aes</span>(<span class="at">y=</span><span class="fu">log</span>(<span class="fu">abs</span>(GDI_Variance)),<span class="at">x=</span>Method_Type, <span class="at">fill=</span>Method_Type))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span> <span class="fu">facet_grid</span>(.<span class="sc">~</span> Method,<span class="at">scales =</span> <span class="st">"free"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="GDI_vairance_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>

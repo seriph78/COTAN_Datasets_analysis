@@ -381,6 +381,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">CD14+ clusterizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PBMCs clustering comparison</span></a>
   </div>
@@ -389,12 +395,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./probability_score.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PBMCs probability score</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">CD14+ clusterizations</span></a>
   </div>
 </li>
       </ul>
@@ -564,7 +564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>majorityVotingClusters <span class="ot">&lt;-</span> labelsDF[cells_to_keep, <span class="st">"majority_voting"</span>]</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(majorityVotingClusters) <span class="ot">&lt;-</span> cells_to_keep</span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>majorityVotingCoexDF <span class="ot">&lt;-</span> <span class="fu">DEAOnClusters</span>(cd14Obj, majorityVotingClusters)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>majorityVotingCoexDF <span class="ot">&lt;-</span> <span class="fu">DEAOnClusters</span>(cd14Obj,<span class="at">clName =</span><span class="st">"majority-voting"</span>,<span class="at">clusters =</span>   majorityVotingClusters)</span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>cd14Obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(cd14Obj, <span class="at">clName =</span> <span class="st">"majority-voting"</span>,</span>
 <span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>                             <span class="at">clusters =</span> majorityVotingClusters,</span>
@@ -607,10 +607,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(mjvt_split.table[,<span class="fu">c</span>(2L, 3L)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       COTAN.split.cluster
-majority.voting.cluster   1   2   3   4   5   6
-    Classical monocytes 879   1   1 589 889  36
-    NK cells              0  25   0   0   0   0
-    pDC                   3   0  10   1   0   0</code></pre>
+majority.voting.cluster   1   2   3   4   5
+    Classical monocytes 877   3 637 837  48
+    NK cells              1  25   0   0   0
+    pDC                   0  10   0   0   0</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -640,9 +640,9 @@ majority.voting.cluster   1   2   3   4   5   6
 <div class="cell-output cell-output-stdout">
 <pre><code>                       COTAN.merged.cluster
 majority.voting.cluster    1    2    3
-    Classical monocytes 1514  879    2
-    NK cells               0    0   25
-    pDC                    1    3   10</code></pre>
+    Classical monocytes 1522  877    3
+    NK cells               0    1   25
+    pDC                    0    0   10</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -665,15 +665,49 @@ majority.voting.cluster    1    2    3
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>markersCD14 <span class="ot">&lt;-</span> <span class="fu">findClustersMarkers</span>(cd14Obj,<span class="at">n =</span> <span class="dv">100</span>,<span class="at">clName =</span> <span class="st">"merge"</span>,<span class="at">method =</span> <span class="st">"BH"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(markersCD14,<span class="at">file =</span> <span class="st">"Data/CD14Cleaned/ClusterMarkerGenes.csv"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(markersCD14)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.1 (2023-06-16)
+<pre><code>  CL     Gene      Score      adjPVal         DEA IsMarker  logFoldCh
+1  1 HLA-DQA1 -0.3398915 2.603676e-59 -0.15274999        0 -0.5470222
+2  1 HLA-DQA2 -0.2899185 7.002901e-43 -0.12223685        0 -0.4804835
+3  1 HLA-DPA1 -0.2808830 2.589504e-40 -0.13090249        0 -0.4370669
+4  1  HLA-DRA -0.2499997 1.042557e-31 -0.10296185        0 -0.3654458
+5  1 HLA-DPB1 -0.2225778 5.652934e-25 -0.09887797        0 -0.3375752
+6  1     YBX1 -0.2095002 5.042102e-22 -0.08080263        0 -0.3784618</code></pre>
+</div>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Data/CD14Cleaned/FromStringrEnrichr/CD14Cl1string_hires_image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Cluster 1 top enriched genes</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Data/CD14Cleaned/FromStringrEnrichr/CD14Cl2string_normal_image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">cluster 2 top enriched genes</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Data/CD14Cleaned/FromStringrEnrichr/Cluster3string_hires_image.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Cluster 3 top enriched genes</figcaption>
+</figure>
+</div>
+<p>The cells in cluster 1 seem to be classical CD14 monocytes since they express CD14 while depleted in MHC class II proteins complex which is enriched in cell cluster 2 that seems intermediate monocytes.</p>
+<p>Cluster 3 does not seem to be a monocyte cluster. Using enrichr website it is enriched in Plasmacytoid Dendritic cell marker genes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.3.2 (2023-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.6 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -688,55 +722,85 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] COTAN_2.1.7        assertthat_0.2.1   zeallot_0.1.0      tibble_3.2.1      
-[5] ggsankey_0.0.99999 ggplot2_3.4.2      rlang_1.1.1       
+[1] COTAN_2.5.0        assertthat_0.2.1   zeallot_0.1.0      tibble_3.2.1      
+[5] ggsankey_0.0.99999 ggplot2_3.5.0      rlang_1.1.1       
 
 loaded via a namespace (and not attached):
-  [1] RColorBrewer_1.1-3     rstudioapi_0.15.0      jsonlite_1.8.7        
-  [4] shape_1.4.6            umap_0.2.10.0          magrittr_2.0.3        
-  [7] spatstat.utils_3.0-3   farver_2.1.1           rmarkdown_2.24        
- [10] GlobalOptions_0.1.2    vctrs_0.6.3            ROCR_1.0-11           
- [13] spatstat.explore_3.2-1 askpass_1.1            htmltools_0.5.5       
- [16] sctransform_0.3.5      parallelly_1.36.0      KernSmooth_2.23-22    
- [19] htmlwidgets_1.6.2      ica_1.0-3              plyr_1.8.8            
- [22] plotly_4.10.2          zoo_1.8-12             igraph_1.5.1          
- [25] mime_0.12              lifecycle_1.0.3        iterators_1.0.14      
- [28] pkgconfig_2.0.3        Matrix_1.6-0           R6_2.5.1              
- [31] fastmap_1.1.1          fitdistrplus_1.1-11    future_1.33.0         
- [34] shiny_1.7.5            clue_0.3-64            digest_0.6.33         
- [37] colorspace_2.1-0       patchwork_1.1.2        S4Vectors_0.38.1      
- [40] Seurat_4.3.0.1         tensor_1.5             RSpectra_0.16-1       
- [43] irlba_2.3.5.1          labeling_0.4.2         progressr_0.14.0      
- [46] RcppZiggurat_0.1.6     fansi_1.0.4            spatstat.sparse_3.0-2 
- [49] httr_1.4.6             polyclip_1.10-4        abind_1.4-5           
- [52] compiler_4.3.1         withr_2.5.0            doParallel_1.0.17     
- [55] viridis_0.6.4          dendextend_1.17.1      MASS_7.3-60           
- [58] openssl_2.1.0          rjson_0.2.21           tools_4.3.1           
- [61] lmtest_0.9-40          httpuv_1.6.11          future.apply_1.11.0   
- [64] goftest_1.2-3          glue_1.6.2             nlme_3.1-162          
- [67] promises_1.2.0.1       grid_4.3.1             Rtsne_0.16            
- [70] cluster_2.1.4          reshape2_1.4.4         generics_0.1.3        
- [73] gtable_0.3.3           spatstat.data_3.0-1    tidyr_1.3.0           
- [76] data.table_1.14.8      sp_2.0-0               utf8_1.2.3            
- [79] BiocGenerics_0.46.0    spatstat.geom_3.2-4    RcppAnnoy_0.0.21      
- [82] ggrepel_0.9.3          RANN_2.6.1             foreach_1.5.2         
- [85] pillar_1.9.0           stringr_1.5.0          later_1.3.1           
- [88] circlize_0.4.15        splines_4.3.1          dplyr_1.1.2           
- [91] lattice_0.21-8         survival_3.5-5         deldir_1.0-9          
- [94] tidyselect_1.2.0       ComplexHeatmap_2.16.0  miniUI_0.1.1.1        
- [97] pbapply_1.7-2          knitr_1.43             gridExtra_2.3         
-[100] IRanges_2.34.1         scattermore_1.2        stats4_4.3.1          
-[103] xfun_0.39              factoextra_1.0.7       matrixStats_1.0.0     
-[106] stringi_1.7.12         lazyeval_0.2.2         yaml_2.3.7            
-[109] evaluate_0.21          codetools_0.2-19       cli_3.6.1             
-[112] RcppParallel_5.1.7     uwot_0.1.16            xtable_1.8-4          
-[115] reticulate_1.30        munsell_0.5.0          Rcpp_1.0.11           
-[118] globals_0.16.2         spatstat.random_3.1-5  png_0.1-8             
-[121] parallel_4.3.1         Rfast_2.0.8            ellipsis_0.3.2        
-[124] parallelDist_0.2.6     listenv_0.9.0          ggthemes_4.2.4        
-[127] viridisLite_0.4.2      scales_1.2.1           ggridges_0.5.4        
-[130] SeuratObject_4.1.3     leiden_0.4.3           purrr_1.0.1           
-[133] crayon_1.5.2           GetoptLong_1.0.5       cowplot_1.1.1         </code></pre>
+  [1] RColorBrewer_1.1-3        rstudioapi_0.15.0        
+  [3] jsonlite_1.8.7            shape_1.4.6              
+  [5] umap_0.2.10.0             magrittr_2.0.3           
+  [7] spatstat.utils_3.0-3      farver_2.1.1             
+  [9] rmarkdown_2.24            GlobalOptions_0.1.2      
+ [11] vctrs_0.6.3               ROCR_1.0-11              
+ [13] spatstat.explore_3.2-1    DelayedMatrixStats_1.22.5
+ [15] askpass_1.2.0             htmltools_0.5.8          
+ [17] S4Arrays_1.2.0            sctransform_0.4.1        
+ [19] parallelly_1.37.1         KernSmooth_2.23-22       
+ [21] htmlwidgets_1.6.2         ica_1.0-3                
+ [23] plyr_1.8.8                plotly_4.10.2            
+ [25] zoo_1.8-12                igraph_2.0.3             
+ [27] mime_0.12                 lifecycle_1.0.3          
+ [29] iterators_1.0.14          pkgconfig_2.0.3          
+ [31] rsvd_1.0.5                Matrix_1.6-3             
+ [33] R6_2.5.1                  fastmap_1.1.1            
+ [35] MatrixGenerics_1.12.3     fitdistrplus_1.1-11      
+ [37] future_1.33.0             shiny_1.8.0              
+ [39] clue_0.3-64               digest_0.6.33            
+ [41] colorspace_2.1-0          patchwork_1.2.0          
+ [43] S4Vectors_0.38.1          tensor_1.5               
+ [45] Seurat_5.0.0              dqrng_0.3.0              
+ [47] RSpectra_0.16-1           irlba_2.3.5.1            
+ [49] beachmat_2.16.0           labeling_0.4.2           
+ [51] PCAtools_2.14.0           progressr_0.14.0         
+ [53] RcppZiggurat_0.1.6        spatstat.sparse_3.0-2    
+ [55] fansi_1.0.4               polyclip_1.10-4          
+ [57] httr_1.4.6                abind_1.4-5              
+ [59] compiler_4.3.2            withr_3.0.0              
+ [61] doParallel_1.0.17         BiocParallel_1.34.2      
+ [63] viridis_0.6.4             fastDummies_1.7.3        
+ [65] dendextend_1.17.1         MASS_7.3-60              
+ [67] openssl_2.1.0             DelayedArray_0.26.7      
+ [69] rjson_0.2.21              tools_4.3.2              
+ [71] lmtest_0.9-40             httpuv_1.6.11            
+ [73] future.apply_1.11.0       goftest_1.2-3            
+ [75] glue_1.7.0                nlme_3.1-163             
+ [77] promises_1.2.0.1          grid_4.3.2               
+ [79] Rtsne_0.17                cluster_2.1.6            
+ [81] reshape2_1.4.4            generics_0.1.3           
+ [83] spatstat.data_3.0-1       gtable_0.3.3             
+ [85] tidyr_1.3.0               data.table_1.15.0        
+ [87] BiocSingular_1.16.0       ScaledMatrix_1.8.1       
+ [89] sp_2.1-1                  utf8_1.2.3               
+ [91] spatstat.geom_3.2-4       BiocGenerics_0.46.0      
+ [93] RcppAnnoy_0.0.21          ggrepel_0.9.5            
+ [95] RANN_2.6.1                foreach_1.5.2            
+ [97] pillar_1.9.0              stringr_1.5.0            
+ [99] spam_2.10-0               RcppHNSW_0.6.0           
+[101] later_1.3.1               circlize_0.4.15          
+[103] splines_4.3.2             dplyr_1.1.2              
+[105] lattice_0.22-5            deldir_2.0-2             
+[107] survival_3.5-8            tidyselect_1.2.0         
+[109] ComplexHeatmap_2.16.0     miniUI_0.1.1.1           
+[111] pbapply_1.7-2             knitr_1.43               
+[113] gridExtra_2.3             IRanges_2.34.1           
+[115] scattermore_1.2           stats4_4.3.2             
+[117] xfun_0.39                 matrixStats_1.2.0        
+[119] stringi_1.8.1             lazyeval_0.2.2           
+[121] yaml_2.3.7                evaluate_0.21            
+[123] codetools_0.2-19          cli_3.6.1                
+[125] uwot_0.1.16               RcppParallel_5.1.7       
+[127] xtable_1.8-4              reticulate_1.36.1        
+[129] munsell_0.5.0             Rcpp_1.0.11              
+[131] spatstat.random_3.2-1     globals_0.16.2           
+[133] png_0.1-8                 parallel_4.3.2           
+[135] Rfast_2.1.0               ellipsis_0.3.2           
+[137] dotCall64_1.1-0           parallelDist_0.2.6       
+[139] sparseMatrixStats_1.12.2  listenv_0.9.0            
+[141] ggthemes_5.1.0            viridisLite_0.4.2        
+[143] scales_1.3.0              ggridges_0.5.4           
+[145] purrr_1.0.1               SeuratObject_5.0.0       
+[147] leiden_0.4.3              crayon_1.5.2             
+[149] GetoptLong_1.0.5          cowplot_1.1.1            </code></pre>
 </div>
 </div>
 

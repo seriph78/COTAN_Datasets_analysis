@@ -381,6 +381,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ clusterizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PBMCs clustering comparison</span></a>
   </div>
@@ -389,12 +395,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./probability_score.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">PBMCs probability score</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CD14+ clusterizations</span></a>
   </div>
 </li>
       </ul>
@@ -554,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="cd14_analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Drop cells with too many ritz reads as they are probably duplets</p>
+<p>Drop cells with too many reads as they are probably doublets</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cellsSizeThr <span class="ot">&lt;-</span> <span class="dv">2500</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cd14Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(cd14Obj, <span class="st">"Cells size threshold"</span>, cellsSizeThr)</span>
@@ -574,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="cd14_analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Drop cells with too high genes expession as they are probably duplets</p>
+<p>Drop cells with too high genes expression as they are probably doublets</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>genesSizeThr <span class="ot">&lt;-</span> <span class="dv">800</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cd14Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(cd14Obj, <span class="st">"Num genes threshold"</span>, genesSizeThr)</span>
@@ -588,7 +588,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="cd14_analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Check number of mitocondrial genes expressed in each cell</p>
+<p>Check number of mitochondrial genes expressed in each cell</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mitGenesPattern <span class="ot">&lt;-</span> <span class="st">"^[Mm][Tt]-"</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getGenes</span>(cd14Obj)[<span class="fu">grep</span>(mitGenesPattern, <span class="fu">getGenes</span>(cd14Obj))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -605,9 +605,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="cd14_analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Cells with a too high percentage of mitocondrial genes are likely dead (or at the last problematic) cells. So we drop them!</p>
+<p>Cells with a too high percentage of mitochondrial genes are likely dead (or at the last problematic) cells. So we drop them!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mitPercThr <span class="ot">&lt;-</span> <span class="fl">6.5</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mitPercThr <span class="ot">&lt;-</span> <span class="dv">7</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cd14Obj <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(cd14Obj, <span class="st">"Mitoc. perc. threshold"</span>, mitPercThr)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>cells_to_rem <span class="ot">&lt;-</span> <span class="fu">rownames</span>(mitSizes)[mitSizes[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> mitPercThr]</span>
@@ -623,7 +623,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="cd14_analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Check number of ribosomial genes expressed in each cell</p>
+<p>Check the number of ribosomal genes expressed in each cell</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ribGenesPattern <span class="ot">&lt;-</span> <span class="st">"^RP[SL]</span><span class="sc">\\</span><span class="st">d+"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getGenes</span>(cd14Obj)[<span class="fu">grep</span>(ribGenesPattern, <span class="fu">getGenes</span>(cd14Obj))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -775,7 +775,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>gdiData[genesToLabel[[50L]], <span class="st">"GDI"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.60883</code></pre>
+<pre><code>[1] 1.606624</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>gdiPlot <span class="ot">&lt;-</span> <span class="fu">GDIPlot</span>(cd14Obj, <span class="at">GDIIn =</span> gdiData, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>,</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">genes =</span> <span class="fu">list</span>(<span class="st">"Top 10 GDI genes"</span> <span class="ot">=</span> genesToLabel[1L<span class="sc">:</span>10L]))</span>
@@ -786,7 +786,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2023-08-21 11:49:17 CEST"</code></pre>
+<pre><code>[1] "2024-05-10 19:18:01 CEST"</code></pre>
 </div>
 </div>
 <p>Save the COTAN object</p>
@@ -798,7 +798,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(splitClusters, splitCoexDF) <span class="sc">%&lt;-%</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cellsUniformClustering</span>(cd14Obj, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>, <span class="at">cores =</span> <span class="dv">13</span>,</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cellsUniformClustering</span>(cd14Obj, <span class="at">GDIThreshold =</span> <span class="fl">1.43</span>, <span class="at">cores =</span> <span class="dv">13</span>,</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span>
 <span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>cd14Obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(cd14Obj, <span class="at">clName =</span> <span class="st">"split"</span>,</span>
@@ -811,8 +811,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(splitClusters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>splitClusters
-  1   2   3   4   5   6 
-882  26  11 590 889  36 </code></pre>
+  1   2   3   4   5 
+878  38 637 837  48 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -821,7 +821,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mergedClusters, mergedCoexDF) <span class="sc">%&lt;-%</span></span>
 <span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mergeUniformCellsClusters</span>(cd14Obj, <span class="at">clusters =</span> splitClusters,</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>, <span class="at">cores =</span> <span class="dv">13</span>,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">GDIThreshold =</span> <span class="fl">1.43</span>, <span class="at">cores =</span> <span class="dv">13</span>,</span>
 <span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">saveObj =</span> <span class="cn">TRUE</span>, <span class="at">outDir =</span> outDir)</span>
 <span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>cd14Obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(cd14Obj, <span class="at">clName =</span> <span class="st">"merge"</span>,</span>
@@ -836,7 +836,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>mergedClusters
    1    2    3 
-1515  882   37 </code></pre>
+1522  878   38 </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -845,13 +845,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.1 (2023-06-16)
+<pre><code>R version 4.3.2 (2023-10-31)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Ubuntu 20.04.6 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -866,55 +866,86 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] SeuratObject_4.1.3 Seurat_4.3.0.1     COTAN_2.1.7        zeallot_0.1.0     
-[5] tibble_3.2.1       ggplot2_3.4.2     
+[1] Seurat_5.0.0       SeuratObject_5.0.0 sp_2.1-1           COTAN_2.5.0       
+[5] zeallot_0.1.0      tibble_3.2.1       ggplot2_3.5.0     
 
 loaded via a namespace (and not attached):
-  [1] RColorBrewer_1.1-3     rstudioapi_0.15.0      jsonlite_1.8.7        
-  [4] shape_1.4.6            umap_0.2.10.0          magrittr_2.0.3        
-  [7] spatstat.utils_3.0-3   farver_2.1.1           rmarkdown_2.24        
- [10] GlobalOptions_0.1.2    vctrs_0.6.3            ROCR_1.0-11           
- [13] spatstat.explore_3.2-1 askpass_1.1            htmltools_0.5.5       
- [16] sctransform_0.3.5      parallelly_1.36.0      KernSmooth_2.23-22    
- [19] htmlwidgets_1.6.2      ica_1.0-3              plyr_1.8.8            
- [22] plotly_4.10.2          zoo_1.8-12             igraph_1.5.1          
- [25] mime_0.12              lifecycle_1.0.3        iterators_1.0.14      
- [28] pkgconfig_2.0.3        Matrix_1.6-0           R6_2.5.1              
- [31] fastmap_1.1.1          fitdistrplus_1.1-11    future_1.33.0         
- [34] shiny_1.7.5            clue_0.3-64            digest_0.6.33         
- [37] colorspace_2.1-0       patchwork_1.1.2        S4Vectors_0.38.1      
- [40] tensor_1.5             RSpectra_0.16-1        irlba_2.3.5.1         
- [43] labeling_0.4.2         progressr_0.14.0       RcppZiggurat_0.1.6    
- [46] fansi_1.0.4            spatstat.sparse_3.0-2  httr_1.4.6            
- [49] polyclip_1.10-4        abind_1.4-5            compiler_4.3.1        
- [52] withr_2.5.0            doParallel_1.0.17      viridis_0.6.4         
- [55] dendextend_1.17.1      MASS_7.3-60            openssl_2.1.0         
- [58] rjson_0.2.21           tools_4.3.1            lmtest_0.9-40         
- [61] httpuv_1.6.11          future.apply_1.11.0    goftest_1.2-3         
- [64] glue_1.6.2             nlme_3.1-162           promises_1.2.0.1      
- [67] grid_4.3.1             Rtsne_0.16             cluster_2.1.4         
- [70] reshape2_1.4.4         generics_0.1.3         gtable_0.3.3          
- [73] spatstat.data_3.0-1    tidyr_1.3.0            data.table_1.14.8     
- [76] sp_2.0-0               utf8_1.2.3             BiocGenerics_0.46.0   
- [79] spatstat.geom_3.2-4    RcppAnnoy_0.0.21       ggrepel_0.9.3         
- [82] RANN_2.6.1             foreach_1.5.2          pillar_1.9.0          
- [85] stringr_1.5.0          later_1.3.1            circlize_0.4.15       
- [88] splines_4.3.1          dplyr_1.1.2            lattice_0.21-8        
- [91] survival_3.5-5         deldir_1.0-9           tidyselect_1.2.0      
- [94] ComplexHeatmap_2.16.0  miniUI_0.1.1.1         pbapply_1.7-2         
- [97] knitr_1.43             gridExtra_2.3          IRanges_2.34.1        
-[100] scattermore_1.2        stats4_4.3.1           xfun_0.39             
-[103] factoextra_1.0.7       matrixStats_1.0.0      stringi_1.7.12        
-[106] lazyeval_0.2.2         yaml_2.3.7             evaluate_0.21         
-[109] codetools_0.2-19       cli_3.6.1              RcppParallel_5.1.7    
-[112] uwot_0.1.16            xtable_1.8-4           reticulate_1.30       
-[115] munsell_0.5.0          Rcpp_1.0.11            globals_0.16.2        
-[118] spatstat.random_3.1-5  png_0.1-8              parallel_4.3.1        
-[121] Rfast_2.0.8            ellipsis_0.3.2         assertthat_0.2.1      
-[124] parallelDist_0.2.6     listenv_0.9.0          ggthemes_4.2.4        
-[127] viridisLite_0.4.2      scales_1.2.1           ggridges_0.5.4        
-[130] leiden_0.4.3           purrr_1.0.1            crayon_1.5.2          
-[133] GetoptLong_1.0.5       rlang_1.1.1            cowplot_1.1.1         </code></pre>
+  [1] RcppAnnoy_0.0.21          splines_4.3.2            
+  [3] later_1.3.1               R.oo_1.26.0              
+  [5] polyclip_1.10-4           fastDummies_1.7.3        
+  [7] lifecycle_1.0.3           doParallel_1.0.17        
+  [9] globals_0.16.2            lattice_0.22-5           
+ [11] MASS_7.3-60               dendextend_1.17.1        
+ [13] magrittr_2.0.3            plotly_4.10.2            
+ [15] rmarkdown_2.24            yaml_2.3.7               
+ [17] httpuv_1.6.11             sctransform_0.4.1        
+ [19] spam_2.10-0               askpass_1.2.0            
+ [21] spatstat.sparse_3.0-2     reticulate_1.36.1        
+ [23] cowplot_1.1.1             pbapply_1.7-2            
+ [25] RColorBrewer_1.1-3        abind_1.4-5              
+ [27] Rtsne_0.17                purrr_1.0.1              
+ [29] R.utils_2.12.2            BiocGenerics_0.46.0      
+ [31] circlize_0.4.15           IRanges_2.34.1           
+ [33] S4Vectors_0.38.1          ggrepel_0.9.5            
+ [35] irlba_2.3.5.1             listenv_0.9.0            
+ [37] spatstat.utils_3.0-3      umap_0.2.10.0            
+ [39] goftest_1.2-3             RSpectra_0.16-1          
+ [41] spatstat.random_3.2-1     dqrng_0.3.0              
+ [43] fitdistrplus_1.1-11       parallelly_1.37.1        
+ [45] DelayedMatrixStats_1.22.5 leiden_0.4.3             
+ [47] codetools_0.2-19          DelayedArray_0.26.7      
+ [49] tidyselect_1.2.0          shape_1.4.6              
+ [51] farver_2.1.1              ScaledMatrix_1.8.1       
+ [53] viridis_0.6.4             matrixStats_1.2.0        
+ [55] stats4_4.3.2              spatstat.explore_3.2-1   
+ [57] jsonlite_1.8.7            GetoptLong_1.0.5         
+ [59] ellipsis_0.3.2            progressr_0.14.0         
+ [61] ggridges_0.5.4            survival_3.5-8           
+ [63] iterators_1.0.14          foreach_1.5.2            
+ [65] tools_4.3.2               ica_1.0-3                
+ [67] Rcpp_1.0.11               glue_1.7.0               
+ [69] gridExtra_2.3             xfun_0.39                
+ [71] MatrixGenerics_1.12.3     ggthemes_5.1.0           
+ [73] dplyr_1.1.2               withr_3.0.0              
+ [75] fastmap_1.1.1             fansi_1.0.4              
+ [77] openssl_2.1.0             digest_0.6.33            
+ [79] rsvd_1.0.5                parallelDist_0.2.6       
+ [81] R6_2.5.1                  mime_0.12                
+ [83] colorspace_2.1-0          scattermore_1.2          
+ [85] tensor_1.5                spatstat.data_3.0-1      
+ [87] R.methodsS3_1.8.2         utf8_1.2.3               
+ [89] tidyr_1.3.0               generics_0.1.3           
+ [91] data.table_1.15.0         httr_1.4.6               
+ [93] htmlwidgets_1.6.2         S4Arrays_1.2.0           
+ [95] uwot_0.1.16               pkgconfig_2.0.3          
+ [97] gtable_0.3.3              ComplexHeatmap_2.16.0    
+ [99] lmtest_0.9-40             htmltools_0.5.8          
+[101] dotCall64_1.1-0           clue_0.3-64              
+[103] scales_1.3.0              png_0.1-8                
+[105] knitr_1.43                rstudioapi_0.15.0        
+[107] reshape2_1.4.4            rjson_0.2.21             
+[109] nlme_3.1-163              zoo_1.8-12               
+[111] GlobalOptions_0.1.2       stringr_1.5.0            
+[113] KernSmooth_2.23-22        parallel_4.3.2           
+[115] miniUI_0.1.1.1            RcppZiggurat_0.1.6       
+[117] pillar_1.9.0              grid_4.3.2               
+[119] vctrs_0.6.3               RANN_2.6.1               
+[121] promises_1.2.0.1          BiocSingular_1.16.0      
+[123] beachmat_2.16.0           xtable_1.8-4             
+[125] cluster_2.1.6             evaluate_0.21            
+[127] cli_3.6.1                 compiler_4.3.2           
+[129] rlang_1.1.1               crayon_1.5.2             
+[131] future.apply_1.11.0       labeling_0.4.2           
+[133] plyr_1.8.8                stringi_1.8.1            
+[135] viridisLite_0.4.2         deldir_2.0-2             
+[137] BiocParallel_1.34.2       assertthat_0.2.1         
+[139] munsell_0.5.0             lazyeval_0.2.2           
+[141] spatstat.geom_3.2-4       PCAtools_2.14.0          
+[143] Matrix_1.6-3              RcppHNSW_0.6.0           
+[145] patchwork_1.2.0           sparseMatrixStats_1.12.2 
+[147] future_1.33.0             shiny_1.8.0              
+[149] ROCR_1.0-11               Rfast_2.1.0              
+[151] igraph_2.0.3              RcppParallel_5.1.7       </code></pre>
 </div>
 </div>
 
