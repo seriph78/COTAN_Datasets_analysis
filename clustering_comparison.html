@@ -552,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="preamble" class="level2">
 <h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scanpy <span class="im">as</span> sc</span>
@@ -3584,14 +3584,14 @@ if (outputEl) {{
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="62">
 <div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_scores(tuning, dataset):</span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> pd.read_csv(<span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/scores_</span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss">.csv'</span>)</span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    scores <span class="op">=</span> scores.rename(columns<span class="op">=</span>{<span class="st">"Unnamed: 0"</span>: <span class="st">"tool"</span>})</span>
 <span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    scores[<span class="st">'tuning'</span>] <span class="op">=</span> tuning</span>
 <span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="25">
+<div class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>datasets <span class="op">=</span> [<span class="st">'PBMC1'</span>, <span class="st">'PBMC2'</span>, <span class="st">'PBMC3'</span>, <span class="st">'PBMC4'</span>]</span>
 <span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>tunings <span class="op">=</span> [<span class="st">'default_celltypist'</span>, <span class="st">'default_antibody'</span>, <span class="st">'celltypist_celltypist'</span>, <span class="st">'antibody_antibody'</span>]</span>
 <span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3609,31 +3609,34 @@ if (outputEl) {{
 <span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for plotting</span></span>
 <span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a>all_scores_melted <span class="op">=</span> all_scores.melt(id_vars<span class="op">=</span>[<span class="st">'tool'</span>, <span class="st">'tuning'</span>, <span class="st">'dataset'</span>], var_name<span class="op">=</span><span class="st">'score'</span>, value_name<span class="op">=</span><span class="st">'value'</span>)</span>
 <span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-18"><a href="#cb71-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Define custom colors</span></span>
-<span id="cb71-19"><a href="#cb71-19" aria-hidden="true" tabindex="-1"></a>custom_palette <span class="op">=</span> {</span>
-<span id="cb71-20"><a href="#cb71-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"seurat"</span>: <span class="st">"#ed5537"</span>,</span>
-<span id="cb71-21"><a href="#cb71-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"monocle"</span>: <span class="st">"#95ba8f"</span>,</span>
-<span id="cb71-22"><a href="#cb71-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scanpy"</span>: <span class="st">"#B3CDE3"</span>,</span>
-<span id="cb71-23"><a href="#cb71-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"COTAN"</span>: <span class="st">"#8856A7"</span>,</span>
-<span id="cb71-24"><a href="#cb71-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scvi-tools"</span>: <span class="st">"#B6A18F"</span></span>
-<span id="cb71-25"><a href="#cb71-25" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb71-26"><a href="#cb71-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-27"><a href="#cb71-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the grid of boxplots</span></span>
+<span id="cb71-18"><a href="#cb71-18" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">"talk"</span>) </span>
+<span id="cb71-19"><a href="#cb71-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Define custom colors</span></span>
+<span id="cb71-20"><a href="#cb71-20" aria-hidden="true" tabindex="-1"></a>custom_palette <span class="op">=</span> {</span>
+<span id="cb71-21"><a href="#cb71-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"seurat"</span>: <span class="st">"#ed5537"</span>,</span>
+<span id="cb71-22"><a href="#cb71-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"monocle"</span>: <span class="st">"#95ba8f"</span>,</span>
+<span id="cb71-23"><a href="#cb71-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scanpy"</span>: <span class="st">"#B3CDE3"</span>,</span>
+<span id="cb71-24"><a href="#cb71-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"COTAN"</span>: <span class="st">"#8856A7"</span>,</span>
+<span id="cb71-25"><a href="#cb71-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scvi-tools"</span>: <span class="st">"#B6A18F"</span></span>
+<span id="cb71-26"><a href="#cb71-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb71-27"><a href="#cb71-27" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-28"><a href="#cb71-28" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.FacetGrid(all_scores_melted, row<span class="op">=</span><span class="st">'score'</span>, col<span class="op">=</span><span class="st">'tuning'</span>, sharey<span class="op">=</span><span class="va">False</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
 <span id="cb71-29"><a href="#cb71-29" aria-hidden="true" tabindex="-1"></a>g.<span class="bu">map</span>(sns.pointplot, <span class="st">'tool'</span>, <span class="st">'value'</span>, palette<span class="op">=</span>custom_palette)</span>
 <span id="cb71-30"><a href="#cb71-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb71-31"><a href="#cb71-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Set titles and labels</span></span>
 <span id="cb71-32"><a href="#cb71-32" aria-hidden="true" tabindex="-1"></a>g.set_titles(col_template<span class="op">=</span><span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>, row_template<span class="op">=</span><span class="st">"</span><span class="sc">{row_name}</span><span class="st">"</span>)</span>
 <span id="cb71-33"><a href="#cb71-33" aria-hidden="true" tabindex="-1"></a>g.set_axis_labels(<span class="st">"Tool"</span>, <span class="st">"Score Value"</span>)</span>
-<span id="cb71-34"><a href="#cb71-34" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top<span class="op">=</span><span class="fl">0.9</span>)</span>
-<span id="cb71-35"><a href="#cb71-35" aria-hidden="true" tabindex="-1"></a>g.fig.suptitle(<span class="st">'Comparison of Clustering Tools by Various Scores and Conditions'</span>)</span>
-<span id="cb71-36"><a href="#cb71-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb71-37"><a href="#cb71-37" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb71-34"><a href="#cb71-34" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top<span class="op">=</span><span class="fl">1.4</span>)</span>
+<span id="cb71-35"><a href="#cb71-35" aria-hidden="true" tabindex="-1"></a><span class="co">#g.fig.suptitle('Comparison of Clustering Tools by Various Scores and Conditions')</span></span>
+<span id="cb71-36"><a href="#cb71-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels</span></span>
+<span id="cb71-37"><a href="#cb71-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g.axes.flatten():</span>
+<span id="cb71-38"><a href="#cb71-38" aria-hidden="true" tabindex="-1"></a>    plt.setp(ax.get_xticklabels(), rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb71-39"><a href="#cb71-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-40"><a href="#cb71-40" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <p><img src="clustering_comparison_files/figure-html/cell-20-output-1.png" class="img-fluid"></p>
 </div>
 </div>
-<div class="cell" data-execution_count="56">
+<div class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load your data (assuming you have CSV files for the scores)</span></span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> load_scores(tuning, dataset, score_type):</span>
 <span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>    file_path <span class="op">=</span> <span class="ss">f'</span><span class="sc">{</span>DIR<span class="sc">}{</span>dataset<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>tuning<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>score_type<span class="sc">}</span><span class="ss">.csv'</span></span>
@@ -3645,7 +3648,7 @@ if (outputEl) {{
 <span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>    scores_melted[<span class="st">'score_type'</span>] <span class="op">=</span> score_type</span>
 <span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> scores_melted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-execution_count="61">
+<div class="cell" data-execution_count="79">
 <div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>datasets <span class="op">=</span> [<span class="st">'PBMC1'</span>, <span class="st">'PBMC2'</span>, <span class="st">'PBMC3'</span>, <span class="st">'PBMC4'</span>]</span>
 <span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>tunings <span class="op">=</span> [<span class="st">'default'</span>, <span class="st">'celltypist'</span>, <span class="st">'antibody'</span>]</span>
@@ -3682,18 +3685,24 @@ if (outputEl) {{
 <span id="cb73-34"><a href="#cb73-34" aria-hidden="true" tabindex="-1"></a>g1.<span class="bu">map</span>(sns.pointplot, <span class="st">'tool'</span>, <span class="st">'value'</span>, palette<span class="op">=</span>custom_palette, order<span class="op">=</span>[ <span class="st">"monocle"</span>, <span class="st">"scanpy"</span>, <span class="st">"scvi-tools"</span>,<span class="st">"seurat"</span>,<span class="st">"COTAN"</span>])</span>
 <span id="cb73-35"><a href="#cb73-35" aria-hidden="true" tabindex="-1"></a>g1.set_titles(col_template<span class="op">=</span><span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>)</span>
 <span id="cb73-36"><a href="#cb73-36" aria-hidden="true" tabindex="-1"></a>g1.set_axis_labels(<span class="st">"Tool"</span>, <span class="st">"Silhouette Score"</span>)</span>
-<span id="cb73-37"><a href="#cb73-37" aria-hidden="true" tabindex="-1"></a>g1.fig.suptitle(<span class="st">'Silhouette Scores by Tool and Tuning Condition'</span>)</span>
+<span id="cb73-37"><a href="#cb73-37" aria-hidden="true" tabindex="-1"></a>g1.fig.suptitle(<span class="st">'Silhouette Scores by Tool and Tuning Condition'</span>, y<span class="op">=</span><span class="fl">1.25</span>)</span>
 <span id="cb73-38"><a href="#cb73-38" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb73-39"><a href="#cb73-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-40"><a href="#cb73-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Davies-Bouldin scores</span></span>
-<span id="cb73-41"><a href="#cb73-41" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> sns.FacetGrid(davies_bouldin_scores, col<span class="op">=</span><span class="st">'tuning'</span>, sharey<span class="op">=</span><span class="va">False</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
-<span id="cb73-42"><a href="#cb73-42" aria-hidden="true" tabindex="-1"></a>g2.<span class="bu">map</span>(sns.pointplot, <span class="st">'tool'</span>, <span class="st">'value'</span>, palette<span class="op">=</span>custom_palette, order<span class="op">=</span>[<span class="st">"monocle"</span>, <span class="st">"scanpy"</span>,  <span class="st">"scvi-tools"</span>,<span class="st">"seurat"</span>,<span class="st">"COTAN"</span>])</span>
-<span id="cb73-43"><a href="#cb73-43" aria-hidden="true" tabindex="-1"></a>g2.set_titles(col_template<span class="op">=</span><span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>)</span>
-<span id="cb73-44"><a href="#cb73-44" aria-hidden="true" tabindex="-1"></a>g2.set_axis_labels(<span class="st">"Tool"</span>, <span class="st">"Davies-Bouldin Score"</span>)</span>
-<span id="cb73-45"><a href="#cb73-45" aria-hidden="true" tabindex="-1"></a>g2.fig.suptitle(<span class="st">'Davies-Bouldin Scores by Tool and Tuning Condition'</span>)</span>
-<span id="cb73-46"><a href="#cb73-46" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top<span class="op">=</span><span class="fl">0.85</span>)</span>
-<span id="cb73-47"><a href="#cb73-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb73-48"><a href="#cb73-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb73-39"><a href="#cb73-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels</span></span>
+<span id="cb73-40"><a href="#cb73-40" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g1.axes.flatten():</span>
+<span id="cb73-41"><a href="#cb73-41" aria-hidden="true" tabindex="-1"></a>    plt.setp(ax.get_xticklabels(), rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb73-42"><a href="#cb73-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-43"><a href="#cb73-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Davies-Bouldin scores</span></span>
+<span id="cb73-44"><a href="#cb73-44" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> sns.FacetGrid(davies_bouldin_scores, col<span class="op">=</span><span class="st">'tuning'</span>, sharey<span class="op">=</span><span class="va">False</span>, height<span class="op">=</span><span class="dv">4</span>, aspect<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb73-45"><a href="#cb73-45" aria-hidden="true" tabindex="-1"></a>g2.<span class="bu">map</span>(sns.pointplot, <span class="st">'tool'</span>, <span class="st">'value'</span>, palette<span class="op">=</span>custom_palette, order<span class="op">=</span>[<span class="st">"monocle"</span>, <span class="st">"scanpy"</span>,  <span class="st">"scvi-tools"</span>,<span class="st">"seurat"</span>,<span class="st">"COTAN"</span>])</span>
+<span id="cb73-46"><a href="#cb73-46" aria-hidden="true" tabindex="-1"></a>g2.set_titles(col_template<span class="op">=</span><span class="st">"</span><span class="sc">{col_name}</span><span class="st">"</span>)</span>
+<span id="cb73-47"><a href="#cb73-47" aria-hidden="true" tabindex="-1"></a>g2.set_axis_labels(<span class="st">"Tool"</span>, <span class="st">"Davies-Bouldin Score"</span>)</span>
+<span id="cb73-48"><a href="#cb73-48" aria-hidden="true" tabindex="-1"></a>g2.fig.suptitle(<span class="st">'Davies-Bouldin Scores by Tool and Tuning Condition'</span>, y<span class="op">=</span><span class="fl">1.85</span>)</span>
+<span id="cb73-49"><a href="#cb73-49" aria-hidden="true" tabindex="-1"></a>plt.subplots_adjust(top<span class="op">=</span><span class="fl">1.5</span>)</span>
+<span id="cb73-50"><a href="#cb73-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels</span></span>
+<span id="cb73-51"><a href="#cb73-51" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> g2.axes.flatten():</span>
+<span id="cb73-52"><a href="#cb73-52" aria-hidden="true" tabindex="-1"></a>    plt.setp(ax.get_xticklabels(), rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb73-53"><a href="#cb73-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-54"><a href="#cb73-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Loading Data/PBMC1/default_silhouette.csv
 Loading Data/PBMC1/default_davies_bouldin.csv
