@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Marco Fantozzi">
-<meta name="dcterms.date" content="2024-05-30">
+<meta name="dcterms.date" content="2024-06-03">
 
 <title>COTAN Datasets analysis - GDI Increment From Mixing</title>
 <style>
@@ -412,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DEA_Type1Error.html" class="sidebar-item-text sidebar-link">
+  <a href="./DEA_Type1Er.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Type I error</span></a>
   </div>
 </li>
@@ -529,7 +529,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 30, 2024</p>
+      <p class="date">June 3, 2024</p>
     </div>
   </div>
   
@@ -763,7 +763,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <p><img src="GDI_Increment_From_Mixing_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"Results/GDI_Sensitivity/GDI_increment.pdf"</span>,<span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">10</span>)</span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"Results/GDI_Sensitivity/GDI_increment.pdf"</span>,<span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(final.plot1)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -808,7 +808,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <p><img src="GDI_Increment_From_Mixing_files/figure-html/unnamed-chunk-10-3.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"Results/GDI_Sensitivity/GDI_TopPercentile.pdf"</span>,<span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">10</span>)</span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="st">"Results/GDI_Sensitivity/GDI_TopPercentile.pdf"</span>,<span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span> )</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(final.plot2)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -879,13 +879,13 @@ loaded via a namespace (and not attached):
  [5] hms_1.1.3          digest_0.6.35      magrittr_2.0.3     evaluate_0.23     
  [9] grid_4.4.0         timechange_0.3.0   fastmap_1.2.0      Matrix_1.7-0      
 [13] jsonlite_1.8.8     mgcv_1.9-1         fansi_1.0.6        viridisLite_0.4.2 
-[17] cli_3.6.2          splines_4.4.0      munsell_0.5.1      withr_3.0.0       
+[17] cli_3.6.2          munsell_0.5.1      splines_4.4.0      withr_3.0.0       
 [21] yaml_2.3.8         tools_4.4.0        tzdb_0.4.0         colorspace_2.1-0  
 [25] vctrs_0.6.5        R6_2.5.1           lifecycle_1.0.4    htmlwidgets_1.6.4 
 [29] pkgconfig_2.0.3    RcppParallel_5.1.7 pillar_1.9.0       gtable_0.3.5      
 [33] glue_1.7.0         Rcpp_1.0.12        xfun_0.44          tidyselect_1.2.1  
-[37] rstudioapi_0.16.0  knitr_1.46         farver_2.1.2       nlme_3.1-164      
-[41] htmltools_0.5.8.1  labeling_0.4.3     rmarkdown_2.27     compiler_4.4.0    </code></pre>
+[37] knitr_1.46         farver_2.1.2       nlme_3.1-164       htmltools_0.5.8.1 
+[41] labeling_0.4.3     rmarkdown_2.27     compiler_4.4.0    </code></pre>
 </div>
 </div>
 

@@ -101,7 +101,7 @@ def scanpyFDR(exprs, meta, feature_meta,  mtCode, outDir, sample):
       'clusters': clusters
   })
     
-  df.to_csv(outDir+sample+"_Scampy_DEA_all_genes.csv")
+  df.to_csv(outDir+sample+"_Scanpy_DEA_all_genes.csv")
 
 
   pp.close()

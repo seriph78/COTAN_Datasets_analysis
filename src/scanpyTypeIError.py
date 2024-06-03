@@ -99,5 +99,5 @@ def scanpyTypeIError(exprs, meta, feature_meta, mtCode, outDir,percentage, sampl
       'clusters': clusters
   })
     
-  df.to_csv(outDir+sample+"_ScanPy_de_genes_"+str(percentage)+".csv")
+  df.to_csv(outDir+sample+"_Scanpy_de_genes_"+str(percentage)+".csv")
   pp.close()
