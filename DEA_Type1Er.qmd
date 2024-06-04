@@ -1,0 +1,299 @@
+---
+title: "Differential expression analisys: type I error"
+author: "Silvia Giulia Galfrè"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+library(COTAN)
+options(parallelly.fork.enable = TRUE)
+library(Seurat)
+library(monocle3)
+library(reticulate)
+library(stringr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(viridis)
+```
+
+```{r}
+dirOut <- "Results/TypeIError/"
+dataSetDir <- "Data/MouseCortexFromLoom/SingleClusterRawData/"
+```
+
+### Automatic functions
+
+```{r}
+
+COTAN.DEA <- function(dataSet,clusters.list, GEO.code, sequencingMethod,sampleCondition, clName,dirOut,percentage){
+  obj <- automaticCOTANObjectCreation(raw = dataSet,
+                                      calcCoex = F,
+                                      cores = 10,
+                                      saveObj = F,
+                                      GEO = GEO.code,
+                                      sequencingMethod = sequencingMethod,
+                                      sampleCondition = sampleCondition)
+  obj <- addClusterization(obj,clName = clName,clusters = clusters.list)
+  
+  DF.DEA <- DEAOnClusters(obj,clName = clName )
+  pval.DEA <- pValueFromDEA(DF.DEA,numCells = getNumCells(obj))
+  adj.pval.DEA <- pval.DEA
+  for (col in colnames(pval.DEA)) {
+    adj.pval.DEA[,col] <- p.adjust(adj.pval.DEA[,col],method = "bonferroni")
+  }
+  n.genes.DEA <- sum(adj.pval.DEA < 0.05)
+  res <- list("n.genes.DEA"=n.genes.DEA,"DF.DEA"=DF.DEA,"adj.pval.DEA" = adj.pval.DEA)
+  
+  write.csv(res$adj.pval.DEA, file = paste0(dirOut,clName,"_de_genes_COTAN_",percentage,".csv"))
+  
+  return(res)
+
+}
+
+Seurat.DEA <- function(dataSet,clusters.list, project, dirOut,percentage){
+  pbmc <- CreateSeuratObject(counts = dataSet, project = project, min.cells = 3, min.features = 20)
+  
+  stopifnot(length(clusters.list)==length(pbmc$orig.ident))
+  
+  
+  pbmc <- NormalizeData(pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
+  pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
+  all.genes <- rownames(pbmc)
+  pbmc <- ScaleData(pbmc, features = all.genes)
+  
+  pbmc <- RunPCA(pbmc)
+  pbmc <- RunUMAP(pbmc, dims = 1:20)
+  
+  pbmc@meta.data$TestCl <- NA
+  pbmc@meta.data[names(clusters.list),]$TestCl <- factor(clusters.list)
+  
+  pbmc <- SetIdent(pbmc,value = "TestCl")
+  
+  pbmc.markers <- FindAllMarkers(pbmc, only.pos = TRUE)
+  
+  
+  
+  n.genes.DEA <- sum(pbmc.markers$p_val_adj < 0.05)
+  
+  print(n.genes.DEA)
+  
+  write.csv(pbmc.markers, file = paste0(dirOut,project,"_de_genes_Seurat_",percentage,".csv"))
+  
+  return(list("n.genes.DEA"=n.genes.DEA,"markers"= pbmc.markers))
+  }
+
+Monocle.DEA <- function(dataSet,clusters.list,project, dirOut,percentage){
+  
+  cell_metadata = as.data.frame(clusters.list[colnames(dataSet)])
+  colnames(cell_metadata) <- "Clusters"
+  cds <- new_cell_data_set(dataSet[rowSums(dataSet) > 3,],
+                         cell_metadata = cell_metadata
+                         )
+  colData(cds)$cluster <- clusters.list[rownames(colData(cds))]
+
+  #cds <- preprocess_cds(cds, num_dim = 100)
+  #cds <- reduce_dimension(cds)
+  #cds <- cluster_cells(cds, resolution=1e-5)
+
+  marker_test_res <- top_markers(cds, 
+                                 group_cells_by="Clusters", 
+                                 genes_to_test_per_group = dim(cds)[1],
+                                  cores=10)
+  
+  # de_results <- fit_models(cds,model_formula_str = " ~ cluster",cores = 10,verbose = T)
+  # fit_coefs <- coefficient_table(de_results)
+  # 
+  # fit_coefs <- fit_coefs %>% filter(term == "cluster")
+  
+  write.csv(marker_test_res, file = paste0(dirOut,project,"_de_genes_Monocle_",percentage,".csv"))
+  
+  # return(list("n.genes.DEA"=sum(fit_coefs$q_value < 0.05, na.rm = T),
+  #             "fit_coefs"= fit_coefs,
+  #             "de_results"=de_results))
+  return(list("n.genes.DEA"=sum(marker_test_res$marker_test_q_value < 0.05, na.rm = T),
+              "marker_test_res"= marker_test_res
+              ))
+}
+
+
+ScanPy.DEA <- function(dataSet,
+                       clusters.list, 
+                       project, 
+                       dirOut,
+                       percentage){
+  pbmc <- CreateSeuratObject(counts = dataSet, project = project, min.cells = 3, min.features = 20)
+  
+  
+  pbmc@meta.data$TestCl <- NA
+  pbmc@meta.data[names(clusters.list),]$TestCl <- clusters.list
+  
+  exprs <- pbmc@assays$RNA$counts
+  
+  meta <- pbmc[[]]
+  #feature_meta <- GetAssay(pbmc)[[]]
+  tmp <- as.data.frame(matrix(data = NA, 
+                              ncol = 1, 
+                              nrow = nrow(pbmc@assays$RNA$counts)))
+  rownames(tmp) <- rownames(pbmc@assays$RNA$counts)
+  
+  feature_meta <- tmp
+  #embedding <- Embeddings(pbmc, "umap")
+  
+  Sys.setenv(RETICULATE_PYTHON = "../../../bin/python3")
+  py <- import("sys")
+  
+  source_python("src/scanpyTypeIError.py")
+  scanpyTypeIError(exprs, 
+                   meta, 
+                   feature_meta, 
+                   "mt", 
+                   dirOut, 
+                   percentage,project)
+
+  out <- read.csv(file = paste0(dirOut,
+                                project,
+                                "_Scanpy_de_genes_",
+                                percentage,
+                                ".csv"),
+                  header = T, 
+                  row.names = 1)
+  
+  gc()
+
+  return(out)
+}
+```
+
+We would evaluate the Type I error and to do so, we consider some transcriptionally uniform clusters from the Loom dataset. We splitted these cluster in two partitions (with three different dimensions: 1/2, 1/3 and 1/4) one containing the cells with higher library size and the other with the lower library size. On these two clusters we than tested the four different software.
+
+```{r, eval=FALSE, echo=TRUE}
+for (perc in c(0.75)) { #0.5, 0.33, 0.25,0.67, 
+  outPutMatrix <- as.data.frame(matrix(nrow = 1,ncol = 4))
+  colnames(outPutMatrix) <- c("COTAN","Seurat", "Monocle", "Scanpy")
+
+  for (dataSet in list.files(dataSetDir)) {
+  
+    cluster.name <- str_split(dataSet,pattern = "_", simplify = T)[1]
+    
+    print(cluster.name)
+    outTemp <- NA
+     
+    dataSet <- readRDS(paste0(dataSetDir,dataSet))
+    
+
+    cl1 <- colnames(dataSet)[order(colSums(dataSet),decreasing = T)[1:round(ncol(dataSet)*perc,digits = 0)]]
+    
+    clusters.list <- list("cl1"=cl1,
+                          "cl2"=colnames(dataSet)[!colnames(dataSet) %in% cl1])
+  
+    clusters.list <- setNames(rep(1,ncol(dataSet)),
+                              colnames(dataSet))
+    clusters.list[colnames(dataSet)[!colnames(dataSet) %in% cl1]] <- 2 
+  
+    cotan.dea.out <- COTAN.DEA(dataSet = dataSet,
+                               clusters.list = clusters.list,
+                               GEO.code = "",
+                               sequencingMethod = "10x",
+                               sampleCondition = "Temp",
+                               clName =  cluster.name,
+                               dirOut, percentage = perc)
+  
+    outTemp <- c(outTemp,cotan.dea.out$n.genes.DEA)
+    
+    rm(cotan.dea.out)
+    gc()
+  
+    seurat.dea.out <- Seurat.DEA(dataSet = dataSet,
+                               clusters.list = clusters.list,
+                               project = cluster.name,
+                               dirOut, percentage = perc)
+  
+    outTemp <- c(outTemp,seurat.dea.out$n.genes.DEA)
+    
+    rm(seurat.dea.out)
+    gc()
+  
+  
+    monocle.dea.out <- Monocle.DEA(dataSet = dataSet,
+                                   clusters.list = clusters.list,
+                                   project = cluster.name,
+                                   dirOut = dirOut, percentage = perc)
+  
+    outTemp <- c(outTemp,monocle.dea.out$n.genes.DEA)
+    rm(monocle.dea.out)
+    gc()
+  
+    ScanPy.dea.out <- ScanPy.DEA(dataSet = dataSet, 
+                                 clusters.list = clusters.list, 
+                                 project = cluster.name, 
+                                 dirOut = dirOut, percentage = perc
+                                  )
+    
+  
+    ScanPy.dea.out.filterd <- ScanPy.dea.out[ScanPy.dea.out$pval_adj < 0.05
+                                             & ScanPy.dea.out$clusters == "cl1.0",]
+    
+    outTemp <- c(outTemp,dim(ScanPy.dea.out.filterd)[1])
+    rm(ScanPy.dea.out.filterd)
+    gc()
+    
+    outTemp <- outTemp[2:length(outTemp)]
+    
+    outPutMatrix <- rbind(outPutMatrix,outTemp)
+    rownames(outPutMatrix)[nrow(outPutMatrix)] <- cluster.name
+    
+    write.csv(outPutMatrix,paste0(dirOut,"Complete_outPut_",perc,".csv"))
+  }
+  
+  outPutMatrix <-   outPutMatrix[2:nrow(outPutMatrix),]
+  write.csv(outPutMatrix,paste0(dirOut,"Complete_outPut_",perc,".csv"))
+
+}
+```
+
+### Summarize the output
+
+```{r}
+
+methods.color <- c("COTAN"="#F73604","Seurat"="#ABD9E9","Seurat_scTr"="#74ADD1","Seurat_Bimod"="#4575B4", "Monocle"="#DAABE9", "Scanpy"="#7F9B5C" )
+df_plot <- NA
+for (perc in c(0.5, 0.33, 0.25,0.67, 0.75)) {
+  outPutMatrix <- read.csv(paste0(dirOut,"Complete_outPut_",perc,".csv"))
+  
+  outPutMatrix$Division <- perc
+  
+  df_plot <- rbind(df_plot,outPutMatrix)
+  
+}
+df_plot <- df_plot[2:nrow(df_plot),]
+
+df_plot <- as.data.frame(pivot_longer(df_plot,cols = c(2:5),values_to = "N.Genes",names_to = "Method"))
+
+df_plot[df_plot$Method == "Cotan",]$Method <- "COTAN"
+df_plot[df_plot$Method == "ScanPy",]$Method <- "Scanpy"
+
+
+typeIerrorPlot <- ggplot(df_plot,aes(x = Method, y=N.Genes,fill=Method))+geom_boxplot(outliers = F)+
+scale_fill_manual(
+    values = methods.color)+ facet_wrap(~Division,scales = "free",nrow = 1)+
+    geom_jitter(color="black",  alpha=0.5,width = 0.2) +
+    theme_light()+
+    theme(axis.text.x=element_blank(),axis.title.x=element_blank(),
+      legend.position="bottom",
+      plot.title = element_text(size=11)
+    )
+
+pdf(paste0(dirOut,"Type1ErrorPlot.pdf"),height = 3,width = 15)
+
+plot(typeIerrorPlot)
+dev.off()
+
+
+plot(typeIerrorPlot)
+```
+
+```{r}
+sessionInfo()
+```

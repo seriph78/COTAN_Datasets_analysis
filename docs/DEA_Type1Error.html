@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Silvia Giulia Galfrè">
-<meta name="dcterms.date" content="2024-02-10">
+<meta name="dcterms.date" content="2024-06-01">
 
-<title>COTAN Datasets analysis - Differential expression analysis: type I error</title>
+<title>COTAN Datasets analysis - Differential expression analisys: type I error</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./geneExpressionAnalysisUniformClusters.html">Gene Enrichment evaluation</a></li><li class="breadcrumb-item"><a href="./DEA_Type1Error.html">Type I error</a></li><li class="breadcrumb-item"><a href="./DEA_Type1Error.html">Type I error</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DEA_Type1Error.html">DEA evaluation</a></li><li class="breadcrumb-item"><a href="./DEA_Type1Error.html">Type I error</a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -160,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Dataset1.html" class="sidebar-item-text sidebar-link">
+  <a href="./Mouse_Cortex_E14.5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cleaning and cell clustering</span></a>
   </div>
 </li>
@@ -280,7 +280,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
- <span class="menu-text">PBMCs with antibody-derived tag</span></a>
+ <span class="menu-text">PBMC form 10X site</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -289,25 +289,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PBMC1_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filtering of PBMC1 using COTAN</span></a>
+ <span class="menu-text">Cleaning PBMC1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PBMC2_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filtering of PBMC2 using COTAN</span></a>
+ <span class="menu-text">Cleaning PBMC2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PBMC3_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filtering of PBMC3 using COTAN</span></a>
+ <span class="menu-text">Cleaning PBMC3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PBMC4_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Filtering of PBMC4 using COTAN</span></a>
+ <span class="menu-text">Cleaning PBMC4</span></a>
   </div>
 </li>
       </ul>
@@ -342,20 +342,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./FindUniformOrigCluster.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Clusters and GDI score</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./OriginalClustersDistanceEvaluation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Clusters Distance Evaluation</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ForebrainDorsal_MixingUniformClusters_ToEstimateGDISensitivity.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Mixing Uniform Clusters To Estimate GDI Sensitivity</span></a>
+  <a href="./FindUniformOrigCluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cluster Unifomity and GDI score</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -377,32 +371,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./NonCT_clusters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Not UT cluster with LR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Real_UT_clustersByCotan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Real UT clusters with LR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">CD14+ clusterizations</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./celltypist_annotation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CellTypist cell classification</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Clustering comparison</span></a>
+ <span class="menu-text">PBMCs clustering comparison</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ground_truth_comparison.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">ground truth comparison</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./random_forest_plots.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">random forest plots</span></a>
+  <a href="./probability_score.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PBMCs probability score</span></a>
   </div>
 </li>
       </ul>
@@ -410,12 +404,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
- <span class="menu-text">Gene Enrichment evaluation</span></a>
+ <span class="menu-text">DEA evaluation</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DEA_Type1Error.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Type I error</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./geneExpressionAnalysisUniformClusters.html" class="sidebar-item-text sidebar-link">
@@ -424,50 +424,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DEA_Seurat_COTAN.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Comparison Seurat - Cotan on Mouse Brain E15.0</span></a>
+  <a href="./FDR_analisys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDR analysis - define DE genes</span></a>
   </div>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
- <span class="menu-text">Type I error</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+ <span class="menu-text">FDR and TPR - ROC curves</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DEA_Type1Error.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Type I error</span></a>
+  <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 3% 10%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5_20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5% 20%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analysisResultsLFC.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - Log Fold Change</span></a>
   </div>
 </li>
       </ul>
   </li>
-          <li class="sidebar-item sidebar-item-section">
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
- <span class="menu-text">False Discovery Rate</span></a>
+ <span class="menu-text">Additional code and scripts</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./FDR_DataSetCreation_ByClusterMerging.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Data-sets creation</span></a>
+  <a href="./src/scanpyTypeIError.py" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ScamPy Type I Error code</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./FDR_analisys.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Define DE genes for each methods</span></a>
+  <a href="./src/scanpyFDR.py" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ScamPy FDR code</span></a>
   </div>
 </li>
-      </ul>
-  </li>
       </ul>
   </li>
     </ul>
@@ -490,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Differential expression analysis: type I error</h1>
+<h1 class="title">Differential expression analisys: type I error</h1>
 </div>
 
 
@@ -507,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 10, 2024</p>
+      <p class="date">June 1, 2024</p>
     </div>
   </div>
   
@@ -517,8 +535,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="automatic-functions" class="level3">
-<h3 class="anchored" data-anchor-id="automatic-functions">Automatic functions</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(COTAN)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">parallelly.fork.enable =</span> <span class="cn">TRUE</span>)</span>
@@ -527,270 +543,282 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>dirOut <span class="ot">&lt;-</span> <span class="st">"Results/TypeIError/"</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>dataSetDir <span class="ot">&lt;-</span> <span class="st">"Data/MouseCortexFromLoom/SingleClusterRawData/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(viridis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>COTAN.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,clusters.list, GEO.code, sequencingMethod,sampleCondition, clName,dirOut,percentage){</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  obj <span class="ot">&lt;-</span> <span class="fu">automaticCOTANObjectCreation</span>(<span class="at">raw =</span> dataSet,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">calcCoex =</span> F,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">cores =</span> <span class="dv">10</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">saveObj =</span> F,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">GEO =</span> GEO.code,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">sequencingMethod =</span> sequencingMethod,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">sampleCondition =</span> sampleCondition)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(obj,<span class="at">clName =</span> clName,<span class="at">clusters =</span> clusters.list)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  DF.DEA <span class="ot">&lt;-</span> <span class="fu">DEAOnClusters</span>(obj,<span class="at">clName =</span> clName )</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  pval.DEA <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(DF.DEA,<span class="at">numCells =</span> <span class="fu">getNumCells</span>(obj))</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  adj.pval.DEA <span class="ot">&lt;-</span> pval.DEA</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">colnames</span>(pval.DEA)) {</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    adj.pval.DEA[,col] <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(adj.pval.DEA[,col],<span class="at">method =</span> <span class="st">"bonferroni"</span>)</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  n.genes.DEA <span class="ot">&lt;-</span> <span class="fu">sum</span>(adj.pval.DEA <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"n.genes.DEA"</span><span class="ot">=</span>n.genes.DEA,<span class="st">"DF.DEA"</span><span class="ot">=</span>DF.DEA,<span class="st">"adj.pval.DEA"</span> <span class="ot">=</span> adj.pval.DEA)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(res<span class="sc">$</span>adj.pval.DEA, <span class="at">file =</span> <span class="fu">paste0</span>(dirOut,clName,<span class="st">"_de_genes_COTAN_"</span>,percentage,<span class="st">".csv"</span>))</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>Seurat.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,clusters.list, project, dirOut,percentage){</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> dataSet, <span class="at">project =</span> project, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">20</span>)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(clusters.list)<span class="sc">==</span><span class="fu">length</span>(pbmc<span class="sc">$</span>orig.ident))</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(pbmc, <span class="at">normalization.method =</span> <span class="st">"LogNormalize"</span>, <span class="at">scale.factor =</span> <span class="dv">10000</span>)</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(pbmc, <span class="at">selection.method =</span> <span class="st">"vst"</span>, <span class="at">nfeatures =</span> <span class="dv">2000</span>)</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  all.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pbmc)</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(pbmc, <span class="at">features =</span> all.genes)</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(pbmc)</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">RunUMAP</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data[<span class="fu">names</span>(clusters.list),]<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> <span class="fu">factor</span>(clusters.list)</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">SetIdent</span>(pbmc,<span class="at">value =</span> <span class="st">"TestCl"</span>)</span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  pbmc.markers <span class="ot">&lt;-</span> <span class="fu">FindAllMarkers</span>(pbmc, <span class="at">only.pos =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  n.genes.DEA <span class="ot">&lt;-</span> <span class="fu">sum</span>(pbmc.markers<span class="sc">$</span>p_val_adj <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(n.genes.DEA)</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(pbmc.markers, <span class="at">file =</span> <span class="fu">paste0</span>(dirOut,project,<span class="st">"_de_genes_Seurat_"</span>,percentage,<span class="st">".csv"</span>))</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="st">"n.genes.DEA"</span><span class="ot">=</span>n.genes.DEA,<span class="st">"markers"</span><span class="ot">=</span> pbmc.markers))</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>Monocle.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,clusters.list,project, dirOut,percentage){</span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  cell_metadata <span class="ot">=</span> <span class="fu">as.data.frame</span>(clusters.list[<span class="fu">colnames</span>(dataSet)])</span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(cell_metadata) <span class="ot">&lt;-</span> <span class="st">"Clusters"</span></span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  cds <span class="ot">&lt;-</span> <span class="fu">new_cell_data_set</span>(dataSet[<span class="fu">rowSums</span>(dataSet) <span class="sc">&gt;</span> <span class="dv">3</span>,],</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cell_metadata =</span> cell_metadata</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>                         )</span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colData</span>(cds)<span class="sc">$</span>cluster <span class="ot">&lt;-</span> clusters.list[<span class="fu">rownames</span>(<span class="fu">colData</span>(cds))]</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  cds <span class="ot">&lt;-</span> <span class="fu">preprocess_cds</span>(cds, <span class="at">num_dim =</span> <span class="dv">100</span>)</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  cds <span class="ot">&lt;-</span> <span class="fu">reduce_dimension</span>(cds)</span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="co">#cds &lt;- cluster_cells(cds, resolution=1e-5)</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  de_results <span class="ot">&lt;-</span> <span class="fu">fit_models</span>(cds,<span class="at">model_formula_str =</span> <span class="st">" ~ cluster"</span>,<span class="at">cores =</span> <span class="dv">10</span>,<span class="at">verbose =</span> T)</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  fit_coefs <span class="ot">&lt;-</span> <span class="fu">coefficient_table</span>(de_results)</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  fit_coefs <span class="ot">&lt;-</span> fit_coefs <span class="sc">%&gt;%</span> <span class="fu">filter</span>(term <span class="sc">==</span> <span class="st">"cluster"</span>)</span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(fit_coefs[,<span class="fu">c</span>(<span class="st">"num_cells_expressed"</span> ,<span class="st">"gene_id"</span>,<span class="st">"p_value"</span>,<span class="st">"q_value"</span>)]), <span class="at">file =</span> <span class="fu">paste0</span>(dirOut,project,<span class="st">"_de_genes_Monocle_"</span>,percentage,<span class="st">".csv"</span>))</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="st">"n.genes.DEA"</span><span class="ot">=</span><span class="fu">sum</span>(fit_coefs<span class="sc">$</span>q_value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> T),</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>              <span class="st">"fit_coefs"</span><span class="ot">=</span> fit_coefs,</span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>              <span class="st">"de_results"</span><span class="ot">=</span>de_results))</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>ScamPy.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,</span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>                       clusters.list, </span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>                       project, </span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>                       dirOut,</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>                       percentage){</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> dataSet, <span class="at">project =</span> project, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">20</span>)</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data[<span class="fu">names</span>(clusters.list),]<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> clusters.list</span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> pbmc<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>counts</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  meta <span class="ot">&lt;-</span> pbmc[[]]</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  <span class="co">#feature_meta &lt;- GetAssay(pbmc)[[]]</span></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, </span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ncol =</span> <span class="dv">1</span>, </span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nrow =</span> <span class="fu">nrow</span>(pbmc<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>counts)))</span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(tmp) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pbmc<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>counts)</span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>  feature_meta <span class="ot">&lt;-</span> tmp</span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>  <span class="co">#embedding &lt;- Embeddings(pbmc, "umap")</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> <span class="st">"../../../bin/python3"</span>)</span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>  py <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"sys"</span>)</span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source_python</span>(<span class="st">"src/scanpyTypeIError.py"</span>)</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scanpyTypeIError</span>(exprs, </span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>                   meta, </span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>                   feature_meta, </span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"mt"</span>, </span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>                   dirOut, </span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>                   project,</span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>                   percentage)</span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(dirOut,</span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>                                project,</span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"_Scampy_de_genes_"</span>,</span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>                                percentage,</span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a>                                <span class="st">".csv"</span>),</span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> T, </span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dirOut <span class="ot">&lt;-</span> <span class="st">"Results/TypeIError/"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dataSetDir <span class="ot">&lt;-</span> <span class="st">"Data/MouseCortexFromLoom/SingleClusterRawData/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We would evaluate the Type I error and to do so, we consider some transcriptionally uniform clusters from the Loom dataset. We splitted these cluster in two partitions (with five different dimensions: 1/4, 1/3, 1/3, 2/3, and 3/4) one containing the cells with higher library size and the other with the lower library size. On these two clusters we than tested the four different software.</p>
+<section id="automatic-functions" class="level3">
+<h3 class="anchored" data-anchor-id="automatic-functions">Automatic functions</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (perc <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.33</span>, <span class="fl">0.25</span>,<span class="fl">0.67</span>, <span class="fl">0.75</span>)) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">1</span>,<span class="at">ncol =</span> <span class="dv">4</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(outPutMatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Cotan"</span>,<span class="st">"Seurat"</span>, <span class="st">"Monocle"</span>, <span class="st">"ScamPy"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (dataSet <span class="cf">in</span> <span class="fu">list.files</span>(dataSetDir)) {</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    cluster.name <span class="ot">&lt;-</span> <span class="fu">str_split</span>(dataSet,<span class="at">pattern =</span> <span class="st">"_"</span>, <span class="at">simplify =</span> T)[<span class="dv">1</span>]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(cluster.name)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>     </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    dataSet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">paste0</span>(dataSetDir,dataSet))</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    cl1 <span class="ot">&lt;-</span> <span class="fu">colnames</span>(dataSet)[<span class="fu">order</span>(<span class="fu">colSums</span>(dataSet),<span class="at">decreasing =</span> T)[<span class="dv">1</span><span class="sc">:</span><span class="fu">round</span>(<span class="fu">ncol</span>(dataSet)<span class="sc">*</span>perc,<span class="at">digits =</span> <span class="dv">0</span>)]]</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    clusters.list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"cl1"</span><span class="ot">=</span>cl1,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"cl2"</span><span class="ot">=</span><span class="fu">colnames</span>(dataSet)[<span class="sc">!</span><span class="fu">colnames</span>(dataSet) <span class="sc">%in%</span> cl1])</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>COTAN.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,clusters.list, GEO.code, sequencingMethod,sampleCondition, clName,dirOut,percentage){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  obj <span class="ot">&lt;-</span> <span class="fu">automaticCOTANObjectCreation</span>(<span class="at">raw =</span> dataSet,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">calcCoex =</span> F,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">cores =</span> <span class="dv">10</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">saveObj =</span> F,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">GEO =</span> GEO.code,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">sequencingMethod =</span> sequencingMethod,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">sampleCondition =</span> sampleCondition)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  obj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(obj,<span class="at">clName =</span> clName,<span class="at">clusters =</span> clusters.list)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  DF.DEA <span class="ot">&lt;-</span> <span class="fu">DEAOnClusters</span>(obj,<span class="at">clName =</span> clName )</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  pval.DEA <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(DF.DEA,<span class="at">numCells =</span> <span class="fu">getNumCells</span>(obj))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  adj.pval.DEA <span class="ot">&lt;-</span> pval.DEA</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">colnames</span>(pval.DEA)) {</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    adj.pval.DEA[,col] <span class="ot">&lt;-</span> <span class="fu">p.adjust</span>(adj.pval.DEA[,col],<span class="at">method =</span> <span class="st">"bonferroni"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  n.genes.DEA <span class="ot">&lt;-</span> <span class="fu">sum</span>(adj.pval.DEA <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"n.genes.DEA"</span><span class="ot">=</span>n.genes.DEA,<span class="st">"DF.DEA"</span><span class="ot">=</span>DF.DEA,<span class="st">"adj.pval.DEA"</span> <span class="ot">=</span> adj.pval.DEA)</span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    clusters.list <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">ncol</span>(dataSet)),</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">colnames</span>(dataSet))</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    clusters.list[<span class="fu">colnames</span>(dataSet)[<span class="sc">!</span><span class="fu">colnames</span>(dataSet) <span class="sc">%in%</span> cl1]] <span class="ot">&lt;-</span> <span class="dv">2</span> </span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    cotan.dea.out <span class="ot">&lt;-</span> <span class="fu">COTAN.DEA</span>(<span class="at">dataSet =</span> dataSet,</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                               <span class="at">clusters.list =</span> clusters.list,</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                               <span class="at">GEO.code =</span> <span class="st">""</span>,</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sequencingMethod =</span> <span class="st">"10x"</span>,</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sampleCondition =</span> <span class="st">"Temp"</span>,</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                               <span class="at">clName =</span>  cluster.name,</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                               dirOut, <span class="at">percentage =</span> perc)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(res<span class="sc">$</span>adj.pval.DEA, <span class="at">file =</span> <span class="fu">paste0</span>(dirOut,clName,<span class="st">"_de_genes_COTAN_"</span>,percentage,<span class="st">".csv"</span>))</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>Seurat.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,clusters.list, project, dirOut,percentage){</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> dataSet, <span class="at">project =</span> project, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">20</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(clusters.list)<span class="sc">==</span><span class="fu">length</span>(pbmc<span class="sc">$</span>orig.ident))</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,cotan.dea.out<span class="sc">$</span>n.genes.DEA)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(cotan.dea.out)</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">NormalizeData</span>(pbmc, <span class="at">normalization.method =</span> <span class="st">"LogNormalize"</span>, <span class="at">scale.factor =</span> <span class="dv">10000</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">FindVariableFeatures</span>(pbmc, <span class="at">selection.method =</span> <span class="st">"vst"</span>, <span class="at">nfeatures =</span> <span class="dv">2000</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  all.genes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pbmc)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">ScaleData</span>(pbmc, <span class="at">features =</span> all.genes)</span>
 <span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    seurat.dea.out <span class="ot">&lt;-</span> <span class="fu">Seurat.DEA</span>(<span class="at">dataSet =</span> dataSet,</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>                               <span class="at">clusters.list =</span> clusters.list,</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>                               <span class="at">project =</span> cluster.name,</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                               dirOut, <span class="at">percentage =</span> perc)</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,seurat.dea.out<span class="sc">$</span>n.genes.DEA)</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(seurat.dea.out)</span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">RunPCA</span>(pbmc)</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">RunUMAP</span>(pbmc, <span class="at">dims =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data[<span class="fu">names</span>(clusters.list),]<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> <span class="fu">factor</span>(clusters.list)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">SetIdent</span>(pbmc,<span class="at">value =</span> <span class="st">"TestCl"</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  pbmc.markers <span class="ot">&lt;-</span> <span class="fu">FindAllMarkers</span>(pbmc, <span class="at">only.pos =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    monocle.dea.out <span class="ot">&lt;-</span> <span class="fu">Monocle.DEA</span>(<span class="at">dataSet =</span> dataSet,</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">clusters.list =</span> clusters.list,</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">project =</span> cluster.name,</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">dirOut =</span> dirOut, <span class="at">percentage =</span> perc)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  n.genes.DEA <span class="ot">&lt;-</span> <span class="fu">sum</span>(pbmc.markers<span class="sc">$</span>p_val_adj <span class="sc">&lt;</span> <span class="fl">0.05</span>)</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(n.genes.DEA)</span>
 <span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,monocle.dea.out<span class="sc">$</span>n.genes.DEA)</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(monocle.dea.out)</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>    scampy.dea.out <span class="ot">&lt;-</span> <span class="fu">ScamPy.DEA</span>(<span class="at">dataSet =</span> dataSet, </span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">clusters.list =</span> clusters.list, </span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">project =</span> cluster.name, </span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">dirOut =</span> dirOut, <span class="at">percentage =</span> perc</span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>                                  )</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    scampy.dea.out.filterd <span class="ot">&lt;-</span> scampy.dea.out[scampy.dea.out<span class="sc">$</span>pval_adj_cl1 <span class="sc">&lt;</span> <span class="fl">0.05</span>,]</span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,<span class="fu">dim</span>(scampy.dea.out.filterd)[<span class="dv">1</span>])</span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(scampy.dea.out.filterd)</span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> outTemp[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(outTemp)]</span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    outPutMatrix <span class="ot">&lt;-</span> <span class="fu">rbind</span>(outPutMatrix,outTemp)</span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(outPutMatrix)[<span class="fu">nrow</span>(outPutMatrix)] <span class="ot">&lt;-</span> cluster.name</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span>   outPutMatrix[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(outPutMatrix),]</span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(pbmc.markers, <span class="at">file =</span> <span class="fu">paste0</span>(dirOut,project,<span class="st">"_de_genes_Seurat_"</span>,percentage,<span class="st">".csv"</span>))</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="st">"n.genes.DEA"</span><span class="ot">=</span>n.genes.DEA,<span class="st">"markers"</span><span class="ot">=</span> pbmc.markers))</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>Monocle.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,clusters.list,project, dirOut,percentage){</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  cell_metadata <span class="ot">=</span> <span class="fu">as.data.frame</span>(clusters.list[<span class="fu">colnames</span>(dataSet)])</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(cell_metadata) <span class="ot">&lt;-</span> <span class="st">"Clusters"</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  cds <span class="ot">&lt;-</span> <span class="fu">new_cell_data_set</span>(dataSet[<span class="fu">rowSums</span>(dataSet) <span class="sc">&gt;</span> <span class="dv">3</span>,],</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>                         <span class="at">cell_metadata =</span> cell_metadata</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>                         )</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colData</span>(cds)<span class="sc">$</span>cluster <span class="ot">&lt;-</span> clusters.list[<span class="fu">rownames</span>(<span class="fu">colData</span>(cds))]</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">#cds &lt;- preprocess_cds(cds, num_dim = 100)</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>  <span class="co">#cds &lt;- reduce_dimension(cds)</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>  <span class="co">#cds &lt;- cluster_cells(cds, resolution=1e-5)</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  marker_test_res <span class="ot">&lt;-</span> <span class="fu">top_markers</span>(cds, </span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">group_cells_by=</span><span class="st">"Clusters"</span>, </span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">genes_to_test_per_group =</span> <span class="fu">dim</span>(cds)[<span class="dv">1</span>],</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">cores=</span><span class="dv">10</span>)</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  <span class="co"># de_results &lt;- fit_models(cds,model_formula_str = " ~ cluster",cores = 10,verbose = T)</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit_coefs &lt;- coefficient_table(de_results)</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>  <span class="co"># </span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fit_coefs &lt;- fit_coefs %&gt;% filter(term == "cluster")</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(marker_test_res, <span class="at">file =</span> <span class="fu">paste0</span>(dirOut,project,<span class="st">"_de_genes_Monocle_"</span>,percentage,<span class="st">".csv"</span>))</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return(list("n.genes.DEA"=sum(fit_coefs$q_value &lt; 0.05, na.rm = T),</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>  <span class="co">#             "fit_coefs"= fit_coefs,</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>  <span class="co">#             "de_results"=de_results))</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="st">"n.genes.DEA"</span><span class="ot">=</span><span class="fu">sum</span>(marker_test_res<span class="sc">$</span>marker_test_q_value <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="at">na.rm =</span> T),</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>              <span class="st">"marker_test_res"</span><span class="ot">=</span> marker_test_res</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>              ))</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>ScanPy.DEA <span class="ot">&lt;-</span> <span class="cf">function</span>(dataSet,</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>                       clusters.list, </span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>                       project, </span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>                       dirOut,</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>                       percentage){</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>  pbmc <span class="ot">&lt;-</span> <span class="fu">CreateSeuratObject</span>(<span class="at">counts =</span> dataSet, <span class="at">project =</span> project, <span class="at">min.cells =</span> <span class="dv">3</span>, <span class="at">min.features =</span> <span class="dv">20</span>)</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>  pbmc<span class="sc">@</span>meta.data[<span class="fu">names</span>(clusters.list),]<span class="sc">$</span>TestCl <span class="ot">&lt;-</span> clusters.list</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>  exprs <span class="ot">&lt;-</span> pbmc<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>counts</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  meta <span class="ot">&lt;-</span> pbmc[[]]</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>  <span class="co">#feature_meta &lt;- GetAssay(pbmc)[[]]</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">data =</span> <span class="cn">NA</span>, </span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ncol =</span> <span class="dv">1</span>, </span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>                              <span class="at">nrow =</span> <span class="fu">nrow</span>(pbmc<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>counts)))</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(tmp) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pbmc<span class="sc">@</span>assays<span class="sc">$</span>RNA<span class="sc">$</span>counts)</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>  feature_meta <span class="ot">&lt;-</span> tmp</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>  <span class="co">#embedding &lt;- Embeddings(pbmc, "umap")</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> <span class="st">"../../../bin/python3"</span>)</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>  py <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"sys"</span>)</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source_python</span>(<span class="st">"src/scanpyTypeIError.py"</span>)</span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scanpyTypeIError</span>(exprs, </span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>                   meta, </span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>                   feature_meta, </span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"mt"</span>, </span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>                   dirOut, </span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>                   percentage,project)</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="fu">paste0</span>(dirOut,</span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>                                project,</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"_Scanpy_de_genes_"</span>,</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>                                percentage,</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>                                <span class="st">".csv"</span>),</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>                  <span class="at">header =</span> T, </span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>                  <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gc</span>()</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We would evaluate the Type I error and to do so, we consider some transcriptionally uniform clusters from the Loom dataset. We splitted these cluster in two partitions (with three different dimensions: 1/2, 1/3 and 1/4) one containing the cells with higher library size and the other with the lower library size. On these two clusters we than tested the four different software.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (perc <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.75</span>)) { <span class="co">#0.5, 0.33, 0.25,0.67, </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="dv">1</span>,<span class="at">ncol =</span> <span class="dv">4</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(outPutMatrix) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"COTAN"</span>,<span class="st">"Seurat"</span>, <span class="st">"Monocle"</span>, <span class="st">"Scanpy"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (dataSet <span class="cf">in</span> <span class="fu">list.files</span>(dataSetDir)) {</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    cluster.name <span class="ot">&lt;-</span> <span class="fu">str_split</span>(dataSet,<span class="at">pattern =</span> <span class="st">"_"</span>, <span class="at">simplify =</span> T)[<span class="dv">1</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(cluster.name)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>     </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    dataSet <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">paste0</span>(dataSetDir,dataSet))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    cl1 <span class="ot">&lt;-</span> <span class="fu">colnames</span>(dataSet)[<span class="fu">order</span>(<span class="fu">colSums</span>(dataSet),<span class="at">decreasing =</span> T)[<span class="dv">1</span><span class="sc">:</span><span class="fu">round</span>(<span class="fu">ncol</span>(dataSet)<span class="sc">*</span>perc,<span class="at">digits =</span> <span class="dv">0</span>)]]</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    clusters.list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"cl1"</span><span class="ot">=</span>cl1,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"cl2"</span><span class="ot">=</span><span class="fu">colnames</span>(dataSet)[<span class="sc">!</span><span class="fu">colnames</span>(dataSet) <span class="sc">%in%</span> cl1])</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    clusters.list <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">ncol</span>(dataSet)),</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>                              <span class="fu">colnames</span>(dataSet))</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    clusters.list[<span class="fu">colnames</span>(dataSet)[<span class="sc">!</span><span class="fu">colnames</span>(dataSet) <span class="sc">%in%</span> cl1]] <span class="ot">&lt;-</span> <span class="dv">2</span> </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    cotan.dea.out <span class="ot">&lt;-</span> <span class="fu">COTAN.DEA</span>(<span class="at">dataSet =</span> dataSet,</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>                               <span class="at">clusters.list =</span> clusters.list,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>                               <span class="at">GEO.code =</span> <span class="st">""</span>,</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sequencingMethod =</span> <span class="st">"10x"</span>,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sampleCondition =</span> <span class="st">"Temp"</span>,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>                               <span class="at">clName =</span>  cluster.name,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>                               dirOut, <span class="at">percentage =</span> perc)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,cotan.dea.out<span class="sc">$</span>n.genes.DEA)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(cotan.dea.out)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    seurat.dea.out <span class="ot">&lt;-</span> <span class="fu">Seurat.DEA</span>(<span class="at">dataSet =</span> dataSet,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>                               <span class="at">clusters.list =</span> clusters.list,</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>                               <span class="at">project =</span> cluster.name,</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>                               dirOut, <span class="at">percentage =</span> perc)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,seurat.dea.out<span class="sc">$</span>n.genes.DEA)</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(seurat.dea.out)</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    monocle.dea.out <span class="ot">&lt;-</span> <span class="fu">Monocle.DEA</span>(<span class="at">dataSet =</span> dataSet,</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">clusters.list =</span> clusters.list,</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">project =</span> cluster.name,</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">dirOut =</span> dirOut, <span class="at">percentage =</span> perc)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,monocle.dea.out<span class="sc">$</span>n.genes.DEA)</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(monocle.dea.out)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>    ScanPy.dea.out <span class="ot">&lt;-</span> <span class="fu">ScanPy.DEA</span>(<span class="at">dataSet =</span> dataSet, </span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">clusters.list =</span> clusters.list, </span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">project =</span> cluster.name, </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">dirOut =</span> dirOut, <span class="at">percentage =</span> perc</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>                                  )</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    ScanPy.dea.out.filterd <span class="ot">&lt;-</span> ScanPy.dea.out[ScanPy.dea.out<span class="sc">$</span>pval_adj <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>                                             <span class="sc">&amp;</span> ScanPy.dea.out<span class="sc">$</span>clusters <span class="sc">==</span> <span class="st">"cl1.0"</span>,]</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> <span class="fu">c</span>(outTemp,<span class="fu">dim</span>(ScanPy.dea.out.filterd)[<span class="dv">1</span>])</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rm</span>(ScanPy.dea.out.filterd)</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gc</span>()</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>    outTemp <span class="ot">&lt;-</span> outTemp[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(outTemp)]</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>    outPutMatrix <span class="ot">&lt;-</span> <span class="fu">rbind</span>(outPutMatrix,outTemp)</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rownames</span>(outPutMatrix)[<span class="fu">nrow</span>(outPutMatrix)] <span class="ot">&lt;-</span> cluster.name</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>    <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span>   outPutMatrix[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(outPutMatrix),]</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write.csv</span>(outPutMatrix,<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="summarize-the-output" class="level3">
 <h3 class="anchored" data-anchor-id="summarize-the-output">Summarize the output</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (perc <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.33</span>, <span class="fl">0.25</span>,<span class="fl">0.67</span>, <span class="fl">0.75</span>)) {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  outPutMatrix<span class="sc">$</span>Division <span class="ot">&lt;-</span> perc</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  df_plot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_plot,outPutMatrix)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> df_plot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(df_plot),]</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">pivot_longer</span>(df_plot,<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>),<span class="at">values_to =</span> <span class="st">"N.Genes"</span>,<span class="at">names_to =</span> <span class="st">"Method"</span>))</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_plot,<span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y=</span>N.Genes,<span class="at">fill=</span>Method))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis</span>(<span class="at">discrete =</span> <span class="cn">TRUE</span>, <span class="at">alpha=</span><span class="fl">0.6</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Division)<span class="sc">+</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">color=</span><span class="st">"black"</span>, <span class="at">size=</span><span class="fl">0.4</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span><span class="fu">theme_light</span>()<span class="sc">+</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position=</span><span class="st">"none"</span>,</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">11</span>)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>methods.color <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"COTAN"</span><span class="ot">=</span><span class="st">"#F73604"</span>,<span class="st">"Seurat"</span><span class="ot">=</span><span class="st">"#ABD9E9"</span>,<span class="st">"Seurat_scTr"</span><span class="ot">=</span><span class="st">"#74ADD1"</span>,<span class="st">"Seurat_Bimod"</span><span class="ot">=</span><span class="st">"#4575B4"</span>, <span class="st">"Monocle"</span><span class="ot">=</span><span class="st">"#DAABE9"</span>, <span class="st">"Scanpy"</span><span class="ot">=</span><span class="st">"#7F9B5C"</span> )</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (perc <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.33</span>, <span class="fl">0.25</span>,<span class="fl">0.67</span>, <span class="fl">0.75</span>)) {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  outPutMatrix <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(dirOut,<span class="st">"Complete_outPut_"</span>,perc,<span class="st">".csv"</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  outPutMatrix<span class="sc">$</span>Division <span class="ot">&lt;-</span> perc</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  df_plot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(df_plot,outPutMatrix)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> df_plot[<span class="dv">2</span><span class="sc">:</span><span class="fu">nrow</span>(df_plot),]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">pivot_longer</span>(df_plot,<span class="at">cols =</span> <span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>),<span class="at">values_to =</span> <span class="st">"N.Genes"</span>,<span class="at">names_to =</span> <span class="st">"Method"</span>))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_plot,<span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y=</span>N.Genes,<span class="at">fill=</span>Method))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> methods.color)<span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>Division)<span class="sc">+</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>(<span class="at">color=</span><span class="st">"black"</span>, <span class="at">size=</span><span class="fl">0.4</span>, <span class="at">alpha=</span><span class="fl">0.9</span>) <span class="sc">+</span><span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position=</span><span class="st">"none"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">11</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="DEA_Type1Error_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="DEA_Type1Error_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
+<pre><code>R version 4.4.0 (2024-04-24)
+Platform: x86_64-pc-linux-gnu
 Running under: Ubuntu 20.04.6 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
+LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -806,94 +834,93 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] tidyr_1.3.0                 viridis_0.6.4              
- [3] viridisLite_0.4.2           ggplot2_3.4.2              
- [5] dplyr_1.1.2                 stringr_1.5.0              
- [7] reticulate_1.35.0           monocle3_1.3.4             
- [9] SingleCellExperiment_1.22.0 SummarizedExperiment_1.30.2
-[11] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
-[13] IRanges_2.34.1              S4Vectors_0.38.1           
-[15] MatrixGenerics_1.12.3       matrixStats_1.2.0          
-[17] Biobase_2.60.0              BiocGenerics_0.46.0        
-[19] Seurat_5.0.0                SeuratObject_5.0.0         
-[21] sp_2.1-1                    COTAN_2.3.3                
+ [1] viridis_0.6.5               viridisLite_0.4.2          
+ [3] ggplot2_3.5.1               tidyr_1.3.1                
+ [5] dplyr_1.1.4                 stringr_1.5.1              
+ [7] reticulate_1.37.0           monocle3_1.3.4             
+ [9] SingleCellExperiment_1.26.0 SummarizedExperiment_1.34.0
+[11] GenomicRanges_1.56.0        GenomeInfoDb_1.40.0        
+[13] IRanges_2.38.0              S4Vectors_0.42.0           
+[15] MatrixGenerics_1.16.0       matrixStats_1.3.0          
+[17] Biobase_2.64.0              BiocGenerics_0.50.0        
+[19] Seurat_5.1.0                SeuratObject_5.0.2         
+[21] sp_2.1-4                    COTAN_2.5.2                
 
 loaded via a namespace (and not attached):
-  [1] RcppAnnoy_0.0.21          splines_4.3.2            
-  [3] later_1.3.1               bitops_1.0-7             
-  [5] tibble_3.2.1              polyclip_1.10-4          
-  [7] fastDummies_1.7.3         lifecycle_1.0.3          
-  [9] doParallel_1.0.17         globals_0.16.2           
- [11] lattice_0.22-5            MASS_7.3-60              
- [13] dendextend_1.17.1         magrittr_2.0.3           
- [15] plotly_4.10.2             rmarkdown_2.24           
- [17] yaml_2.3.7                httpuv_1.6.11            
- [19] sctransform_0.4.1         spam_2.10-0              
- [21] askpass_1.2.0             spatstat.sparse_3.0-2    
- [23] minqa_1.2.5               cowplot_1.1.1            
- [25] pbapply_1.7-2             RColorBrewer_1.1-3       
- [27] zlibbioc_1.46.0           abind_1.4-5              
- [29] Rtsne_0.16                purrr_1.0.1              
- [31] RCurl_1.98-1.12           GenomeInfoDbData_1.2.10  
- [33] circlize_0.4.15           ggrepel_0.9.3            
- [35] irlba_2.3.5.1             listenv_0.9.0            
- [37] spatstat.utils_3.0-3      terra_1.7-39             
- [39] umap_0.2.10.0             goftest_1.2-3            
- [41] RSpectra_0.16-1           spatstat.random_3.2-1    
- [43] dqrng_0.3.0               fitdistrplus_1.1-11      
- [45] parallelly_1.36.0         DelayedMatrixStats_1.22.5
- [47] leiden_0.4.3              codetools_0.2-19         
- [49] DelayedArray_0.26.7       tidyselect_1.2.0         
- [51] shape_1.4.6               farver_2.1.1             
- [53] lme4_1.1-34               ScaledMatrix_1.8.1       
- [55] spatstat.explore_3.2-1    jsonlite_1.8.7           
- [57] GetoptLong_1.0.5          ellipsis_0.3.2           
- [59] progressr_0.14.0          ggridges_0.5.4           
- [61] survival_3.5-7            iterators_1.0.14         
- [63] foreach_1.5.2             tools_4.3.2              
- [65] ica_1.0-3                 Rcpp_1.0.11              
- [67] glue_1.7.0                gridExtra_2.3            
- [69] xfun_0.39                 ggthemes_5.0.0           
- [71] withr_3.0.0               fastmap_1.1.1            
- [73] boot_1.3-28               fansi_1.0.4              
- [75] openssl_2.1.0             digest_0.6.33            
- [77] rsvd_1.0.5                parallelDist_0.2.6       
- [79] R6_2.5.1                  mime_0.12                
- [81] colorspace_2.1-0          scattermore_1.2          
- [83] tensor_1.5                spatstat.data_3.0-1      
- [85] utf8_1.2.3                generics_0.1.3           
- [87] data.table_1.15.0         httr_1.4.6               
- [89] htmlwidgets_1.6.2         S4Arrays_1.2.0           
- [91] uwot_0.1.16               pkgconfig_2.0.3          
- [93] gtable_0.3.3              ComplexHeatmap_2.16.0    
- [95] lmtest_0.9-40             XVector_0.40.0           
- [97] htmltools_0.5.7           dotCall64_1.1-0          
- [99] clue_0.3-64               scales_1.3.0             
-[101] png_0.1-8                 knitr_1.43               
-[103] rstudioapi_0.15.0         reshape2_1.4.4           
-[105] rjson_0.2.21              nloptr_2.0.3             
-[107] nlme_3.1-163              zoo_1.8-12               
-[109] GlobalOptions_0.1.2       KernSmooth_2.23-22       
-[111] parallel_4.3.2            miniUI_0.1.1.1           
-[113] RcppZiggurat_0.1.6        pillar_1.9.0             
-[115] grid_4.3.2                vctrs_0.6.3              
-[117] RANN_2.6.1                promises_1.2.0.1         
-[119] BiocSingular_1.16.0       beachmat_2.16.0          
-[121] xtable_1.8-4              cluster_2.1.6            
-[123] evaluate_0.21             zeallot_0.1.0            
-[125] cli_3.6.1                 compiler_4.3.2           
-[127] rlang_1.1.1               crayon_1.5.2             
-[129] future.apply_1.11.0       labeling_0.4.2           
-[131] plyr_1.8.8                stringi_1.8.1            
-[133] deldir_2.0-2              BiocParallel_1.34.2      
-[135] assertthat_0.2.1          munsell_0.5.0            
-[137] lazyeval_0.2.2            spatstat.geom_3.2-4      
-[139] PCAtools_2.14.0           Matrix_1.6-3             
-[141] RcppHNSW_0.6.0            patchwork_1.2.0          
-[143] sparseMatrixStats_1.12.2  future_1.33.0            
-[145] shiny_1.8.0               ROCR_1.0-11              
-[147] Rfast_2.1.0               igraph_1.6.0             
-[149] RcppParallel_5.1.7       </code></pre>
+  [1] RcppAnnoy_0.0.22          splines_4.4.0            
+  [3] later_1.3.2               tibble_3.2.1             
+  [5] polyclip_1.10-6           fastDummies_1.7.3        
+  [7] lifecycle_1.0.4           doParallel_1.0.17        
+  [9] globals_0.16.3            lattice_0.22-6           
+ [11] MASS_7.3-60.2             dendextend_1.17.1        
+ [13] magrittr_2.0.3            plotly_4.10.4            
+ [15] rmarkdown_2.27            yaml_2.3.8               
+ [17] httpuv_1.6.15             sctransform_0.4.1        
+ [19] spam_2.10-0               askpass_1.2.0            
+ [21] spatstat.sparse_3.0-3     minqa_1.2.7              
+ [23] cowplot_1.1.3             pbapply_1.7-2            
+ [25] RColorBrewer_1.1-3        abind_1.4-5              
+ [27] zlibbioc_1.50.0           Rtsne_0.17               
+ [29] purrr_1.0.2               GenomeInfoDbData_1.2.12  
+ [31] circlize_0.4.16           ggrepel_0.9.5            
+ [33] irlba_2.3.5.1             listenv_0.9.1            
+ [35] spatstat.utils_3.0-4      terra_1.7-78             
+ [37] umap_0.2.10.0             goftest_1.2-3            
+ [39] RSpectra_0.16-1           spatstat.random_3.2-3    
+ [41] dqrng_0.4.0               fitdistrplus_1.1-11      
+ [43] parallelly_1.37.1         DelayedMatrixStats_1.26.0
+ [45] leiden_0.4.3.1            codetools_0.2-20         
+ [47] DelayedArray_0.30.1       tidyselect_1.2.1         
+ [49] shape_1.4.6.1             farver_2.1.2             
+ [51] UCSC.utils_1.0.0          lme4_1.1-35.3            
+ [53] ScaledMatrix_1.12.0       spatstat.explore_3.2-7   
+ [55] jsonlite_1.8.8            GetoptLong_1.0.5         
+ [57] progressr_0.14.0          ggridges_0.5.6           
+ [59] survival_3.6-4            iterators_1.0.14         
+ [61] foreach_1.5.2             tools_4.4.0              
+ [63] ica_1.0-3                 Rcpp_1.0.12              
+ [65] glue_1.7.0                gridExtra_2.3            
+ [67] SparseArray_1.4.5         xfun_0.44                
+ [69] ggthemes_5.1.0            withr_3.0.0              
+ [71] fastmap_1.2.0             boot_1.3-30              
+ [73] fansi_1.0.6               openssl_2.2.0            
+ [75] digest_0.6.35             rsvd_1.0.5               
+ [77] parallelDist_0.2.6        R6_2.5.1                 
+ [79] mime_0.12                 colorspace_2.1-0         
+ [81] scattermore_1.2           tensor_1.5               
+ [83] spatstat.data_3.0-4       utf8_1.2.4               
+ [85] generics_0.1.3            data.table_1.15.4        
+ [87] httr_1.4.7                htmlwidgets_1.6.4        
+ [89] S4Arrays_1.4.1            uwot_0.2.2               
+ [91] pkgconfig_2.0.3           gtable_0.3.5             
+ [93] ComplexHeatmap_2.20.0     lmtest_0.9-40            
+ [95] XVector_0.44.0            htmltools_0.5.8.1        
+ [97] dotCall64_1.1-1           clue_0.3-65              
+ [99] scales_1.3.0              png_0.1-8                
+[101] knitr_1.46                rstudioapi_0.16.0        
+[103] reshape2_1.4.4            rjson_0.2.21             
+[105] nloptr_2.0.3              nlme_3.1-164             
+[107] zoo_1.8-12                GlobalOptions_0.1.2      
+[109] KernSmooth_2.23-24        parallel_4.4.0           
+[111] miniUI_0.1.1.1            RcppZiggurat_0.1.6       
+[113] pillar_1.9.0              grid_4.4.0               
+[115] vctrs_0.6.5               RANN_2.6.1               
+[117] promises_1.3.0            BiocSingular_1.20.0      
+[119] beachmat_2.20.0           xtable_1.8-4             
+[121] cluster_2.1.6             evaluate_0.23            
+[123] zeallot_0.1.0             cli_3.6.2                
+[125] compiler_4.4.0            rlang_1.1.3              
+[127] crayon_1.5.2              future.apply_1.11.2      
+[129] labeling_0.4.3            plyr_1.8.9               
+[131] stringi_1.8.4             deldir_2.0-4             
+[133] BiocParallel_1.38.0       assertthat_0.2.1         
+[135] munsell_0.5.1             lazyeval_0.2.2           
+[137] spatstat.geom_3.2-9       PCAtools_2.16.0          
+[139] Matrix_1.7-0              RcppHNSW_0.6.0           
+[141] patchwork_1.2.0           sparseMatrixStats_1.16.0 
+[143] future_1.33.2             shiny_1.8.1.1            
+[145] ROCR_1.0-11               Rfast_2.1.0              
+[147] igraph_2.0.3              RcppParallel_5.1.7       </code></pre>
 </div>
 </div>
 

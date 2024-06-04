@@ -1,0 +1,194 @@
+---
+title: "Real UT clusters"
+author: "Silvia Galfrè"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+Cl432 E13.5 E15.0
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preamble
+
+```{r preamble}
+library(ggplot2)
+library(zeallot)
+library(data.table)
+library(parallelDist)
+library(tidyr)
+library(tidyverse)
+library(caret)
+theme_set(theme_bw())
+library(COTAN)
+library(stringr)
+library(nnet)
+
+options(parallelly.fork.enable = TRUE)
+inDir <- file.path("Data/MouseCortexFromLoom/")
+
+#setLoggingLevel(2)
+#setLoggingFile(file.path(inDir, "MixingClustersGDI_ForebrainDorsal.log"))
+
+outDir <- file.path("Data/MouseCortexFromLoom/PureClusters/")
+if (!file.exists(outDir)) {
+  dir.create(outDir)
+}
+
+
+```
+
+## 428 and 434 e15.0
+
+```{r}
+e15.0 <- readRDS(paste0(inDir,"e15.0_ForebrainDorsal.cotan.RDS"))
+
+cells <- c(rownames(getMetadataCells(e15.0)[getMetadataCells(e15.0)[,"Clusters"] == 428,]),
+           rownames(getMetadataCells(e15.0)[getMetadataCells(e15.0)[,"Clusters"] == 434,]))
+
+cl428_cl434 <- dropGenesCells(e15.0,cells = getCells(e15.0)[!getCells(e15.0) %in% cells] )
+
+cl428_cl434 <- clean(cl428_cl434)
+cl428_cl434 <- proceedToCoex(cl428_cl434)
+
+#saveRDS(cl428_cl434,past0(outDir,"cl428_cl434.cotan.RDS"))
+```
+
+```{r}
+cl428_cl434GDI <- calculateGDI(cl428_cl434)
+
+subsetGDIcl428_cl434 <- cl428_cl434GDI[cl428_cl434GDI$sum.raw.norm > 7,]
+top.GDI.genes <- rownames(subsetGDIcl428_cl434[order(subsetGDIcl428_cl434$GDI,decreasing = T),])[1:50]
+
+GDIPlot(cl428_cl434,genes = "",GDIIn = cl428_cl434GDI)
+```
+
+```{r}
+data <- getNormalizedData(cl428_cl434)
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- as.numeric(getClusterizationData(cl428_cl434,clName = "original.clusters")[[1]])
+
+COTAN_Cl.code <- COTAN_Cl.code -1
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r}
+# Fit the model
+model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
+# Summarize the model
+summary(model)
+# Make predictions
+probabilities <- model %>% predict(test.data, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+# Model accuracy
+mean(predicted.classes == test.data$COTAN_Cl.code)
+```
+## 434  e13.5 e14.5
+
+```{r,echo=FALSE,eval=FALSE}
+e14.5 <- readRDS(paste0(inDir,"e14.5_ForebrainDorsal.cotan.RDS"))
+
+cells <- c(rownames(getMetadataCells(e14.5)[getMetadataCells(e14.5)[,"Clusters"] == 434,]),
+           rownames(getMetadataCells(e13.5)[getMetadataCells(e13.5)[,"Clusters"] == 434,]))
+
+#cl525_cl510 <- dropGenesCells(e14.5,cells = getCells(e14.5)[!getCells(e14.5) %in% cells] )
+
+
+
+cl525_cl510 <- clean(cl525_cl510)
+cl525_cl510 <- proceedToCoex(cl525_cl510)
+
+#saveRDS(cl525_cl510,paste0(outDir,"cl525_cl510.cotan.RDS"))
+checkClusterUniformity(cl525_cl510,cells = cells)
+```
+
+```{r,echo=FALSE,eval=FALSE}
+cl525_cl510GDI <- calculateGDI(cl525_cl510)
+
+subsetGDIcl525_cl510 <- cl525_cl510GDI[cl525_cl510GDI$sum.raw.norm > 7,]
+top.GDI.genes <- rownames(subsetGDIcl525_cl510[order(subsetGDIcl525_cl510$GDI,decreasing = T),])[1:50]
+
+GDIPlot(cl525_cl510,genes = "",GDIIn = cl525_cl510GDI)
+```
+
+```{r,echo=FALSE,eval=FALSE}
+data <- getNormalizedData(cl525_cl510)
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- as.numeric(getClusterizationData(cl525_cl510,clName = "original.clusters")[[1]])
+
+COTAN_Cl.code <- COTAN_Cl.code -1
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r,echo=FALSE,eval=FALSE}
+# Fit the model
+model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
+# Summarize the model
+summary(model)
+# Make predictions
+probabilities <- model %>% predict(test.data, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+# Model accuracy
+mean(predicted.classes == test.data$COTAN_Cl.code)
+```
+
+
+
+------------------------------------------------------------------------
+
+```{r}
+Sys.time()
+```
+
+```{r}
+sessionInfo()
+```

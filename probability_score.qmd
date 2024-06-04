@@ -1,0 +1,372 @@
+---
+  title: "Probability score computation"
+---
+
+```{r}
+library(rlang)
+library(testthat)
+library(ggplot2)
+library(tibble)
+library(zeallot)
+library(Seurat)
+library(aricode)
+library(funtimes)
+library(monocle3)
+library(cluster)
+library(COTAN)
+
+tunings = c('default', 'antibody', 'celltypist')
+tools = c('monocle', 'scanpy', 'seurat', 'scvi-tools', 'COTAN')
+
+
+averageClustersDistance <- function(probMatrixDF,
+                                    clustersList, numDim) {
+  
+  squareDist <- function(subMatrix) {
+    subMatrix <- scale(subMatrix, scale = FALSE, center = TRUE)
+    return(sum(rowSums(subMatrix^2)))
+}
+  
+  pca <- PCAtools::pca(mat = probMatrixDF, rank = numDim, transposed = TRUE)
+
+  residual_variance = 100 - sum(pca[["variance"]])
+
+  normMatrix <- scale(x = pca[["rotated"]], center = TRUE, scale = TRUE)
+  rownames(normMatrix) <- rownames(probMatrixDF)
+
+  final_dimensions = dim(normMatrix)[2]
+
+  sumDist <- 0.0
+  for (cl in clustersList) {
+    sumDist <- sumDist + squareDist(normMatrix[cl, , drop = FALSE])
+  }
+  score = sumDist / ncol(normMatrix) / (nrow(normMatrix) - length(clustersList))
+  return(list("residual_variance" = residual_variance, "final_dimensions" = final_dimensions, "score" = score))
+}
+
+
+
+```
+## PBMC1
+
+```{r}
+dataset = 'PBMC1'
+celltypistPath = paste('Data/', dataset, '/celltypist/Immune_All_Low_probability_matrix.csv', sep='')
+outPath = paste('Data/', dataset, '/probabilistic_score.csv', sep='')
+```
+
+
+Load CellTypist clusterization
+
+```{r}
+probMatrixDF <- read.csv(celltypistPath, header = TRUE)
+probMatrixDF <- column_to_rownames(probMatrixDF, var = "X")
+rownames(probMatrixDF) <- gsub("[.]", ":", rownames(probMatrixDF))
+rownames(probMatrixDF) <- gsub("X10X", "10X", rownames(probMatrixDF))
+rownames(probMatrixDF) <- substr(rownames(probMatrixDF), 1, nchar(rownames(probMatrixDF)) - 2)
+```
+
+Estimate number of dimensions
+
+```{r}
+prc <- PCAtools::pca(mat = probMatrixDF, rank = 50, transposed = TRUE)
+plot(prc$sdev)
+```
+
+```{r}
+nDims <- 20
+```
+
+Calculate the projection to spherical distribution [Malahanobis distance]:
+the sum of square distances from center of sub-cluster in pca-projected space
+
+
+
+```{r}
+scores = data.frame()#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)
+for (tool in tools) {
+  for (tuning in tunings) {
+    labelsPath = paste('Data/', dataset, '/', tool, '/', tuning, '/clustering_labels.csv', sep='')
+    labels <- read.csv(labelsPath, header = TRUE)
+    clustersList<- split(as.character(labels$cell), labels$cluster)
+    score_data = averageClustersDistance(probMatrixDF, clustersList,numDim = nDims)
+    scores = rbind(
+      scores,
+      data.frame(
+        "tool" = tool,
+        "dataset" = dataset,
+        "tuning" = tuning,
+        "score" = score_data$score,
+        "residual_variance" = score_data$residual_variance,
+        "final_dimensions" = score_data$final_dimensions
+      )
+    )
+  }
+}
+write.csv(scores, outPath, row.names = FALSE)
+scores
+```
+
+```{r}
+set.seed(42)
+shuffledCells <- rownames(probMatrixDF)
+rndDist <- function(n) {
+  clusters <- set_names(rep(1:n, ceiling(9000/n))[1:nrow(probMatrixDF)], shuffledCells)
+  cluster_list <- split(names(clusters), clusters)
+  d <- averageClustersDistance(probMatrixDF, cluster_list,nDims)
+  return(d$score)
+}
+sizes <- c(1:15, seq(20, 50, by = 5), seq(60, 100, by = 10),
+           seq(150, 1000, by = 50), seq(1500, 9000, by = 500))
+sizesToDists <- vapply(sizes,rndDist, numeric(1)) 
+names(sizesToDists) <- sizes
+pdf(paste('Data/', dataset, '/probability_score_dim_dependency.pdf', sep=''))
+plot(names(sizesToDists), sizesToDists)
+dev.off()
+plot(names(sizesToDists), sizesToDists)
+```
+## PBMC2
+
+```{r}
+dataset = 'PBMC2'
+celltypistPath = paste('Data/', dataset, '/celltypist/Immune_All_Low_probability_matrix.csv', sep='')
+outPath = paste('Data/', dataset, '/probabilistic_score.csv', sep='')
+```
+
+
+Load CellTypist clusterization
+
+```{r}
+probMatrixDF <- read.csv(celltypistPath, header = TRUE)
+probMatrixDF <- column_to_rownames(probMatrixDF, var = "X")
+rownames(probMatrixDF) <- gsub("[.]", ":", rownames(probMatrixDF))
+rownames(probMatrixDF) <- gsub("X10X", "10X", rownames(probMatrixDF))
+rownames(probMatrixDF) <- substr(rownames(probMatrixDF), 1, nchar(rownames(probMatrixDF)) - 2)
+```
+
+Estimate number of dimensions
+
+```{r}
+prc <- PCAtools::pca(mat = probMatrixDF, rank = 50, transposed = TRUE)
+plot(prc$sdev)
+```
+
+```{r}
+nDims <- 20
+```
+
+Calculate the projection to spherical distribution [Malahanobis distance]:
+the sum of square distances from center of sub-cluster in pca-projected space
+
+
+```{r}
+scores = data.frame()#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)
+for (tool in tools) {
+  for (tuning in tunings) {
+    labelsPath = paste('Data/', dataset, '/', tool, '/', tuning, '/clustering_labels.csv', sep='')
+    labels <- read.csv(labelsPath, header = TRUE)
+    clustersList<- split(as.character(labels$cell), labels$cluster)
+    score_data = averageClustersDistance(probMatrixDF, clustersList,numDim = nDims)
+    scores = rbind(
+      scores,
+      data.frame(
+        "tool" = tool,
+        "dataset" = dataset,
+        "tuning" = tuning,
+        "score" = score_data$score,
+        "residual_variance" = score_data$residual_variance,
+        "final_dimensions" = score_data$final_dimensions
+      )
+    )
+  }
+}
+write.csv(scores, outPath, row.names = FALSE)
+scores
+```
+
+```{r}
+set.seed(42)
+shuffledCells <- rownames(probMatrixDF)
+rndDist <- function(n) {
+  clusters <- set_names(rep(1:n, ceiling(9000/n))[1:nrow(probMatrixDF)], shuffledCells)
+  cluster_list <- split(names(clusters), clusters)
+  d <- averageClustersDistance(probMatrixDF, cluster_list,nDims)
+  return(d$score)
+}
+sizes <- c(1:15, seq(20, 50, by = 5), seq(60, 100, by = 10),
+           seq(150, 1000, by = 50), seq(1500, 9000, by = 500))
+sizesToDists <- vapply(sizes, rndDist, numeric(1)) 
+names(sizesToDists) <- sizes
+pdf(paste('Data/', dataset, '/probability_score_dim_dependency.pdf', sep=''))
+plot(names(sizesToDists), sizesToDists)
+dev.off()
+plot(names(sizesToDists), sizesToDists)
+```
+
+
+## PBMC3
+
+```{r}
+dataset = 'PBMC3'
+celltypistPath = paste('Data/', dataset, '/celltypist/Immune_All_Low_probability_matrix.csv', sep='')
+outPath = paste('Data/', dataset, '/probabilistic_score.csv', sep='')
+```
+
+
+Load CellTypist clusterization
+
+```{r}
+probMatrixDF <- read.csv(celltypistPath, header = TRUE)
+probMatrixDF <- column_to_rownames(probMatrixDF, var = "X")
+rownames(probMatrixDF) <- gsub("[.]", ":", rownames(probMatrixDF))
+rownames(probMatrixDF) <- gsub("X10X", "10X", rownames(probMatrixDF))
+rownames(probMatrixDF) <- substr(rownames(probMatrixDF), 1, nchar(rownames(probMatrixDF)) - 2)
+```
+
+Estimate number of dimensions
+
+```{r}
+prc <- PCAtools::pca(mat = probMatrixDF, rank = 50, transposed = TRUE)
+plot(prc$sdev)
+```
+
+```{r}
+nDims <- 20
+```
+
+Calculate the projection to spherical distribution [Malahanobis distance]:
+the sum of square distances from center of sub-cluster in pca-projected space
+
+
+```{r}
+scores = data.frame()#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)
+for (tool in tools) {
+  for (tuning in tunings) {
+    labelsPath = paste('Data/', dataset, '/', tool, '/', tuning, '/clustering_labels.csv', sep='')
+    labels <- read.csv(labelsPath, header = TRUE)
+    clustersList<- split(as.character(labels$cell), labels$cluster)
+    score_data = averageClustersDistance(probMatrixDF, clustersList,numDim = nDims)
+    scores = rbind(
+      scores,
+      data.frame(
+        "tool" = tool,
+        "dataset" = dataset,
+        "tuning" = tuning,
+        "score" = score_data$score,
+        "residual_variance" = score_data$residual_variance,
+        "final_dimensions" = score_data$final_dimensions
+      )
+    )
+  }
+}
+write.csv(scores, outPath, row.names = FALSE)
+scores
+```
+
+```{r}
+set.seed(42)
+shuffledCells <- rownames(probMatrixDF)
+rndDist <- function(n) {
+  clusters <- set_names(rep(1:n, ceiling(9000/n))[1:nrow(probMatrixDF)], shuffledCells)
+  cluster_list <- split(names(clusters), clusters)
+  d <- averageClustersDistance(probMatrixDF, cluster_list,nDims)
+  return(d$score)
+}
+sizes <- c(1:15, seq(20, 50, by = 5), seq(60, 100, by = 10),
+           seq(150, 1000, by = 50), seq(1500, 9000, by = 500))
+sizesToDists <- vapply(sizes, rndDist, numeric(1)) 
+names(sizesToDists) <- sizes
+pdf(paste('Data/', dataset, '/probability_score_dim_dependency.pdf', sep=''))
+plot(names(sizesToDists), sizesToDists)
+dev.off()
+plot(names(sizesToDists), sizesToDists)
+```
+
+## PBMC4
+
+```{r}
+dataset = 'PBMC4'
+celltypistPath = paste('Data/', dataset, '/celltypist/Immune_All_Low_probability_matrix.csv', sep='')
+outPath = paste('Data/', dataset, '/probabilistic_score.csv', sep='')
+```
+
+
+Load CellTypist clusterization
+
+```{r}
+probMatrixDF <- read.csv(celltypistPath, header = TRUE)
+probMatrixDF <- column_to_rownames(probMatrixDF, var = "X")
+rownames(probMatrixDF) <- gsub("[.]", ":", rownames(probMatrixDF))
+rownames(probMatrixDF) <- gsub("X10X", "10X", rownames(probMatrixDF))
+rownames(probMatrixDF) <- substr(rownames(probMatrixDF), 1, nchar(rownames(probMatrixDF)) - 2)
+```
+
+Estimate number of dimensions
+
+```{r}
+prc <- PCAtools::pca(mat = probMatrixDF, rank = 50, transposed = TRUE)
+plot(prc$sdev)
+```
+
+```{r}
+nDims <- 20
+```
+
+Calculate the projection to spherical distribution [Malahanobis distance]:
+the sum of square distances from center of sub-cluster in pca-projected space
+
+
+```{r}
+scores = data.frame()#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)
+for (tool in tools) {
+  for (tuning in tunings) {
+    labelsPath = paste('Data/', dataset, '/', tool, '/', tuning, '/clustering_labels.csv', sep='')
+    labels <- read.csv(labelsPath, header = TRUE)
+    clustersList<- split(as.character(labels$cell), labels$cluster)
+    score_data = averageClustersDistance(probMatrixDF, clustersList,numDim = nDims)
+    scores = rbind(
+      scores,
+      data.frame(
+        "tool" = tool,
+        "dataset" = dataset,
+        "tuning" = tuning,
+        "score" = score_data$score,
+        "residual_variance" = score_data$residual_variance,
+        "final_dimensions" = score_data$final_dimensions
+      )
+    )
+  }
+}
+write.csv(scores, outPath, row.names = FALSE)
+scores
+```
+
+```{r}
+set.seed(42)
+shuffledCells <- rownames(probMatrixDF)
+rndDist <- function(n) {
+  clusters <- set_names(rep(1:n, ceiling(9000/n))[1:nrow(probMatrixDF)], shuffledCells)
+  cluster_list <- split(names(clusters), clusters)
+  d <- averageClustersDistance(probMatrixDF, cluster_list,nDims)
+  return(d$score)
+}
+sizes <- c(1:15, seq(20, 50, by = 5), seq(60, 100, by = 10),
+           seq(150, 1000, by = 50), seq(1500, 9000, by = 500))
+sizesToDists <- vapply(sizes, rndDist, numeric(1)) 
+names(sizesToDists) <- sizes
+pdf(paste('Data/', dataset, '/probability_score_dim_dependency.pdf', sep=''))
+plot(names(sizesToDists), sizesToDists)
+dev.off()
+plot(names(sizesToDists), sizesToDists)
+```
+
+
+------------------------------------------------------------------------
+
+```{r, eval=TRUE}
+Sys.time()
+```
+
+```{r, eval=TRUE}
+sessionInfo()
+```

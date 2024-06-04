@@ -58,7 +58,80 @@ Seurat.DEA <- function(dataSet,clusters.list, project, dirOut#,percentage
   #write.csv(pbmc.markers, file = paste0(dirOut,project,"_de_genes_Seurat_",percentage,".csv"))
   
   return(list("n.genes.DEA"=n.genes.DEA,"markers"= pbmc.markers))
-  }
+}
+
+
+Seurat.DEA.bimod <- function(dataSet,clusters.list, project, dirOut#,percentage
+                       ){
+  pbmc <- CreateSeuratObject(counts = dataSet,
+                             project = project, min.cells = 3, min.features = 20)
+  
+  stopifnot(length(clusters.list)==length(pbmc$orig.ident))
+  
+  
+  pbmc <- NormalizeData(pbmc, normalization.method = "LogNormalize", scale.factor = 10000)
+  pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
+  all.genes <- rownames(pbmc)
+  pbmc <- ScaleData(pbmc, features = all.genes)
+  
+  pbmc <- RunPCA(pbmc)
+  pbmc <- RunUMAP(pbmc, dims = 1:20)
+  
+  pbmc@meta.data$TestCl <- NA
+  pbmc@meta.data[names(clusters.list),]$TestCl <- factor(clusters.list)
+  
+  pbmc <- SetIdent(pbmc,value = "TestCl")
+  
+  pbmc.markers <- FindAllMarkers(pbmc, only.pos = TRUE,test.use = "bimod" )
+  
+  
+  
+  n.genes.DEA <- sum(pbmc.markers$p_val_adj < 0.05)
+  
+  print(n.genes.DEA)
+  
+  #write.csv(pbmc.markers, file = paste0(dirOut,project,"_de_genes_Seurat_",percentage,".csv"))
+  
+  return(list("n.genes.DEA"=n.genes.DEA,"markers"= pbmc.markers))
+}
+
+Seurat.DEAScTransform <- function(dataSet,clusters.list, project, dirOut#,percentage
+                       ){
+  pbmc <- CreateSeuratObject(counts = dataSet,
+                             project = project, min.cells = 3, min.features = 20)
+  
+  stopifnot(length(clusters.list)==length(pbmc$orig.ident))
+
+  # store mitochondrial percentage in object meta data
+  pbmc <- PercentageFeatureSet(pbmc, pattern = "^mt-", col.name = "percent.mt")
+
+# run sctransform
+  pbmc <- SCTransform(pbmc, vars.to.regress = "percent.mt", verbose = FALSE)
+
+  
+  pbmc <- RunPCA(pbmc)
+  pbmc <- RunUMAP(pbmc, dims = 1:20)
+  
+  pbmc@meta.data$TestCl <- NA
+  pbmc@meta.data[names(clusters.list),]$TestCl <- factor(clusters.list)
+  
+  pbmc <- SetIdent(pbmc,value = "TestCl")
+  
+  pbmc.markers <- FindAllMarkers(pbmc, only.pos = TRUE)
+  
+  
+  
+  n.genes.DEA <- sum(pbmc.markers$p_val_adj < 0.05)
+  
+  print(n.genes.DEA)
+  
+  #write.csv(pbmc.markers, file = paste0(dirOut,project,"_de_genes_Seurat_",percentage,".csv"))
+  
+  return(list("n.genes.DEA"=n.genes.DEA,"markers"= pbmc.markers))
+}
+
+
+
 
 Monocle.DEA <- function(dataSet,clusters.list,project, dirOut#,percentage
                         ){
@@ -187,6 +260,43 @@ for (ind in 1:dim(datasets_csv)[1]) {
           file.path(dirOut,paste0(file.code,"Seurat_DEA_genes.csv")))
 }
 ```
+### DEA genes for Seurat scTransform
+
+```{r seurat2, echo=TRUE, eval=FALSE}
+for (ind in 1:dim(datasets_csv)[1]) {
+  #print(ind)
+  file.code <- paste0(datasets_csv$Group[ind],"_",datasets_csv$Collection[ind])
+  dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
+
+  clusters <- getClusterizationData(dataset,clName = "mergedClusters")[[1]]
+  deaSeurat <- Seurat.DEAScTransform(getRawData(dataset),
+                          clusters.list = clusters,
+                          project = file.code,
+                          dirOut = dirOut)
+  write.csv(deaSeurat$markers,
+          file.path(dirOut,paste0(file.code,"Seurat_DEA_ScTransform_genes.csv")))
+}
+```
+### DEA genes for Seurat test: bimod
+
+```{r seurat3, echo=TRUE, eval=FALSE}
+for (ind in 1:dim(datasets_csv)[1]) {
+  #print(ind)
+  file.code <- paste0(datasets_csv$Group[ind],"_",datasets_csv$Collection[ind])
+  dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
+
+  clusters <- getClusterizationData(dataset,clName = "mergedClusters")[[1]]
+  deaSeurat <- Seurat.DEA.bimod(getRawData(dataset),
+                          clusters.list = clusters,
+                          project = file.code,
+                          dirOut = dirOut)
+  write.csv(deaSeurat$markers,
+          file.path(dirOut,paste0(file.code,"Seurat_DEA_Bimod_genes.csv")))
+}
+```
+
+
+
 ### DEA from Monocle
 
 ```{r monocle, echo=TRUE, eval=FALSE}

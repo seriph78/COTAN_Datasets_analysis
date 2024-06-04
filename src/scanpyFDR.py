@@ -13,17 +13,10 @@ from scipy.stats import rankdata
 from matplotlib.backends.backend_pdf import PdfPages
 
 def scanpyFDR(exprs, meta, feature_meta,  mtCode, outDir, sample):
-  #exprs = sys.argv[1]
-  #meta = sys.argv[2]
-  #feature_meta = sys.argv[3]
-  #embedding = sys.argv[4]
   
-  #adata_seurat = sc.AnnData(X = r.exprs.T, obs = r.meta, var = r.feature_meta)
   adata = sc.AnnData(X = exprs.T, obs = meta, var = feature_meta)
   
-  #adata_seurat.obsm['umap'] = r.embedding
-  #adata_seurat.obsm['umap'] = embedding
-  
+
   adata.var_names_make_unique()
   #adata_seurat
   
@@ -58,9 +51,7 @@ def scanpyFDR(exprs, meta, feature_meta,  mtCode, outDir, sample):
   sc.pp.log1p(adata)
   
   sc.pp.highly_variable_genes(adata,min_mean=0.0125, max_mean=3, min_disp=0.5)
-      #n_top_genes=500)#, # chosen based on elbow plot above
- #     flavor='seurat_v3')
-  
+
   sc.pl.highly_variable_genes(adata)
   hi_var_genes = plt.show()
   pp.savefig(hi_var_genes)
@@ -110,57 +101,8 @@ def scanpyFDR(exprs, meta, feature_meta,  mtCode, outDir, sample):
       'clusters': clusters
   })
     
-  # Calculating average expression for each cluster
-  # Replace groups[0] and groups[1] with your actual cluster names
-  
-  # avg_exp_cl1 = np.mean(adata[adata.obs['TestCl'] == int(float(groups[0])), :].X, axis=0)
-  # avg_exp_cl2 = np.mean(adata[adata.obs['TestCl'] == int(float(groups[1])), :].X, axis=0)
-  # 
-  # #print(adata_seurat[adata_seurat.obs['TestCl'] == int(float(groups[0])), :].X)
-  #  #print(avg_exp_cl1.size())
-  # #print(df.head())
-  # # If the AnnData object's X is a sparse matrix, convert it to a dense format
-  # # Convert the average expressions to dense format if they are sparse
-  # 
-  # avg_exp_cl1_dense = avg_exp_cl1.A1 if scipy.sparse.issparse(avg_exp_cl1) else avg_exp_cl1
-  # avg_exp_cl2_dense = avg_exp_cl2.A1 if scipy.sparse.issparse(avg_exp_cl2) else avg_exp_cl2
-  # 
-  # # Create a DataFrame from the average expressions
-  # avg_exp_df = pd.DataFrame({
-  #     'avg_expr_cl1': avg_exp_cl1_dense, 
-  #     'avg_expr_cl2': avg_exp_cl2_dense
-  # }, index=adata_seurat.var_names)  
-  # #print(avg_exp_df.shape)
-  # #print(df.shape)
-  # 
-  # # Merge this DataFrame with df
-  # df_merged = df.merge(avg_exp_df, left_on='genes', right_index=True)
-  # print(df_merged.head())
-  # # Set gene names as the index
-  # df_merged.set_index('genes', inplace=True)
-  # 
-  #df_merged.to_csv(outDir+sample+"_Scampy_de_genes_"+str(percentage)+".csv")
-  df.to_csv(outDir+sample+"_Scampy_DEA_all_genes.csv")
+  df.to_csv(outDir+sample+"_Scanpy_DEA_all_genes.csv")
 
-  #################
-  # 
-  # # Creating a DataFrame to hold results
-  # de_genes = pd.DataFrame({group: results['names'][group] for group in groups})
-  # 
-  # # Adding adjusted p-values to the DataFrame
-  # for group in groups:
-  #     de_genes[f'pvals_adj_{group}'] = results['pvals_adj'][group]
-  # 
-  # # Filter genes with adjusted p-value < 0.05
-  # # for group in groups:
-  # #     de_genes_filtered = de_genes[de_genes[f'pvals_adj_{group}'] < 0.05]
-  # # 
-  # # Display the filtered results
-  # #print(de_genes)
-  # 
-  # 
-  # #print(de_genes.size)
-  # de_genes.to_csv(outDir+sample+"de_genes_filtered.csv")
 
   pp.close()
 #import scvi

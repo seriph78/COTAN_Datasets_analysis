@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "!src/"
+    - "clustering_comparison.ipynb"
 
 
 website:
@@ -21,7 +22,7 @@ website:
         
         - section: "Mouse Cortex Loo 2019"
           contents:
-          - href: Dataset1.qmd
+          - href: Mouse_Cortex_E14.5.qmd
             text: "Cleaning and cell clustering"
           - href: geneCoexAnalysisDataset1.qmd
             text: "Coexpression analaysis"
@@ -58,6 +59,18 @@ website:
           contents: 
           - href: cd14_analysis.qmd
             text: "CD14+ Cleaning and cell clustering"
+        
+        - section: "PBMC form 10X site"
+          contents:
+          - href: PBMC1_filtering.qmd
+            text: "Cleaning PBMC1"
+          - href: PBMC2_filtering.qmd
+            text: "Cleaning PBMC2"
+          - href: PBMC3_filtering.qmd
+            text: "Cleaning PBMC3"
+          - href: PBMC4_filtering.qmd
+            text: "Cleaning PBMC4"
+          
             
       - section: "Coex score evaluation"
         contents: 
@@ -69,16 +82,61 @@ website:
           text: "Clusters Distance Evaluation"
         - href: FindUniformOrigCluster.qmd
           text: "Cluster Unifomity and GDI score"
+        - href: GDI_Increment_From_Mixing.qmd
+          text: "GDI Increment From Mixing"
           
       - section: "Cluster evaluation"
         contents: 
+        
+        - href: NonCT_clusters.qmd
+          text: "Not UT cluster with LR"
+        
+        - href: Real_UT_clustersByCotan.qmd
+          text: "Real UT clusters with LR"
+        
         - href: cd14_clusterizations_comparisons.qmd
           text: "CD14+ clusterizations"
+        
+          
+        - href: clustering_comparison.ipynb
+          text: "PBMCs clustering comparison"
+          
+        - href: probability_score.qmd
+          text: "PBMCs probability score"
+        
           
       - section: "DEA evaluation"
         contents: 
-        - href: DEA_Seurat_COTAN.qmd
-        text: "Comparison Seurat - Cotan on Mouse Brain E15.0"
+        - href: DEA_Type1Er.qmd
+          text: "Type I error"
+        - href: geneExpressionAnalysisUniformClusters.qmd
+          text: "Explorative analysis of gene expression"
+        - href: FDR_analisys.qmd
+          text: "FDR analysis - define DE genes"
+        - section: "FDR and TPR - ROC curves"
+          contents: 
+          - href: FDR_analisysResults3_10.qmd
+            text: "Results - thresholds true 3% 10%"
+          - href: FDR_analisysResults5_20.qmd
+            text: "Results - thresholds true 5% 20%"
+          - href: FDR_analisysResults5.qmd
+            text: "Results - thresholds true 5%"
+          - href: FDR_analysisResultsLFC.qmd
+            text: "Results - Log Fold Change"
+      
+      - section: "Additional code and scripts"
+        contents: 
+        - href: src/scanpyTypeIError.py
+          text: "ScamPy Type I Error code"
+        - href: src/scanpyFDR.py
+          text: "ScamPy FDR code"
+        - href: scanpy.ipynb
+          text: "Example of scanpy clustering and DEA"
+        - href: scvi-tools.ipynb
+          text: "Example of ScVI clustering and DEA"
+        
+        
+
 
 format:
   html:

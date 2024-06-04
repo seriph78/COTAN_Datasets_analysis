@@ -13,6 +13,10 @@ library(tibble)
 library(zeallot)
 library(assertthat)
 library(COTAN)
+library(caret)
+theme_set(theme_bw())
+library(stringr)
+library(nnet)
 #devtools::load_all("~/dev/COTAN/COTAN/")
 
 options(parallelly.fork.enable = TRUE)
@@ -51,14 +55,16 @@ assert_that(identical(cells_to_keep, getCells(cd14Obj)))
 majorityVotingClusters <- labelsDF[cells_to_keep, "majority_voting"]
 names(majorityVotingClusters) <- cells_to_keep
 
-majorityVotingCoexDF <- DEAOnClusters(cd14Obj, majorityVotingClusters)
+majorityVotingCoexDF <- DEAOnClusters(cd14Obj,clName ="majority-voting",clusters =   majorityVotingClusters)
 
 cd14Obj <- addClusterization(cd14Obj, clName = "majority-voting",
                              clusters = majorityVotingClusters,
                              coexDF = majorityVotingCoexDF)
 ```
+
 ```{r,echo=FALSE}
 majorityVotingClusters <- getClusterizationData(cd14Obj,clName = "majority-voting")$clusters
+
 ```
 
 Save the COTAN object
@@ -144,6 +150,89 @@ ggplot(mjvt_merged.table2,
   theme_sankey(base_size = 16) +
   theme(legend.position = "none")
 ```
+
+```{r}
+markersCD14 <- findClustersMarkers(cd14Obj,n = 100,clName = "merge",method = "BH")
+write.csv(markersCD14,file = "Data/CD14Cleaned/ClusterMarkerGenes.csv")
+head(markersCD14)
+```
+
+```{r}
+cd14GDI <- calculateGDI(cd14Obj)
+
+subsetGDI <- cd14GDI[cd14GDI$sum.raw.norm > 7,]
+top.GDI.genes <- rownames(subsetGDI[order(subsetGDI$GDI,decreasing = T),])[1:50]
+
+GDIPlot(cd14Obj,genes = "",GDIIn = cd14GDI)
+```
+
+```{r}
+data <- getNormalizedData(cd14Obj)
+
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- getClusterizationData(cd14Obj,clName = "merge")[[1]]
+#COTAN_Cl.code[COTAN_Cl.code == "A549"] <- 0
+#COTAN_Cl.code[COTAN_Cl.code == "CCL-185-IG"] <- 1
+
+COTAN_Cl.code <- as.numeric(COTAN_Cl.code)
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+```{r}
+train.data$COTAN_Cl.code <- as.factor(train.data$COTAN_Cl.code)
+test.data$COTAN_Cl.code <- as.factor(test.data$COTAN_Cl.code)
+# Fit the model
+#model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 75))
+model <- multinom(COTAN_Cl.code ~ ., data = train.data, maxit = 500)
+probabilities <- predict(model, newdata = test.data, type = "probs")
+
+# Find the class with the highest probability for each case
+predicted.classes <- apply(probabilities, 1, which.max)
+
+# Adjust predicted classes to match your factor levels
+levels <- levels(train.data$COTAN_Cl.code)
+predicted.classes <- levels[predicted.classes]
+
+# Calculate model accuracy
+accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
+#result.df[nrow(result.df),"Accuracy"] <- accuracy
+print(accuracy)
+```
+
+So the logistic regression accuracy for COTAN three clusters is quite good.
+
+![Cluster 1 top enriched genes. In red enriched Reactome Pathways innate immune system genes.](Data/CD14Cleaned/FromStringrEnrichr/CD14Cluster1.png){fig-align="center"}
+
+![cluster 2 - 100 top enriched genes. In red Antigen processing and presentation of exogenous peptide antigen via MHC class II genes, in violet Regulation of leukocyte cell-cell adhesion (GO Biological Process) and in green Adaptive Immune System](Data/CD14Cleaned/FromStringrEnrichr/CD14Cluster2string_vector_graphic.png){fig-align="center"}
+
+![Cluster 3 - 100 top enriched genes. In violet Cytokine Signaling in Immune system and in red Immunoregulatory interactions between a Lymphoid and a non-Lymphoid cell enriched genes for Reatome Pathways.](Data/CD14Cleaned/FromStringrEnrichr/CD14Cluster3.png){fig-align="center"}
+
+The cells in cluster 1 seem to be classical CD14 monocytes since they express CD14 while depleted in MHC class II proteins complex which is enriched in cell cluster 2 that seems intermediate monocytes.
+
+Cluster 3 does not seem to be a monocyte cluster. Using enrichr website it is enriched in Plasmacytoid Dendritic cell marker genes.
 
 ```{r}
 sessionInfo()

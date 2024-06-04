@@ -41,7 +41,7 @@ Inspect cells' sizes
 cellSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
 ```
 
-Drop cells with too many ritz reads as they are probably duplets
+Drop cells with too many reads as they are probably doublets
 
 ```{r}
 cellsSizeThr <- 2500
@@ -59,7 +59,7 @@ Inspect the number of expressed genes per cell
 genesSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
 ```
 
-Drop cells with too high genes expession as they are probably duplets
+Drop cells with too high genes expression as they are probably doublets
 
 ```{r}
 genesSizeThr <- 800
@@ -72,7 +72,7 @@ cd14Obj <- dropGenesCells(cd14Obj, cells = cells_to_rem)
 genesSizePlot(cd14Obj, splitPattern = "-", numCol = 2)
 ```
 
-Check number of mitocondrial genes expressed in each cell
+Check number of mitochondrial genes expressed in each cell
 
 ```{r}
 mitGenesPattern <- "^[Mm][Tt]-"
@@ -85,10 +85,10 @@ c(mitPlot, mitSizes) %<-%
 plot(mitPlot)
 ```
 
-Cells with a too high percentage of mitocondrial genes are likely dead (or at the last problematic) cells. So we drop them!
+Cells with a too high percentage of mitochondrial genes are likely dead (or at the last problematic) cells. So we drop them!
 
 ```{r}
-mitPercThr <- 6.5
+mitPercThr <- 7
 cd14Obj <- addElementToMetaDataset(cd14Obj, "Mitoc. perc. threshold", mitPercThr)
 
 cells_to_rem <- rownames(mitSizes)[mitSizes[["mit.percentage"]] > mitPercThr]
@@ -102,7 +102,7 @@ c(mitPlot, mitSizes) %<-%
 plot(mitPlot)
 ```
 
-Check number of ribosomial genes expressed in each cell
+Check the number of ribosomal genes expressed in each cell
 
 ```{r}
 ribGenesPattern <- "^RP[SL]\\d+"
@@ -176,7 +176,6 @@ cd14Obj <- proceedToCoex(cd14Obj, calcCoex = TRUE, cores = 12,
 cd14Obj <- readRDS(file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS")))
 ```
 
-
 ```{r}
 gdiData <- calculateGDI(cd14Obj)
 
@@ -207,7 +206,7 @@ cd14Obj <- readRDS(file = file.path(outDir, paste0(sampleCondition, ".cotan.RDS"
 
 ```{r, eval=FALSE, echo=TRUE}
 c(splitClusters, splitCoexDF) %<-%
-  cellsUniformClustering(cd14Obj, GDIThreshold = 1.4, cores = 13,
+  cellsUniformClustering(cd14Obj, GDIThreshold = 1.43, cores = 13,
                          saveObj = TRUE, outDir = outDir)
 
 cd14Obj <- addClusterization(cd14Obj, clName = "split",

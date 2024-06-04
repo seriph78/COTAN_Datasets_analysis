@@ -1,0 +1,870 @@
+---
+title: "Not Uniform Transcriptomic clusters with Logistic Regression"
+author: "Silvia Galfrè"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preamble
+
+```{r preamble}
+library(ggplot2)
+library(zeallot)
+library(data.table)
+library(parallelDist)
+library(tidyr)
+library(tidyverse)
+library(caret)
+theme_set(theme_bw())
+library(COTAN)
+library(stringr)
+library(nnet)
+
+options(parallelly.fork.enable = TRUE)
+
+inDir <- file.path("Data/MouseCortexFromLoom/")
+
+#setLoggingLevel(2)
+#setLoggingFile(file.path(inDir, "MixingClustersGDI_ForebrainDorsal.log"))
+
+outDir <- file.path("Data/MouseCortexFromLoom/NotCTSingleClusters/")
+if (!file.exists(outDir)) {
+  dir.create(outDir)
+}
+
+
+result.df <- data.frame()
+```
+
+In this part we want to show that if COTAN detects more division for cluster defined by other methods, this division is consitent and real. To test it we will use a simple logistic regression. 
+
+
+## Cluster 525 e15.0
+
+
+
+```{r, eval=FALSE, echo=TRUE}
+e15.0 <- readRDS(paste0(inDir,"e15.0_ForebrainDorsal.cotan.RDS")
+cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "525"]
+
+cells <-names(cells)
+
+write.csv(getRawData(e15.0)[,cells],paste0(outDir,"cl525/RawDataCL525.csv"))
+
+cl525 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
+                                       GEO = "Loom",
+                                       sequencingMethod = "10X",
+                                       sampleCondition = "cl525",
+                                       cores = 10,saveObj = T,
+                                       outDir = "Data/MouseCortexFromLoom/NotCTSingleClusters/",
+                                       calcCoex = T)
+
+```
+
+```{r, eval=TRUE,echo=FALSE}
+cl525 <- readRDS(paste0(outDir,"cl525.cotan.RDS"))
+
+cl <- "Cl525E15.0"
+n.cells <- getNumCells(cl525)
+n.cls <- length(unique(getClusters(cl525)))
+
+result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
+colnames(result.df) <- c("OriginalCluster","CellNumber","COTANClusterNumber","Accuracy" )
+result.df
+```
+
+
+```{r}
+cl525GDI <- calculateGDI(cl525)
+
+subsetGDICl525 <- cl525GDI[cl525GDI$sum.raw.norm > 7,]
+top.GDI.genes <- rownames(subsetGDICl525[order(subsetGDICl525$GDI,decreasing = T),])[1:50]
+
+GDIPlot(cl525,genes = "",GDIIn = cl525GDI)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+list.cl.CT <- cellsUniformClustering(cl525, GDIThreshold = 1.43, cores = 10L,
+                         saveObj = TRUE, outDir = outDir)
+
+cl525 <- addClusterization(cl525, clName = "split",
+                              clusters = list.cl.CT$clusters,
+                              coexDF = list.cl.CT$coex, override = TRUE)
+
+table(list.cl.CT$clusters)
+```
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(cl525, clusters = list.cl.CT$clusters,
+                            GDIThreshold = 1.43, batchSize = 4L, cores = 10L,
+                            saveObj = TRUE, outDir = outDir)
+
+cl525 <- addClusterization(cl525, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+saveRDS(cl525,paste0(outDir,"cl525.cotan.RDS"))
+
+table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
+```
+
+So there isn't a perfect separation due to the cell bar code.
+
+
+```{r}
+cl525ClsMarkers <- findClustersMarkers(cl525,n = 200,method = "BH")
+
+head(cl525ClsMarkers)
+```
+
+```{r, eval=FALSE, echo=FALSE}
+write.csv(cl525ClsMarkers,paste0(outDir,"cl525/ClustersMarkers.csv"))
+write.csv(getClusterizationData(cl525)[[1]],file = paste0(outDir,"cl525/CellClusters.csv"))
+```
+
+
+```{r}
+data <- getNormalizedData(cl525)
+
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- getClusterizationData(cl525)[[1]]
+#COTAN_Cl.code[COTAN_Cl.code == "A549"] <- 0
+#COTAN_Cl.code[COTAN_Cl.code == "CCL-185-IG"] <- 1
+
+COTAN_Cl.code <- as.numeric(COTAN_Cl.code)
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r}
+train.data$COTAN_Cl.code <- as.factor(train.data$COTAN_Cl.code)
+test.data$COTAN_Cl.code <- as.factor(test.data$COTAN_Cl.code)
+# Fit the model
+#model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 75))
+model <- multinom(COTAN_Cl.code ~ ., data = train.data, maxit = 500)
+probabilities <- predict(model, newdata = test.data, type = "probs")
+
+# Find the class with the highest probability for each case
+predicted.classes <- apply(probabilities, 1, which.max)
+
+# Adjust predicted classes to match your factor levels
+levels <- levels(train.data$COTAN_Cl.code)
+predicted.classes <- levels[predicted.classes]
+
+# Calculate model accuracy
+accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
+result.df[nrow(result.df),"Accuracy"] <- accuracy
+print(accuracy)
+```
+So also a simple logistic regression confirm that this cluster is in fact formed by four different cell populations.
+
+Now lets try to search the identity of these cells.
+
+Since COTAN can detect also very lowly expressed genes, but all the literature methods not, the online methods are bias for highly expressed genes. So, we will take all genes detected as enriched by COTAN and filter also for the highly expressed ones.
+
+
+```{r}
+top <- cl525ClsMarkers[cl525ClsMarkers$Gene %in% rownames(cl525GDI[cl525GDI$sum.raw.norm > 7,]) & cl525ClsMarkers$Score > 0,]
+top
+```
+```{r}
+write.csv(top,paste0(outDir,"cl525/TopClustersMarkers.csv"))
+```
+
+
+
+## Cluster 511 e15.0
+
+```{r, eval=FALSE, echo=TRUE}
+cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "511"]
+
+cells <-names(cells)
+
+cl511 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
+                                       GEO = "Loom",
+                                       sequencingMethod = "10X",
+                                       sampleCondition = "cl511",
+                                       cores = 10,saveObj = T,
+                                       outDir = "Data/MouseCortexFromLoom/NotCTSingleClusters/",
+                                       calcCoex = T)
+
+```
+```{r, eval=TRUE,echo=FALSE}
+cl511 <- readRDS(paste0(outDir,"cl511.cotan.RDS"))
+
+cl <- "Cl511E15.0"
+n.cells <- getNumCells(cl511)
+n.cls <- length(unique(getClusters(cl511)))
+
+result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
+result.df
+```
+
+```{r}
+cl511GDI <- calculateGDI(cl511)
+
+subsetGDIcl511 <- cl511GDI[cl511GDI$sum.raw.norm > 7,]
+top.GDI.genes <- rownames(subsetGDIcl511[order(subsetGDIcl511$GDI,decreasing = T),])[1:50]
+
+GDIPlot(cl511,genes = "",GDIIn = cl511GDI)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+list.cl.CT <- cellsUniformClustering(cl511, GDIThreshold = 1.43, cores = 10L,
+                         saveObj = TRUE, outDir = outDir)
+
+cl511 <- addClusterization(cl511, clName = "split",
+                              clusters = list.cl.CT$clusters,
+                              coexDF = list.cl.CT$coex, override = TRUE)
+
+table(list.cl.CT$clusters)
+```
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(cl511, clusters = list.cl.CT$clusters,
+                            GDIThreshold = 1.43, batchSize = 4L, cores = 10L,
+                            saveObj = TRUE, outDir = outDir)
+
+cl511 <- addClusterization(cl511, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+saveRDS(cl511,paste0(outDir,"cl511.cotan.RDS"))
+
+table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
+```
+
+
+
+
+```{r}
+data <- getNormalizedData(cl511)
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- getClusterizationData(cl511)[[1]]
+#COTAN_Cl.code[COTAN_Cl.code == "A549"] <- 0
+#COTAN_Cl.code[COTAN_Cl.code == "CCL-185-IG"] <- 1
+
+COTAN_Cl.code <- as.numeric(COTAN_Cl.code)-1
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r}
+# Fit the model
+model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
+# Summarize the model
+summary(model)
+# Make predictions
+probabilities <- model %>% predict(test.data, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+# Model accuracy
+accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
+result.df[nrow(result.df),"Accuracy"] <- accuracy
+
+accuracy
+```
+
+So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
+
+```{r}
+cl511ClsMarkers <- findClustersMarkers(cl511,n = 200,method = "BH")
+cl511ClsMarkers
+```
+
+```{r, eval=FALSE, echo=FALSE}
+write.csv(cl511ClsMarkers,paste0(outDir,"cl511/ClustersMarkers.csv"))
+
+write.csv(getClusterizationData(cl511)[[1]],file = paste0(outDir,"cl511/CellClusters.csv"))
+```
+
+## Cluster 184 e15.0
+
+```{r, eval=TRUE,echo=FALSE}
+cl184 <- readRDS(paste0(outDir,"cl184.cotan.RDS"))
+cl <- "Cl184E15.0"
+n.cells <- getNumCells(cl184)
+n.cls <- length(unique(getClusters(cl184)))
+
+result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
+result.df
+```
+
+
+```{r, eval=FALSE, echo=TRUE}
+cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "184"]
+
+cells <-names(cells)
+
+cl184 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
+                                       GEO = "Loom",
+                                       sequencingMethod = "10X",
+                                       sampleCondition = "cl184",
+                                       cores = 10,saveObj = T,
+                                       outDir = "Data/MouseCortexFromLoom/NotCTSingleClusters/",
+                                       calcCoex = T)
+
+```
+
+
+```{r}
+cl184GDI <- calculateGDI(cl184)
+
+subsetGDIcl184 <- cl184GDI[cl184GDI$sum.raw.norm > 7,]
+top.GDI.genes <- rownames(subsetGDIcl184[order(subsetGDIcl184$GDI,decreasing = T),])[1:50]
+
+GDIPlot(cl184,genes = "",GDIIn = cl184GDI)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+list.cl.CT <- cellsUniformClustering(cl184, GDIThreshold = 1.43, cores = 10L,
+                         saveObj = TRUE, outDir = outDir)
+
+cl184 <- addClusterization(cl184, clName = "split",
+                              clusters = list.cl.CT$clusters,
+                              coexDF = list.cl.CT$coex, override = TRUE)
+
+table(list.cl.CT$clusters)
+```
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(cl184, clusters = list.cl.CT$clusters,
+                            GDIThreshold = 1.43, batchSize = 4L, cores = 10L,
+                            saveObj = TRUE, outDir = outDir)
+
+cl184 <- addClusterization(cl184, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+saveRDS(cl184,paste0(outDir,"cl184.cotan.RDS"))
+
+table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
+```
+
+
+
+```{r}
+data <- getNormalizedData(cl184)
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- getClusterizationData(cl184)[[1]]
+#COTAN_Cl.code[COTAN_Cl.code == "A549"] <- 0
+#COTAN_Cl.code[COTAN_Cl.code == "CCL-185-IG"] <- 1
+
+COTAN_Cl.code <- as.numeric(COTAN_Cl.code)-1
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r}
+# Fit the model
+model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
+# Summarize the model
+summary(model)
+# Make predictions
+probabilities <- model %>% predict(test.data, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+# Model accuracy
+accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
+result.df[nrow(result.df),"Accuracy"] <- accuracy
+
+accuracy
+
+```
+
+So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
+
+```{r}
+cl184ClsMarkers <- findClustersMarkers(cl184,n = 200,method = "BH")
+cl184ClsMarkers
+```
+
+```{r, echo=FALSE, eval=FALSE}
+write.csv(cl184ClsMarkers,paste0(outDir,"cl184/ClustersMarkers.csv"))
+write.csv(getClusterizationData(cl184)[[1]],file = paste0(outDir,"cl184/CellClusters.csv"))
+```
+
+## Cluster 432 e13.5
+
+```{r, eval=TRUE,echo=FALSE}
+cl432  <- readRDS(paste0(outDir,"cl432.cotan.RDS"))
+cl <- "Cl432E13.5"
+n.cells <- getNumCells(cl432)
+n.cls <- length(unique(getClusters(cl432)))
+
+result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
+result.df
+
+```
+
+
+```{r, echo=TRUE, eval=FALSE}
+e13.5 <- readRDS(paste0(inDir,"e13.5_ForebrainDorsal.cotan.RDS"))
+
+cells <- getClusterizationData(e13.5,clName = "original.clusters")[[1]][getClusterizationData(e13.5,clName = "original.clusters")[[1]] == "432"]
+
+cells <-names(cells)
+
+cl432 <-  automaticCOTANObjectCreation(raw = getRawData(e13.5)[,cells],
+                                       GEO = "Loom",
+                                       sequencingMethod = "10X",
+                                       sampleCondition = "cl432",
+                                       cores = 10,saveObj = T,
+                                       outDir = "Data/MouseCortexFromLoom/NotCTSingleClusters/",
+                                       calcCoex = T)
+```
+
+```{r}
+cl432GDI <- calculateGDI(cl432)
+
+subsetGDIcl432 <- cl432GDI[cl432GDI$sum.raw.norm > 5,]
+top.GDI.genes <- rownames(subsetGDIcl432[order(subsetGDIcl432$GDI,decreasing = T),])[1:25]
+
+GDIPlot(cl432,genes = list("topGDI"=top.GDI.genes),GDIIn = cl432GDI)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+list.cl.CT <- cellsUniformClustering(cl432, GDIThreshold = 1.43, cores = 10L,
+                         saveObj = TRUE, outDir = outDir)
+
+cl432 <- addClusterization(cl432, clName = "split",
+                              clusters = list.cl.CT$clusters,
+                              coexDF = list.cl.CT$coex, override = TRUE)
+
+table(list.cl.CT$clusters)
+```
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(cl432, clusters = list.cl.CT$clusters,
+                            GDIThreshold = 1.43, batchSize = 4L, cores = 10L,
+                            saveObj = TRUE, outDir = outDir)
+
+cl432 <- addClusterization(cl432, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+saveRDS(cl432,paste0(outDir,"cl432.cotan.RDS"))
+
+table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
+```
+
+
+
+```{r}
+data <- getNormalizedData(cl432)
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- getClusterizationData(cl432)[[1]]
+#COTAN_Cl.code[COTAN_Cl.code == "A549"] <- 0
+#COTAN_Cl.code[COTAN_Cl.code == "CCL-185-IG"] <- 1
+
+COTAN_Cl.code <- as.numeric(COTAN_Cl.code)-1
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r}
+# Fit the model
+model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
+# Summarize the model
+summary(model)
+# Make predictions
+probabilities <- model %>% predict(test.data, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+# Model accuracy
+accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
+result.df[nrow(result.df),"Accuracy"] <- accuracy
+
+accuracy
+
+```
+
+So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
+
+```{r}
+cl432ClsMarkers <- findClustersMarkers(cl432,n = 200,method = "BH")
+cl432ClsMarkers
+```
+
+```{r, echo=FALSE, eval=FALSE}
+write.csv(cl432ClsMarkers,paste0(outDir,"cl432/ClustersMarkers.csv"))
+write.csv(getClusterizationData(cl432)[[1]],file = paste0(outDir,"cl432/CellClusters.csv"))
+```
+
+
+
+## Cluster 510 e15.0
+
+```{r, eval=TRUE,echo=FALSE}
+cl510e15.0  <- readRDS(paste0(outDir,"cl510e15.0.cotan.RDS"))
+
+cl <- "Cl510E15.0"
+n.cells <- getNumCells(cl510e15.0 )
+n.cls <- length(unique(getClusters(cl510e15.0)))
+
+result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
+result.df
+```
+
+
+```{r,eval=FALSE, echo=TRUE}
+cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "510"]
+
+cells <-names(cells)
+
+cl510e15.0 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
+                                       GEO = "Loom",
+                                       sequencingMethod = "10X",
+                                       sampleCondition = "cl510e15.0",
+                                       cores = 10,saveObj = T,
+                                       outDir = "Data/MouseCortexFromLoom/NotCTSingleClusters/",
+                                       calcCoex = T)
+
+```
+
+```{r}
+cl510e15.0GDI <- calculateGDI(cl510e15.0)
+
+subsetGDIcl510e15.0 <- cl510e15.0GDI[cl510e15.0GDI$sum.raw.norm > 5,]
+top.GDI.genes <- rownames(subsetGDIcl510e15.0[order(subsetGDIcl510e15.0$GDI,decreasing = T),])[1:25]
+
+GDIPlot(cl510e15.0,genes = list("topGDI"=top.GDI.genes),GDIIn = cl510e15.0GDI)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+list.cl.CT <- cellsUniformClustering(cl510e15.0, GDIThreshold = 1.43, cores = 10L,
+                         saveObj = TRUE, outDir = outDir)
+
+cl510e15.0 <- addClusterization(cl510e15.0, clName = "split",
+                              clusters = list.cl.CT$clusters,
+                              coexDF = list.cl.CT$coex, override = TRUE)
+
+table(list.cl.CT$clusters)
+```
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(cl510e15.0, clusters = list.cl.CT$clusters,
+                            GDIThreshold = 1.43, batchSize = 4L, cores = 10L,
+                            saveObj = TRUE, outDir = outDir)
+
+cl510e15.0 <- addClusterization(cl510e15.0, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+saveRDS(cl510e15.0,paste0(outDir,"cl510e15.0.cotan.RDS"))
+
+table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
+```
+
+
+
+```{r}
+data <- getNormalizedData(cl510e15.0)
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- getClusterizationData(cl510e15.0)[[1]]
+#COTAN_Cl.code[COTAN_Cl.code == "A549"] <- 0
+#COTAN_Cl.code[COTAN_Cl.code == "CCL-185-IG"] <- 1
+
+COTAN_Cl.code <- as.numeric(COTAN_Cl.code)-1
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r}
+# Fit the model
+model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
+# Summarize the model
+summary(model)
+# Make predictions
+probabilities <- model %>% predict(test.data, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+# Model accuracy
+accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
+result.df[nrow(result.df),"Accuracy"] <- accuracy
+
+accuracy
+
+```
+
+So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
+
+```{r}
+cl510e15.0ClsMarkers <- findClustersMarkers(cl510e15.0,n = 200,method = "BH")
+cl510e15.0ClsMarkers
+```
+
+```{r, echo=FALSE, eval=FALSE}
+write.csv(cl510e15.0ClsMarkers,paste0(outDir,"cl510e15.0/ClustersMarkers.csv"))
+write.csv(getClusterizationData(cl510e15.0)[[1]],file = paste0(outDir,"cl510e15.0/CellClusters.csv"))
+```
+
+## Cluster 511 e15.0
+
+```{r, eval=TRUE,echo=FALSE}
+cl511e15.0  <- readRDS(paste0(outDir,"cl511e15.0.cotan.RDS"))
+
+cl <- "Cl511E15.0"
+n.cells <- getNumCells(cl511e15.0)
+n.cls <- length(unique(getClusters(cl511e15.0)))
+
+result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
+result.df
+```
+
+
+
+```{r,eval=FALSE, echo=TRUE}
+cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "511"]
+
+cells <-names(cells)
+
+cl511e15.0 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
+                                       GEO = "Loom",
+                                       sequencingMethod = "10X",
+                                       sampleCondition = "cl511e15.0",
+                                       cores = 10,saveObj = T,
+                                       outDir = "Data/MouseCortexFromLoom/NotCTSingleClusters/",
+                                       calcCoex = T)
+
+```
+
+
+```{r}
+cl511e15.0GDI <- calculateGDI(cl511e15.0)
+
+subsetGDIcl511e15.0 <- cl511e15.0GDI[cl511e15.0GDI$sum.raw.norm > 5,]
+top.GDI.genes <- rownames(subsetGDIcl511e15.0[order(subsetGDIcl511e15.0$GDI,decreasing = T),])[1:25]
+
+GDIPlot(cl511e15.0,genes = list("topGDI"=top.GDI.genes),GDIIn = cl511e15.0GDI)
+```
+
+```{r, eval=FALSE, echo=TRUE}
+list.cl.CT <- cellsUniformClustering(cl511e15.0, GDIThreshold = 1.43, cores = 10L,
+                         saveObj = TRUE, outDir = outDir)
+
+cl511e15.0 <- addClusterization(cl511e15.0, clName = "split",
+                              clusters = list.cl.CT$clusters,
+                              coexDF = list.cl.CT$coex, override = TRUE)
+
+table(list.cl.CT$clusters)
+```
+```{r, eval=FALSE, echo=TRUE}
+c(mergedClusters, mergedCoexDF) %<-%
+  mergeUniformCellsClusters(cl511e15.0, clusters = list.cl.CT$clusters,
+                            GDIThreshold = 1.43, batchSize = 4L, cores = 10L,
+                            saveObj = TRUE, outDir = outDir)
+
+cl511e15.0 <- addClusterization(cl511e15.0, clName = "merge",
+                              clusters = mergedClusters,
+                              coexDF = mergedCoexDF,
+                              override = TRUE)
+
+saveRDS(cl511e15.0,paste0(outDir,"cl511e15.0.cotan.RDS"))
+
+table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
+```
+
+
+
+```{r}
+data <- getNormalizedData(cl511e15.0)
+data <- data[!rowSums(as.matrix(data)) < 1,]
+data <- log(data*10000+1)
+
+row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+
+genes.to.keep <- c(names(row_stdev[1:100]),top.GDI.genes)
+
+data.small <- data[rownames(data) %in% genes.to.keep,]
+
+#data <- t(as.matrix(data))
+data.small <- t(as.matrix(data.small))
+
+
+COTAN_Cl.code <- getClusterizationData(cl511e15.0)[[1]]
+#COTAN_Cl.code[COTAN_Cl.code == "A549"] <- 0
+#COTAN_Cl.code[COTAN_Cl.code == "CCL-185-IG"] <- 1
+
+COTAN_Cl.code <- as.numeric(COTAN_Cl.code)-1
+
+data.small <- cbind(data.small,COTAN_Cl.code)
+data.small <- as.data.frame(data.small)
+
+# Split the data into training and test set
+set.seed(123)
+training.samples <- data.small[,"COTAN_Cl.code"] %>% 
+  createDataPartition(p = 0.8, list = FALSE)
+train.data  <- data.small[training.samples, ]
+test.data <- data.small[-training.samples, ]
+head(train.data)
+```
+
+
+```{r}
+# Fit the model
+model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
+# Summarize the model
+summary(model)
+# Make predictions
+probabilities <- model %>% predict(test.data, type = "response")
+predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+# Model accuracy
+accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
+result.df[nrow(result.df),"Accuracy"] <- accuracy
+
+accuracy
+
+```
+
+So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
+
+```{r}
+cl511e15.0ClsMarkers <- findClustersMarkers(cl511e15.0,n = 200,method = "BH")
+cl511e15.0ClsMarkers
+```
+
+```{r, echo=FALSE, eval=FALSE}
+write.csv(cl511e15.0ClsMarkers,paste0(outDir,"cl511e15.0/ClustersMarkers.csv"))
+write.csv(getClusterizationData(cl511e15.0)[[1]],file = paste0(outDir,"cl511e15.0/CellClusters.csv"))
+```
+
+## Summary
+
+```{r}
+result.df
+```
+
+
+
+------------------------------------------------------------------------
+
+```{r}
+Sys.time()
+```
+
+```{r}
+sessionInfo()
+```

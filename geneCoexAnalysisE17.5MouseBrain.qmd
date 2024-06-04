@@ -2,10 +2,42 @@
 title: "Gene Correlation Analysis E17.5 Mouse Brain"
 ---
 
+## Prologue
+
 ```{r}
 library(COTAN)
 library(ComplexHeatmap)
 library(circlize)
+library(dplyr)
+library(Hmisc)
+library(Seurat)
+library(patchwork)
+library(Rfast)
+library(parallel)
+library(doParallel)
+library(HiClimR)
+library(stringr)
+library(fst)
+
+options(parallelly.fork.enable = TRUE)
+
+dataSetFile <- "Data/MouseCortexFromLoom/e17.5_ForebrainDorsal.cotan.RDS"
+name <- str_split(dataSetFile,pattern = "/",simplify = T)[3]
+name <- str_remove(name,pattern = ".RDS")
+
+project = "E17.5"
+
+
+setLoggingLevel(1)
+outDir <- "CoexData/"
+setLoggingFile(paste0(outDir, "Logs/",name,".log"))
+
+obj <- readRDS(dataSetFile)
+file_code = getMetadataElement(obj, datasetTags()[["cond"]])
+```
+
+```{r}
+source("src/Functions.R")
 ```
 
 To compare the ability of COTAN to asses the real correlation between genes we define some pools of genes:
@@ -34,15 +66,11 @@ genesList <- list(
 ## COTAN
 
 ```{r}
-obj <- readRDS("Data/MouseCortexFromLoom/e17.5_ForebrainDorsal.cotan.RDS")
-
+int.genes <-getGenes(obj)
 ```
 
 ```{r}
-int.genes <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)[c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers) %in% getGenes(obj)]
-
-
-coexMat.big <- getGenesCoex(obj)[int.genes,int.genes]
+coexMat.big <- getGenesCoex(obj)#[int.genes,int.genes]
 
 coexMat <- getGenesCoex(obj)[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
 
@@ -78,43 +106,62 @@ draw(htmp, heatmap_legend_side="right")
 ```
 
 ```{r, echo=FALSE}
-int.genes <- c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers)[c(genesList$NPGs,genesList$hk,genesList$PNGs,genesList$layers) %in% getGenes(obj)]
-
-pvalueMat.big <- calculatePValue(obj, geneSubsetCol = int.genes, geneSubsetRow = int.genes)
+pvalueMat.big <- calculatePValue(obj)#, geneSubsetCol = int.genes, geneSubsetRow = int.genes)
 ```
 
 ```{r, echo=FALSE}
-saveRDS(coexMat.big,file = paste0("CoexData/CotanCoex_",
-                              getMetadataDataset(obj)[3,2],
-                              ".RDS"))
-saveRDS(pvalueMat.big,file = paste0("CoexData/CotanPValues_",
-                              getMetadataElement(obj, datasetTags()[["cond"]]),".RDS"))
+
+write_fst(as.data.frame(coexMat.big), paste0("CoexData/CotanCoex_",file_code,
+                              ".fst"),compress = 100)
+write_fst(as.data.frame(pvalueMat.big), paste0("CoexData/CotanPValues_",
+                              file_code,".fst"),compress = 100)
+
+
+rm(coexMat.big)
+rm(pvalueMat.big)
 ```
 
 ```{r}
-GDIPlot(obj,genes = genesList,GDIThreshold = 1.4)
+GDI_DF <- calculateGDI(obj)
+GDI_DF$geneType <- NA
+for (cat in names(genesList)) {
+  GDI_DF[rownames(GDI_DF) %in% genesList[[cat]],]$geneType <- cat
+}
+
+GDI_DF$GDI_centered <- scale(GDI_DF$GDI,center = T,scale = T)
+
+write.csv(GDI_DF,paste0("CoexData/","Variance_GDI_genes",file_code,".csv"))
+
+
+GDI_DF[unlist(genesList),]
+```
+
+```{r}
+GDIPlot(obj,GDIIn = GDI_DF, genes = genesList,GDIThreshold = 1.4)
 ```
 
 ## Seurat correlation
 
 ```{r}
-library(dplyr)
-library(Hmisc)
-library(Seurat)
-library(patchwork)
-library(Rfast)
-library(parallel)
-library(doParallel)
-```
-
-```{r}
-srat<- CreateSeuratObject(counts = getRawData(obj), project = "E14.5", min.cells = 3, min.features = 200)
+srat<- CreateSeuratObject(counts = getRawData(obj), 
+                          project = project, 
+                          min.cells = 3, 
+                          min.features = 200)
 srat[["percent.mt"]] <- PercentageFeatureSet(srat, pattern = "^mt-")
 srat <- NormalizeData(srat)
 srat <- FindVariableFeatures(srat, selection.method = "vst", nfeatures = 2000)
 
 # plot variable features with and without labels
 plot1 <- VariableFeaturePlot(srat)
+
+plot1$data$centered_variance <- scale(plot1$data$variance.standardized,
+                                      center = T,scale = F)
+
+write.csv(plot1$data,paste0("CoexData/",
+                            "Variance_Seurat_genes",
+                            getMetadataElement(obj, 
+                                               datasetTags()[["cond"]]),".csv"))
+
 LabelPoints(plot = plot1, points = c(genesList$NPGs,genesList$PNGs,genesList$layers), repel = TRUE)
 
 ```
@@ -126,172 +173,217 @@ LabelPoints(plot = plot1, points = c(genesList$hk), repel = TRUE)
 ```{r}
 all.genes <- rownames(srat)
 srat <- ScaleData(srat, features = all.genes)
-seurat.data = srat[["RNA"]]@data
+seurat.data = GetAssayData(srat[["RNA"]],layer = "data")
 ```
 
 ```{r}
-int.genes <- rownames(seurat.data)[rownames(seurat.data) %in% c(genesList$NPGs, genesList$hk, genesList$PNGs, genesList$layers)]
-subset_data <- t(as.matrix(seurat.data)[int.genes,])
+corr.pval.list <- correlation_pvalues(data = seurat.data,
+                                      int.genes,
+                                      n.cells = getNumCells(obj))
 
-# Get gene names for the subset
-subset_gene_names <- colnames(subset_data)
+seurat.data.cor.big <- as.matrix(Matrix::forceSymmetric(corr.pval.list$data.cor, uplo = "U"))
 
-num_cores <- 12  # Change this to the desired number of cores
-cl <- parallel::makeCluster(num_cores)
-registerDoParallel(cl)
-
-cor_p_values <- foreach(i = 1:ncol(subset_data), .combine = "cbind") %dopar% {
-  p_values <- numeric(ncol(subset_data))
-  for (j in 1:ncol(subset_data)) {
-    if (i == j) {
-      p_values[j] <- 1
-    } else {
-      cor_result <- cor.test(subset_data[, i], subset_data[, j], method = "pearson")
-      p_values[j] <- cor_result$p.value
-    }
-  }
-  return(p_values)
-}
-
-# Stop the parallel backend
-stopCluster(cl)
-# Extract correlation coefficients and p-values
-seurat.data.cor.big <- cor(subset_data, method = "pearson")
-
-# Create a named matrix for p-values
-rownames(cor_p_values) <- colnames(cor_p_values) <- subset_gene_names
-p_values <- cor_p_values
-
-diag(seurat.data.cor.big) <- 0
-
-seurat.data.cor <- seurat.data.cor.big[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
+htmp <- correlation_plot(seurat.data.cor.big, 
+                         genesList, title="Seurat corr")
 
 
-f1 = colorRamp2(seq(-0.5,0.5, length = 3), c("#DC0000B2", "white","#3C5488B2" ))
+p_values.fromSeurat <- corr.pval.list$p_values
+seurat.data.cor.big <- corr.pval.list$data.cor
 
-split.genes <- factor(c(rep("NPGs",length(genesList[["NPGs"]])),
-                         rep("HK",length(genesList[["hk"]])),
-                         rep("PNGs",length(genesList[["PNGs"]]))),
-                         levels = c("NPGs","HK","PNGs"))
+rm(corr.pval.list)
+gc()
 
-lgd = Legend(col_fun = f1, title = "COTAN coex")
-
-htmp <- Heatmap(as.matrix(seurat.data.cor),
-        #width = ncol(seurat.corMat)*unit(2.5, "mm"), 
-        height = nrow(seurat.data.cor)*unit(3, "mm"),
-        cluster_rows = FALSE,
-        cluster_columns = FALSE,
-        col = f1,
-        row_names_side = "left",
-        row_names_gp = gpar(fontsize = 11),
-        column_names_gp  = gpar(fontsize = 11),
-        column_split = split.genes,
-        row_split = split.genes,
-        cluster_row_slices = FALSE, 
-    cluster_column_slices = FALSE,
-    heatmap_legend_param = list(
-        title = "Seurat corr", at = c(-0.5, 0, 0.5),direction = "horizontal",
-        labels = c("-0.5", "0", "0.5")
-    )
-   )
 draw(htmp, heatmap_legend_side="right")
 ```
 
 ```{r, echo=FALSE}
-saveRDS(seurat.data.cor.big,file = paste0("CoexData/SeuratCorr_",
-                              getMetadataElement(obj, datasetTags()[["cond"]]),
-                              ".RDS"))
-saveRDS(pvalueMat.big,file = paste0("CoexData/SeuratPValues_",
-                              getMetadataElement(obj, datasetTags()[["cond"]]),".RDS"))
+
+write_fst(as.data.frame(p_values.fromSeurat),path = paste0("CoexData/SeuratPValues_",file_code,".fst"),compress = 100)
+
+write_fst(as.data.frame(seurat.data.cor.big),
+          path = paste0("CoexData/SeuratCorr_",
+                              file_code,
+                              ".fst"), compress = 100)
+
+rm(seurat.data.cor.big)
+rm(p_values.fromSeurat)
 ```
 
+### Seurat SC Transform
+
 ```{r}
-srat <-  SCTransform(srat, method = "glmGamPoi", vars.to.regress = "percent.mt", verbose = FALSE)
-seurat.data = srat[["SCT"]]@data
+srat <-  SCTransform(srat, 
+                     method = "glmGamPoi", 
+                     vars.to.regress = "percent.mt", 
+                     verbose = FALSE)
 
-int.genes <- rownames(seurat.data)[rownames(seurat.data) %in% c(genesList$NPGs, genesList$hk, genesList$PNGs, genesList$layers)]
-subset_data <- t(as.matrix(seurat.data)[int.genes,])
+seurat.data <- GetAssayData(srat[["SCT"]],layer = "data")
 
-# Get gene names for the subset
-subset_gene_names <- colnames(subset_data)
+#Remove genes with all zeros
+seurat.data <-seurat.data[rowSums(seurat.data) > 0,]
 
-num_cores <- 12  # Change this to the desired number of cores
-cl <- makeCluster(num_cores)
-registerDoParallel(cl)
 
-cor_p_values <- foreach(i = 1:ncol(subset_data), .combine = "cbind") %dopar% {
-  p_values <- numeric(ncol(subset_data))
-  for (j in 1:ncol(subset_data)) {
-    if (i == j) {
-      p_values[j] <- 1
-    } else {
-      cor_result <- cor.test(subset_data[, i], subset_data[, j], method = "pearson")
-      p_values[j] <- cor_result$p.value
-    }
-  }
-  return(p_values)
-}
+corr.pval.list <- correlation_pvalues(seurat.data,
+                                      int.genes,
+                                      n.cells = getNumCells(obj))
 
-# Stop the parallel backend
-stopCluster(cl)
-# Extract correlation coefficients and p-values
-seurat.data.cor.big <- cor(subset_data, method = "pearson")
+seurat.data.cor.big <- as.matrix(Matrix::forceSymmetric(corr.pval.list$data.cor, uplo = "U"))
 
-# Create a named matrix for p-values
-rownames(cor_p_values) <- colnames(cor_p_values) <- subset_gene_names
-p_values <- cor_p_values
-
-diag(seurat.data.cor.big) <- 0
-
-seurat.data.cor <- seurat.data.cor.big[c(genesList$NPGs,genesList$hk,genesList$PNGs),c(genesList$NPGs,genesList$hk,genesList$PNGs)]
+htmp <- correlation_plot(seurat.data.cor.big, 
+                         genesList, title="Seurat corr SCT")
 
 
 
-f1 = colorRamp2(seq(-0.5,0.5, length = 3), c("#DC0000B2", "white","#3C5488B2" ))
+p_values.fromSeurat <- corr.pval.list$p_values
+seurat.data.cor.big <- corr.pval.list$data.cor
 
-split.genes <- factor(c(rep("NPGs",length(genesList[["NPGs"]])),
-                         rep("HK",length(genesList[["hk"]])),
-                         rep("PNGs",length(genesList[["PNGs"]]))),
-                         levels = c("NPGs","HK","PNGs"))
-diag(seurat.data.cor) <- 0
+rm(corr.pval.list)
+gc()
 
-f1 = colorRamp2(seq(-0.5,0.5, length = 3), c("#DC0000B2", "white","#3C5488B2" ))
 
-split.genes <- factor(c(rep("NPGs",length(genesList[["NPGs"]])),
-                         rep("HK",length(genesList[["hk"]])),
-                         rep("PNGs",length(genesList[["PNGs"]]))),
-                         levels = c("NPGs","HK","PNGs"))
-
-lgd = Legend(col_fun = f1, title = "COTAN coex")
-
-htmp <- Heatmap(as.matrix(seurat.data.cor),
-        #width = ncol(seurat.corMat)*unit(2.5, "mm"), 
-        height = nrow(seurat.data.cor)*unit(3, "mm"),
-        cluster_rows = FALSE,
-        cluster_columns = FALSE,
-        col = f1,
-        row_names_side = "left",
-        row_names_gp = gpar(fontsize = 11),
-        column_names_gp  = gpar(fontsize = 11),
-        column_split = split.genes,
-        row_split = split.genes,
-        cluster_row_slices = FALSE, 
-    cluster_column_slices = FALSE,
-    heatmap_legend_param = list(
-        title = "Seurat corr SCT", at = c(-0.5, 0, 0.5),direction = "horizontal",
-        labels = c("-0.5", "0", "0.5")
-    )
-   )
 draw(htmp, heatmap_legend_side="right")
 ```
 
 ```{r,echo=FALSE}
-saveRDS(seurat.data.cor.big,file = paste0("CoexData/SeuratCorrSCT_",
-                              getMetadataElement(obj, datasetTags()[["cond"]]),
-                              ".RDS"))
+plot1 <- VariableFeaturePlot(srat)
 
-saveRDS(pvalueMat.big,file = paste0("CoexData/SeuratPValuesSCT_",
-                              getMetadataElement(obj, datasetTags()[["cond"]]),".RDS"))
+plot1$data$centered_variance <- scale(plot1$data$residual_variance,
+                                      center = T,scale = F)
+
+write.csv(plot1$data,paste0("CoexData/",
+                            "Variance_SeuratSCT_genes",
+                            getMetadataElement(obj, 
+                                               datasetTags()[["cond"]]),".csv"))
+
+write_fst(as.data.frame(seurat.data.cor.big),path = paste0("CoexData/SeuratCorrSCT_",file_code,".fst"), compress = 100)
+
+write_fst(as.data.frame(p_values.fromSeurat),path =  paste0("CoexData/SeuratPValuesSCT_", file_code,".fst"))
+
+
+rm(seurat.data.cor.big)
+rm(p_values.fromSeurat)
+```
+
+## Monocle
+
+```{r}
+library(monocle3)
+```
+
+```{r}
+cds <- new_cell_data_set(getRawData(obj),
+                         cell_metadata = getMetadataCells(obj),
+                         gene_metadata = getMetadataGenes(obj)
+                         )
+cds <- preprocess_cds(cds, num_dim = 100)
+
+normalized_counts <- normalized_counts(cds)
+```
+
+```{r}
+#Remove genes with all zeros
+normalized_counts <- normalized_counts[rowSums(normalized_counts) > 0,]
+
+
+corr.pval.list <- correlation_pvalues(normalized_counts,
+                                      int.genes,
+                                      n.cells = getNumCells(obj))
+
+rm(normalized_counts)
+
+monocle.data.cor.big <- as.matrix(Matrix::forceSymmetric(corr.pval.list$data.cor, uplo = "U"))
+
+htmp <- correlation_plot(data.cor.big = monocle.data.cor.big,
+                         genesList,
+                         title = "Monocle corr")
+
+
+p_values.from.monocle <- corr.pval.list$p_values
+monocle.data.cor.big <- corr.pval.list$data.cor
+
+rm(corr.pval.list)
+gc()
+
+draw(htmp, heatmap_legend_side="right")
+```
+
+```{r,echo=FALSE}
+write_fst(as.data.frame(monocle.data.cor.big),
+       path = paste0("CoexData/MonocleCorr_",
+                              file_code,
+                              ".fst"),compress = 100)
+write_fst(as.data.frame(p_values.from.monocle),
+       path = paste0("CoexData/MonoclePValues_",
+                              file_code,".fst"),compress = 100)
+
+
+
+rm(p_values.from.monocle)
+rm(monocle.data.cor.big)
+```
+
+## ScanPy
+
+```{r}
+library(reticulate)
+
+dirOutScP <- paste0("CoexData/ScanPy/")
+if (!dir.exists(dirOutScP)) {
+  dir.create(dirOutScP)
+}
+
+Sys.setenv(RETICULATE_PYTHON = "../../../bin/python3")
+  py <- import("sys")
+  
+  source_python("src/scanpyGenesExpression.py")
+  scanpyFDR(getRawData(obj), 
+                  getMetadataCells(obj), 
+                  getMetadataGenes(obj), 
+                   "mt", 
+                   dirOutScP, 
+                   file_code,
+            int.genes)
+
+normalized_counts <- read.csv(paste0(dirOutScP,
+                                     file_code,"_Scampy_expression_all_genes.gz"),header = T,row.names = 1)
+
+normalized_counts <- t(normalized_counts)
+
+```
+
+```{r}
+#Remove genes with all zeros
+normalized_counts <-normalized_counts[rowSums(normalized_counts) > 0,]
+
+
+corr.pval.list <- correlation_pvalues(normalized_counts,
+                                      int.genes,
+                                      n.cells = getNumCells(obj))
+
+ScanPy.data.cor.big <- as.matrix(Matrix::forceSymmetric(corr.pval.list$data.cor, uplo = "U"))
+
+
+htmp <- correlation_plot(data.cor.big = ScanPy.data.cor.big,
+                         genesList,
+                         title = "ScanPy corr")
+
+p_values.from.ScanPy <- corr.pval.list$p_values
+ScanPy.data.cor.big <- corr.pval.list$data.cor
+
+rm(corr.pval.list)
+gc()
+
+draw(htmp, heatmap_legend_side="right")
+```
+
+```{r,echo=FALSE}
+write_fst(as.data.frame(ScanPy.data.cor.big), path = paste0("CoexData/ScanPyCorr_", file_code,      ".fst"),compress = 100)
+write_fst(as.data.frame(p_values.from.ScanPy),
+       path = paste0("CoexData/ScanPyPValues_",
+                              file_code,".fst"), compress = 100)
+
+rm(p_values.fromScanPy)
+rm(ScanPy.data.cor.big)
 ```
 
 ------------------------------------------------------------------------

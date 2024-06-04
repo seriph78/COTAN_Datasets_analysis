@@ -21,7 +21,8 @@ library(data.table)
 library(parallelDist)
 library(tidyr)
 library(tidyverse)
-#library(COTAN)
+library(ggh4x)
+library(gridExtra)
 
 #options(parallelly.fork.enable = TRUE)
 
@@ -89,7 +90,8 @@ colnames(distDF) <- c("Distance", "DistanceSqrt")
 D2IPlot <- ggplot(cbind(resMix40, distDF),
                   aes(x=Distance, y=GDIIncrement)) +
              geom_point() +
-             geom_smooth(method=lm, formula = y ~ x) 
+             geom_smooth(method=lm, formula = y ~ x)+
+             ylab("Top GDI percentile Increment") 
            # +  xlim(0, 1.5) + ylim(0, 1.5) + coord_fixed()
 
 plot(D2IPlot)
@@ -120,13 +122,15 @@ dim(allRes)
 IScPlot <- ggplot(allRes, aes(x=MixingFraction, y=GDIIncrement, color=Distance,)) +
   geom_point() +
   scale_color_continuous(type = "viridis") +
-  scale_x_log10()
+  scale_x_log10()+
+             ylab("Top GDI percentile Increment") 
 
 plot(IScPlot)
 
 GScPlot <- ggplot(allResWithBase, aes(x=MixingFraction, y=GDI, color=Distance,)) +
   geom_point() +
-  scale_color_continuous(type = "viridis")
+  scale_color_continuous(type = "viridis")+
+             ylab("Top GDI percentile") 
 
 plot(GScPlot)
 ```
@@ -157,7 +161,8 @@ ILinesPLot <- ggplot(allRes2[allRes2[["ClusterPair"]] %between% rng, ],
   geom_path(aes(group = ClusterPair)) +
   theme(legend.position = "none") +
   #scale_x_log10() + 
-  scale_colour_stepsn(colours = hcl.colors(6, palette = "Dark 2")[6:1])
+  scale_colour_stepsn(colours = hcl.colors(6, palette = "Dark 2")[6:1])+
+             ylab("Top GDI percentile Increment") 
 
 plot(ILinesPLot)
 
@@ -168,7 +173,8 @@ GLinesPLot <- ggplot(allResWithBase2[allResWithBase2[["ClusterPair"]] %between% 
   geom_path(aes(group = ClusterPair)) +
   theme(legend.position = "none") +
   #scale_x_log10() + 
-  scale_colour_stepsn(colours = hcl.colors(6, palette = "Dark 2")[6:1]) 
+  scale_colour_stepsn(colours = hcl.colors(6, palette = "Dark 2")[6:1]) +
+             ylab("Top GDI percentile") 
 #  geom_line(data = data.frame(cbind(MixingFraction = c(0,0.8), GDI = c(1.4,1.4))),
 #            aes(x = MixingFraction, y = GDI))
 
@@ -193,20 +199,50 @@ allRes$Group <- factor((allRes$ClusterPair - 1) %/% 35 + 1)
 levels(allRes$Group) <- paste0("Distance bin ",c(1:6))
 
 allRes$discreteMixing <- factor(mg(allRes$MixingFraction))
-levels(allRes$discreteMixing) <- c("0%","5%","10%","20%","40%","80%")
+levels(allRes$discreteMixing) <- c("5%","10%","20%","40%","80%")
 
-IBoxPlot <- ggplot(allRes, aes(x=discreteMixing, 
+design <- "
+  ABC
+  DEF
+  DEF
+"
+
+first.part <- c("Distance bin 1", "Distance bin 2", "Distance bin 3")
+second.part <-c("Distance bin 4", "Distance bin 5", "Distance bin 6") 
+
+IBoxPlotA <- ggplot(allRes[allRes$Group %in% first.part,], aes(x=discreteMixing, 
                        y=GDIIncrement, 
                        fill=Group,
                        group = discreteMixing)) +
   geom_boxplot()+
   geom_jitter(width=0.25, alpha=0.5) +
-  scale_colour_stepsn(colours = hcl.colors(6, palette = "Dark 2")[6:1]) +
-  facet_wrap(. ~ Group, ncol = 3)+
-  theme(legend.position = "none") 
+  scale_fill_manual(values = c("#0B5345","#117A65","#16A085")) +
+  facet_grid2(cols = vars(Group))+
+  theme_light()+
+  theme(legend.position = "none",axis.title.x=element_blank(),
+        axis.title.y =element_blank()) #+
+             #ylab("Top GDI percentile Increment") 
 
+IBoxPlotB <- ggplot(allRes[allRes$Group %in% second.part,], aes(x=discreteMixing, 
+                       y=GDIIncrement, 
+                       fill=Group,
+                       group = discreteMixing)) +
+  geom_boxplot()+
+  geom_jitter(width=0.25, alpha=0.5) +
+  scale_fill_manual(values = c("#1ABC9C","#48C9B0","#A3E4D7")) +
+  facet_grid2(cols = vars(Group))+
+  theme_light()+
+  theme(legend.position = "none",axis.title.x=element_blank(),
+        axis.title.y =element_blank()) 
 
-plot(IBoxPlot)
+final.plot1 <- grid.arrange(IBoxPlotA,IBoxPlotB,ncol = 2, nrow = 3,
+             layout_matrix = rbind(c(1,1), c(2,2), c(2,2)))
+
+pdf("Results/GDI_Sensitivity/GDI_increment.pdf",width = 7, height = 7)
+plot(final.plot1)
+dev.off()
+
+plot(final.plot1)
 
 
 allResWithBase$Group <- factor((allResWithBase$ClusterPair - 1) %/% 35 + 1)
@@ -216,16 +252,38 @@ levels(allResWithBase$Group) <- paste0("Distance bin ",c(1:6))
 allResWithBase$discreteMixing <- factor(mg(allResWithBase$MixingFraction))
 levels(allResWithBase$discreteMixing) <- c("0%","5%","10%","20%","40%","80%")
 
-GBoxPlot <- ggplot(allResWithBase,
-                   aes(x=discreteMixing, y=GDI, fill=Group,
-                              group = discreteMixing))+
-  geom_boxplot() +
-  geom_jitter(width=0.25, alpha=0.5) +
-  scale_colour_stepsn(colours = hcl.colors(6, palette = "Dark 2")[6:1]) +
-  facet_wrap(. ~ Group, ncol = 3)+
-  theme(legend.position = "none") 
 
-plot(GBoxPlot)
+GBoxPlotA <- ggplot(allResWithBase[allResWithBase$Group %in% first.part,], aes(x=discreteMixing, y=GDI, fill=Group,
+                              group = discreteMixing))+
+  geom_boxplot()+
+  geom_jitter(width=0.25, alpha=0.5) +
+  scale_fill_manual(values = c("#0B5345","#117A65","#16A085")) +
+  facet_grid2(cols = vars(Group))+
+  theme_light()+
+  theme(legend.position = "none",axis.title.x=element_blank(),
+        axis.title.y =element_blank()) #+
+             #ylab("Top GDI percentile Increment") 
+
+GBoxPlotB <- ggplot(allResWithBase[allResWithBase$Group %in% second.part,], aes(x=discreteMixing, y=GDI, fill=Group,
+                              group = discreteMixing)) +
+  geom_boxplot()+
+  geom_jitter(width=0.25, alpha=0.5) +
+  scale_fill_manual(values = c("#1ABC9C","#48C9B0","#A3E4D7")) +
+  facet_grid2(cols = vars(Group))+
+  theme_light()+
+  theme(legend.position = "none",axis.title.x=element_blank(),
+        axis.title.y =element_blank()) 
+
+final.plot2 <- grid.arrange(GBoxPlotA,GBoxPlotB,ncol = 2, nrow = 5,
+             layout_matrix = rbind(c(1,1),c(1,1),c(2,2), c(2,2), c(2,2)))
+
+
+pdf("Results/GDI_Sensitivity/GDI_TopPercentile.pdf",width = 7, height = 7 )
+plot(final.plot2)
+dev.off()
+
+
+plot(final.plot2)
 ```
 
 ## Load calculated data about multi clusters cases for analysis
@@ -242,8 +300,11 @@ pg <- ggplot(resMix20_2, aes(x=PredictedGDIIncrement, y=GDIIncrement)) +
   geom_point() +
   geom_smooth(method=lm, formula = y ~ x + 0) +
   coord_fixed() +
-  xlim(0, 1.5) + ylim(0, 1.5)
+  xlim(0, 1.5) + ylim(0, 1.5)+
+             ylab("Top GDI percentile Increment") 
   #scale_x_log10() + scale_y_log10() 
+
+
 
 plot(pg)
 ```
