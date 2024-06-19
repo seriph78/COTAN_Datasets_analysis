@@ -946,6 +946,15 @@ converged</code></pre>
 <pre><code>[1] 0.8521561</code></pre>
 </div>
 </div>
+<p>Number of cells in each CT clusters</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">getClusterizationData</span>(cd14Obj,<span class="at">clName =</span> <span class="st">"merge"</span>)[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   1    2    3 
+1522  878   38 </code></pre>
+</div>
+</div>
 <p>So the logistic regression accuracy for COTAN three clusters is quite good.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -968,7 +977,7 @@ converged</code></pre>
 <p>The cells in cluster 1 seem to be classical CD14 monocytes since they express CD14 while depleted in MHC class II proteins complex which is enriched in cell cluster 2 that seems intermediate monocytes.</p>
 <p>Cluster 3 does not seem to be a monocyte cluster. Using enrichr website it is enriched in Plasmacytoid Dendritic cell marker genes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.4.0 (2024-04-24)
 Platform: x86_64-pc-linux-gnu
@@ -992,7 +1001,7 @@ attached base packages:
 
 other attached packages:
  [1] nnet_7.3-19        stringr_1.5.1      caret_6.0-94       lattice_0.22-6    
- [5] COTAN_2.5.2        assertthat_0.2.1   zeallot_0.1.0      tibble_3.2.1      
+ [5] COTAN_2.5.4        assertthat_0.2.1   zeallot_0.1.0      tibble_3.2.1      
  [9] ggsankey_0.0.99999 ggplot2_3.5.1      rlang_1.1.3       
 
 loaded via a namespace (and not attached):
@@ -1055,7 +1064,7 @@ loaded via a namespace (and not attached):
 [113] dotCall64_1.1-1           clue_0.3-65              
 [115] SeuratObject_5.0.2        scales_1.3.0             
 [117] png_0.1-8                 gower_1.0.1              
-[119] knitr_1.46                rstudioapi_0.16.0        
+[119] knitr_1.47                rstudioapi_0.16.0        
 [121] reshape2_1.4.4            rjson_0.2.21             
 [123] nlme_3.1-164              zoo_1.8-12               
 [125] GlobalOptions_0.1.2       KernSmooth_2.23-24       
