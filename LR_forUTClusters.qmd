@@ -1,0 +1,318 @@
+---
+title: "Logistic regression for UT clusters"
+---
+
+```{r}
+library(ggplot2)
+library(Seurat)
+library(zeallot)
+library(data.table)
+library(parallelDist)
+library(tidyr)
+library(tidyverse)
+library(caret)
+theme_set(theme_bw())
+library(COTAN)
+library(stringr)
+library(nnet)
+
+options(parallelly.fork.enable = TRUE)
+inDir <- file.path("Data/MouseCortexFromLoom/")
+
+outDir <- file.path("Data/MouseCortexFromLoom/MergeUTClustersForLR/")
+
+setLoggingFile("Data/MouseCortexFromLoom/MergeUTClustersForLR/Log.txt")
+
+```
+
+I checked with the LR all clusters that were split by Seurat or Monocle but were seen as UT clusters by COTAN (more than 300 cells).
+
+```{r, functions}
+
+create_obj <- function(file_dataset, cluster_code1, cluster_code2, clName){
+
+  dataset <- readRDS(paste0(inDir,file_dataset))
+
+  cells <- names(getClusters(dataset,clName = clName)[getClusters(dataset,clName = clName) %in% c(cluster_code1,cluster_code2)])
+
+  dataset <- dropGenesCells(dataset,cells = getCells(dataset)[!getCells(dataset) %in% cells] )
+
+  dataset <- clean(dataset)
+  dataset <- proceedToCoex(dataset,cores = 5,saveObj = FALSE)
+  
+  return(dataset)
+}
+
+
+create_obj_fromS <- function(file_dataset,seuratObj, clName, genesToDrop){
+
+  dataset <- readRDS(paste0(inDir,file_dataset))
+
+  dataset <- dropGenesCells(dataset,
+                            cells = getCells(dataset)[!getCells(dataset) %in% rownames(seuratObj@meta.data)],
+                            genes = genesToDrop)
+
+  dataset <- clean(dataset)
+  dataset <- proceedToCoex(dataset,cores = 5,saveObj = FALSE)
+  
+  
+  dataset <- addClusterization(dataset,clName = clName,
+                               clusters = seurat.clNew$seurat_clusters)
+  
+  return(dataset)
+}
+
+
+
+LR_function <- function(dataset, 
+                        top.GDI.genes, 
+                        clName, 
+                        train.test.partition = 0.8){
+  
+  #data <- getZeroOneProj(dataset)
+  data <- getNormalizedData(dataset)
+  data <- data/sum(data[,1])
+  #data <- data[!rowSums(as.matrix(data)) < 1,]
+  data <- log(data*10000+1)
+  
+  zeroOne <- getZeroOneProj(dataset)
+  #toSkipp <- rownames(zeroOne)[rowSums(zeroOne)/getNumCells(dataset) > 0.7]
+  
+  row_stdev <- apply(data, 1, sd, na.rm=TRUE)
+  row_stdev <- row_stdev[order(row_stdev,decreasing = T)]
+  
+  genes.to.keep <- c(names(row_stdev[1:50]))#,
+    #top.GDI.genes)
+  #genes.to.keep <- genes.to.keep[!genes.to.keep %in% top.GDI.genes]
+  
+  data.small <- data[rownames(data) %in% genes.to.keep,]
+  
+  #data <- t(as.matrix(data))
+  data.small <- t(as.matrix(data.small))
+  
+  tmp <- getGenesCoex(dataset,genes = genes.to.keep)
+  plot(hist(as.matrix(tmp),breaks = 100))
+  
+  Cl.code <- as.numeric(getClusterizationData(dataset,
+                                                    clName = clName)[[1]])
+  
+  Cl.code <- Cl.code -1
+  print(unique(Cl.code))
+  
+  data.small <- cbind(data.small,Cl.code)
+  data.small <- as.data.frame(data.small)
+  
+  # Split the data into training and test set
+  set.seed(123)
+  training.samples <- data.small[,"Cl.code"] %>% 
+    createDataPartition(p = train.test.partition, list = FALSE)
+  train.data  <- data.small[training.samples, ]
+  test.data <- data.small[-training.samples, ]
+    
+    # Fit the model
+  model <- glm( Cl.code ~., data = train.data, 
+                family = binomial,
+                control = list(maxit = 50))
+  # Summarize the model
+  sum.model <- summary(model)
+  # Make predictions
+  probabilities <- model %>% predict(test.data, type = "response")
+  predicted.classes <- ifelse(probabilities > 0.5, "1", "0")
+  # Model accuracy
+  accuracy <- mean(predicted.classes == test.data$Cl.code)
+  return(list("summray.model"=sum.model, "Test.accuracy"=accuracy))
+}
+
+clusterSeurat <- function(raw.matrix, genesToKeep){
+  raw.matrix <- raw.matrix[genesToKeep,]
+  pbmc <- CreateSeuratObject(counts = raw.matrix, project = "temp", min.cells = 3, min.features = 200)
+  pbmc[["percent.mt"]] <- PercentageFeatureSet(pbmc, pattern = "^MT-")
+  pbmc <- NormalizeData(pbmc)
+  pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
+  all.genes <- rownames(pbmc)
+pbmc <- ScaleData(pbmc, features = all.genes)
+pbmc <- RunPCA(pbmc, features = VariableFeatures(object = pbmc))
+pbmc <- FindNeighbors(pbmc, dims = 1:10)
+pbmc <- FindClusters(pbmc, resolution = 0.8)
+return(pbmc)
+  
+}
+
+```
+
+## dataset LaManno E15.0
+
+```{r}
+mainDataset <- readRDS(paste0(inDir,"e15.0_ForebrainDorsal.cotan.RDS"))
+getClusterizations(mainDataset)
+```
+
+### Monocle High Res. 11 - 27 (402) 1.38
+
+```{r}
+Cl11_27obj <- create_obj(file_dataset = "e15.0_ForebrainDorsal.cotan.RDS",
+                         cluster_code1 = "11",
+                         cluster_code2 = "27",
+                         clName = "monocle.high.res" )
+
+
+dea_cl11_27 <- DEAOnClusters(Cl11_27obj,clName = "monocle.high.res")
+```
+
+
+```{r}
+dea_cl11_27[colnames(data.small),]
+```
+```{r}
+pVal_DEA <-  pValueFromDEA(coexDF = dea_cl11_27,numCells = getNumCells(Cl11_27obj),method = "BH")
+
+pVal_DEA[colnames(data.small),]
+```
+```{r}
+pVal_DEA[colnames(data.small),][pVal_DEA[colnames(data.small),1] < 0.05,]
+```
+
+
+
+
+
+```{r}
+checkClusterUniformity(Cl11_27obj,cells = getCells(Cl11_27obj))
+```
+
+
+```{r}
+Cl11_27objGDI <- calculateGDI(Cl11_27obj)
+
+subsetGDICl11_27 <- Cl11_27objGDI[Cl11_27objGDI$sum.raw.norm > 2,]
+
+top.GDI.genes <- rownames(subsetGDICl11_27[order(subsetGDICl11_27$GDI,decreasing = T),])[1:100]
+
+GDIPlot(Cl11_27obj,genes = "",GDIIn = Cl11_27objGDI,GDIThreshold = 1.4)
+```
+
+```{r}
+LR_outputList <- LR_function(dataset = Cl11_27obj,top.GDI.genes = top.GDI.genes,clName = "monocle.high.res",train.test.partition = 0.8)
+
+#LR_outputList$summray.model
+```
+
+```{r}
+genesToKeep <- sample(getGenes(Cl11_27obj),
+                      size = round(getNumGenes(Cl11_27obj)/2,digits = 0))
+seurat.clNew <- clusterSeurat(getRawData(Cl11_27obj),genesToKeep)
+table(seurat.clNew@meta.data$seurat_clusters)
+```
+
+The next is an objec with the new Seurat Clusterization but with only the genes not used for the clusterization itself
+```{r}
+COTANObj_FromSeuratCl11_27 <- create_obj_fromS(file_dataset = "e15.0_ForebrainDorsal.cotan.RDS",seuratObj =seurat.clNew,clName = "SeuratCl11_27",genesToDrop = genesToKeep) 
+
+LR_outputListFromSeuratCl11_27 <- LR_function(dataset = COTANObj_FromSeuratCl11_27,top.GDI.genes = top.GDI.genes,clName = "SeuratCl11_27",train.test.partition = 0.8)
+
+```
+
+
+
+```{r}
+LR_outputListFromSeuratCl11_27$Test.accuracy
+```
+
+### Monocle High Res 42 - 5 (436) 1.40
+
+### Monocle High Res 11 - 32 (313) 1.46
+
+### Seurat High Res 22 - 30 (332) 1.35
+
+```{r}
+Cl22_30obj <- create_obj(file_dataset = "e15.0_ForebrainDorsal.cotan.RDS",
+                         cluster_code1 = "22",
+                         cluster_code2 = "30",
+                         clName = "seurat.high.res" )
+
+
+```
+
+```{r}
+Cl22_30objGDI <- calculateGDI(Cl22_30obj)
+
+subsetGDICl22_30 <- Cl22_30objGDI[Cl22_30objGDI$sum.raw.norm > 7,]
+
+top.GDI.genes <- rownames(subsetGDICl22_30[order(subsetGDICl22_30$GDI,decreasing = T),])[1:100]
+
+GDIPlot(Cl22_30obj,genes = "",GDIIn = Cl22_30objGDI)
+```
+
+```{r}
+LR_outputList <- LR_function(dataset = Cl22_30obj,top.GDI.genes = top.GDI.genes,clName = "seurat.high.res",train.test.partition = 0.8)
+
+LR_outputList$summray.model
+```
+```{r}
+LR_outputList$Test.accuracy
+```
+### Seurat High Res 08 - 32 (390) 1.35
+
+```{r}
+Cl08_32obj <- create_obj(file_dataset = "e15.0_ForebrainDorsal.cotan.RDS",
+                         cluster_code1 = "08",
+                         cluster_code2 = "32",
+                         clName = "seurat.high.res" )
+
+
+```
+
+```{r}
+Cl08_32objGDI <- calculateGDI(Cl08_32obj)
+
+subsetGDICl08_32 <- Cl08_32objGDI[Cl08_32objGDI$sum.raw.norm > 2,]
+
+top.GDI.genes <- rownames(Cl08_32objGDI[Cl08_32objGDI$GDI > 1.34,])
+top.GDI.genes <- rownames(subsetGDICl08_32[order(subsetGDICl08_32$GDI,decreasing = T),])[1:20]
+
+GDIPlot(Cl08_32obj,genes = list("GG"=c("Negr1", "Rpl26")),GDIIn = Cl08_32objGDI)
+```
+
+```{r}
+LR_outputList <- LR_function(dataset = Cl08_32obj,top.GDI.genes = top.GDI.genes,clName = "seurat.high.res",train.test.partition = 0.8)
+
+#LR_outputList$summray.model
+```
+```{r}
+LR_outputList$Test.accuracy
+```
+
+### Seurat High Res 07 - 12 (599) 1.38
+
+### Seurat High Res 00 - 12 (699) 1.45
+
+## E17.5
+
+### Seurat 01 - 03 (551) 1.41
+
+
+
+
+```{r}
+cotanE17.5 <- readRDS("Data/MouseCortexFromLoom/e17.5_ForebrainDorsal.cotan.RDS")
+
+table(getClusters(cotanE17.5,clName = "seurat"),getClusters(cotanE17.5,clName = "merge"))
+```
+
+```{r}
+list.merged <- mergeUniformCellsClusters(objCOTAN = cotanE17.5,GDIThreshold = 1.4,getClusters(cotanE17.5,clName = "seurat"),cores = 5)
+```
+
+```{r}
+cotandataset <- readRDS("Data/MouseCortexFromLoom/dataset_ForebrainDorsal.cotan.RDS")
+
+table(getClusters(cotandataset,clName = "seurat"),getClusters(cotandataset,clName = "merge"))
+```
+
+```{r}
+table(getClusters(cotandataset,clName = "monocle.high.res"),getClusters(cotandataset,clName = "merge"))
+```
+
+```{r}
+list.merged <- mergeUniformCellsClusters(objCOTAN = cotandataset,GDIThreshold = 1.4,getClusters(cotandataset,clName = "seurat.high.res"),cores = 6)
+```

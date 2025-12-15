@@ -8,3 +8,4 @@ Data/*
 *.RDS
 /.quarto/
 *.csv
+CoexData/*
