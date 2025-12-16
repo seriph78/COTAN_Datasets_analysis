@@ -1,0 +1,28 @@
+PBMC2 
+antibody_labels_postproc 5233
+COTAN labels cells 5976
+celltypist_labels 5976
+
+
+PBMC1
+antibody_labels_postproc 4308
+celltypist 3610
+COTAN 3610
+Seurat 3610
+
+PBMC3
+antibody_labels_postproc 9862
+celltypist 10944
+COTAN 10944
+Seurat 10944
+
+
+PBMC4
+antibody_labels_postproc 6660
+celltypist 6967
+COTAN 6967
+Seurat 6967
+
+
+
+

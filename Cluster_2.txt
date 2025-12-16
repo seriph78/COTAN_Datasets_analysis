@@ -1,0 +1,615 @@
+$geneontology_Biological_Process
+      geneSet
+1  GO:0019886
+2  GO:0002495
+3  GO:0002504
+4  GO:0002399
+5  GO:0002503
+6  GO:0002478
+7  GO:0019884
+8  GO:0002396
+9  GO:0002501
+10 GO:0019882
+11 GO:0048002
+12 GO:0043207
+13 GO:0009607
+14 GO:0006955
+15 GO:0051707
+16 GO:0044419
+17 GO:0002376
+18 GO:2001198
+19 GO:0006952
+20 GO:0009605
+21 GO:0098609
+22 GO:0050776
+23 GO:0002682
+24 GO:2001199
+25 GO:0043269
+26 GO:0097028
+27 GO:0050867
+28 GO:0022407
+29 GO:0050870
+30 GO:0050778
+31 GO:0051251
+32 GO:1903039
+33 GO:0042110
+34 GO:0002696
+35 GO:1903037
+36 GO:0002684
+37 GO:0050863
+38 GO:0022409
+39 GO:0051240
+                                                                                 description
+1          antigen processing and presentation of exogenous peptide antigen via MHC class II
+2                    antigen processing and presentation of peptide antigen via MHC class II
+3  antigen processing and presentation of peptide or polysaccharide antigen via MHC class II
+4                                                      MHC class II protein complex assembly
+5                                 peptide antigen assembly with MHC class II protein complex
+6                           antigen processing and presentation of exogenous peptide antigen
+7                                   antigen processing and presentation of exogenous antigen
+8                                                               MHC protein complex assembly
+9                                          peptide antigen assembly with MHC protein complex
+10                                                       antigen processing and presentation
+11                                    antigen processing and presentation of peptide antigen
+12                                                      response to external biotic stimulus
+13                                                               response to biotic stimulus
+14                                                                           immune response
+15                                                                response to other organism
+16                 biological process involved in interspecies interaction between organisms
+17                                                                     immune system process
+18                                              regulation of dendritic cell differentiation
+19                                                                          defense response
+20                                                             response to external stimulus
+21                                                                        cell-cell adhesion
+22                                                             regulation of immune response
+23                                                       regulation of immune system process
+24                                     negative regulation of dendritic cell differentiation
+25                                                    regulation of monoatomic ion transport
+26                                                            dendritic cell differentiation
+27                                                    positive regulation of cell activation
+28                                                          regulation of cell-cell adhesion
+29                                                  positive regulation of T cell activation
+30                                                    positive regulation of immune response
+31                                              positive regulation of lymphocyte activation
+32                                       positive regulation of leukocyte cell-cell adhesion
+33                                                                         T cell activation
+34                                               positive regulation of leukocyte activation
+35                                                regulation of leukocyte cell-cell adhesion
+36                                              positive regulation of immune system process
+37                                                           regulation of T cell activation
+38                                                 positive regulation of cell-cell adhesion
+39                                   positive regulation of multicellular organismal process
+                                                  link size overlap
+1  http://amigo.geneontology.org/amigo/term/GO:0019886   24       9
+2  http://amigo.geneontology.org/amigo/term/GO:0002495   25       9
+3  http://amigo.geneontology.org/amigo/term/GO:0002504   26       9
+4  http://amigo.geneontology.org/amigo/term/GO:0002399   13       7
+5  http://amigo.geneontology.org/amigo/term/GO:0002503   13       7
+6  http://amigo.geneontology.org/amigo/term/GO:0002478   32       9
+7  http://amigo.geneontology.org/amigo/term/GO:0019884   39       9
+8  http://amigo.geneontology.org/amigo/term/GO:0002396   18       7
+9  http://amigo.geneontology.org/amigo/term/GO:0002501   18       7
+10 http://amigo.geneontology.org/amigo/term/GO:0019882   82      11
+11 http://amigo.geneontology.org/amigo/term/GO:0048002   49       9
+12 http://amigo.geneontology.org/amigo/term/GO:0043207  752      30
+13 http://amigo.geneontology.org/amigo/term/GO:0009607  770      30
+14 http://amigo.geneontology.org/amigo/term/GO:0006955  869      32
+15 http://amigo.geneontology.org/amigo/term/GO:0051707  751      29
+16 http://amigo.geneontology.org/amigo/term/GO:0044419  851      31
+17 http://amigo.geneontology.org/amigo/term/GO:0002376 1249      39
+18 http://amigo.geneontology.org/amigo/term/GO:2001198   13       5
+19 http://amigo.geneontology.org/amigo/term/GO:0006952  870      30
+20 http://amigo.geneontology.org/amigo/term/GO:0009605 1215      36
+21 http://amigo.geneontology.org/amigo/term/GO:0098609  364      17
+22 http://amigo.geneontology.org/amigo/term/GO:0050776  508      20
+23 http://amigo.geneontology.org/amigo/term/GO:0002682  784      26
+24 http://amigo.geneontology.org/amigo/term/GO:2001199    5       3
+25 http://amigo.geneontology.org/amigo/term/GO:0043269  144      10
+26 http://amigo.geneontology.org/amigo/term/GO:0097028   28       5
+27 http://amigo.geneontology.org/amigo/term/GO:0050867  211      12
+28 http://amigo.geneontology.org/amigo/term/GO:0022407  251      13
+29 http://amigo.geneontology.org/amigo/term/GO:0050870  153      10
+30 http://amigo.geneontology.org/amigo/term/GO:0050778  417      17
+31 http://amigo.geneontology.org/amigo/term/GO:0051251  195      11
+32 http://amigo.geneontology.org/amigo/term/GO:1903039  167      10
+33 http://amigo.geneontology.org/amigo/term/GO:0042110  312      14
+34 http://amigo.geneontology.org/amigo/term/GO:0002696  204      11
+35 http://amigo.geneontology.org/amigo/term/GO:1903037  205      11
+36 http://amigo.geneontology.org/amigo/term/GO:0002684  582      20
+37 http://amigo.geneontology.org/amigo/term/GO:0050863  210      11
+38 http://amigo.geneontology.org/amigo/term/GO:0022409  180      10
+39 http://amigo.geneontology.org/amigo/term/GO:0051240  697      22
+        expect enrichmentRatio       pValue          FDR
+1   0.34242125       26.283416 1.869466e-11 9.301359e-08
+2   0.35668880       25.232079 2.886828e-11 9.301359e-08
+3   0.37095635       24.261615 4.363435e-11 9.372658e-08
+4   0.18547817       37.740289 1.561252e-10 2.012141e-07
+5   0.18547817       37.740289 1.561252e-10 2.012141e-07
+6   0.45656166       19.712562 3.649674e-10 3.919750e-07
+7   0.55643452       16.174410 2.539119e-09 1.955390e-06
+8   0.25681593       27.256876 2.730991e-09 1.955390e-06
+9   0.25681593       27.256876 2.730991e-09 1.955390e-06
+10  1.16993926        9.402198 1.736546e-08 1.119030e-05
+11  0.69911004       12.873510 2.188004e-08 1.281772e-05
+12 10.72919904        2.796108 9.157574e-08 4.917617e-05
+13 10.98601497        2.730745 1.555422e-07 7.710107e-05
+14 12.39850261        2.580957 1.923522e-07 8.853699e-05
+15 10.71493149        2.706504 3.264293e-07 1.402340e-04
+16 12.14168668        2.553187 4.115479e-07 1.630367e-04
+17 17.82017234        2.188531 4.301093e-07 1.630367e-04
+18  0.18547817       26.957350 6.292170e-07 2.252597e-04
+19 12.41277017        2.416866 2.190626e-06 7.429680e-04
+20 17.33507558        2.076714 5.415289e-06 1.744806e-03
+21  5.19338890        3.273392 1.274115e-05 3.909713e-03
+22  7.24791637        2.759414 2.510683e-05 7.288591e-03
+23 11.18576070        2.324384 2.601452e-05 7.288591e-03
+24  0.07133776       42.053465 2.761583e-05 7.414851e-03
+25  2.05452748        4.867299 3.510823e-05 9.049498e-03
+26  0.39949145       12.515912 4.053534e-05 9.900256e-03
+27  3.01045345        3.986110 4.148152e-05 9.900256e-03
+28  3.58115553        3.630113 5.176284e-05 1.191285e-02
+29  2.18293544        4.580988 5.901062e-05 1.311257e-02
+30  5.94956915        2.857350 7.264213e-05 1.560353e-02
+31  2.78217262        3.953745 9.530216e-05 1.981055e-02
+32  2.38268117        4.196953 1.232001e-04 2.422100e-02
+33  4.45147620        3.145024 1.240368e-04 2.422100e-02
+34  2.91058059        3.779315 1.425928e-04 2.702554e-02
+35  2.92484814        3.760879 1.489090e-04 2.741628e-02
+36  8.30371521        2.408560 1.696488e-04 3.036714e-02
+37  2.99618590        3.671334 1.841905e-04 3.207901e-02
+38  2.56815934        3.893839 2.282199e-04 3.870129e-02
+39  9.94448368        2.212282 2.598940e-04 4.294248e-02
+                                                                                                                                                                                                     overlapId
+1                                                                                                                                                                 567;1520;3115;3118;3119;3120;3123;3127;10437
+2                                                                                                                                                                 567;1520;3115;3118;3119;3120;3123;3127;10437
+3                                                                                                                                                                 567;1520;3115;3118;3119;3120;3123;3127;10437
+4                                                                                                                                                                            567;3115;3118;3119;3120;3123;3127
+5                                                                                                                                                                            567;3115;3118;3119;3120;3123;3127
+6                                                                                                                                                                 567;1520;3115;3118;3119;3120;3123;3127;10437
+7                                                                                                                                                                 567;1520;3115;3118;3119;3120;3123;3127;10437
+8                                                                                                                                                                            567;3115;3118;3119;3120;3123;3127
+9                                                                                                                                                                            567;3115;3118;3119;3120;3123;3127
+10                                                                                                                                                    567;1520;3115;3118;3119;3120;3123;3127;10288;10437;57705
+11                                                                                                                                                                567;1520;3115;3118;3119;3120;3123;3127;10437
+12                                                199;567;602;929;978;1051;1072;1436;1520;1675;2219;2537;3123;3687;4814;5452;6688;7531;7538;8635;10288;10577;10859;23406;29800;55577;57674;57705;114769;353514
+13                                                199;567;602;929;978;1051;1072;1436;1520;1675;2219;2537;3123;3687;4814;5452;6688;7531;7538;8635;10288;10577;10859;23406;29800;55577;57674;57705;114769;353514
+14                                         199;567;602;929;1051;1436;1520;1675;2212;2217;2219;2357;2537;3115;3118;3119;3120;3123;3127;4814;5452;6398;6688;7531;8635;10261;10288;10859;10870;29800;55577;353514
+15                                                    199;567;602;929;1051;1072;1436;1520;1675;2219;2537;3123;3687;4814;5452;6688;7531;7538;8635;10288;10577;10859;23406;29800;55577;57674;57705;114769;353514
+16                                         199;567;602;929;1051;1072;1436;1520;1675;2219;2537;3123;3482;3687;4814;5452;6688;7531;7538;8635;10288;10577;10859;23406;27243;29800;55577;57674;57705;114769;353514
+17 199;567;602;929;1051;1436;1520;1675;2212;2217;2219;2357;2537;3115;3118;3119;3120;3123;3127;3957;4814;5452;6398;6688;7531;7538;8635;10261;10288;10437;10859;10870;28959;29800;55365;55577;57674;57705;353514
+18                                                                                                                                                                                1051;10288;10859;28959;55365
+19                                                199;602;929;1051;1436;1471;1520;1675;2219;2357;2537;3123;3687;3957;4046;4814;5265;6688;7076;7531;7538;8635;10288;10859;23406;29800;55577;57674;114769;353514
+20                    199;432;567;602;929;967;978;1051;1072;1436;1520;1675;2219;2357;2537;3123;3687;3957;4046;4814;5452;6427;6688;7531;7538;8635;10288;10577;10859;23406;29800;55577;57674;57705;114769;353514
+21                                                                                                                       199;567;1051;3115;3118;3119;3120;3123;3127;3687;3957;4814;6282;6688;10288;10859;80139
+22                                                                                                       567;929;1520;1675;2212;2219;2357;3115;3118;3119;3120;3123;3127;4814;6688;7531;10288;10859;10870;55577
+23                                                                        199;567;929;1051;1436;1520;1675;2212;2219;2357;3115;3118;3119;3120;3123;3127;4814;6688;7531;7538;10288;10859;10870;28959;55365;55577
+24                                                                                                                                                                                           10859;28959;55365
+25                                                                                                                                                      567;967;1520;7531;8514;10063;10288;10859;246329;353514
+26                                                                                                                                                                                1051;10288;10859;28959;55365
+27                                                                                                                                               199;567;3115;3118;3119;3120;3123;3127;6688;10288;10859;353514
+28                                                                                                                                           199;567;1051;3115;3118;3119;3120;3123;3127;6688;10288;10859;80139
+29                                                                                                                                                           199;567;3115;3118;3119;3120;3123;3127;10288;10859
+30                                                                                                                        567;929;1520;1675;2219;2357;3115;3118;3119;3120;3123;3127;4814;6688;7531;10859;55577
+31                                                                                                                                                      199;567;3115;3118;3119;3120;3123;3127;6688;10288;10859
+32                                                                                                                                                           199;567;3115;3118;3119;3120;3123;3127;10288;10859
+33                                                                                                                                       199;567;602;1051;3115;3118;3119;3120;3123;3127;6688;10288;10859;57705
+34                                                                                                                                                      199;567;3115;3118;3119;3120;3123;3127;6688;10288;10859
+35                                                                                                                                                      199;567;1051;3115;3118;3119;3120;3123;3127;10288;10859
+36                                                                                                         199;567;929;1436;1520;1675;2219;2357;3115;3118;3119;3120;3123;3127;4814;6688;7531;10288;10859;55577
+37                                                                                                                                                      199;567;1051;3115;3118;3119;3120;3123;3127;10288;10859
+38                                                                                                                                                           199;567;3115;3118;3119;3120;3123;3127;10288;10859
+39                                                                                              199;567;602;929;1051;1072;1436;2219;3115;3118;3119;3120;3123;3127;3687;4814;5452;6688;10288;10859;80139;353514
+                                                                                                                                                                                                                                                           userId
+1                                                                                                                                                                                            HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M;CTSS
+2                                                                                                                                                                                            HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M;CTSS
+3                                                                                                                                                                                            HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M;CTSS
+4                                                                                                                                                                                                       HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M
+5                                                                                                                                                                                                       HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M
+6                                                                                                                                                                                            HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M;CTSS
+7                                                                                                                                                                                            HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M;CTSS
+8                                                                                                                                                                                                       HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M
+9                                                                                                                                                                                                       HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M
+10                                                                                                                                                                              HLA-DQB2;WDFY4;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;LILRB2;B2M;CTSS
+11                                                                                                                                                                                           HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M;CTSS
+12                                                                                WDFY4;YWHAE;FCN1;HLA-DRB1;ITGAX;CD14;CFL1;CFD;ZDHHC1;CARD16;LILRB2;RNF213;B2M;AIF1;LILRB1;COTL1;NPC2;NINJ1;IFI6;POU2F2;BCL3;CEBPB;ZFP36;LILRA5;CTSS;SPI1;CSF1R;NAGK;CDA;RNASET2
+13                                                                                WDFY4;YWHAE;FCN1;HLA-DRB1;ITGAX;CD14;CFL1;CFD;ZDHHC1;CARD16;LILRB2;RNF213;B2M;AIF1;LILRB1;COTL1;NPC2;NINJ1;IFI6;POU2F2;BCL3;CEBPB;ZFP36;LILRA5;CTSS;SPI1;CSF1R;NAGK;CDA;RNASET2
+14                                                   HLA-DQB2;YWHAE;HLA-DPB1;HLA-DRB5;FCN1;HLA-DRB1;HLA-DQB1;IGSF6;CD14;FCGR2A;CFD;ZDHHC1;HLA-DQA2;FPR1;LILRB2;B2M;HCST;AIF1;LILRB1;NINJ1;IFI6;POU2F2;BCL3;CEBPB;FCGRT;SECTM1;LILRA5;CTSS;SPI1;CSF1R;NAGK;RNASET2
+15                                                                                    WDFY4;YWHAE;FCN1;HLA-DRB1;ITGAX;CD14;CFL1;CFD;ZDHHC1;CARD16;LILRB2;RNF213;B2M;AIF1;LILRB1;COTL1;NPC2;NINJ1;IFI6;POU2F2;BCL3;CEBPB;ZFP36;LILRA5;CTSS;SPI1;CSF1R;NAGK;RNASET2
+16                                                                       WDFY4;YWHAE;FCN1;HLA-DRB1;ITGAX;CD14;CFL1;CFD;ZDHHC1;CARD16;LILRB2;RNF213;B2M;AIF1;LILRB1;COTL1;NPC2;NINJ1;IFI6;POU2F2;BCL3;CEBPB;ZFP36;LILRA5;CTSS;SPI1;CSF1R;CHMP2A;NAGK;IGF2R;RNASET2
+17 HLA-DQB2;WDFY4;YWHAE;HLA-DPB1;HLA-DRB5;LGALS2;TMEM176B;FCN1;HLA-DRB1;IFI30;TMEM176A;HLA-DQB1;IGSF6;CD14;FCGR2A;CFD;ZDHHC1;HLA-DQA2;FPR1;LILRB2;RNF213;B2M;HCST;AIF1;LILRB1;NINJ1;IFI6;POU2F2;BCL3;CEBPB;ZFP36;FCGRT;SECTM1;LILRA5;CTSS;SPI1;CSF1R;NAGK;RNASET2
+18                                                                                                                                                                                                                          TMEM176B;TMEM176A;LILRB2;LILRB1;CEBPB
+19                                                                          YWHAE;LGALS2;FCN1;HLA-DRB1;ITGAX;CST3;SERPINA1;LSP1;CD14;CFD;TIMP1;ZDHHC1;CARD16;FPR1;LILRB2;RNF213;AIF1;LILRB1;COTL1;NINJ1;IFI6;BCL3;CEBPB;ZFP36;LILRA5;CTSS;SPI1;CSF1R;NAGK;RNASET2
+20                                              SRSF2;WDFY4;YWHAE;LGALS2;FCN1;HLA-DRB1;ITGAX;ASGR1;LSP1;CD14;CFL1;CFD;ZDHHC1;CARD16;FPR1;LILRB2;RNF213;B2M;AIF1;LILRB1;COTL1;NPC2;NINJ1;IFI6;CD63;POU2F2;BCL3;CEBPB;ZFP36;LILRA5;CTSS;SPI1;CSF1R;NAGK;CDA;RNASET2
+21                                                                                                                                      HLA-DQB2;HLA-DPB1;HLA-DRB5;LGALS2;HLA-DRB1;ITGAX;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;S100A11;NINJ1;CEBPB;SPI1;ZNF703
+22                                                                                                                              HLA-DQB2;YWHAE;HLA-DPB1;HLA-DRB5;FCN1;HLA-DRB1;HLA-DQB1;CD14;FCGR2A;CFD;HLA-DQA2;FPR1;LILRB2;B2M;HCST;LILRB1;NINJ1;CTSS;SPI1;NAGK
+23                                                                                     HLA-DQB2;YWHAE;HLA-DPB1;HLA-DRB5;TMEM176B;FCN1;HLA-DRB1;TMEM176A;HLA-DQB1;CD14;FCGR2A;CFD;HLA-DQA2;FPR1;LILRB2;B2M;HCST;AIF1;LILRB1;NINJ1;CEBPB;ZFP36;CTSS;SPI1;CSF1R;NAGK
+24                                                                                                                                                                                                                                       TMEM176B;TMEM176A;LILRB1
+25                                                                                                                                                                                                    YWHAE;LILRB2;B2M;LILRB1;CD63;KCNAB2;COX17;LILRA5;STAC3;CTSS
+26                                                                                                                                                                                                                          TMEM176B;TMEM176A;LILRB2;LILRB1;CEBPB
+27                                                                                                                                                                       HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;LILRA5;SPI1
+28                                                                                                                                                                 HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;CEBPB;SPI1;ZNF703
+29                                                                                                                                                                                   HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1
+30                                                                                                                                                 HLA-DQB2;YWHAE;HLA-DPB1;HLA-DRB5;FCN1;HLA-DRB1;HLA-DQB1;CD14;CFD;HLA-DQA2;FPR1;B2M;LILRB1;NINJ1;CTSS;SPI1;NAGK
+31                                                                                                                                                                              HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;SPI1
+32                                                                                                                                                                                   HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1
+33                                                                                                                                                             HLA-DQB2;WDFY4;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;BCL3;CEBPB;SPI1
+34                                                                                                                                                                              HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;SPI1
+35                                                                                                                                                                             HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;CEBPB
+36                                                                                                                               HLA-DQB2;YWHAE;HLA-DPB1;HLA-DRB5;FCN1;HLA-DRB1;HLA-DQB1;CD14;CFD;HLA-DQA2;FPR1;LILRB2;B2M;AIF1;LILRB1;NINJ1;CTSS;SPI1;CSF1R;NAGK
+37                                                                                                                                                                             HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;CEBPB
+38                                                                                                                                                                                   HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1
+39                                                                                                             HLA-DQB2;HLA-DPB1;HLA-DRB5;FCN1;HLA-DRB1;ITGAX;HLA-DQB1;CD14;CFL1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;NINJ1;POU2F2;BCL3;CEBPB;LILRA5;SPI1;CSF1R;ZNF703
+
+$geneontology_Biological_Process_noRedundant
+      geneSet                                description
+1  GO:0002396               MHC protein complex assembly
+2  GO:0019882        antigen processing and presentation
+3  GO:0043269     regulation of monoatomic ion transport
+4  GO:0050867     positive regulation of cell activation
+5  GO:0022407           regulation of cell-cell adhesion
+6  GO:0007159               leukocyte cell-cell adhesion
+7  GO:0001819 positive regulation of cytokine production
+8  GO:0006959                    humoral immune response
+9  GO:0002250                   adaptive immune response
+10 GO:0051249        regulation of lymphocyte activation
+                                                  link size overlap    expect
+1  http://amigo.geneontology.org/amigo/term/GO:0002396   18       7 0.2530120
+2  http://amigo.geneontology.org/amigo/term/GO:0019882   82      11 1.1526104
+3  http://amigo.geneontology.org/amigo/term/GO:0043269  144      10 2.0240964
+4  http://amigo.geneontology.org/amigo/term/GO:0050867  211      12 2.9658635
+5  http://amigo.geneontology.org/amigo/term/GO:0022407  251      13 3.5281124
+6  http://amigo.geneontology.org/amigo/term/GO:0007159  228      11 3.2048193
+7  http://amigo.geneontology.org/amigo/term/GO:0001819  268      12 3.7670683
+8  http://amigo.geneontology.org/amigo/term/GO:0006959   70       6 0.9839357
+9  http://amigo.geneontology.org/amigo/term/GO:0002250  240      11 3.3734940
+10 http://amigo.geneontology.org/amigo/term/GO:0051249  284      12 3.9919679
+   enrichmentRatio       pValue          FDR
+1        27.666667 2.409656e-09 1.990376e-06
+2         9.543554 1.414639e-08 5.842459e-06
+3         4.940476 2.990439e-05 6.967162e-03
+4         4.046039 3.427305e-05 6.967162e-03
+5         3.684690 4.217410e-05 6.967162e-03
+6         3.432331 3.202107e-04 3.964057e-02
+7         3.185501 3.359370e-04 3.964057e-02
+8         6.097959 4.159992e-04 4.295192e-02
+9         3.260714 4.964085e-04 4.555927e-02
+10        3.006036 5.683424e-04 4.694508e-02
+                                                           overlapId
+1                                  567;3115;3118;3119;3120;3123;3127
+2           567;1520;3115;3118;3119;3120;3123;3127;10288;10437;57705
+3             567;967;1520;7531;8514;10063;10288;10859;246329;353514
+4      199;567;3115;3118;3119;3120;3123;3127;6688;10288;10859;353514
+5  199;567;1051;3115;3118;3119;3120;3123;3127;6688;10288;10859;80139
+6             199;567;1051;3115;3118;3119;3120;3123;3127;10288;10859
+7        199;567;602;929;1051;1436;2219;3115;5452;10288;10859;353514
+8                                       602;1675;2219;3119;3123;5452
+9             567;602;1520;3115;3118;3119;3120;3123;3127;10288;10859
+10       199;567;1051;3115;3118;3119;3120;3123;3127;6688;10288;10859
+                                                                                           userId
+1                                       HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M
+2               HLA-DQB2;WDFY4;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;LILRB2;B2M;CTSS
+3                                     YWHAE;LILRB2;B2M;LILRB1;CD63;KCNAB2;COX17;LILRA5;STAC3;CTSS
+4        HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;LILRA5;SPI1
+5  HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;CEBPB;SPI1;ZNF703
+6              HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;CEBPB
+7                        HLA-DPB1;FCN1;CD14;LILRB2;B2M;AIF1;LILRB1;POU2F2;BCL3;CEBPB;LILRA5;CSF1R
+8                                                          FCN1;HLA-DRB1;HLA-DQB1;CFD;POU2F2;BCL3
+9               HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;LILRB1;BCL3;CTSS
+10        HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;AIF1;LILRB1;CEBPB;SPI1
+
+$geneontology_Cellular_Component_noRedundant
+      geneSet                      description
+1  GO:0042611              MHC protein complex
+2  GO:0098576         lumenal side of membrane
+3  GO:0101002           ficolin-1-rich granule
+4  GO:0030667       secretory granule membrane
+5  GO:0031091           platelet alpha granule
+6  GO:0005770                    late endosome
+7  GO:0070820                 tertiary granule
+8  GO:0031983                    vesicle lumen
+9  GO:0030139                endocytic vesicle
+10 GO:0009897 external side of plasma membrane
+                                                  link size overlap    expect
+1  http://amigo.geneontology.org/amigo/term/GO:0042611   21       7 0.3313609
+2  http://amigo.geneontology.org/amigo/term/GO:0098576   31       6 0.4891519
+3  http://amigo.geneontology.org/amigo/term/GO:0101002  162      11 2.5562130
+4  http://amigo.geneontology.org/amigo/term/GO:0030667  192      11 3.0295858
+5  http://amigo.geneontology.org/amigo/term/GO:0031091   35       5 0.5522682
+6  http://amigo.geneontology.org/amigo/term/GO:0005770  204      11 3.2189349
+7  http://amigo.geneontology.org/amigo/term/GO:0070820  118       8 1.8619329
+8  http://amigo.geneontology.org/amigo/term/GO:0031983  216      11 3.4082840
+9  http://amigo.geneontology.org/amigo/term/GO:0030139  200      10 3.1558185
+10 http://amigo.geneontology.org/amigo/term/GO:0009897  133       8 2.0986193
+   enrichmentRatio       pValue          FDR
+1        21.125000 1.817515e-08 3.326052e-06
+2        12.266129 6.867031e-06 6.283333e-04
+3         4.303241 3.922128e-05 2.392498e-03
+4         3.630859 1.832989e-04 7.071390e-03
+5         9.053571 1.932074e-04 7.071390e-03
+6         3.417279 3.118091e-04 9.510178e-03
+7         4.296610 4.857534e-04 1.165535e-02
+8         3.227431 5.095234e-04 1.165535e-02
+9         3.168750 1.074638e-03 1.967638e-02
+10        3.812030 1.075212e-03 1.967638e-02
+                                               overlapId
+1                      567;3115;3118;3119;3120;3123;3127
+2                          3115;3118;3119;3120;3123;3127
+3   1;978;1471;1520;1675;2219;2357;3687;5265;10288;23406
+4  334;929;967;2212;2357;3482;3687;8514;8560;10288;53917
+5                                   1;334;1675;5265;7076
+6  567;967;1520;3115;3118;3119;3120;3123;3127;3482;27243
+7                 567;978;1471;1520;2357;3687;8514;10288
+8    1;567;978;1675;2219;5265;6282;7076;8635;10577;23406
+9       567;1520;3115;3118;3119;3120;3123;3127;3482;7314
+10                 432;567;929;2217;2219;3123;3687;10859
+                                                                             userId
+1                         HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M
+2                             HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2
+3                      FCN1;ITGAX;CST3;SERPINA1;CFD;FPR1;LILRB2;COTL1;A1BG;CTSS;CDA
+4                 DEGS1;ITGAX;CD14;FCGR2A;RAB24;FPR1;LILRB2;CD63;KCNAB2;APLP2;IGF2R
+5                                                     SERPINA1;CFD;TIMP1;A1BG;APLP2
+6  HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M;CD63;CTSS;CHMP2A;IGF2R
+7                                        ITGAX;CST3;FPR1;LILRB2;B2M;KCNAB2;CTSS;CDA
+8                   FCN1;SERPINA1;CFD;TIMP1;B2M;S100A11;COTL1;NPC2;A1BG;CDA;RNASET2
+9          HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M;UBB;CTSS;IGF2R
+10                                  FCN1;HLA-DRB1;ITGAX;ASGR1;CD14;B2M;LILRB1;FCGRT
+
+$geneontology_Molecular_Function_noRedundant
+     geneSet                  description
+1 GO:0023023  MHC protein complex binding
+2 GO:0003823              antigen binding
+3 GO:0140375     immune receptor activity
+4 GO:0033218                amide binding
+5 GO:0061134 peptidase regulator activity
+                                                 link size overlap    expect
+1 http://amigo.geneontology.org/amigo/term/GO:0023023   26      10 0.3825539
+2 http://amigo.geneontology.org/amigo/term/GO:0003823   43       9 0.6326852
+3 http://amigo.geneontology.org/amigo/term/GO:0140375   66       8 0.9710983
+4 http://amigo.geneontology.org/amigo/term/GO:0033218  179      12 2.6337362
+5 http://amigo.geneontology.org/amigo/term/GO:0061134   79       7 1.1623752
+  enrichmentRatio       pValue          FDR
+1       26.140110 1.205992e-12 3.195879e-10
+2       14.225083 7.846636e-09 1.039679e-06
+3        8.238095 4.503171e-06 3.977801e-04
+4        4.556265 9.834784e-06 6.515544e-04
+5        6.022152 1.429867e-04 7.578296e-03
+                                                      overlapId
+1            567;3115;3118;3119;3120;3123;3127;7531;10288;10859
+2                   567;2217;2219;3115;3118;3119;3120;3123;3127
+3                   2357;3118;3119;3120;3123;10288;10859;353514
+4 567;1471;2217;3115;3118;3119;3120;3123;3127;10288;10859;23759
+5                           334;1471;1520;5265;5721;7076;114769
+                                                                                    userId
+1            HLA-DQB2;YWHAE;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;LILRB2;B2M;LILRB1
+2                     HLA-DQB2;HLA-DPB1;HLA-DRB5;FCN1;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M;FCGRT
+3                            HLA-DQB2;HLA-DRB1;HLA-DQB1;HLA-DQA2;FPR1;LILRB2;LILRB1;LILRA5
+4 HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;CST3;HLA-DQB1;PPIL2;HLA-DQA2;LILRB2;B2M;LILRB1;FCGRT
+5                                              CST3;SERPINA1;PSME2;TIMP1;CARD16;CTSS;APLP2
+
+$pathway_KEGG
+    geneSet                                  description
+1  hsa05150              Staphylococcus aureus infection
+2  hsa04612          Antigen processing and presentation
+3  hsa05310                                       Asthma
+4  hsa05322                 Systemic lupus erythematosus
+5  hsa05152                                 Tuberculosis
+6  hsa05320                   Autoimmune thyroid disease
+7  hsa04640                   Hematopoietic cell lineage
+8  hsa05330                          Allograft rejection
+9  hsa05332                    Graft-versus-host disease
+10 hsa04940                     Type I diabetes mellitus
+11 hsa04672 Intestinal immune network for IgA production
+12 hsa05321                   Inflammatory bowel disease
+13 hsa05140                                Leishmaniasis
+14 hsa04145                                    Phagosome
+15 hsa05416                            Viral myocarditis
+16 hsa04514                      Cell adhesion molecules
+17 hsa05323                         Rheumatoid arthritis
+18 hsa04658             Th1 and Th2 cell differentiation
+19 hsa05166      Human T-cell leukemia virus 1 infection
+20 hsa04659                    Th17 cell differentiation
+21 hsa05145                                Toxoplasmosis
+22 hsa04610          Complement and coagulation cascades
+23 hsa04380                   Osteoclast differentiation
+24 hsa05168             Herpes simplex virus 1 infection
+                                                                                                           link
+1                http://www.kegg.jp/kegg-bin/show_pathway?hsa05150+1675+2212+2357+3108+3115+3118+3119+3123+3127
+2           http://www.kegg.jp/kegg-bin/show_pathway?hsa04612+10437+1520+3108+3115+3118+3119+3123+3127+567+5721
+3                               http://www.kegg.jp/kegg-bin/show_pathway?hsa05310+3108+3115+3118+3119+3123+3127
+4                          http://www.kegg.jp/kegg-bin/show_pathway?hsa05322+2212+3108+3115+3118+3119+3123+3127
+5  http://www.kegg.jp/kegg-bin/show_pathway?hsa05152+1051+1520+2212+3108+3115+3118+3119+3123+3127+3687+4046+929
+6                               http://www.kegg.jp/kegg-bin/show_pathway?hsa05320+3108+3115+3118+3119+3123+3127
+7                      http://www.kegg.jp/kegg-bin/show_pathway?hsa04640+1436+3108+3115+3118+3119+3123+3127+929
+8                               http://www.kegg.jp/kegg-bin/show_pathway?hsa05330+3108+3115+3118+3119+3123+3127
+9                               http://www.kegg.jp/kegg-bin/show_pathway?hsa05332+3108+3115+3118+3119+3123+3127
+10                              http://www.kegg.jp/kegg-bin/show_pathway?hsa04940+3108+3115+3118+3119+3123+3127
+11                              http://www.kegg.jp/kegg-bin/show_pathway?hsa04672+3108+3115+3118+3119+3123+3127
+12                              http://www.kegg.jp/kegg-bin/show_pathway?hsa05321+3108+3115+3118+3119+3123+3127
+13                         http://www.kegg.jp/kegg-bin/show_pathway?hsa05140+2212+3108+3115+3118+3119+3123+3127
+14                http://www.kegg.jp/kegg-bin/show_pathway?hsa04145+1520+2212+3108+3115+3118+3119+3123+3127+929
+15                              http://www.kegg.jp/kegg-bin/show_pathway?hsa05416+3108+3115+3118+3119+3123+3127
+16                              http://www.kegg.jp/kegg-bin/show_pathway?hsa04514+3108+3115+3118+3119+3123+3127
+17                              http://www.kegg.jp/kegg-bin/show_pathway?hsa05323+3108+3115+3118+3119+3123+3127
+18                              http://www.kegg.jp/kegg-bin/show_pathway?hsa04658+3108+3115+3118+3119+3123+3127
+19                http://www.kegg.jp/kegg-bin/show_pathway?hsa05166+3108+3115+3118+3119+3123+3127+567+6688+7538
+20                              http://www.kegg.jp/kegg-bin/show_pathway?hsa04659+3108+3115+3118+3119+3123+3127
+21                              http://www.kegg.jp/kegg-bin/show_pathway?hsa05145+3108+3115+3118+3119+3123+3127
+22                                             http://www.kegg.jp/kegg-bin/show_pathway?hsa04610+1675+3687+5265
+23                          http://www.kegg.jp/kegg-bin/show_pathway?hsa04380+10288+10859+1436+2212+353514+6688
+24                http://www.kegg.jp/kegg-bin/show_pathway?hsa05168+3108+3115+3118+3119+3123+3127+5452+567+6427
+   size overlap    expect enrichmentRatio       pValue          FDR
+1    30       9 0.4809783       18.711864 4.106757e-10 1.392190e-07
+2    49      10 0.7855978       12.729159 2.582855e-09 4.377940e-07
+3    16       6 0.2565217       23.389831 9.274255e-08 8.322631e-06
+4    26       7 0.4168478       16.792699 9.820213e-08 8.322631e-06
+5   121      12 1.9399457        6.185740 2.796342e-07 1.895920e-05
+6    22       6 0.3527174       17.010786 8.019735e-07 4.036409e-05
+7    50       8 0.8016304        9.979661 8.527065e-07 4.036409e-05
+8    23       6 0.3687500       16.271186 1.071613e-06 4.036409e-05
+9    23       6 0.3687500       16.271186 1.071613e-06 4.036409e-05
+10   25       6 0.4008152       14.969492 1.833842e-06 6.216725e-05
+11   26       6 0.4168478       14.393742 2.354534e-06 7.256246e-05
+12   35       6 0.5611413       10.692494 1.484266e-05 4.193052e-04
+13   54       7 0.8657609        8.085374 1.864264e-05 4.861428e-04
+14   99       9 1.5872283        5.670262 2.110294e-05 5.109926e-04
+15   40       6 0.6413043        9.355932 3.298461e-05 7.454521e-04
+16   48       6 0.7695652        7.796610 9.547661e-05 2.022911e-03
+17   53       6 0.8497283        7.061081 1.678633e-04 3.347391e-03
+18   57       6 0.9138587        6.565566 2.524817e-04 4.755071e-03
+19  152       9 2.4369565        3.693131 5.898440e-04 1.052406e-02
+20   70       6 1.1222826        5.346247 7.763671e-04 1.315942e-02
+21   73       6 1.1703804        5.126538 9.711649e-04 1.567738e-02
+22   18       3 0.2885870       10.395480 2.692250e-03 4.148512e-02
+23   91       6 1.4589674        4.112498 3.042671e-03 4.484632e-02
+24  194       9 3.1103261        2.893587 3.303545e-03 4.666257e-02
+                                                    overlapId
+1                1675;2212;2357;3108;3115;3118;3119;3123;3127
+2           10437;1520;3108;3115;3118;3119;3123;3127;567;5721
+3                               3108;3115;3118;3119;3123;3127
+4                          2212;3108;3115;3118;3119;3123;3127
+5  1051;1520;2212;3108;3115;3118;3119;3123;3127;3687;4046;929
+6                               3108;3115;3118;3119;3123;3127
+7                      1436;3108;3115;3118;3119;3123;3127;929
+8                               3108;3115;3118;3119;3123;3127
+9                               3108;3115;3118;3119;3123;3127
+10                              3108;3115;3118;3119;3123;3127
+11                              3108;3115;3118;3119;3123;3127
+12                              3108;3115;3118;3119;3123;3127
+13                         2212;3108;3115;3118;3119;3123;3127
+14                1520;2212;3108;3115;3118;3119;3123;3127;929
+15                              3108;3115;3118;3119;3123;3127
+16                              3108;3115;3118;3119;3123;3127
+17                              3108;3115;3118;3119;3123;3127
+18                              3108;3115;3118;3119;3123;3127
+19                3108;3115;3118;3119;3123;3127;567;6688;7538
+20                              3108;3115;3118;3119;3123;3127
+21                              3108;3115;3118;3119;3123;3127
+22                                             1675;3687;5265
+23                          10288;10859;1436;2212;353514;6688
+24                3108;3115;3118;3119;3123;3127;5452;567;6427
+                                                                                   userId
+1                    HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;FCGR2A;CFD;HLA-DQA2;FPR1;HLA-DMA
+2               HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;PSME2;HLA-DQA2;B2M;HLA-DMA;CTSS
+3                                    HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+4                             HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;FCGR2A;HLA-DQA2;HLA-DMA
+5  HLA-DPB1;HLA-DRB5;HLA-DRB1;ITGAX;HLA-DQB1;LSP1;CD14;FCGR2A;HLA-DQA2;HLA-DMA;CEBPB;CTSS
+6                                    HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+7                         HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;CD14;HLA-DQA2;HLA-DMA;CSF1R
+8                                    HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+9                                    HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+10                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+11                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+12                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+13                            HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;FCGR2A;HLA-DQA2;HLA-DMA
+14                  HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;CD14;FCGR2A;HLA-DQA2;HLA-DMA;CTSS
+15                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+16                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+17                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+18                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+19                    HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M;HLA-DMA;ZFP36;SPI1
+20                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+21                                   HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;HLA-DMA
+22                                                                     ITGAX;SERPINA1;CFD
+23                                                 FCGR2A;LILRB2;LILRB1;LILRA5;SPI1;CSF1R
+24                  SRSF2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2;B2M;HLA-DMA;POU2F2
+
+$pathway_Panther
+NULL
+
+$pathway_Reactome
+         geneSet                                      description
+1   R-HSA-168256                                    Immune System
+2  R-HSA-6798695                         Neutrophil degranulation
+3   R-HSA-202430 Translocation of ZAP-70 to Immunological synapse
+4   R-HSA-389948                                   PD-1 signaling
+5   R-HSA-202427       Phosphorylation of CD3 and TCR zeta chains
+6   R-HSA-202433         Generation of second messenger molecules
+7   R-HSA-114608                           Platelet degranulation
+8    R-HSA-76005     Response to elevated platelet cytosolic Ca2+
+9   R-HSA-877300                       Interferon gamma signaling
+10  R-HSA-168249                             Innate Immune System
+11 R-HSA-2132295                MHC class II antigen presentation
+12  R-HSA-202424                         Downstream TCR signaling
+13  R-HSA-388841                 Costimulation by the CD28 family
+14  R-HSA-202403                                    TCR signaling
+15 R-HSA-1280215              Cytokine Signaling in Immune system
+16 R-HSA-1280218                           Adaptive Immune System
+17  R-HSA-913531                             Interferon Signaling
+18   R-HSA-76002   Platelet activation, signaling and aggregation
+                                                 link size overlap     expect
+1   http://reactome.org/PathwayBrowser/#/R-HSA-168256 1234      42 17.3630598
+2  http://reactome.org/PathwayBrowser/#/R-HSA-6798695  370      22  5.2061038
+3   http://reactome.org/PathwayBrowser/#/R-HSA-202430   13       6  0.1829172
+4   http://reactome.org/PathwayBrowser/#/R-HSA-389948   15       6  0.2110583
+5   http://reactome.org/PathwayBrowser/#/R-HSA-202427   17       6  0.2391994
+6   http://reactome.org/PathwayBrowser/#/R-HSA-202433   22       6  0.3095521
+7   http://reactome.org/PathwayBrowser/#/R-HSA-114608   58       8  0.8160920
+8    http://reactome.org/PathwayBrowser/#/R-HSA-76005   62       8  0.8723742
+9   http://reactome.org/PathwayBrowser/#/R-HSA-877300   67       8  0.9427269
+10  http://reactome.org/PathwayBrowser/#/R-HSA-168249  697      25  9.8071740
+11 http://reactome.org/PathwayBrowser/#/R-HSA-2132295   78       8  1.0975030
+12  http://reactome.org/PathwayBrowser/#/R-HSA-202424   79       8  1.1115735
+13  http://reactome.org/PathwayBrowser/#/R-HSA-388841   47       6  0.6613159
+14  http://reactome.org/PathwayBrowser/#/R-HSA-202403   94       8  1.3226318
+15 http://reactome.org/PathwayBrowser/#/R-HSA-1280215  485      18  6.8242172
+16 http://reactome.org/PathwayBrowser/#/R-HSA-1280218  486      18  6.8382878
+17  http://reactome.org/PathwayBrowser/#/R-HSA-913531  175      10  2.4623464
+18   http://reactome.org/PathwayBrowser/#/R-HSA-76002  133       8  1.8713833
+   enrichmentRatio       pValue          FDR
+1         2.418928 3.792182e-10 6.040946e-07
+2         4.225809 2.590618e-09 2.063427e-06
+3        32.801733 9.946524e-09 5.281604e-06
+4        28.428169 2.837314e-08 1.129960e-05
+5        25.083679 6.861739e-08 2.186150e-05
+6        19.382843 3.913365e-07 1.038998e-04
+7         9.802817 1.124396e-06 2.558804e-04
+8         9.170377 1.896504e-06 3.776413e-04
+9         8.486021 3.459311e-06 6.122981e-04
+10        2.549154 3.934298e-06 6.267337e-04
+11        7.289274 1.099457e-05 1.592214e-03
+12        7.197005 1.209717e-05 1.605899e-03
+13        9.072820 4.267626e-05 4.964966e-03
+14        6.048547 4.363435e-05 4.964966e-03
+15        2.637665 8.804702e-05 9.005626e-03
+16        2.632238 9.045199e-05 9.005626e-03
+17        4.061167 1.434974e-04 1.344655e-02
+18        4.274913 4.962150e-04 4.391503e-02
+                                                                                                                                                                                                              overlapId
+1  1;10288;10437;1052;10577;1072;10859;10870;1436;1471;1520;1675;2212;2219;23406;2357;2537;3115;3118;3119;3120;3123;3127;3185;3482;353514;3687;5265;53917;567;5721;57674;6282;7076;7314;8514;8560;8635;929;967;978;9903
+2                                                                                                            1;10288;10577;1471;1520;1675;2212;2219;23406;2357;3482;3687;5265;53917;567;6282;8514;8560;8635;929;967;978
+3                                                                                                                                                                                         3115;3118;3119;3120;3123;3127
+4                                                                                                                                                                                         3115;3118;3119;3120;3123;3127
+5                                                                                                                                                                                         3115;3118;3119;3120;3123;3127
+6                                                                                                                                                                                         3115;3118;3119;3120;3123;3127
+7                                                                                                                                                                                    1;1072;1675;334;5216;5265;7076;967
+8                                                                                                                                                                                    1;1072;1675;334;5216;5265;7076;967
+9                                                                                                                                                                               10437;3115;3118;3119;3120;3123;3127;567
+10                                                                                            1;10288;10577;1072;1471;1520;1675;2212;2219;23406;2357;3482;3687;5265;53917;567;5721;6282;7314;8514;8560;8635;929;967;978
+11                                                                                                                                                                             10437;1520;3115;3118;3119;3120;3123;3127
+12                                                                                                                                                                              3115;3118;3119;3120;3123;3127;5721;7314
+13                                                                                                                                                                                        3115;3118;3119;3120;3123;3127
+14                                                                                                                                                                              3115;3118;3119;3120;3123;3127;5721;7314
+15                                                                                                                            10437;1052;1072;1436;2357;2537;3115;3118;3119;3120;3123;3127;3185;3687;567;5721;7076;7314
+16                                                                                                                       10288;10437;10859;10870;1520;3115;3118;3119;3120;3123;3127;353514;567;5721;57674;7314;929;9903
+17                                                                                                                                                                    10437;2537;3115;3118;3119;3120;3123;3127;567;7314
+18                                                                                                                                                                                   1;1072;1675;334;5216;5265;7076;967
+                                                                                                                                                                                                                                                                      userId
+1  DEGS1;HLA-DQB2;HNRNPF;HLA-DPB1;HLA-DRB5;FCN1;HLA-DRB1;IFI30;ITGAX;CST3;SERPINA1;HLA-DQB1;CD14;CFL1;CEBPD;FCGR2A;RAB24;PSME2;CFD;TIMP1;HLA-DQA2;FPR1;LILRB2;RNF213;B2M;HCST;LILRB1;S100A11;COTL1;KLHL21;NPC2;IFI6;A1BG;CD63;KCNAB2;UBB;LILRA5;CTSS;CSF1R;CDA;IGF2R;RNASET2
+2                                                                                                                                            DEGS1;FCN1;ITGAX;CST3;SERPINA1;CD14;FCGR2A;RAB24;CFD;FPR1;LILRB2;B2M;S100A11;COTL1;NPC2;A1BG;CD63;KCNAB2;CTSS;CDA;IGF2R;RNASET2
+3                                                                                                                                                                                                                      HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2
+4                                                                                                                                                                                                                      HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2
+5                                                                                                                                                                                                                      HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2
+6                                                                                                                                                                                                                      HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2
+7                                                                                                                                                                                                                               SERPINA1;CFL1;PFN1;CFD;TIMP1;A1BG;CD63;APLP2
+8                                                                                                                                                                                                                               SERPINA1;CFL1;PFN1;CFD;TIMP1;A1BG;CD63;APLP2
+9                                                                                                                                                                                                            HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M
+10                                                                                                                            DEGS1;FCN1;ITGAX;CST3;SERPINA1;CD14;CFL1;FCGR2A;RAB24;PSME2;CFD;FPR1;LILRB2;B2M;S100A11;COTL1;NPC2;A1BG;CD63;KCNAB2;UBB;CTSS;CDA;IGF2R;RNASET2
+11                                                                                                                                                                                                          HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;CTSS
+12                                                                                                                                                                                                           HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;PSME2;HLA-DQA2;UBB
+13                                                                                                                                                                                                                     HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;HLA-DQA2
+14                                                                                                                                                                                                           HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;HLA-DQB1;PSME2;HLA-DQA2;UBB
+15                                                                                                                                                   HLA-DQB2;HNRNPF;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;ITGAX;HLA-DQB1;CFL1;CEBPD;PSME2;TIMP1;HLA-DQA2;FPR1;B2M;IFI6;UBB;CSF1R
+16                                                                                                                                               HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;CD14;PSME2;HLA-DQA2;LILRB2;RNF213;B2M;HCST;LILRB1;KLHL21;UBB;LILRA5;CTSS
+17                                                                                                                                                                                                  HLA-DQB2;HLA-DPB1;HLA-DRB5;HLA-DRB1;IFI30;HLA-DQB1;HLA-DQA2;B2M;IFI6;UBB
+18                                                                                                                                                                                                                              SERPINA1;CFL1;PFN1;CFD;TIMP1;A1BG;CD63;APLP2
+

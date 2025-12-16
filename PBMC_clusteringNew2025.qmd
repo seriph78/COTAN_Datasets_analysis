@@ -1,0 +1,258 @@
+---
+title: "COTAN coex clustering PBMCs"
+author: "Silvia Galfrè"
+---
+
+```{r}
+library(COTAN)
+library(stringr)
+library(ggplot2)
+library(tibble)
+library(zeallot)
+```
+
+## PBMC1
+
+```{r}
+pbmc1 <- readRDS("Data/PBMC1/COTAN/PBMC1.cotan.RDS")
+
+options(parallelly.fork.enable = TRUE)
+
+advChecker <- new("AdvancedGDIUniformityCheck")
+```
+
+```{r}
+setLoggingFile("Data/PBMC1/LogClustering.log")
+
+pbmc1 <- clean(pbmc1)
+pbmc1 <- proceedToCoex(pbmc1,calcCoex = T,cores = 5,saveObj = F)
+
+cl <- cellsUniformClustering(pbmc1,cores = 5,initialResolution = 0.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "AB",saveObj = T,
+                             outDir = "Data/PBMC1/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = pbmc1,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC1/")
+
+pbmc1 <- addClusterization(pbmc1,clName = "AB_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+pbmc1 <- addClusterization(pbmc1,clName = "AB_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC1/COTAN/AB_CoexEigenSplitCluster.csv")
+write.csv(cl.merged$clusters,"Data/PBMC1/COTAN/AB_CoexEigenMergeCluster.csv")
+
+saveRDS(pbmc1,"Data/PBMC1/COTAN/PBMC1.cotan.RDS")
+```
+
+```{r}
+
+cl <- cellsUniformClustering(pbmc1,cores = 5,#initialResolution = 3.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "LL",saveObj = T,
+                             outDir = "Data/PBMC1/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = pbmc1,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC1/")
+
+pbmc1 <- addClusterization(pbmc1,clName = "LL_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+pbmc1 <- addClusterization(pbmc1,clName = "LL_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC1/COTAN/LL_CoexEigenSplitCluster.csv")
+
+write.csv(cl.merged$clusters,"Data/PBMC1/COTAN/LL_CoexEigenMergeCluster.csv")
+```
+
+```{r}
+saveRDS(pbmc1,"Data/PBMC1/COTAN/PBMC1.cotan.RDS")
+```
+
+
+## PBMC2
+
+```{r}
+pbmc2 <- readRDS("Data/PBMC2/filtered/PBMC2.cotan.RDS")
+```
+
+```{r}
+setLoggingFile("Data/PBMC2/LogClustering.log")
+
+pbmc2 <- clean(pbmc2)
+pbmc2 <- proceedToCoex(pbmc2,calcCoex = T,cores = 5,saveObj = F)
+
+cl <- cellsUniformClustering(pbmc2,cores = 5,initialResolution = 0.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "AB",saveObj = T,
+                             outDir = "Data/PBMC2/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = pbmc2,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC2/")
+
+pbmc2 <- addClusterization(pbmc2,clName = "AB_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+pbmc2 <- addClusterization(pbmc2,clName = "AB_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC2/COTAN/AB_CoexEigenSplitCluster.csv")
+write.csv(cl.merged$clusters,"Data/PBMC2/COTAN/AB_CoexEigenMergeCluster.csv")
+```
+
+```{r}
+cl <- cellsUniformClustering(pbmc2,cores = 5,#initialResolution = 3.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "LL",saveObj = T,
+                             outDir = "Data/PBMC2/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = pbmc2,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC2/")
+
+pbmc2 <- addClusterization(pbmc2,clName = "LL_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+pbmc2 <- addClusterization(pbmc2,clName = "LL_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC2/COTAN/LL_CoexEigenSplitCluster.csv")
+
+write.csv(cl.merged$clusters,"Data/PBMC2/COTAN/LL_CoexEigenMergeCluster.csv")
+```
+
+```{r}
+
+```
+
+
+```{r}
+cl <- cellsUniformClustering(pbmc2,cores = 5,#initialResolution = 3.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "LL",saveObj = T,
+                             outDir = "Data/PBMC2/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = pbmc2,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC2/")
+
+pbmc2 <- addClusterization(pbmc2,clName = "LL_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+pbmc2 <- addClusterization(pbmc2,clName = "LL_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC2/COTAN/LL_CoexEigenSplitCluster.csv")
+
+write.csv(cl.merged$clusters,"Data/PBMC2/COTAN/LL_CoexEigenMergeCluster.csv")
+```
+
+```{r}
+saveRDS(pbmc2,"Data/PBMC1/COTAN/PBMC2.cotan.RDS")
+```
+
+
+
+## PBMC3
+
+```{r}
+PBMC3 <- readRDS("Data/PBMC3/filtered/PBMC3.cotan.RDS")
+```
+
+```{r}
+setLoggingFile("Data/PBMC3/LogClustering.log")
+
+PBMC3 <- clean(PBMC3)
+PBMC3 <- proceedToCoex(PBMC3,calcCoex = T,cores = 5,saveObj = F)
+
+cl <- cellsUniformClustering(PBMC3,cores = 5,initialResolution = 0.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "AB",saveObj = T,
+                             outDir = "Data/PBMC3/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = PBMC3,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC3/")
+
+PBMC3 <- addClusterization(PBMC3,clName = "AB_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+PBMC3 <- addClusterization(PBMC3,clName = "AB_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC3/COTAN/AB_CoexEigenSplitCluster.csv")
+write.csv(cl.merged$clusters,"Data/PBMC3/COTAN/AB_CoexEigenMergeCluster.csv")
+```
+
+```{r}
+cl <- cellsUniformClustering(PBMC3,cores = 5,#initialResolution = 3.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "LL",saveObj = T,
+                             outDir = "Data/PBMC3/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = PBMC3,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC3/")
+
+PBMC3 <- addClusterization(PBMC3,clName = "LL_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+PBMC3 <- addClusterization(PBMC3,clName = "LL_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC3/COTAN/LL_CoexEigenSplitCluster.csv")
+
+write.csv(cl.merged$clusters,"Data/PBMC3/COTAN/LL_CoexEigenMergeCluster.csv")
+```
+
+```{r}
+cl <- cellsUniformClustering(PBMC3,cores = 5,#initialResolution = 3.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "LL",saveObj = T,
+                             outDir = "Data/PBMC3/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = PBMC3,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC3/")
+
+PBMC3 <- addClusterization(PBMC3,clName = "LL_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+PBMC3 <- addClusterization(PBMC3,clName = "LL_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC3/COTAN/LL_CoexEigenSplitCluster.csv")
+
+write.csv(cl.merged$clusters,"Data/PBMC3/COTAN/LL_CoexEigenMergeCluster.csv")
+```
+
+## PBMC4
+
+```{r}
+PBMC4 <- readRDS("Data/PBMC4/filtered/PBMC4.cotan.RDS")
+```
+
+```{r}
+setLoggingFile("Data/PBMC4/LogClustering.log")
+
+PBMC4 <- clean(PBMC4)
+PBMC4 <- proceedToCoex(PBMC4,calcCoex = T,cores = 5,saveObj = F)
+
+cl <- cellsUniformClustering(PBMC4,cores = 5,initialResolution = 0.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "AB",saveObj = T,
+                             outDir = "Data/PBMC4/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = PBMC4,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC4/")
+
+PBMC4 <- addClusterization(PBMC4,clName = "AB_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+PBMC4 <- addClusterization(PBMC4,clName = "AB_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC4/COTAN/AB_CoexEigenSplitCluster.csv")
+write.csv(cl.merged$clusters,"Data/PBMC4/COTAN/AB_CoexEigenMergeCluster.csv")
+```
+
+```{r}
+cl <- cellsUniformClustering(PBMC4,cores = 5,#initialResolution = 3.8,
+                             optimizeForSpeed = T,
+                             checker = advChecker,
+                             useCoexEigen = T,dataMethod = "LL",saveObj = T,
+                             outDir = "Data/PBMC4/")
+
+cl.merged <- mergeUniformCellsClusters(objCOTAN = PBMC4,clusters = cl$clusters,checkers = advChecker,cores = 5,optimizeForSpeed = T,saveObj = T,outDir = "Data/PBMC4/")
+
+PBMC4 <- addClusterization(PBMC4,clName = "LL_CoexEigenSplit",clusters = cl$clusters,coexDF = cl$coex)
+
+PBMC4 <- addClusterization(PBMC4,clName = "LL_CoexEigenMerge",clusters = cl.merged$clusters,coexDF = cl.merged$coex)
+
+write.csv(cl$clusters,"Data/PBMC4/COTAN/LL_CoexEigenSplitCluster.csv")
+
+write.csv(cl.merged$clusters,"Data/PBMC4/COTAN/LL_CoexEigenMergeCluster.csv")
+```
+
+
+
