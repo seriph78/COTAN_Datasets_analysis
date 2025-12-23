@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Silvia Giulia Galfrè">
-<meta name="dcterms.date" content="2024-03-04">
+<meta name="dcterms.date" content="2025-12-22">
 
-<title>COTAN Datasets analysis - FDR analysis - Results - thresholds true 5% 20%</title>
+<title>FDR analysis - Results - thresholds true 5% 20% – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -106,13 +113,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DEA_Type1Er.html">DEA evaluation</a></li><li class="breadcrumb-item"><a href="./FDR_analisysResults3_10.html">FDR and TPR - ROC curves</a></li><li class="breadcrumb-item"><a href="./FDR_analisysResults5_20.html">Results - thresholds true 5% 20%</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DEA_Type1Er.html">DEA evaluation</a></li><li class="breadcrumb-item"><a href="./FDR_analisysResults3_10.html">FDR and TPR - ROC curves</a></li><li class="breadcrumb-item"><a href="./FDR_analisysResults5_20.html">Results - thresholds true 5% 20%</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -121,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">COTAN Datasets analysis</a> 
@@ -142,18 +149,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Datasets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Loo 2019</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -174,9 +181,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -209,9 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Brain LaManno 2021</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -262,9 +269,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">CD14+</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -279,9 +286,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">PBMC form 10X site</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -316,9 +323,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Coex score evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -333,9 +340,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">GDI sensitivity</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -362,9 +369,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
  <span class="menu-text">Cluster evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -403,9 +410,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -430,9 +437,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
  <span class="menu-text">FDR and TPR - ROC curves</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -441,12 +448,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Results - thresholds true 3% 10%</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./FDR_analisysResults3_10_th04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Results - thresholds true 3% 10% threshold 0.4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -473,9 +474,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Additional code and scripts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -509,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -644,7 +645,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DEA_Type1Er.html">DEA evaluation</a></li><li class="breadcrumb-item"><a href="./FDR_analisysResults3_10.html">FDR and TPR - ROC curves</a></li><li class="breadcrumb-item"><a href="./FDR_analisysResults5_20.html">Results - thresholds true 5% 20%</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">FDR analysis - Results - thresholds true 5% 20%</h1>
 </div>
@@ -663,7 +664,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 4, 2024</p>
+      <p class="date">December 22, 2025</p>
     </div>
   </div>
   
@@ -671,7 +672,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <section id="preamble" class="level2">
 <h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
@@ -894,7 +897,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -1209,7 +1212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -1261,7 +1264,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>TwoClusters_even_nearPL <span class="ot">&lt;-</span> TwoClusters_even_near <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"FPR"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"TPR"</span>)</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>TwoClusters_even_nearPL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1347,7 +1354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -1662,7 +1669,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -1713,7 +1720,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>Two_Clusters_even_mediumPL <span class="ot">&lt;-</span> Two_Clusters_even_medium <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"FPR"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"TPR"</span>)</span>
 <span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>Two_Clusters_even_mediumPL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1799,7 +1810,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -2114,7 +2125,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -2165,7 +2176,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>Two_Clusters_even_farPL <span class="ot">&lt;-</span> Two_Clusters_even_far <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"FPR"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"TPR"</span>)</span>
 <span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>Two_Clusters_even_farPL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2254,7 +2269,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -2384,7 +2399,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb60-54"><a href="#cb60-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the ROC curve</span></span>
 <span id="cb60-55"><a href="#cb60-55" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(roc_resultSeurat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/seurat4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/seurat4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2572,7 +2591,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -2623,7 +2642,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>Two_Clusters_uneven_nearPL <span class="ot">&lt;-</span> Two_Clusters_uneven_near <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"FPR"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"TPR"</span>)</span>
 <span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>Two_Clusters_uneven_nearPL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2709,7 +2732,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -3024,7 +3047,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb79-12"><a href="#cb79-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -3076,7 +3099,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>Two_Clusters_uneven_mediumPL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3162,7 +3189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb87-8"><a href="#cb87-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb87-9"><a href="#cb87-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb87-10"><a href="#cb87-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb87-11"><a href="#cb87-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb87-12"><a href="#cb87-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb87-13"><a href="#cb87-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -3477,7 +3504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -3529,7 +3556,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb95-5"><a href="#cb95-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb95-6"><a href="#cb95-6" aria-hidden="true" tabindex="-1"></a>Two_Clusters_uneven_farPL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -3618,7 +3649,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -3936,7 +3967,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb109-6"><a href="#cb109-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb109-7"><a href="#cb109-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb109-8"><a href="#cb109-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb109-9"><a href="#cb109-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb109-10"><a href="#cb109-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb109-11"><a href="#cb109-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb109-12"><a href="#cb109-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -3988,7 +4019,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb110-5"><a href="#cb110-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"FPR"</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"TPR"</span>)<span class="sc">+</span><span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">"none"</span>)</span>
 <span id="cb110-6"><a href="#cb110-6" aria-hidden="true" tabindex="-1"></a>Three_Clusters_even</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -4074,7 +4109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb117-7"><a href="#cb117-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb117-8"><a href="#cb117-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb117-9"><a href="#cb117-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb117-10"><a href="#cb117-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb117-10"><a href="#cb117-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb117-11"><a href="#cb117-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb117-12"><a href="#cb117-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb117-13"><a href="#cb117-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -4392,7 +4427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb124-6"><a href="#cb124-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb124-7"><a href="#cb124-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb124-8"><a href="#cb124-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb124-9"><a href="#cb124-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb124-9"><a href="#cb124-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb124-10"><a href="#cb124-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb124-11"><a href="#cb124-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb124-12"><a href="#cb124-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -4444,7 +4479,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb125-5"><a href="#cb125-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb125-6"><a href="#cb125-6" aria-hidden="true" tabindex="-1"></a>Three_Clusters_uneven</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-43-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -4533,7 +4572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb132-7"><a href="#cb132-7" aria-hidden="true" tabindex="-1"></a>  dataset <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(dataSetDir,<span class="fu">paste0</span>(file.code,<span class="st">".RDS"</span>)))</span>
 <span id="cb132-8"><a href="#cb132-8" aria-hidden="true" tabindex="-1"></a>  deaCOTAN <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset,<span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">2</span>]]</span>
 <span id="cb132-9"><a href="#cb132-9" aria-hidden="true" tabindex="-1"></a>  pvalCOTAN <span class="ot">&lt;-</span> <span class="fu">pValueFromDEA</span>(deaCOTAN,</span>
-<span id="cb132-10"><a href="#cb132-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">method =</span> <span class="st">"none"</span>)</span>
+<span id="cb132-10"><a href="#cb132-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">numCells =</span> <span class="fu">getNumCells</span>(dataset),<span class="at">adjustmentMethod =</span> <span class="st">"none"</span>)</span>
 <span id="cb132-11"><a href="#cb132-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb132-12"><a href="#cb132-12" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb132-13"><a href="#cb132-13" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -4846,7 +4885,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb139-6"><a href="#cb139-6" aria-hidden="true" tabindex="-1"></a>  clusterization <span class="ot">&lt;-</span> <span class="fu">getClusterizationData</span>(dataset, <span class="at">clName =</span> <span class="st">"mergedClusters"</span>)[[<span class="dv">1</span>]]</span>
 <span id="cb139-7"><a href="#cb139-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#print(file.code)</span></span>
 <span id="cb139-8"><a href="#cb139-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb139-9"><a href="#cb139-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScamPy_DEA_genes.csv"</span>)),</span>
+<span id="cb139-9"><a href="#cb139-9" aria-hidden="true" tabindex="-1"></a>  deaScamPy <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(dirOut,<span class="fu">paste0</span>(file.code,<span class="st">"ScanPy_DEA_genes.csv"</span>)),</span>
 <span id="cb139-10"><a href="#cb139-10" aria-hidden="true" tabindex="-1"></a>                        <span class="at">row.names =</span> <span class="dv">1</span>) </span>
 <span id="cb139-11"><a href="#cb139-11" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb139-12"><a href="#cb139-12" aria-hidden="true" tabindex="-1"></a>  cl.names <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
@@ -4899,7 +4938,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb140-6"><a href="#cb140-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb140-7"><a href="#cb140-7" aria-hidden="true" tabindex="-1"></a>Five_Clusters_unevenPL</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-48-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -4914,7 +4957,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb141-2"><a href="#cb141-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Even_Near"</span>, <span class="st">"Even_Medium"</span>, <span class="st">"Even_Far"</span>, <span class="st">"Uneven_Near"</span>,<span class="st">"Uneven_Medium"</span>,<span class="st">"Uneven_Far"</span>),</span>
 <span id="cb141-3"><a href="#cb141-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">common.legend =</span> T, <span class="at">legend =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid" width="1440"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-49-1.png" class="img-fluid figure-img" width="1440"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -4925,7 +4972,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb142-2"><a href="#cb142-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"3_Even"</span>, <span class="st">"3_Uneven"</span>, <span class="st">""</span>, <span class="st">"5_Uneven"</span>),</span>
 <span id="cb142-3"><a href="#cb142-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">common.legend =</span> T, <span class="at">legend =</span> <span class="st">"bottom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid" width="960"></p>
+<div>
+<figure class="figure">
+<p><img src="FDR_analisysResults5_20_files/figure-html/unnamed-chunk-50-1.png" class="img-fluid figure-img" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -4934,13 +4985,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb143"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href="#cb143-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.6 LTS
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -4956,98 +5007,70 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] ggpubr_0.6.0                ggplot2_3.4.2              
- [3] tidyr_1.3.0                 dplyr_1.1.2                
- [5] stringr_1.5.0               reticulate_1.35.0          
- [7] monocle3_1.3.4              SingleCellExperiment_1.22.0
- [9] SummarizedExperiment_1.30.2 GenomicRanges_1.52.0       
-[11] GenomeInfoDb_1.36.1         IRanges_2.34.1             
-[13] S4Vectors_0.38.1            MatrixGenerics_1.12.3      
-[15] matrixStats_1.2.0           Biobase_2.60.0             
-[17] BiocGenerics_0.46.0         Seurat_5.0.0               
-[19] SeuratObject_5.0.0          sp_2.1-1                   
-[21] pROC_1.18.4                 COTAN_2.3.3                
+ [1] ggpubr_0.6.0                ggplot2_4.0.1              
+ [3] tidyr_1.3.1                 dplyr_1.1.4                
+ [5] stringr_1.5.1               reticulate_1.42.0          
+ [7] monocle3_1.3.7              SingleCellExperiment_1.30.0
+ [9] SummarizedExperiment_1.38.1 GenomicRanges_1.60.0       
+[11] GenomeInfoDb_1.44.0         IRanges_2.42.0             
+[13] S4Vectors_0.46.0            MatrixGenerics_1.20.0      
+[15] matrixStats_1.5.0           Biobase_2.68.0             
+[17] BiocGenerics_0.54.0         generics_0.1.3             
+[19] Seurat_5.2.1                SeuratObject_5.1.0         
+[21] sp_2.2-0                    pROC_1.18.5                
+[23] COTAN_2.9.4                
 
 loaded via a namespace (and not attached):
-  [1] RcppAnnoy_0.0.21          splines_4.3.2            
-  [3] later_1.3.1               bitops_1.0-7             
-  [5] tibble_3.2.1              polyclip_1.10-4          
-  [7] fastDummies_1.7.3         lifecycle_1.0.3          
-  [9] rstatix_0.7.2             doParallel_1.0.17        
- [11] globals_0.16.2            lattice_0.22-5           
- [13] MASS_7.3-60               backports_1.4.1          
- [15] dendextend_1.17.1         magrittr_2.0.3           
- [17] plotly_4.10.2             rmarkdown_2.24           
- [19] yaml_2.3.7                httpuv_1.6.11            
- [21] sctransform_0.4.1         spam_2.10-0              
- [23] askpass_1.2.0             spatstat.sparse_3.0-2    
- [25] minqa_1.2.5               cowplot_1.1.1            
- [27] pbapply_1.7-2             RColorBrewer_1.1-3       
- [29] zlibbioc_1.46.0           abind_1.4-5              
- [31] Rtsne_0.16                purrr_1.0.1              
- [33] RCurl_1.98-1.12           GenomeInfoDbData_1.2.10  
- [35] circlize_0.4.15           ggrepel_0.9.3            
- [37] irlba_2.3.5.1             listenv_0.9.0            
- [39] spatstat.utils_3.0-3      terra_1.7-39             
- [41] umap_0.2.10.0             goftest_1.2-3            
- [43] RSpectra_0.16-1           spatstat.random_3.2-1    
- [45] dqrng_0.3.0               fitdistrplus_1.1-11      
- [47] parallelly_1.36.0         DelayedMatrixStats_1.22.5
- [49] leiden_0.4.3              codetools_0.2-19         
- [51] DelayedArray_0.26.7       tidyselect_1.2.0         
- [53] shape_1.4.6               farver_2.1.1             
- [55] lme4_1.1-34               ScaledMatrix_1.8.1       
- [57] viridis_0.6.4             spatstat.explore_3.2-1   
- [59] jsonlite_1.8.7            GetoptLong_1.0.5         
- [61] ellipsis_0.3.2            progressr_0.14.0         
- [63] ggridges_0.5.4            survival_3.5-7           
- [65] iterators_1.0.14          foreach_1.5.2            
- [67] tools_4.3.2               ica_1.0-3                
- [69] Rcpp_1.0.11               glue_1.7.0               
- [71] gridExtra_2.3             xfun_0.39                
- [73] ggthemes_5.0.0            withr_3.0.0              
- [75] fastmap_1.1.1             boot_1.3-28              
- [77] fansi_1.0.4               openssl_2.1.0            
- [79] digest_0.6.33             rsvd_1.0.5               
- [81] parallelDist_0.2.6        R6_2.5.1                 
- [83] mime_0.12                 colorspace_2.1-0         
- [85] scattermore_1.2           tensor_1.5               
- [87] spatstat.data_3.0-1       utf8_1.2.3               
- [89] generics_0.1.3            data.table_1.15.0        
- [91] httr_1.4.6                htmlwidgets_1.6.2        
- [93] S4Arrays_1.2.0            uwot_0.1.16              
- [95] pkgconfig_2.0.3           gtable_0.3.3             
- [97] ComplexHeatmap_2.16.0     lmtest_0.9-40            
- [99] XVector_0.40.0            htmltools_0.5.7          
-[101] carData_3.0-5             dotCall64_1.1-0          
-[103] clue_0.3-64               scales_1.3.0             
-[105] png_0.1-8                 knitr_1.43               
-[107] rstudioapi_0.15.0         reshape2_1.4.4           
-[109] rjson_0.2.21              nloptr_2.0.3             
-[111] nlme_3.1-163              zoo_1.8-12               
-[113] GlobalOptions_0.1.2       KernSmooth_2.23-22       
-[115] parallel_4.3.2            miniUI_0.1.1.1           
-[117] RcppZiggurat_0.1.6        pillar_1.9.0             
-[119] grid_4.3.2                vctrs_0.6.3              
-[121] RANN_2.6.1                promises_1.2.0.1         
-[123] car_3.1-2                 BiocSingular_1.16.0      
-[125] beachmat_2.16.0           xtable_1.8-4             
-[127] cluster_2.1.6             evaluate_0.21            
-[129] zeallot_0.1.0             cli_3.6.1                
-[131] compiler_4.3.2            rlang_1.1.1              
-[133] crayon_1.5.2              ggsignif_0.6.4           
-[135] future.apply_1.11.0       labeling_0.4.2           
-[137] plyr_1.8.8                stringi_1.8.1            
-[139] viridisLite_0.4.2         deldir_2.0-2             
-[141] BiocParallel_1.34.2       assertthat_0.2.1         
-[143] munsell_0.5.0             lazyeval_0.2.2           
-[145] spatstat.geom_3.2-4       PCAtools_2.14.0          
-[147] Matrix_1.6-3              RcppHNSW_0.6.0           
-[149] patchwork_1.2.0           sparseMatrixStats_1.12.2 
-[151] future_1.33.0             shiny_1.8.0              
-[153] ROCR_1.0-11               Rfast_2.1.0              
-[155] broom_1.0.5               igraph_1.6.0             
-[157] RcppParallel_5.1.7       </code></pre>
+  [1] RcppAnnoy_0.0.22        splines_4.5.2           later_1.4.2            
+  [4] tibble_3.3.0            polyclip_1.10-7         fastDummies_1.7.5      
+  [7] lifecycle_1.0.4         rstatix_0.7.2           Rdpack_2.6.4           
+ [10] doParallel_1.0.17       globals_0.18.0          lattice_0.22-7         
+ [13] MASS_7.3-65             backports_1.5.0         dendextend_1.19.0      
+ [16] magrittr_2.0.4          plotly_4.11.0           rmarkdown_2.29         
+ [19] yaml_2.3.10             httpuv_1.6.16           sctransform_0.4.2      
+ [22] spam_2.11-1             spatstat.sparse_3.1-0   minqa_1.2.8            
+ [25] cowplot_1.1.3           pbapply_1.7-2           RColorBrewer_1.1-3     
+ [28] abind_1.4-8             Rtsne_0.17              purrr_1.2.0            
+ [31] circlize_0.4.16         GenomeInfoDbData_1.2.14 ggrepel_0.9.6          
+ [34] irlba_2.3.5.1           listenv_0.9.1           spatstat.utils_3.1-4   
+ [37] goftest_1.2-3           RSpectra_0.16-2         spatstat.random_3.4-1  
+ [40] fitdistrplus_1.2-2      parallelly_1.45.0       codetools_0.2-20       
+ [43] DelayedArray_0.34.1     tidyselect_1.2.1        shape_1.4.6.1          
+ [46] UCSC.utils_1.4.0        farver_2.1.2            lme4_1.1-37            
+ [49] ScaledMatrix_1.16.0     viridis_0.6.5           spatstat.explore_3.4-2 
+ [52] jsonlite_2.0.0          GetoptLong_1.0.5        gghalves_0.1.4         
+ [55] Formula_1.2-5           progressr_0.15.1        ggridges_0.5.6         
+ [58] survival_3.8-3          iterators_1.0.14        foreach_1.5.2          
+ [61] tools_4.5.2             ica_1.0-3               Rcpp_1.0.14            
+ [64] glue_1.8.0              gridExtra_2.3           SparseArray_1.8.0      
+ [67] xfun_0.52               ggthemes_5.1.0          withr_3.0.2            
+ [70] fastmap_1.2.0           boot_1.3-32             digest_0.6.37          
+ [73] rsvd_1.0.5              parallelDist_0.2.6      R6_2.6.1               
+ [76] mime_0.13               colorspace_2.1-1        scattermore_1.2        
+ [79] tensor_1.5              spatstat.data_3.1-6     utf8_1.2.5             
+ [82] data.table_1.17.0       httr_1.4.7              htmlwidgets_1.6.4      
+ [85] S4Arrays_1.8.0          uwot_0.2.3              pkgconfig_2.0.3        
+ [88] gtable_0.3.6            ComplexHeatmap_2.24.0   lmtest_0.9-40          
+ [91] S7_0.2.1                XVector_0.48.0          htmltools_0.5.8.1      
+ [94] carData_3.0-5           dotCall64_1.2           zigg_0.0.2             
+ [97] clue_0.3-66             scales_1.4.0            png_0.1-8              
+[100] reformulas_0.4.1        spatstat.univar_3.1-3   knitr_1.50             
+[103] reshape2_1.4.4          rjson_0.2.23            nloptr_2.2.1           
+[106] nlme_3.1-168            proxy_0.4-27            zoo_1.8-14             
+[109] GlobalOptions_0.1.2     KernSmooth_2.23-26      parallel_4.5.2         
+[112] miniUI_0.1.2            pillar_1.10.2           grid_4.5.2             
+[115] vctrs_0.6.5             RANN_2.6.2              promises_1.3.2         
+[118] car_3.1-3               BiocSingular_1.24.0     beachmat_2.24.0        
+[121] xtable_1.8-4            cluster_2.1.8.1         evaluate_1.0.3         
+[124] zeallot_0.2.0           cli_3.6.5               compiler_4.5.2         
+[127] rlang_1.1.6             crayon_1.5.3            ggsignif_0.6.4         
+[130] future.apply_1.20.0     labeling_0.4.3          plyr_1.8.9             
+[133] stringi_1.8.7           viridisLite_0.4.2       deldir_2.0-4           
+[136] BiocParallel_1.42.0     assertthat_0.2.1        lazyeval_0.2.2         
+[139] spatstat.geom_3.4-1     Matrix_1.7-4            RcppHNSW_0.6.0         
+[142] patchwork_1.3.2         future_1.58.0           shiny_1.11.0           
+[145] rbibutils_2.3           ROCR_1.0-11             Rfast_2.1.5.1          
+[148] broom_1.0.8             igraph_2.1.4            RcppParallel_5.1.10    </code></pre>
 </div>
 </div>
 
@@ -5091,18 +5114,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -5134,11 +5146,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -5148,8 +5199,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -5161,7 +5221,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -5205,6 +5388,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -5230,6 +5414,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -5290,6 +5500,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

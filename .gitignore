@@ -9,3 +9,8 @@ Data/*
 /.quarto/
 *.csv
 CoexData/*
+*.fst
+*.csv.gz
+*.log
+*.pdf
+*.png

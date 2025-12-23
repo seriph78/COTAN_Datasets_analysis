@@ -118,13 +118,12 @@ ground_truth_tot <- ground_truth_tot[2:nrow(ground_truth_tot),]
 
 head(ground_truth_tot)
 ```
+
 ```{r}
 length(unique(ground_truth_tot$genes))
 
 sum(ground_truth_tot$value)
 ```
-
-
 
 ### ROC for COTAN
 
@@ -138,7 +137,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -261,7 +260,6 @@ roc_resultSeurat <- roc(deaSeurat_tot$value, 1 - deaSeurat_tot$p_val)
 #plot(roc_resultSeurat)
 ```
 
-
 ### ROC for Seurat scTransform
 
 ```{r, echo=TRUE, eval=TRUE}
@@ -319,8 +317,6 @@ deaSeurat_tot$value <- as.numeric(deaSeurat_tot$value)
 roc_resultSeurat_scTr <- roc(deaSeurat_tot$value, 1 - deaSeurat_tot$p_val)
 ```
 
-
-
 ### ROC for Seurat Bimod
 
 ```{r, echo=TRUE, eval=TRUE}
@@ -377,8 +373,6 @@ deaSeurat_tot$value <- as.numeric(deaSeurat_tot$value)
 # Compute the ROC curve - note that we invert the p-values with 1 - p_values
 roc_resultSeurat_Bimod <- roc(deaSeurat_tot$value, 1 - deaSeurat_tot$p_val)
 ```
-
-
 
 ### ROC for Monocle
 
@@ -450,7 +444,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -492,8 +486,8 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 #plot(roc_resultScamPy)
 ```
 
-
 ### Summary ROC for all methods
+
 ```{r}
 TwoClusters_even_near <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,
                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
@@ -568,7 +562,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -875,7 +869,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -916,7 +910,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Two_Clusters_even_medium <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -990,7 +986,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -1297,7 +1293,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -1338,7 +1334,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Two_Clusters_even_far <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -1414,7 +1412,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -1721,7 +1719,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -1762,7 +1760,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Two_Clusters_uneven_near <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -1836,7 +1836,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2143,7 +2143,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -2184,7 +2184,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Two_Clusters_uneven_medium <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -2259,7 +2261,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2566,7 +2568,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -2607,7 +2609,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Two_Clusters_uneven_far <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -2616,8 +2620,6 @@ Two_Clusters_uneven_farPL <- Two_Clusters_uneven_far + xlab("FPR") + ylab("TPR")
 
 Two_Clusters_uneven_farPL
 ```
-
-
 
 # 3 clusters
 
@@ -2686,7 +2688,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2993,7 +2995,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -3034,7 +3036,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Three_Clusters_even <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -3096,6 +3100,7 @@ head(ground_truth_tot)
 length(unique(ground_truth_tot$genes)) 
 sum(ground_truth_tot$value)
 ```
+
 ### ROC for COTAN
 
 ```{r cotan8, echo=TRUE, eval=TRUE}
@@ -3108,7 +3113,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -3415,7 +3420,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -3456,7 +3461,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Three_Clusters_uneven <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -3520,6 +3527,7 @@ head(ground_truth_tot)
 length(unique(ground_truth_tot$genes)) 
 sum(ground_truth_tot$value)
 ```
+
 ### ROC for COTAN
 
 ```{r cotan9, echo=TRUE, eval=TRUE}
@@ -3532,7 +3540,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -3828,7 +3836,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -3869,7 +3877,9 @@ roc_resultScamPy <- roc(deaScamPy_tot$value, 1 - deaScamPy_tot$pval)
 # Plot the ROC curve
 #plot(roc_resultScamPy)
 ```
+
 ### Summary ROC for all methods
+
 ```{r}
 Five_Clusters <- ggroc(list(COTAN=roc_resultCOTAN, Seurat=roc_resultSeurat,                  Seurat_scTr = roc_resultSeurat_scTr, Seurat_Bimod = roc_resultSeurat_Bimod,
                  Monocle=roc_resultMonocle, ScamPy=roc_resultScamPy))
@@ -3898,10 +3908,8 @@ ggarrange(Three_Clusters_evenPL,Three_Clusters_unevenPL, NULL, Five_Clusters_une
           ncol = 2, nrow = 2, common.legend = T, legend = "bottom")
 ```
 
-
 ## Footer
 
 ```{r}
 sessionInfo()
 ```
-

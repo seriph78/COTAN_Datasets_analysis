@@ -5,6 +5,14 @@ project:
     - "*.qmd"
     - "!src/"
     - "clustering_comparison.ipynb"
+    - "!LR_forUTClusters.qmd"
+    - "!cd14_analysis_HGDI.qmd"
+    - "!DEA_Seurat_COTAN.qmd"
+    - "!FDR_DataSetCreation_ByClusterMerging.qmd"
+    - "!ForebrainDorsal_MixingUniformClusters_ToEstimateGDISensitivity.qmd"
+    - "!GDI_vairance.qmd"
+    - "!PBMC_clusteringNew2025.qmd"
+    - "!SubsettingDataSensitivityEvaluation.qmd"
 
 
 website:

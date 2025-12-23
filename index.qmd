@@ -18,6 +18,17 @@ title: "COTAN V2.0 Datasets analysis"
 | 9 | PBMC2 | PBMC | H.s. | 6574 |  | [ ](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-with-cell-surface-proteins-next-gem-3-1-standard-3-1-0)10X website | 5975 | 10X | yes |
 | 10 | PBMC3 | PBMC | H.s. | 11715 |  | [ ](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-with-cell-surface-proteins-next-gem-3-1-standard-3-1-0)10X website | 10944 | 10X | yes |
 | 11 | PBMC4 | PBMC | H.s. | 8258 |  | [ ](https://www.10xgenomics.com/datasets/5-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-with-cell-surface-proteins-next-gem-3-1-standard-3-1-0)10X website | 6966 | 10X | yes |
+| 12 |  |  |  |  |  |  |  | 10X | yes |
+| 13 |  |  |  |  |  |  |  | 10X | yes |
+| 14 |  |  |  |  |  |  |  | 10X | yes |
+| 15 |  |  |  |  |  |  |  | 10X | yes |
+| 16 |  |  |  |  |  |  |  | 10X | yes |
+| 17 |  |  |  |  |  |  |  | 10X | yes |
+| 18 |  |  |  |  |  |  |  | 10X | yes |
+| 19 |  |  |  |  |  |  |  | 10X | yes |
+| 20 |  |  |  |  |  |  |  | 10X | yes |
+
+
 :::
 
 ```{r, echo=FALSE, eval=FALSE}

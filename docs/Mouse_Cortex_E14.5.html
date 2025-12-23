@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>COTAN Datasets analysis - E14.5 Mouse Cortex Loo 2019</title>
+<title>E14.5 Mouse Cortex Loo 2019 – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -79,7 +79,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,6 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -104,13 +111,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="./Mouse_Cortex_E14.5.html">Mouse Cortex Loo 2019</a></li><li class="breadcrumb-item"><a href="./Mouse_Cortex_E14.5.html">Cleaning and cell clustering</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="./Mouse_Cortex_E14.5.html">Mouse Cortex Loo 2019</a></li><li class="breadcrumb-item"><a href="./Mouse_Cortex_E14.5.html">Cleaning and cell clustering</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -119,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">COTAN Datasets analysis</a> 
@@ -140,18 +147,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">Datasets</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Mouse Cortex Loo 2019</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -172,9 +179,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -207,9 +214,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Brain LaManno 2021</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -260,9 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">CD14+</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,9 +284,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">PBMC form 10X site</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,9 +321,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Coex score evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -331,9 +338,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">GDI sensitivity</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -360,9 +367,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
  <span class="menu-text">Cluster evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -401,9 +408,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -428,9 +435,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">FDR and TPR - ROC curves</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -439,12 +446,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Results - thresholds true 3% 10%</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./FDR_analisysResults3_10_th04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Results - thresholds true 3% 10% threshold 0.4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -471,9 +472,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Additional code and scripts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -507,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -521,7 +522,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="./Mouse_Cortex_E14.5.html">Mouse Cortex Loo 2019</a></li><li class="breadcrumb-item"><a href="./Mouse_Cortex_E14.5.html">Cleaning and cell clustering</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">E14.5 Mouse Cortex Loo 2019</h1>
 </div>
@@ -536,7 +537,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">parallelly.fork.enable =</span> <span class="cn">TRUE</span>)</span>
@@ -549,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>e14_dge <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"../COTAN_small_paper/data/MouseCortex/E14_combined_matrix.txt.gz"</span>,<span class="at">header=</span>T,<span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>,<span class="at">row.names=</span><span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>e14_dge <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">"Data/MouseCortex/OriginalData/E14_combined_matrix.txt.gz"</span>,<span class="at">header=</span>T,<span class="at">sep=</span><span class="st">"</span><span class="sc">\t</span><span class="st">"</span>,<span class="at">row.names=</span><span class="dv">1</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">dim</span>(e14_dge))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -568,46 +571,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                             <span class="at">GEO =</span> <span class="st">"GSE123335"</span>,</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">sequencingMethod =</span> <span class="st">"Drop_seq"</span>,</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">sampleCondition =</span> cond)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(e14_dge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>CellCond <span class="ot">&lt;-</span> <span class="fu">str_split</span>(<span class="fu">getCells</span>(obj),<span class="at">pattern =</span> <span class="st">"_"</span>,<span class="at">simplify =</span> T)[,<span class="dv">1</span>]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(CellCond) <span class="ot">&lt;-</span> <span class="fu">getCells</span>(obj)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">addCondition</span>(obj,<span class="st">"CellCond"</span>,CellCond)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(e14_dge)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ECDPlot</span>(obj, <span class="at">yCut =</span> 400L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ECDPlot</span>(obj, <span class="at">yCut =</span> <span class="dv">400</span>L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(obj,<span class="at">splitPattern =</span> <span class="st">"_"</span>,<span class="at">numCol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(obj,<span class="at">condName =</span> <span class="st">"CellCond"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(obj,<span class="at">splitPattern =</span> <span class="st">"_"</span>,<span class="at">numCol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(obj,<span class="at">condName =</span> <span class="st">"CellCond"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mit <span class="ot">&lt;-</span> <span class="fu">mitochondrialPercentagePlot</span>(obj, <span class="at">genePrefix =</span> <span class="st">"^mt-"</span>,<span class="at">splitPattern =</span> <span class="st">"_"</span>,<span class="at">numCol =</span> <span class="dv">1</span>)</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mit <span class="ot">&lt;-</span> <span class="fu">mitochondrialPercentagePlot</span>(obj, <span class="at">genePrefix =</span> <span class="st">"^mt-"</span>,<span class="at">condName =</span> <span class="st">"CellCond"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mit[[<span class="st">"plot"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>To drop cells by cell library size:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cells_to_rem <span class="ot">&lt;-</span> <span class="fu">getCells</span>(obj)[<span class="fu">getCellsSize</span>(obj) <span class="sc">&gt;</span> <span class="dv">15000</span>]</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(obj, <span class="at">cells =</span> cells_to_rem)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(obj,<span class="at">splitPattern =</span> <span class="st">"_"</span>,<span class="at">numCol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(obj,<span class="at">condName =</span> <span class="st">"CellCond"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(obj,<span class="at">splitPattern =</span> <span class="st">"_"</span>,<span class="at">numCol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(obj,<span class="at">condName =</span> <span class="st">"CellCond"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>To drop cells by mitochondrial percentage:</p>
@@ -616,17 +648,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>cells_to_rem <span class="ot">&lt;-</span> <span class="fu">rownames</span>(mit[[<span class="st">"sizes"</span>]])[to_rem]</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(obj, <span class="at">cells =</span> cells_to_rem)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>mit <span class="ot">&lt;-</span> <span class="fu">mitochondrialPercentagePlot</span>(obj, <span class="at">genePrefix =</span> <span class="st">"^mt-"</span>,<span class="at">splitPattern =</span> <span class="st">"_"</span>,<span class="at">numCol =</span> <span class="dv">1</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>mit <span class="ot">&lt;-</span> <span class="fu">mitochondrialPercentagePlot</span>(obj, <span class="at">genePrefix =</span> <span class="st">"^mt-"</span>,<span class="at">condName =</span> <span class="st">"CellCond"</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>mit[[<span class="st">"plot"</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(obj,<span class="at">splitPattern =</span> <span class="st">"_"</span>,<span class="at">numCol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(obj,<span class="at">condName =</span> <span class="st">"CellCond"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -635,13 +675,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>pcaCellsPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>genesPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -652,19 +700,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>pcaCellsPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a> genesPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nuPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -672,17 +732,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>yset <span class="ot">&lt;-</span> <span class="fl">0.18</span> <span class="co"># the threshold to remove low UDE cells</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plot.ude <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(nuDf, <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> nu)) <span class="sc">+</span></span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_point</span>(<span class="at">colour =</span> <span class="st">"#8491B4B2"</span>, <span class="at">size =</span> <span class="fl">1.0</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">xlim</span>(0L, <span class="dv">3000</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">xlim</span>(<span class="dv">0</span>L, <span class="dv">3000</span>) <span class="sc">+</span></span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>            <span class="fu">ylim</span>(<span class="fl">0.0</span>, <span class="fl">1.0</span>) <span class="sc">+</span></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> yset, <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
 <span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                       <span class="at">color =</span> <span class="st">"darkred"</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> 1000L, <span class="at">y =</span> <span class="fl">0.25</span>,</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>            <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">1000</span>L, <span class="at">y =</span> <span class="fl">0.25</span>,</span>
 <span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>                     <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"to remove cells with nu &lt; "</span>, yset),</span>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">color =</span> <span class="st">"darkred"</span>, <span class="at">size =</span> <span class="fl">4.5</span>)</span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>plot.ude</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -695,25 +759,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>pcaCellsPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>genesPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>UDEPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nuPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -721,32 +801,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(UDEPlot<span class="sc">$</span>data, <span class="fu">aes</span>(PC1,PC2,<span class="at">color =</span> Sample)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(UDEPlot<span class="sc">$</span>data, <span class="fu">aes</span>(PC2,PC3,<span class="at">color =</span> Sample)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(UDEPlot<span class="sc">$</span>data, <span class="fu">aes</span>(PC2,PC5,<span class="at">color =</span> Sample)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(UDEPlot<span class="sc">$</span>data, <span class="fu">aes</span>(PC2,PC5,<span class="at">color =</span> groups)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.5</span>, <span class="at">alpha=</span><span class="fl">0.7</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Mouse_Cortex_E14.5_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <section id="cotan-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="cotan-analysis">COTAN analysis</h2>
 <p>In this part, all the contingency tables are computed and used to get the statistics.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">estimateDispersionBisection</span>(obj, <span class="at">cores =</span> 15L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">estimateLambdaLinear</span>(obj)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">estimateDispersionBisection</span>(obj, <span class="at">cores =</span> <span class="dv">15</span>L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>COEX</code> evaluation and storing</p>
 <div class="cell">
@@ -757,18 +854,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(obj, <span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(cond, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(cond, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>objTemp <span class="ot">&lt;-</span> obj</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="at">file =</span> <span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(cond, <span class="st">".cotan.RDS"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>(Next code… just check that the already stored data is identical to the re-calculated)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(<span class="fu">getRawData</span>(obj),<span class="fu">getRawData</span>(objTemp))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.6 LTS
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -783,85 +888,86 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] stringr_1.5.0     qpdf_1.3.2        Rtsne_0.17        factoextra_1.0.7 
-[5] ggplot2_3.5.0     data.table_1.15.0 zeallot_0.1.0     COTAN_2.5.0      
+[1] stringr_1.5.1     qpdf_1.3.5        Rtsne_0.17        factoextra_1.0.7 
+[5] ggplot2_4.0.1     data.table_1.17.0 zeallot_0.2.0     COTAN_2.9.4      
 
 loaded via a namespace (and not attached):
-  [1] RcppAnnoy_0.0.21          splines_4.3.2            
-  [3] later_1.3.1               tibble_3.2.1             
-  [5] polyclip_1.10-4           fastDummies_1.7.3        
-  [7] lifecycle_1.0.3           doParallel_1.0.17        
-  [9] globals_0.16.2            lattice_0.22-5           
- [11] MASS_7.3-60               dendextend_1.17.1        
- [13] magrittr_2.0.3            plotly_4.10.2            
- [15] rmarkdown_2.24            yaml_2.3.7               
- [17] httpuv_1.6.11             Seurat_5.0.0             
- [19] sctransform_0.4.1         spam_2.10-0              
- [21] askpass_1.2.0             sp_2.1-1                 
- [23] spatstat.sparse_3.0-2     reticulate_1.36.1        
- [25] cowplot_1.1.1             pbapply_1.7-2            
- [27] RColorBrewer_1.1-3        abind_1.4-5              
- [29] purrr_1.0.1               BiocGenerics_0.46.0      
- [31] circlize_0.4.15           IRanges_2.34.1           
- [33] S4Vectors_0.38.1          ggrepel_0.9.5            
- [35] irlba_2.3.5.1             listenv_0.9.0            
- [37] spatstat.utils_3.0-3      umap_0.2.10.0            
- [39] goftest_1.2-3             RSpectra_0.16-1          
- [41] spatstat.random_3.2-1     dqrng_0.3.0              
- [43] fitdistrplus_1.1-11       parallelly_1.37.1        
- [45] DelayedMatrixStats_1.22.5 leiden_0.4.3             
- [47] codetools_0.2-19          DelayedArray_0.26.7      
- [49] tidyselect_1.2.0          shape_1.4.6              
- [51] farver_2.1.1              ScaledMatrix_1.8.1       
- [53] viridis_0.6.4             matrixStats_1.2.0        
- [55] stats4_4.3.2              spatstat.explore_3.2-1   
- [57] jsonlite_1.8.7            GetoptLong_1.0.5         
- [59] ellipsis_0.3.2            progressr_0.14.0         
- [61] ggridges_0.5.4            survival_3.5-8           
- [63] iterators_1.0.14          foreach_1.5.2            
- [65] tools_4.3.2               ica_1.0-3                
- [67] Rcpp_1.0.11               glue_1.7.0               
- [69] gridExtra_2.3             xfun_0.39                
- [71] MatrixGenerics_1.12.3     ggthemes_5.1.0           
- [73] dplyr_1.1.2               withr_3.0.0              
- [75] fastmap_1.1.1             fansi_1.0.4              
- [77] openssl_2.1.0             digest_0.6.33            
- [79] rsvd_1.0.5                parallelDist_0.2.6       
- [81] R6_2.5.1                  mime_0.12                
- [83] colorspace_2.1-0          scattermore_1.2          
- [85] tensor_1.5                spatstat.data_3.0-1      
- [87] utf8_1.2.3                tidyr_1.3.0              
- [89] generics_0.1.3            httr_1.4.6               
- [91] htmlwidgets_1.6.2         S4Arrays_1.2.0           
- [93] uwot_0.1.16               pkgconfig_2.0.3          
- [95] gtable_0.3.3              ComplexHeatmap_2.16.0    
- [97] lmtest_0.9-40             htmltools_0.5.8          
- [99] dotCall64_1.1-0           clue_0.3-64              
-[101] SeuratObject_5.0.0        scales_1.3.0             
-[103] png_0.1-8                 knitr_1.43               
-[105] rstudioapi_0.15.0         reshape2_1.4.4           
-[107] rjson_0.2.21              nlme_3.1-163             
-[109] zoo_1.8-12                GlobalOptions_0.1.2      
-[111] KernSmooth_2.23-22        parallel_4.3.2           
-[113] miniUI_0.1.1.1            RcppZiggurat_0.1.6       
-[115] pillar_1.9.0              grid_4.3.2               
-[117] vctrs_0.6.3               RANN_2.6.1               
-[119] promises_1.2.0.1          BiocSingular_1.16.0      
-[121] beachmat_2.16.0           xtable_1.8-4             
-[123] cluster_2.1.6             evaluate_0.21            
-[125] cli_3.6.1                 compiler_4.3.2           
-[127] rlang_1.1.1               crayon_1.5.2             
-[129] future.apply_1.11.0       labeling_0.4.2           
-[131] plyr_1.8.8                stringi_1.8.1            
-[133] viridisLite_0.4.2         deldir_2.0-2             
-[135] BiocParallel_1.34.2       assertthat_0.2.1         
-[137] munsell_0.5.0             lazyeval_0.2.2           
-[139] spatstat.geom_3.2-4       PCAtools_2.14.0          
-[141] Matrix_1.6-3              RcppHNSW_0.6.0           
-[143] patchwork_1.2.0           sparseMatrixStats_1.12.2 
-[145] future_1.33.0             shiny_1.8.0              
-[147] ROCR_1.0-11               Rfast_2.1.0              
-[149] igraph_2.0.3              RcppParallel_5.1.7       </code></pre>
+  [1] RcppAnnoy_0.0.22            splines_4.5.2              
+  [3] later_1.4.2                 tibble_3.3.0               
+  [5] polyclip_1.10-7             fastDummies_1.7.5          
+  [7] lifecycle_1.0.4             doParallel_1.0.17          
+  [9] globals_0.18.0              lattice_0.22-7             
+ [11] MASS_7.3-65                 dendextend_1.19.0          
+ [13] magrittr_2.0.4              plotly_4.11.0              
+ [15] rmarkdown_2.29              yaml_2.3.10                
+ [17] httpuv_1.6.16               Seurat_5.2.1               
+ [19] sctransform_0.4.2           askpass_1.2.1              
+ [21] spam_2.11-1                 sp_2.2-0                   
+ [23] spatstat.sparse_3.1-0       reticulate_1.42.0          
+ [25] cowplot_1.1.3               pbapply_1.7-2              
+ [27] RColorBrewer_1.1-3          abind_1.4-8                
+ [29] GenomicRanges_1.60.0        purrr_1.2.0                
+ [31] BiocGenerics_0.54.0         circlize_0.4.16            
+ [33] GenomeInfoDbData_1.2.14     IRanges_2.42.0             
+ [35] S4Vectors_0.46.0            ggrepel_0.9.6              
+ [37] irlba_2.3.5.1               listenv_0.9.1              
+ [39] spatstat.utils_3.1-4        goftest_1.2-3              
+ [41] RSpectra_0.16-2             spatstat.random_3.4-1      
+ [43] fitdistrplus_1.2-2          parallelly_1.45.0          
+ [45] codetools_0.2-20            DelayedArray_0.34.1        
+ [47] tidyselect_1.2.1            shape_1.4.6.1              
+ [49] UCSC.utils_1.4.0            farver_2.1.2               
+ [51] ScaledMatrix_1.16.0         viridis_0.6.5              
+ [53] matrixStats_1.5.0           stats4_4.5.2               
+ [55] spatstat.explore_3.4-2      jsonlite_2.0.0             
+ [57] GetoptLong_1.0.5            gghalves_0.1.4             
+ [59] progressr_0.15.1            ggridges_0.5.6             
+ [61] survival_3.8-3              iterators_1.0.14           
+ [63] foreach_1.5.2               tools_4.5.2                
+ [65] ica_1.0-3                   Rcpp_1.0.14                
+ [67] glue_1.8.0                  gridExtra_2.3              
+ [69] SparseArray_1.8.0           xfun_0.52                  
+ [71] MatrixGenerics_1.20.0       ggthemes_5.1.0             
+ [73] GenomeInfoDb_1.44.0         dplyr_1.1.4                
+ [75] withr_3.0.2                 fastmap_1.2.0              
+ [77] digest_0.6.37               rsvd_1.0.5                 
+ [79] parallelDist_0.2.6          R6_2.6.1                   
+ [81] mime_0.13                   colorspace_2.1-1           
+ [83] scattermore_1.2             tensor_1.5                 
+ [85] spatstat.data_3.1-6         tidyr_1.3.1                
+ [87] generics_0.1.3              httr_1.4.7                 
+ [89] htmlwidgets_1.6.4           S4Arrays_1.8.0             
+ [91] uwot_0.2.3                  pkgconfig_2.0.3            
+ [93] gtable_0.3.6                ComplexHeatmap_2.24.0      
+ [95] lmtest_0.9-40               S7_0.2.1                   
+ [97] SingleCellExperiment_1.30.0 XVector_0.48.0             
+ [99] htmltools_0.5.8.1           dotCall64_1.2              
+[101] zigg_0.0.2                  clue_0.3-66                
+[103] SeuratObject_5.1.0          scales_1.4.0               
+[105] Biobase_2.68.0              png_0.1-8                  
+[107] spatstat.univar_3.1-3       knitr_1.50                 
+[109] reshape2_1.4.4              rjson_0.2.23               
+[111] nlme_3.1-168                proxy_0.4-27               
+[113] zoo_1.8-14                  GlobalOptions_0.1.2        
+[115] KernSmooth_2.23-26          parallel_4.5.2             
+[117] miniUI_0.1.2                pillar_1.10.2              
+[119] grid_4.5.2                  vctrs_0.6.5                
+[121] RANN_2.6.2                  promises_1.3.2             
+[123] BiocSingular_1.24.0         beachmat_2.24.0            
+[125] xtable_1.8-4                cluster_2.1.8.1            
+[127] evaluate_1.0.3              cli_3.6.5                  
+[129] compiler_4.5.2              rlang_1.1.6                
+[131] crayon_1.5.3                future.apply_1.20.0        
+[133] labeling_0.4.3              plyr_1.8.9                 
+[135] stringi_1.8.7               viridisLite_0.4.2          
+[137] deldir_2.0-4                BiocParallel_1.42.0        
+[139] assertthat_0.2.1            lazyeval_0.2.2             
+[141] spatstat.geom_3.4-1         Matrix_1.7-4               
+[143] RcppHNSW_0.6.0              patchwork_1.3.2            
+[145] future_1.58.0               shiny_1.11.0               
+[147] SummarizedExperiment_1.38.1 ROCR_1.0-11                
+[149] Rfast_2.1.5.1               igraph_2.1.4               
+[151] RcppParallel_5.1.10        </code></pre>
 </div>
 </div>
 
@@ -904,18 +1010,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -947,11 +1042,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -961,8 +1095,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -974,7 +1117,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1018,6 +1284,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1043,6 +1310,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1103,6 +1396,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

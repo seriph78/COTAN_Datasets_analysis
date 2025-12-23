@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Silvia Galfrè">
-<meta name="dcterms.date" content="2024-06-22">
+<meta name="dcterms.date" content="2025-12-16">
 
-<title>COTAN Datasets analysis - Real UT clusters</title>
+<title>Real UT clusters – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -106,13 +113,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./Real_UT_clustersByCotan.html">Real UT clusters with LR</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./Real_UT_clustersByCotan.html">Real UT clusters with LR</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -121,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">COTAN Datasets analysis</a> 
@@ -142,18 +149,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Datasets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Loo 2019</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -174,9 +181,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -209,9 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Brain LaManno 2021</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -262,9 +269,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">CD14+</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -279,9 +286,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">PBMC form 10X site</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -316,9 +323,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Coex score evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -333,9 +340,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">GDI sensitivity</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -362,9 +369,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
  <span class="menu-text">Cluster evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -403,9 +410,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -430,9 +437,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">FDR and TPR - ROC curves</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -441,12 +448,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Results - thresholds true 3% 10%</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./FDR_analisysResults3_10_th04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Results - thresholds true 3% 10% threshold 0.4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -473,9 +474,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Additional code and scripts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -509,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -525,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./Real_UT_clustersByCotan.html">Real UT clusters with LR</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Real UT clusters</h1>
 </div>
@@ -544,7 +545,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 22, 2024</p>
+      <p class="date">December 16, 2025</p>
     </div>
   </div>
   
@@ -552,7 +553,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p>Cl432 E13.5 E15.0</p>
 <section id="preamble" class="level2">
@@ -605,216 +608,254 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">GDIPlot</span>(cl428_cl434,<span class="at">genes =</span> <span class="st">""</span>,<span class="at">GDIIn =</span> cl428_cl434GDI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Real_UT_clustersByCotan_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Real_UT_clustersByCotan_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">getNormalizedData</span>(cl428_cl434)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data<span class="sc">/</span><span class="fu">sum</span>(data[,<span class="dv">1</span>])</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#data &lt;- data[!rowSums(as.matrix(data)) &lt; 1,]</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">*</span><span class="dv">10000</span><span class="sc">+</span><span class="dv">1</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>row_stdev <span class="ot">&lt;-</span> <span class="fu">apply</span>(data, <span class="dv">1</span>, sd, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>row_stdev <span class="ot">&lt;-</span> row_stdev[<span class="fu">order</span>(row_stdev,<span class="at">decreasing =</span> T)]</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>genes.to.keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">names</span>(row_stdev[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]),top.GDI.genes)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> data[<span class="fu">rownames</span>(data) <span class="sc">%in%</span> genes.to.keep,]</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#data &lt;- t(as.matrix(data))</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(data.small))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data[<span class="sc">!</span><span class="fu">rowSums</span>(<span class="fu">as.matrix</span>(data)) <span class="sc">&lt;</span> <span class="dv">1</span>,]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">log</span>(data<span class="sc">*</span><span class="dv">10000</span><span class="sc">+</span><span class="dv">1</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>row_stdev <span class="ot">&lt;-</span> <span class="fu">apply</span>(data, <span class="dv">1</span>, sd, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>row_stdev <span class="ot">&lt;-</span> row_stdev[<span class="fu">order</span>(row_stdev,<span class="at">decreasing =</span> T)]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>genes.to.keep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">names</span>(row_stdev[<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>]),top.GDI.genes)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> data[<span class="fu">rownames</span>(data) <span class="sc">%in%</span> genes.to.keep,]</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#data &lt;- t(as.matrix(data))</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">as.matrix</span>(data.small))</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>COTAN_Cl.code <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">getClusterizationData</span>(cl428_cl434,<span class="at">clName =</span> <span class="st">"original.clusters"</span>)[[<span class="dv">1</span>]])</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>COTAN_Cl.code <span class="ot">&lt;-</span> COTAN_Cl.code <span class="sc">-</span><span class="dv">1</span></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> <span class="fu">cbind</span>(data.small,COTAN_Cl.code)</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data.small)</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and test set</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>training.samples <span class="ot">&lt;-</span> data.small[,<span class="st">"COTAN_Cl.code"</span>] <span class="sc">%&gt;%</span> </span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">createDataPartition</span>(<span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>train.data  <span class="ot">&lt;-</span> data.small[training.samples, ]</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>test.data <span class="ot">&lt;-</span> data.small[<span class="sc">-</span>training.samples, ]</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>COTAN_Cl.code <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">getClusterizationData</span>(cl428_cl434,<span class="at">clName =</span> <span class="st">"original.clusters"</span>)[[<span class="dv">1</span>]])</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>COTAN_Cl.code <span class="ot">&lt;-</span> COTAN_Cl.code <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> <span class="fu">cbind</span>(data.small,COTAN_Cl.code)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>data.small <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(data.small)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Split the data into training and test set</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>training.samples <span class="ot">&lt;-</span> data.small[,<span class="st">"COTAN_Cl.code"</span>] <span class="sc">%&gt;%</span> </span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">createDataPartition</span>(<span class="at">p =</span> <span class="fl">0.8</span>, <span class="at">list =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>train.data  <span class="ot">&lt;-</span> data.small[training.samples, ]</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>test.data <span class="ot">&lt;-</span> data.small[<span class="sc">-</span>training.samples, ]</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(train.data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                              Hs3st1   Abracl   Cdkn1c   Cited2    Mllt3
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 2.131073 0.000000 1.550102 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 2.204009 0.000000 2.840395 2.204009
-10X74_4_A_1:GATTCGGAGGTGAGx 0.000000 2.481727 1.319213 1.868868 1.319213
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 2.852085 0.000000 1.450389 2.379020
-10X74_4_A_1:CCTAGAGAGTCACAx 2.634119 1.669657 0.000000 3.115812 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 0.000000 3.728844 0.000000 2.875281 1.220847
-                               Mfap4   Cxcl12 Cdc42ep3    Fmnl2  Phf20l1
-10X74_4_A_1:GTAACGTGCCATAGx 1.550102 1.550102 0.000000 0.000000 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 0.000000 1.615546 2.571994 2.571994
-10X74_4_A_1:GATTCGGAGGTGAGx 3.004857 1.868868 0.000000 0.000000 1.319213
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.379020 0.000000 2.018835 0.000000 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 1.669657 0.000000 0.000000 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 2.875281 1.754424 0.000000 0.000000 0.000000
-                               Ptprk     Tnik  Gm29260    Sfrp1   Pantr1
-10X74_4_A_1:GTAACGTGCCATAGx 1.550102 1.550102 0.000000 1.550102 2.496164
-10X73_3_A_1:ACGCCGGATCGTAGx 2.204009 2.204009 1.615546 1.615546 1.615546
-10X74_4_A_1:GATTCGGAGGTGAGx 1.319213 1.868868 1.868868 1.868868 2.481727
-10X74_4_A_1:CTGAGCCTGGTAAAx 1.450389 0.000000 2.018835 0.000000 2.379020
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 0.000000 0.000000 1.669657 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 0.000000 0.000000 1.220847 1.754424 2.561118
-                               Magi2  Tmem108   Frmd4b   Plppr1     Nfia
-10X74_4_A_1:GTAACGTGCCATAGx 0.000000 0.000000 0.000000 0.000000 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 0.000000 1.615546 2.840395 2.204009
-10X74_4_A_1:GATTCGGAGGTGAGx 0.000000 0.000000 0.000000 2.221530 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 1.450389 2.379020 2.018835 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 0.000000 0.000000 1.669657 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 2.357095 1.220847 1.754424 1.220847 2.730486
-                              Igfbp2    Fabp7 Ctnnd2      Ptn   Frmd4a   Nkain2
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 0.000000      0 2.131073 3.147239 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 0.000000 1.615546      0 1.615546 1.615546 3.051789
-10X74_4_A_1:GATTCGGAGGTGAGx 2.858930 1.319213      0 0.000000 0.000000 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 1.450389      0 2.643269 1.450389 2.643269
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 1.669657      0 2.263916 0.000000 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 2.357095 1.754424      0 0.000000 0.000000 1.220847
-                              Sorbs2     Hes6      Dcc  Neurog2    Tcf12
-10X74_4_A_1:GTAACGTGCCATAGx 2.496164 0.000000 1.550102 0.000000 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 2.571994 1.615546 0.000000 0.000000 2.571994
-10X74_4_A_1:GATTCGGAGGTGAGx 1.868868 1.868868 1.868868 2.688010 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 0.000000 2.852085 0.000000 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 1.669657 0.000000 0.000000 3.115812
-10X74_4_A_1:CTAGGATGCTTGCCx 2.100490 0.000000 1.220847 1.220847 2.100490
-                             Cbfa2t2    Ccnd2   Elavl4    Clvs1     Ank3
-10X74_4_A_1:GTAACGTGCCATAGx 0.000000 0.000000 1.550102 0.000000 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 1.615546 0.000000 0.000000 1.615546
-10X74_4_A_1:GATTCGGAGGTGAGx 2.481727 2.858930 1.319213 0.000000 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 0.000000 2.018835 0.000000 2.852085
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 2.263916 2.903693 2.634119 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 2.100490 2.100490 1.220847 1.754424
-                               Igsf8     Map2     Lhx2   Nkain3  Neurod2
-10X74_4_A_1:GTAACGTGCCATAGx 0.000000 0.000000 2.131073 1.550102 2.496164
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 2.204009 1.615546 1.615546 1.615546
-10X74_4_A_1:GATTCGGAGGTGAGx 1.319213 1.868868 2.221530 2.688010 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 1.450389 0.000000 2.018835 3.171927 3.024739
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 2.903693 2.903693 0.000000 2.263916
-10X74_4_A_1:CTAGGATGCTTGCCx 1.754424 1.220847 2.730486 0.000000 2.561118
-                               Sstr2    Eomes C130071C03Rik     Emx1  Cttnbp2
-10X74_4_A_1:GTAACGTGCCATAGx 2.763031 0.000000      2.131073 2.131073 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 2.204009 0.000000      2.204009 1.615546 3.051789
-10X74_4_A_1:GATTCGGAGGTGAGx 2.481727 1.868868      0.000000 1.319213 2.221530
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.643269 0.000000      2.643269 1.450389 0.000000
-10X74_4_A_1:CCTAGAGAGTCACAx 2.263916 2.263916      1.669657 0.000000 3.115812
-10X74_4_A_1:CTAGGATGCTTGCCx 2.875281 0.000000      1.220847 2.100490 2.875281
-                                Nfix    Epha4   Plxna2   Plxna4     Aff3
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 0.000000 1.550102 1.550102 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 3.721016 0.000000 1.615546 0.000000 2.571994
-10X74_4_A_1:GATTCGGAGGTGAGx 2.688010 1.319213 2.221530 0.000000 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 3.024739 1.450389 2.643269 0.000000 0.000000
-10X74_4_A_1:CCTAGAGAGTCACAx 2.903693 1.669657 1.669657 0.000000 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 3.467944 1.220847 0.000000 0.000000 0.000000
-                                Nrp1   Nedd4l    Tiam2  Ppp2r2b   Bcl11a
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 1.550102 1.550102 2.763031 2.131073
-10X73_3_A_1:ACGCCGGATCGTAGx 2.204009 0.000000 2.204009 2.204009 1.615546
-10X74_4_A_1:GATTCGGAGGTGAGx 0.000000 0.000000 2.221530 1.319213 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 0.000000 1.450389 2.852085 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 1.669657 0.000000 2.263916 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 0.000000 1.220847 2.100490 2.100490 2.561118
-                                Zeb2    Tenm2    Gria2    Gpm6a    Ptprd
-10X74_4_A_1:GTAACGTGCCATAGx 1.550102 0.000000 2.496164 1.550102 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 0.000000 0.000000 2.204009 2.840395 0.000000
-10X74_4_A_1:GATTCGGAGGTGAGx 1.868868 0.000000 1.319213 1.319213 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 0.000000 2.379020 1.450389 2.379020
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 0.000000 1.669657 0.000000 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 2.357095 1.220847 0.000000 0.000000 0.000000
-                                Sox5   Mpped2   Bcl11b    Epha5     Nol4
-10X74_4_A_1:GTAACGTGCCATAGx 2.763031 2.496164 1.550102 2.496164 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 2.204009 0.000000 2.571994 2.204009
-10X74_4_A_1:GATTCGGAGGTGAGx 1.319213 2.858930 0.000000 2.221530 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 1.450389 0.000000 2.018835 2.852085
-10X74_4_A_1:CCTAGAGAGTCACAx 2.263916 0.000000 0.000000 2.634119 2.903693
-10X74_4_A_1:CTAGGATGCTTGCCx 0.000000 1.754424 0.000000 2.357095 0.000000
-                               Grik2     Pcp4   Ccser1    Kcnb2    Kcnh7
-10X74_4_A_1:GTAACGTGCCATAGx 1.550102 0.000000 3.538277 2.131073 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 0.000000 3.051789 2.840395 0.000000 0.000000
-10X74_4_A_1:GATTCGGAGGTGAGx 1.319213 2.688010 0.000000 1.319213 1.319213
-10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 0.000000 3.024739 0.000000 1.450389
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 2.903693 2.263916 0.000000 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 1.754424 2.357095 1.220847 2.357095
-                                 Pam    Negr1    Myt1l      Id2    Foxp2
-10X74_4_A_1:GTAACGTGCCATAGx 0.000000 1.550102 3.424120 2.973475 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 2.571994 2.571994 2.204009 2.204009 1.615546
-10X74_4_A_1:GATTCGGAGGTGAGx 1.868868 2.481727 0.000000 0.000000 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 1.450389 0.000000 2.379020 0.000000 2.379020
-10X74_4_A_1:CCTAGAGAGTCACAx 2.634119 3.115812 1.669657 2.903693 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 0.000000 2.100490 2.561118 0.000000
-                                Gpc6    Pcdh7   Rbfox1    Robo2     Rprm
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 2.131073 2.763031 3.295232 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 2.204009 3.051789 3.374663 3.618342 0.000000
-10X74_4_A_1:GATTCGGAGGTGAGx 0.000000 1.319213 1.319213 3.245101 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 0.000000 3.024739 2.643269 0.000000
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 2.903693 1.669657 2.634119 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 0.000000 2.100490 0.000000 3.113983 1.220847
-                              Rbfox3    Stmn3     Nrn1     Nrg1     Cdh8
-10X74_4_A_1:GTAACGTGCCATAGx 1.550102 1.550102 0.000000 2.973475 2.131073
-10X73_3_A_1:ACGCCGGATCGTAGx 0.000000 0.000000 0.000000 2.840395 3.226201
-10X74_4_A_1:GATTCGGAGGTGAGx 1.868868 0.000000 1.868868 2.688010 2.688010
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.379020 2.379020 2.852085 3.300205 2.379020
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 1.669657 1.669657 2.903693 2.263916
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 2.357095 1.754424 3.113983 2.357095
-                            Cacna2d1    Rpl26    Rack1     Top1    Rpl12
-10X74_4_A_1:GTAACGTGCCATAGx 0.000000 2.763031 0.000000 2.496164 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 2.204009 3.226201 0.000000 1.615546 0.000000
-10X74_4_A_1:GATTCGGAGGTGAGx 2.481727 2.858930 2.221530 2.221530 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 2.852085 1.450389 1.450389 0.000000
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 2.634119 2.263916 1.669657 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 3.214891 2.100490 2.100490 2.357095
-                               Rplp1    Rpl22     Eif5   Rpl36a    Rps21
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 0.000000 2.973475 2.496164 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 2.571994 0.000000 0.000000 0.000000 0.000000
-10X74_4_A_1:GATTCGGAGGTGAGx 2.481727 1.319213 1.868868 0.000000 2.688010
-10X74_4_A_1:CTGAGCCTGGTAAAx 1.450389 2.018835 2.018835 3.024739 1.450389
-10X74_4_A_1:CCTAGAGAGTCACAx 2.634119 0.000000 0.000000 2.634119 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 2.100490 1.754424 1.220847 2.100490 2.357095
-                              Eif4a1     Ppia     Sub1      Mdk    Pde4d
-10X74_4_A_1:GTAACGTGCCATAGx 1.550102 2.763031 2.131073 0.000000 1.550102
-10X73_3_A_1:ACGCCGGATCGTAGx 2.204009 2.204009 0.000000 2.571994 2.571994
-10X74_4_A_1:GATTCGGAGGTGAGx 1.868868 1.319213 1.868868 3.004857 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.852085 1.450389 1.450389 3.693302 0.000000
-10X74_4_A_1:CCTAGAGAGTCACAx 2.263916 0.000000 1.669657 3.115812 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 1.754424 0.000000 1.220847 2.875281 2.875281
-                               Rps28    Rpl15    Baz2b     Rere   Rpl35a
-10X74_4_A_1:GTAACGTGCCATAGx 1.550102 2.496164 1.550102 1.550102 2.763031
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 0.000000 1.615546 3.051789 1.615546
-10X74_4_A_1:GATTCGGAGGTGAGx 1.319213 2.481727 1.868868 0.000000 2.481727
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 2.379020 1.450389 3.300205 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 2.634119 0.000000 1.669657 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 2.561118 0.000000 1.754424 1.754424
-                               Cox8a   Nt5dc2    Ttc28      Ckb     Calr
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 0.000000 2.131073 1.550102 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 2.204009 0.000000 2.571994 0.000000 0.000000
-10X74_4_A_1:GATTCGGAGGTGAGx 1.319213 2.858930 2.688010 1.319213 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 1.450389 2.018835 3.171927 0.000000 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 0.000000 2.263916 0.000000 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 2.100490 1.754424 1.220847 0.000000
-                               Arpc5    Basp1    Map1b     Xist   Ctnna2
-10X74_4_A_1:GTAACGTGCCATAGx 2.131073 2.496164 2.496164 0.000000 2.496164
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 2.571994 1.615546 2.571994 3.374663
-10X74_4_A_1:GATTCGGAGGTGAGx 1.319213 2.481727 0.000000 0.000000 1.868868
-10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 1.450389 2.018835 2.643269 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 0.000000 1.669657 3.683694 0.000000
-10X74_4_A_1:CTAGGATGCTTGCCx 2.100490 1.754424 0.000000 2.357095 1.754424
-                               Fabp5   Zbtb20    Eif1b     Nsg1     Meg3
-10X74_4_A_1:GTAACGTGCCATAGx 0.000000 1.550102 1.550102 1.550102 0.000000
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 2.204009 2.571994 1.615546 0.000000
-10X74_4_A_1:GATTCGGAGGTGAGx 1.868868 2.481727 1.319213 1.868868 0.000000
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 1.450389 2.643269 2.643269 2.018835
-10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 2.263916 1.669657 2.634119 1.669657
-10X74_4_A_1:CTAGGATGCTTGCCx 2.357095 1.220847 2.100490 1.754424 1.220847
-                               Rsrp1   Mllt11    Ctxn1   Dpysl3 COTAN_Cl.code
-10X74_4_A_1:GTAACGTGCCATAGx 2.496164 2.131073 1.550102 1.550102             0
-10X73_3_A_1:ACGCCGGATCGTAGx 1.615546 0.000000 2.840395 1.615546             0
-10X74_4_A_1:GATTCGGAGGTGAGx 1.868868 1.319213 1.319213 0.000000             0
-10X74_4_A_1:CTGAGCCTGGTAAAx 2.018835 2.379020 0.000000 2.379020             0
-10X74_4_A_1:CCTAGAGAGTCACAx 1.669657 1.669657 1.669657 0.000000             0
-10X74_4_A_1:CTAGGATGCTTGCCx 1.220847 2.357095 2.561118 0.000000             0</code></pre>
+<pre><code>                               Abracl  Cdkn1c    Cited2     Mllt3  Fam210b
+10X74_4_A_1:GTAACGTGCCATAGx 10.128836 0.00000  9.435728  9.435728 0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx 10.211198 0.00000 10.904327 10.211198 9.518087
+10X74_4_A_1:GATTCGGAGGTGAGx 10.518544 9.13233  9.825424  9.132330 9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.916737 0.00000  9.307371 10.405923 9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177 0.00000 11.194560  0.000000 0.000000
+10X74_4_A_1:CTAGGATGCTTGCCx 11.828628 0.00000 10.941336  8.995532 8.995532
+                                Mfap4   Cxcl12  Cdc42ep3    Limch1     Ier2
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728 9.435728  0.000000  0.000000 0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx  9.518087 0.000000  9.518087  0.000000 0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx 11.078148 9.825424  0.000000  9.132330 9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.405923 0.000000 10.000473 10.000473 9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177 9.585177  0.000000  0.000000 0.000000
+10X74_4_A_1:CTAGGATGCTTGCCx 10.941336 9.688617  0.000000  8.995532 8.995532
+                                Ptprk   Gm29260    Sfrp1    Pantr1     Magi2
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728  0.000000 9.435728 10.534287  0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx 10.211198  9.518087 9.518087  9.518087  9.518087
+10X74_4_A_1:GATTCGGAGGTGAGx  9.132330  9.825424 9.825424 10.518544  0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx  9.307371 10.000473 0.000000 10.405923  0.000000
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177  0.000000 9.585177  0.000000  0.000000
+10X74_4_A_1:CTAGGATGCTTGCCx  0.000000  8.995532 9.688617 10.604871 10.381733
+                             Tmem108     Ddr1       Ezr    Sncaip CT025619.1
+10X74_4_A_1:GTAACGTGCCATAGx 0.000000 0.000000  9.435728  0.000000   9.435728
+10X73_3_A_1:ACGCCGGATCGTAGx 0.000000 0.000000  0.000000  9.518087  10.211198
+10X74_4_A_1:GATTCGGAGGTGAGx 0.000000 0.000000 10.230871  9.825424   9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx 9.307371 0.000000  0.000000 10.000473   9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 0.000000 10.278290  0.000000   9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 8.995532 8.995532  8.995532  0.000000   8.995532
+                               Fabp7 Ctnnd2       Ptn    Frmd4a    Sorbs2
+10X74_4_A_1:GTAACGTGCCATAGx 0.000000      0 10.128836 11.227421 10.534287
+10X73_3_A_1:ACGCCGGATCGTAGx 9.518087      0  9.518087  9.518087 10.616651
+10X74_4_A_1:GATTCGGAGGTGAGx 9.132330      0  0.000000  0.000000  9.825424
+10X74_4_A_1:CTGAGCCTGGTAAAx 9.307371      0 10.693598  9.307371 10.000473
+10X74_4_A_1:CCTAGAGAGTCACAx 9.585177      0 10.278290  0.000000  9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 9.688617      0  0.000000  0.000000 10.094061
+                                Hes6       Dcc   Neurog2     Tcf12  Fam110a
+10X74_4_A_1:GTAACGTGCCATAGx 0.000000  9.435728  0.000000  0.000000 0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx 9.518087  0.000000  0.000000 10.616651 0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx 9.825424  9.825424 10.741682  9.825424 9.825424
+10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 10.916737  0.000000 10.000473 0.000000
+10X74_4_A_1:CCTAGAGAGTCACAx 9.585177  0.000000  0.000000 11.194560 9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 0.000000  8.995532  8.995532 10.094061 0.000000
+                               Dhrs4     Ccnd2    Elavl4      Ank3    Klf12
+10X74_4_A_1:GTAACGTGCCATAGx 0.000000  0.000000  9.435728  9.435728 0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx 0.000000  9.518087  0.000000  9.518087 0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx 9.132330 10.924000  9.132330  0.000000 9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000  0.000000 10.000473 10.916737 9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 10.278290 10.971420  9.585177 9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 9.688617 10.094061 10.094061  9.688617 0.000000
+                             Slc17a6     Lzts1      Map2      Lhx2   Neurod2
+10X74_4_A_1:GTAACGTGCCATAGx 0.000000  0.000000  0.000000 10.128836 10.534287
+10X73_3_A_1:ACGCCGGATCGTAGx 0.000000  9.518087 10.211198  9.518087  9.518087
+10X74_4_A_1:GATTCGGAGGTGAGx 9.132330 10.518544  9.825424 10.230871  9.825424
+10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 10.405923  0.000000 10.000473 11.099055
+10X74_4_A_1:CCTAGAGAGTCACAx 0.000000  0.000000 10.971420 10.971420 10.278290
+10X74_4_A_1:CTAGGATGCTTGCCx 8.995532 10.381733  8.995532 10.787188 10.604871
+                               Sstr2     Eomes   Vps37b      Ier5  Cttnbp2
+10X74_4_A_1:GTAACGTGCCATAGx 10.82196  0.000000  0.00000 10.128836  0.00000
+10X73_3_A_1:ACGCCGGATCGTAGx 10.21120  0.000000  0.00000  9.518087 11.12747
+10X74_4_A_1:GATTCGGAGGTGAGx 10.51854  9.825424  9.13233  0.000000 10.23087
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.69360  0.000000  0.00000  0.000000  0.00000
+10X74_4_A_1:CCTAGAGAGTCACAx 10.27829 10.278290 10.27829  9.585177 11.19456
+10X74_4_A_1:CTAGGATGCTTGCCx 10.94134  0.000000 10.60487  0.000000 10.94134
+                              Tmem178   Plxna4      Aff3     Tiam2  Ppp2r2b
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728 9.435728  9.435728  9.435728 10.82196
+10X73_3_A_1:ACGCCGGATCGTAGx  0.000000 0.000000 10.616651 10.211198 10.21120
+10X74_4_A_1:GATTCGGAGGTGAGx  9.132330 0.000000  0.000000 10.230871  9.13233
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.405923 0.000000  0.000000  9.307371 10.91674
+10X74_4_A_1:CCTAGAGAGTCACAx  0.000000 0.000000  0.000000  0.000000 10.27829
+10X74_4_A_1:CTAGGATGCTTGCCx  0.000000 0.000000  0.000000 10.094061 10.09406
+                                 Zeb2     Gria2     Nbea     Ptprd      Sox5
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728 10.534287 0.000000  9.435728 10.821963
+10X73_3_A_1:ACGCCGGATCGTAGx  0.000000 10.211198 9.518087  0.000000  9.518087
+10X74_4_A_1:GATTCGGAGGTGAGx  9.825424  9.132330 0.000000  0.000000  9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx  0.000000 10.405923 0.000000 10.405923 10.000473
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177  9.585177 0.000000  0.000000 10.278290
+10X74_4_A_1:CTAGGATGCTTGCCx 10.381733  0.000000 0.000000  0.000000  0.000000
+                               Mpped2   Bcl11b    Epha5     Nol4    Grik2
+10X74_4_A_1:GTAACGTGCCATAGx 10.534287 9.435728 10.53429  0.00000 9.435728
+10X73_3_A_1:ACGCCGGATCGTAGx 10.211198 0.000000 10.61665 10.21120 0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx 10.924000 0.000000 10.23087  0.00000 9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx  9.307371 0.000000 10.00047 10.91674 0.000000
+10X74_4_A_1:CCTAGAGAGTCACAx  0.000000 0.000000 10.68374 10.97142 0.000000
+10X74_4_A_1:CTAGGATGCTTGCCx  9.688617 0.000000 10.38173  0.00000 8.995532
+                            Mir124.2hg      Pcp4   Ccser1     Kcnb2   Dscaml1
+10X74_4_A_1:GTAACGTGCCATAGx   0.000000  0.000000 11.63288 10.128836  0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx   0.000000 11.127466 10.90433  0.000000  0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx   0.000000 10.741682  0.00000  9.132330  9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx   0.000000  0.000000 11.09906  0.000000  0.000000
+10X74_4_A_1:CCTAGAGAGTCACAx   0.000000 10.971420 10.27829  0.000000 10.278290
+10X74_4_A_1:CTAGGATGCTTGCCx   8.995532  9.688617 10.38173  8.995532  9.688617
+                                Kcnh7       Pam     Negr1     Ppm1e     Myt1l
+10X74_4_A_1:GTAACGTGCCATAGx  0.000000  0.000000  9.435728 10.534287 11.515100
+10X73_3_A_1:ACGCCGGATCGTAGx  0.000000 10.616651 10.616651  9.518087 10.211198
+10X74_4_A_1:GATTCGGAGGTGAGx  9.132330  9.825424 10.518544  9.825424  0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx  9.307371  9.307371  0.000000  0.000000 10.405923
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177 10.683744 11.194560  0.000000  9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 10.381733  8.995532  0.000000  9.688617 10.094061
+                                Foxp2     Gpc6     Masp1 Serpini1    Pcdh7
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728 10.12884  0.000000 9.435728 10.12884
+10X73_3_A_1:ACGCCGGATCGTAGx  9.518087 10.21120  9.518087 0.000000 11.12747
+10X74_4_A_1:GATTCGGAGGTGAGx  0.000000  0.00000  9.132330 0.000000  9.13233
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.405923  0.00000 10.693598 0.000000  0.00000
+10X74_4_A_1:CCTAGAGAGTCACAx  0.000000  0.00000  0.000000 0.000000 10.97142
+10X74_4_A_1:CTAGGATGCTTGCCx  0.000000  0.00000  9.688617 0.000000 10.09406
+                               Rbfox1    Robo2     Fhod3     Rprm      Gng3
+10X74_4_A_1:GTAACGTGCCATAGx 10.821963 11.38157  9.435728 0.000000 10.128836
+10X73_3_A_1:ACGCCGGATCGTAGx 11.463934 11.71525 10.211198 0.000000  0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx  9.132330 11.32946  9.132330 9.825424  9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx 11.099055 10.69360  0.000000 0.000000  0.000000
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177 10.68374  0.000000 0.000000  0.000000
+10X74_4_A_1:CTAGGATGCTTGCCx  0.000000 11.19265  9.688617 8.995532  8.995532
+                               Uchl1  Tmem176b      Nrn1   Snap25     Nrg1
+10X74_4_A_1:GTAACGTGCCATAGx 0.000000  9.435728  0.000000 9.435728 11.04510
+10X73_3_A_1:ACGCCGGATCGTAGx 0.000000 10.211198  0.000000 0.000000 10.90433
+10X74_4_A_1:GATTCGGAGGTGAGx 0.000000  9.132330  9.825424 0.000000 10.74168
+10X74_4_A_1:CTGAGCCTGGTAAAx 9.307371  0.000000 10.916737 9.307371 11.38673
+10X74_4_A_1:CCTAGAGAGTCACAx 0.000000  9.585177  9.585177 9.585177 10.97142
+10X74_4_A_1:CTAGGATGCTTGCCx 0.000000  8.995532  9.688617 9.688617 11.19265
+                                Cdh8   Trim17     Chga    Rpl26     Rack1
+10X74_4_A_1:GTAACGTGCCATAGx 10.12884 0.000000 0.000000 10.82196  0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx 11.30979 0.000000 9.518087 11.30979  0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx 10.74168 0.000000 0.000000 10.92400 10.230871
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.40592 9.307371 9.307371 10.91674  9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx 10.27829 9.585177 0.000000 10.68374 10.278290
+10X74_4_A_1:CTAGGATGCTTGCCx 10.38173 8.995532 0.000000 11.29801 10.094061
+                             Hsp90b1    Aldoa   Tuba1b    Sf3b6      Top1
+10X74_4_A_1:GTAACGTGCCATAGx 9.435728 9.435728 9.435728  0.00000 10.534287
+10X73_3_A_1:ACGCCGGATCGTAGx 0.000000 9.518087 9.518087  0.00000  9.518087
+10X74_4_A_1:GATTCGGAGGTGAGx 0.000000 9.132330 9.132330  9.13233 10.230871
+10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 9.307371 9.307371  0.00000  9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx 0.000000 0.000000 0.000000  0.00000  9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 0.000000 8.995532 0.000000 10.09406 10.094061
+                                  Tpr     Smc3     Rplp1     Rpl22   Rpl36a
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728 0.000000 10.128836  0.000000 10.53429
+10X73_3_A_1:ACGCCGGATCGTAGx  0.000000 0.000000 10.616651  0.000000  0.00000
+10X74_4_A_1:GATTCGGAGGTGAGx 10.230871 0.000000 10.518544  9.132330  0.00000
+10X74_4_A_1:CTGAGCCTGGTAAAx  0.000000 0.000000  9.307371 10.000473 11.09906
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177 0.000000 10.683744  0.000000 10.68374
+10X74_4_A_1:CTAGGATGCTTGCCx  0.000000 8.995532 10.094061  9.688617 10.09406
+                                Rps21    Eif4a1      Erh      Mdk     Pde4d
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728  9.435728 0.000000  0.00000  9.435728
+10X73_3_A_1:ACGCCGGATCGTAGx  0.000000 10.211198 0.000000 10.61665 10.616651
+10X74_4_A_1:GATTCGGAGGTGAGx 10.741682  9.825424 0.000000 11.07815  0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx  9.307371 10.916737 0.000000 11.79219  0.000000
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177 10.278290 0.000000 11.19456  9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 10.381733  9.688617 9.688617 10.94134 10.941336
+                              Pgrmc1    Ube2r2     Bri3     Rps28     Mbtd1
+10X74_4_A_1:GTAACGTGCCATAGx 0.000000  0.000000 0.000000  9.435728  0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx 0.000000  9.518087 0.000000  9.518087 10.616651
+10X74_4_A_1:GATTCGGAGGTGAGx 9.132330  0.000000 9.132330  9.132330  0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx 9.307371 10.000473 9.307371 10.000473  9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx 9.585177  0.000000 9.585177  0.000000 10.683744
+10X74_4_A_1:CTAGGATGCTTGCCx 0.000000  0.000000 9.688617  8.995532  9.688617
+                               Rpl15     Macf1   Phf21a     Oaz2      Gnb1
+10X74_4_A_1:GTAACGTGCCATAGx 10.53429  9.435728 0.000000 10.12884  0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx  0.00000  9.518087 0.000000  0.00000 10.211198
+10X74_4_A_1:GATTCGGAGGTGAGx 10.51854  0.000000 9.825424  9.13233  0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.40592  9.307371 0.000000  0.00000  9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx 10.68374  0.000000 0.000000  0.00000  9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 10.60487 10.381733 8.995532  0.00000  0.000000
+                               Zfp422    Rpl35a     Cox8a   Nt5dc2
+10X74_4_A_1:GTAACGTGCCATAGx 10.128836 10.821963 10.128836  0.00000
+10X73_3_A_1:ACGCCGGATCGTAGx  0.000000  9.518087 10.211198  0.00000
+10X74_4_A_1:GATTCGGAGGTGAGx  9.132330 10.518544  9.132330 10.92400
+10X74_4_A_1:CTGAGCCTGGTAAAx  0.000000 10.000473  9.307371 10.00047
+10X74_4_A_1:CCTAGAGAGTCACAx  0.000000  0.000000  0.000000  0.00000
+10X74_4_A_1:CTAGGATGCTTGCCx  8.995532  9.688617  8.995532 10.09406
+                            X4930402H24Rik     Ttc28      Ckb   Sh3bgrl
+10X74_4_A_1:GTAACGTGCCATAGx      10.821963 10.128836 9.435728  0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx       9.518087 10.616651 0.000000  9.518087
+10X74_4_A_1:GATTCGGAGGTGAGx       0.000000 10.741682 9.132330  0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx      10.000473 11.253204 0.000000  0.000000
+10X74_4_A_1:CCTAGAGAGTCACAx       0.000000 10.278290 0.000000 10.278290
+10X74_4_A_1:CTAGGATGCTTGCCx       0.000000  9.688617 8.995532  9.688617
+                               Top2b  Ndufa10 C530008M17Rik     Basp1  Gpatch8
+10X74_4_A_1:GTAACGTGCCATAGx 9.435728  0.00000      0.000000 10.534287 9.435728
+10X73_3_A_1:ACGCCGGATCGTAGx 0.000000  0.00000      0.000000 10.616651 9.518087
+10X74_4_A_1:GATTCGGAGGTGAGx 0.000000 10.23087      0.000000 10.518544 9.132330
+10X74_4_A_1:CTGAGCCTGGTAAAx 0.000000 10.00047      0.000000  9.307371 9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx 0.000000  0.00000      9.585177  0.000000 0.000000
+10X74_4_A_1:CTAGGATGCTTGCCx 8.995532  0.00000     10.094061  9.688617 8.995532
+                                Map1b  Ccdc88a     Xist    Ctnna2     Rnf7
+10X74_4_A_1:GTAACGTGCCATAGx 10.534287 0.000000  0.00000 10.534287 9.435728
+10X73_3_A_1:ACGCCGGATCGTAGx  9.518087 9.518087 10.61665 11.463934 0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx  0.000000 0.000000  0.00000  9.825424 0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.000473 0.000000 10.69360 10.000473 9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177 0.000000 11.78234  0.000000 0.000000
+10X74_4_A_1:CTAGGATGCTTGCCx  0.000000 8.995532 10.38173  9.688617 9.688617
+                                Fabp5    Usmg5     Phip     Rbmx    Zbtb20
+10X74_4_A_1:GTAACGTGCCATAGx  0.000000 9.435728 9.435728 10.12884  9.435728
+10X73_3_A_1:ACGCCGGATCGTAGx  9.518087 0.000000 0.000000  0.00000 10.211198
+10X74_4_A_1:GATTCGGAGGTGAGx  9.825424 0.000000 9.132330  9.13233 10.518544
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.000473 9.307371 0.000000  0.00000  9.307371
+10X74_4_A_1:CCTAGAGAGTCACAx  0.000000 0.000000 0.000000  0.00000 10.278290
+10X74_4_A_1:CTAGGATGCTTGCCx 10.381733 8.995532 0.000000  0.00000  8.995532
+                                Eif1b      Lcor      Nsg1      Evl      Meg3
+10X74_4_A_1:GTAACGTGCCATAGx  9.435728  0.000000  9.435728 9.435728  0.000000
+10X73_3_A_1:ACGCCGGATCGTAGx 10.616651  9.518087  9.518087 9.518087  0.000000
+10X74_4_A_1:GATTCGGAGGTGAGx  9.132330  9.825424  9.825424 0.000000  0.000000
+10X74_4_A_1:CTGAGCCTGGTAAAx 10.693598 10.000473 10.693598 0.000000 10.000473
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177  0.000000 10.683744 0.000000  9.585177
+10X74_4_A_1:CTAGGATGCTTGCCx 10.094061  0.000000  9.688617 8.995532  8.995532
+                               Eif4a2     Rab10    Mllt11 COTAN_Cl.code
+10X74_4_A_1:GTAACGTGCCATAGx 10.821963  0.000000 10.128836             0
+10X73_3_A_1:ACGCCGGATCGTAGx  0.000000  9.518087  0.000000             0
+10X74_4_A_1:GATTCGGAGGTGAGx  0.000000 10.230871  9.132330             0
+10X74_4_A_1:CTGAGCCTGGTAAAx  0.000000  0.000000 10.405923             0
+10X74_4_A_1:CCTAGAGAGTCACAx  9.585177  0.000000  9.585177             0
+10X74_4_A_1:CTAGGATGCTTGCCx  0.000000  0.000000 10.381733             0</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -829,143 +870,164 @@ glm(formula = COTAN_Cl.code ~ ., family = binomial, data = train.data,
     control = list(maxit = 50))
 
 Coefficients:
-               Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)   -4.427802   3.686632  -1.201 0.229735    
-Hs3st1        -0.045329   0.273332  -0.166 0.868285    
-Abracl        -0.021102   0.287762  -0.073 0.941542    
-Cdkn1c         1.282281   0.317326   4.041 5.32e-05 ***
-Cited2        -0.095750   0.335083  -0.286 0.775069    
-Mllt3         -0.017451   0.291300  -0.060 0.952231    
-Mfap4         -0.328338   0.301103  -1.090 0.275515    
-Cxcl12         0.374555   0.301754   1.241 0.214510    
-Cdc42ep3       0.948126   0.344243   2.754 0.005883 ** 
-Fmnl2          0.761696   0.280651   2.714 0.006647 ** 
-Phf20l1       -0.049548   0.295853  -0.167 0.866995    
-Ptprk         -0.005845   0.310432  -0.019 0.984979    
-Tnik           0.068744   0.288077   0.239 0.811392    
-Gm29260       -2.170967   0.457504  -4.745 2.08e-06 ***
-Sfrp1         -0.320217   0.322417  -0.993 0.320623    
-Pantr1        -0.701726   0.342261  -2.050 0.040339 *  
-Magi2          0.063704   0.269791   0.236 0.813336    
-Tmem108        0.013377   0.296197   0.045 0.963977    
-Frmd4b        -0.452528   0.296115  -1.528 0.126459    
-Plppr1         0.173573   0.280712   0.618 0.536357    
-Nfia           0.193750   0.287645   0.674 0.500583    
-Igfbp2        -0.113178   0.335945  -0.337 0.736197    
-Fabp7         -0.131296   0.297122  -0.442 0.658567    
-Ctnnd2         0.322188   0.280410   1.149 0.250561    
-Ptn           -0.594166   0.313001  -1.898 0.057658 .  
-Frmd4a        -0.277474   0.255226  -1.087 0.276961    
-Nkain2         0.104150   0.293746   0.355 0.722920    
-Sorbs2         0.663126   0.298806   2.219 0.026469 *  
-Hes6           0.855882   0.323864   2.643 0.008224 ** 
-Dcc           -0.505708   0.306444  -1.650 0.098893 .  
-Neurog2        0.261606   0.305102   0.857 0.391202    
-Tcf12          0.038644   0.274525   0.141 0.888053    
-Cbfa2t2       -0.433520   0.268387  -1.615 0.106250    
-Ccnd2          0.179213   0.274252   0.653 0.513459    
-Elavl4         1.215423   0.399152   3.045 0.002327 ** 
-Clvs1          0.089130   0.282731   0.315 0.752575    
-Ank3           0.179434   0.282506   0.635 0.525330    
-Igsf8          0.129736   0.275953   0.470 0.638255    
-Map2          -0.181323   0.310183  -0.585 0.558839    
-Lhx2           0.402542   0.349519   1.152 0.249442    
-Nkain3        -0.044385   0.277034  -0.160 0.872710    
-Neurod2        0.105776   0.378601   0.279 0.779948    
-Sstr2         -0.362034   0.300426  -1.205 0.228176    
-Eomes          0.772645   0.349417   2.211 0.027019 *  
-C130071C03Rik -0.122480   0.263918  -0.464 0.642587    
-Emx1          -0.593572   0.267820  -2.216 0.026670 *  
-Cttnbp2        0.273984   0.318743   0.860 0.390023    
-Nfix           0.517842   0.348689   1.485 0.137514    
-Epha4         -0.638904   0.321235  -1.989 0.046712 *  
-Plxna2        -0.236110   0.258832  -0.912 0.361657    
-Plxna4         0.925213   0.354572   2.609 0.009071 ** 
-Aff3          -0.013714   0.295144  -0.046 0.962940    
-Nrp1           0.232902   0.272307   0.855 0.392389    
-Nedd4l        -0.303610   0.310862  -0.977 0.328732    
-Tiam2          0.134778   0.290641   0.464 0.642843    
-Ppp2r2b        0.016351   0.367928   0.044 0.964553    
-Bcl11a         0.337470   0.274048   1.231 0.218163    
-Zeb2          -1.599521   0.393935  -4.060 4.90e-05 ***
-Tenm2          0.468738   0.303563   1.544 0.122559    
-Gria2          0.149754   0.312789   0.479 0.632103    
-Gpm6a          0.119547   0.268907   0.445 0.656633    
-Ptprd         -0.507448   0.323955  -1.566 0.117251    
-Sox5          -0.256282   0.298164  -0.860 0.390046    
-Mpped2         0.103093   0.283960   0.363 0.716564    
-Bcl11b        -0.280065   0.348847  -0.803 0.422072    
-Epha5          0.749204   0.349295   2.145 0.031961 *  
-Nol4           0.098607   0.302192   0.326 0.744194    
-Grik2         -0.008390   0.310334  -0.027 0.978432    
-Pcp4           0.054691   0.254859   0.215 0.830084    
-Ccser1         0.280685   0.303408   0.925 0.354909    
-Kcnb2         -0.585578   0.278485  -2.103 0.035489 *  
-Kcnh7         -0.492670   0.281629  -1.749 0.080229 .  
-Pam            0.142564   0.301995   0.472 0.636874    
-Negr1         -0.716179   0.285728  -2.507 0.012193 *  
-Myt1l          0.163594   0.292845   0.559 0.576408    
-Id2           -0.668509   0.288152  -2.320 0.020342 *  
-Foxp2          0.725433   0.271382   2.673 0.007515 ** 
-Gpc6           0.069695   0.314905   0.221 0.824843    
-Pcdh7          0.814931   0.291051   2.800 0.005111 ** 
-Rbfox1        -0.459985   0.294818  -1.560 0.118705    
-Robo2          0.144083   0.316589   0.455 0.649030    
-Rprm           0.958384   0.297789   3.218 0.001289 ** 
-Rbfox3        -0.123098   0.304439  -0.404 0.685960    
-Stmn3         -0.779303   0.310707  -2.508 0.012136 *  
-Nrn1          -0.293944   0.307378  -0.956 0.338923    
-Nrg1          -0.180726   0.303194  -0.596 0.551126    
-Cdh8          -0.830419   0.303920  -2.732 0.006288 ** 
-Cacna2d1       0.524141   0.335929   1.560 0.118695    
-Rpl26         -1.285495   0.369625  -3.478 0.000505 ***
-Rack1          0.141107   0.303411   0.465 0.641881    
-Top1          -0.888447   0.379757  -2.340 0.019309 *  
-Rpl12          0.118293   0.285560   0.414 0.678692    
-Rplp1         -0.649347   0.402071  -1.615 0.106309    
-Rpl22          0.098887   0.318478   0.310 0.756181    
-Eif5          -0.621647   0.305526  -2.035 0.041884 *  
-Rpl36a         0.797852   0.333875   2.390 0.016863 *  
-Rps21         -0.480747   0.352633  -1.363 0.172786    
-Eif4a1         0.665213   0.340406   1.954 0.050681 .  
-Ppia          -0.144535   0.305864  -0.473 0.636538    
-Sub1           0.308813   0.289513   1.067 0.286124    
-Mdk           -0.266772   0.334220  -0.798 0.424759    
-Pde4d          1.286486   0.347047   3.707 0.000210 ***
-Rps28          0.146676   0.346989   0.423 0.672507    
-Rpl15          1.194097   0.386632   3.088 0.002012 ** 
-Baz2b          0.214207   0.284718   0.752 0.451843    
-Rere          -0.880721   0.324004  -2.718 0.006563 ** 
-Rpl35a        -0.465717   0.348718  -1.336 0.181710    
-Cox8a          0.157332   0.300227   0.524 0.600249    
-Nt5dc2        -0.265734   0.280191  -0.948 0.342923    
-Ttc28         -0.550163   0.304121  -1.809 0.070447 .  
-Ckb            0.294038   0.306467   0.959 0.337334    
-Calr           0.154004   0.305910   0.503 0.614661    
-Arpc5         -0.142432   0.273624  -0.521 0.602688    
-Basp1          0.160793   0.265227   0.606 0.544350    
-Map1b         -0.469132   0.295153  -1.589 0.111957    
-Xist          -0.207244   0.247978  -0.836 0.403303    
-Ctnna2         0.164829   0.269426   0.612 0.540685    
-Fabp5          1.215383   0.345384   3.519 0.000433 ***
-Zbtb20        -0.371833   0.309890  -1.200 0.230183    
-Eif1b         -0.161688   0.291010  -0.556 0.578477    
-Nsg1          -0.040988   0.323469  -0.127 0.899166    
-Meg3          -0.051099   0.265693  -0.192 0.847489    
-Rsrp1          0.536480   0.291008   1.844 0.065253 .  
-Mllt11         0.482180   0.371390   1.298 0.194181    
-Ctxn1          0.516132   0.313897   1.644 0.100120    
-Dpysl3         0.599812   0.314290   1.908 0.056331 .  
+                 Estimate Std. Error    z value Pr(&gt;|z|)    
+(Intercept)    -1.392e+15  5.418e+07  -25692175   &lt;2e-16 ***
+Abracl         -3.668e+13  1.108e+06  -33117531   &lt;2e-16 ***
+Cdkn1c          9.057e+13  8.449e+05  107200885   &lt;2e-16 ***
+Cited2         -1.192e+14  1.158e+06 -102925237   &lt;2e-16 ***
+Mllt3          -1.411e+12  9.271e+05   -1522016   &lt;2e-16 ***
+Fam210b        -4.090e+12  7.886e+05   -5185950   &lt;2e-16 ***
+Mfap4          -6.719e+12  1.105e+06   -6082731   &lt;2e-16 ***
+Cxcl12          3.911e+13  8.228e+05   47537816   &lt;2e-16 ***
+Cdc42ep3        1.404e+13  8.102e+05   17326401   &lt;2e-16 ***
+Limch1          4.103e+13  7.629e+05   53781940   &lt;2e-16 ***
+Ier2           -1.632e+13  8.096e+05  -20155968   &lt;2e-16 ***
+Ptprk          -3.990e+13  7.877e+05  -50648051   &lt;2e-16 ***
+Gm29260        -1.591e+14  8.513e+05 -186868495   &lt;2e-16 ***
+Sfrp1          -1.001e+13  7.665e+05  -13056648   &lt;2e-16 ***
+Pantr1         -4.908e+13  1.184e+06  -41449633   &lt;2e-16 ***
+Magi2           2.042e+13  7.718e+05   26452066   &lt;2e-16 ***
+Tmem108         3.884e+13  8.406e+05   46203169   &lt;2e-16 ***
+Ddr1           -6.061e+13  7.777e+05  -77935451   &lt;2e-16 ***
+Ezr            -1.538e+12  8.165e+05   -1883070   &lt;2e-16 ***
+Sncaip         -6.607e+13  7.615e+05  -86758312   &lt;2e-16 ***
+CT025619.1      5.786e+13  7.693e+05   75220795   &lt;2e-16 ***
+Fabp7          -1.160e+13  7.987e+05  -14523404   &lt;2e-16 ***
+Ctnnd2          5.243e+13  7.989e+05   65626431   &lt;2e-16 ***
+Ptn            -5.180e+13  8.866e+05  -58423528   &lt;2e-16 ***
+Frmd4a         -9.865e+12  8.139e+05  -12119603   &lt;2e-16 ***
+Sorbs2          7.082e+13  1.040e+06   68115662   &lt;2e-16 ***
+Hes6            5.248e+13  8.207e+05   63952536   &lt;2e-16 ***
+Dcc            -1.086e+14  1.091e+06  -99558297   &lt;2e-16 ***
+Neurog2         8.885e+12  8.991e+05    9882478   &lt;2e-16 ***
+Tcf12           4.439e+13  7.580e+05   58560212   &lt;2e-16 ***
+Fam110a        -3.762e+12  7.726e+05   -4870098   &lt;2e-16 ***
+Dhrs4          -6.585e+13  8.280e+05  -79533727   &lt;2e-16 ***
+Ccnd2           2.088e+13  8.477e+05   24635620   &lt;2e-16 ***
+Elavl4          5.882e+13  1.040e+06   56574947   &lt;2e-16 ***
+Ank3            1.621e+12  8.158e+05    1986603   &lt;2e-16 ***
+Klf12           1.858e+13  8.113e+05   22905550   &lt;2e-16 ***
+Slc17a6         3.336e+13  7.777e+05   42892923   &lt;2e-16 ***
+Lzts1          -3.340e+11  7.629e+05    -437779   &lt;2e-16 ***
+Map2            1.529e+13  1.049e+06   14565916   &lt;2e-16 ***
+Lhx2            6.076e+13  1.073e+06   56647519   &lt;2e-16 ***
+Neurod2         1.156e+14  1.308e+06   88402243   &lt;2e-16 ***
+Sstr2           2.958e+13  1.123e+06   26328080   &lt;2e-16 ***
+Eomes           2.323e+13  8.998e+05   25818313   &lt;2e-16 ***
+Vps37b          2.378e+13  7.719e+05   30806540   &lt;2e-16 ***
+Ier5           -6.635e+13  7.933e+05  -83638912   &lt;2e-16 ***
+Cttnbp2         7.413e+12  1.026e+06    7226886   &lt;2e-16 ***
+Tmem178         5.869e+13  7.711e+05   76112402   &lt;2e-16 ***
+Plxna4          6.142e+12  8.247e+05    7447401   &lt;2e-16 ***
+Aff3            3.216e+13  8.494e+05   37865603   &lt;2e-16 ***
+Tiam2           3.504e+13  8.431e+05   41564359   &lt;2e-16 ***
+Ppp2r2b         1.014e+12  1.343e+06     755110   &lt;2e-16 ***
+Zeb2           -8.426e+13  8.214e+05 -102580264   &lt;2e-16 ***
+Gria2           3.458e+13  8.115e+05   42614466   &lt;2e-16 ***
+Nbea           -2.142e+13  7.864e+05  -27232237   &lt;2e-16 ***
+Ptprd          -8.085e+12  8.432e+05   -9588010   &lt;2e-16 ***
+Sox5            1.043e+13  9.521e+05   10952629   &lt;2e-16 ***
+Mpped2          1.653e+13  9.316e+05   17741622   &lt;2e-16 ***
+Bcl11b         -5.000e+13  8.186e+05  -61072633   &lt;2e-16 ***
+Epha5           7.168e+13  1.438e+06   49838920   &lt;2e-16 ***
+Nol4            5.393e+13  8.773e+05   61475929   &lt;2e-16 ***
+Grik2          -8.502e+12  7.828e+05  -10860942   &lt;2e-16 ***
+Mir124.2hg      3.667e+12  8.306e+05    4415594   &lt;2e-16 ***
+Pcp4           -9.935e+12  7.703e+05  -12897946   &lt;2e-16 ***
+Ccser1          6.731e+13  1.011e+06   66545181   &lt;2e-16 ***
+Kcnb2          -3.395e+13  7.809e+05  -43477366   &lt;2e-16 ***
+Dscaml1        -3.299e+13  8.061e+05  -40923228   &lt;2e-16 ***
+Kcnh7          -3.625e+13  8.216e+05  -44124624   &lt;2e-16 ***
+Pam            -2.266e+13  9.566e+05  -23682478   &lt;2e-16 ***
+Negr1          -5.486e+13  8.125e+05  -67527681   &lt;2e-16 ***
+Ppm1e          -1.101e+13  7.777e+05  -14161188   &lt;2e-16 ***
+Myt1l           1.275e+13  9.473e+05   13455861   &lt;2e-16 ***
+Foxp2          -4.217e+12  7.833e+05   -5382953   &lt;2e-16 ***
+Gpc6           -7.684e+12  7.945e+05   -9671234   &lt;2e-16 ***
+Masp1           4.292e+13  7.665e+05   55993994   &lt;2e-16 ***
+Serpini1       -5.105e+12  8.061e+05   -6333133   &lt;2e-16 ***
+Pcdh7           5.837e+13  8.073e+05   72299867   &lt;2e-16 ***
+Rbfox1          7.461e+12  8.031e+05    9289560   &lt;2e-16 ***
+Robo2          -6.876e+13  1.420e+06  -48418494   &lt;2e-16 ***
+Fhod3           4.399e+13  7.980e+05   55121613   &lt;2e-16 ***
+Rprm            3.484e+13  7.835e+05   44465376   &lt;2e-16 ***
+Gng3            2.281e+13  7.680e+05   29706841   &lt;2e-16 ***
+Uchl1          -1.332e+13  7.594e+05  -17544470   &lt;2e-16 ***
+Tmem176b        8.467e+12  8.030e+05   10544314   &lt;2e-16 ***
+Nrn1           -5.681e+13  9.557e+05  -59447760   &lt;2e-16 ***
+Snap25         -4.422e+13  7.898e+05  -55987310   &lt;2e-16 ***
+Nrg1           -3.190e+13  1.511e+06  -21119116   &lt;2e-16 ***
+Cdh8           -9.450e+13  9.459e+05  -99906199   &lt;2e-16 ***
+Trim17         -5.827e+13  7.920e+05  -73573697   &lt;2e-16 ***
+Chga            1.515e+13  7.864e+05   19260283   &lt;2e-16 ***
+Rpl26          -1.381e+14  1.158e+06 -119242819   &lt;2e-16 ***
+Rack1          -3.030e+13  1.065e+06  -28463399   &lt;2e-16 ***
+Hsp90b1         1.513e+12  7.764e+05    1949079   &lt;2e-16 ***
+Aldoa           5.999e+13  7.895e+05   75985414   &lt;2e-16 ***
+Tuba1b         -2.984e+13  7.673e+05  -38893858   &lt;2e-16 ***
+Sf3b6          -1.751e+13  7.754e+05  -22583944   &lt;2e-16 ***
+Top1           -4.635e+13  1.256e+06  -36914861   &lt;2e-16 ***
+Tpr             2.535e+13  8.111e+05   31258405   &lt;2e-16 ***
+Smc3            1.778e+13  7.864e+05   22614692   &lt;2e-16 ***
+Rplp1           6.245e+13  1.506e+06   41453287   &lt;2e-16 ***
+Rpl22           5.820e+13  9.818e+05   59284313   &lt;2e-16 ***
+Rpl36a          7.624e+13  1.286e+06   59290521   &lt;2e-16 ***
+Rps21          -1.722e+13  9.803e+05  -17562653   &lt;2e-16 ***
+Eif4a1          3.635e+13  1.107e+06   32824725   &lt;2e-16 ***
+Erh             3.879e+13  8.249e+05   47018259   &lt;2e-16 ***
+Mdk             6.137e+13  1.311e+06   46812498   &lt;2e-16 ***
+Pde4d           9.697e+13  8.054e+05  120403478   &lt;2e-16 ***
+Pgrmc1          4.160e+13  7.890e+05   52731940   &lt;2e-16 ***
+Ube2r2         -4.281e+12  7.630e+05   -5610419   &lt;2e-16 ***
+Bri3           -4.674e+12  7.624e+05   -6130738   &lt;2e-16 ***
+Rps28           2.337e+13  1.081e+06   21624714   &lt;2e-16 ***
+Mbtd1          -3.431e+13  8.020e+05  -42787850   &lt;2e-16 ***
+Rpl15           4.540e+13  1.056e+06   42976360   &lt;2e-16 ***
+Macf1          -3.898e+13  7.456e+05  -52271693   &lt;2e-16 ***
+Phf21a         -1.085e+13  7.941e+05  -13663454   &lt;2e-16 ***
+Oaz2           -2.184e+13  7.671e+05  -28476312   &lt;2e-16 ***
+Gnb1            3.086e+13  7.786e+05   39638926   &lt;2e-16 ***
+Zfp422         -2.665e+13  7.937e+05  -33579867   &lt;2e-16 ***
+Rpl35a         -4.777e+13  1.012e+06  -47191386   &lt;2e-16 ***
+Cox8a           3.798e+12  9.384e+05    4047518   &lt;2e-16 ***
+Nt5dc2         -2.355e+13  7.820e+05  -30114999   &lt;2e-16 ***
+X4930402H24Rik -3.421e+13  8.011e+05  -42703505   &lt;2e-16 ***
+Ttc28          -2.613e+13  9.395e+05  -27807041   &lt;2e-16 ***
+Ckb            -4.380e+13  8.412e+05  -52071863   &lt;2e-16 ***
+Sh3bgrl        -1.422e+13  7.831e+05  -18158721   &lt;2e-16 ***
+Top2b           4.336e+13  7.850e+05   55234013   &lt;2e-16 ***
+Ndufa10        -8.308e+13  7.998e+05 -103871878   &lt;2e-16 ***
+C530008M17Rik  -4.875e+13  8.134e+05  -59928713   &lt;2e-16 ***
+Basp1           1.084e+14  1.002e+06  108114394   &lt;2e-16 ***
+Gpatch8         4.789e+12  7.653e+05    6257168   &lt;2e-16 ***
+Map1b          -3.338e+13  9.207e+05  -36254006   &lt;2e-16 ***
+Ccdc88a         9.193e+12  7.736e+05   11882326   &lt;2e-16 ***
+Xist           -2.576e+13  7.861e+05  -32765738   &lt;2e-16 ***
+Ctnna2         -4.233e+13  9.718e+05  -43552178   &lt;2e-16 ***
+Rnf7           -5.865e+11  8.067e+05    -727059   &lt;2e-16 ***
+Fabp5           6.801e+13  9.924e+05   68526316   &lt;2e-16 ***
+Usmg5           3.478e+13  7.931e+05   43858152   &lt;2e-16 ***
+Phip            3.203e+13  7.823e+05   40942232   &lt;2e-16 ***
+Rbmx            5.754e+12  7.791e+05    7384674   &lt;2e-16 ***
+Zbtb20         -4.798e+13  1.022e+06  -46936751   &lt;2e-16 ***
+Eif1b          -7.349e+13  1.019e+06  -72109569   &lt;2e-16 ***
+Lcor            1.574e+13  7.874e+05   19989987   &lt;2e-16 ***
+Nsg1           -8.545e+12  9.945e+05   -8592451   &lt;2e-16 ***
+Evl            -1.350e+13  7.905e+05  -17079400   &lt;2e-16 ***
+Meg3            4.731e+13  8.077e+05   58571895   &lt;2e-16 ***
+Eif4a2         -3.366e+13  7.879e+05  -42721584   &lt;2e-16 ***
+Rab10          -3.012e+13  7.727e+05  -38981490   &lt;2e-16 ***
+Mllt11          9.241e+13  1.233e+06   74972937   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 653.13  on 472  degrees of freedom
-Residual deviance: 217.74  on 347  degrees of freedom
-AIC: 469.74
+    Null deviance:  653.13  on 472  degrees of freedom
+Residual deviance: 4685.67  on 326  degrees of freedom
+AIC: 4979.7
 
-Number of Fisher Scoring iterations: 8</code></pre>
+Number of Fisher Scoring iterations: 32</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>probabilities <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(test.data, <span class="at">type =</span> <span class="st">"response"</span>)</span>
@@ -983,19 +1045,19 @@ Number of Fisher Scoring iterations: 8</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-06-22 16:00:00 CEST"</code></pre>
+<pre><code>[1] "2025-12-16 18:58:42 CET"</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.4.0 (2024-04-24)
+<pre><code>R version 4.5.2 (2025-10-31)
 Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 20.04.6 LTS
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -1010,97 +1072,96 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] torch_0.13.0       nnet_7.3-19        COTAN_2.5.4        caret_6.0-94      
- [5] lattice_0.22-6     lubridate_1.9.3    forcats_1.0.0      stringr_1.5.1     
- [9] dplyr_1.1.4        purrr_1.0.2        readr_2.1.5        tibble_3.2.1      
-[13] tidyverse_2.0.0    tidyr_1.3.1        parallelDist_0.2.6 data.table_1.15.4 
-[17] zeallot_0.1.0      ggplot2_3.5.1     
+ [1] nnet_7.3-20        COTAN_2.9.4        caret_7.0-1        lattice_0.22-7    
+ [5] lubridate_1.9.4    forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4       
+ [9] purrr_1.2.0        readr_2.1.5        tibble_3.3.0       tidyverse_2.0.0   
+[13] tidyr_1.3.1        parallelDist_0.2.6 data.table_1.17.0  zeallot_0.2.0     
+[17] ggplot2_4.0.1     
 
 loaded via a namespace (and not attached):
-  [1] RcppAnnoy_0.0.22          splines_4.4.0            
-  [3] later_1.3.2               polyclip_1.10-6          
-  [5] hardhat_1.3.1             pROC_1.18.5              
-  [7] rpart_4.1.23              fastDummies_1.7.3        
-  [9] lifecycle_1.0.4           doParallel_1.0.17        
- [11] processx_3.8.4            globals_0.16.3           
- [13] MASS_7.3-60.2             dendextend_1.17.1        
- [15] magrittr_2.0.3            plotly_4.10.4            
- [17] rmarkdown_2.27            yaml_2.3.8               
- [19] httpuv_1.6.15             Seurat_5.1.0             
- [21] sctransform_0.4.1         askpass_1.2.0            
- [23] spam_2.10-0               spatstat.sparse_3.0-3    
- [25] sp_2.1-4                  reticulate_1.37.0        
- [27] cowplot_1.1.3             pbapply_1.7-2            
- [29] RColorBrewer_1.1-3        abind_1.4-5              
- [31] zlibbioc_1.50.0           Rtsne_0.17               
- [33] BiocGenerics_0.50.0       coro_1.0.4               
- [35] ipred_0.9-14              circlize_0.4.16          
- [37] lava_1.8.0                IRanges_2.38.0           
- [39] S4Vectors_0.42.0          ggrepel_0.9.5            
- [41] irlba_2.3.5.1             spatstat.utils_3.0-4     
- [43] listenv_0.9.1             umap_0.2.10.0            
- [45] goftest_1.2-3             RSpectra_0.16-1          
- [47] spatstat.random_3.2-3     dqrng_0.4.0              
- [49] fitdistrplus_1.1-11       parallelly_1.37.1        
- [51] DelayedMatrixStats_1.26.0 leiden_0.4.3.1           
- [53] codetools_0.2-20          DelayedArray_0.30.1      
- [55] tidyselect_1.2.1          shape_1.4.6.1            
- [57] farver_2.1.2              viridis_0.6.5            
- [59] ScaledMatrix_1.12.0       spatstat.explore_3.2-7   
- [61] matrixStats_1.3.0         stats4_4.4.0             
- [63] jsonlite_1.8.8            GetoptLong_1.0.5         
- [65] progressr_0.14.0          ggridges_0.5.6           
- [67] survival_3.6-4            iterators_1.0.14         
- [69] foreach_1.5.2             tools_4.4.0              
- [71] ica_1.0-3                 Rcpp_1.0.12              
- [73] glue_1.7.0                gridExtra_2.3            
- [75] prodlim_2023.08.28        SparseArray_1.4.5        
- [77] xfun_0.44                 MatrixGenerics_1.16.0    
- [79] ggthemes_5.1.0            withr_3.0.0              
- [81] fastmap_1.2.0             fansi_1.0.6              
- [83] openssl_2.2.0             callr_3.7.6              
- [85] digest_0.6.35             rsvd_1.0.5               
- [87] timechange_0.3.0          R6_2.5.1                 
- [89] mime_0.12                 colorspace_2.1-0         
- [91] scattermore_1.2           tensor_1.5               
- [93] spatstat.data_3.0-4       utf8_1.2.4               
- [95] generics_0.1.3            recipes_1.0.10           
- [97] class_7.3-22              httr_1.4.7               
- [99] htmlwidgets_1.6.4         S4Arrays_1.4.1           
-[101] uwot_0.2.2                ModelMetrics_1.2.2.2     
-[103] pkgconfig_2.0.3           gtable_0.3.5             
-[105] timeDate_4032.109         ComplexHeatmap_2.20.0    
-[107] lmtest_0.9-40             XVector_0.44.0           
-[109] htmltools_0.5.8.1         dotCall64_1.1-1          
-[111] clue_0.3-65               SeuratObject_5.0.2       
-[113] scales_1.3.0              png_0.1-8                
-[115] gower_1.0.1               knitr_1.47               
-[117] rstudioapi_0.16.0         tzdb_0.4.0               
-[119] reshape2_1.4.4            rjson_0.2.21             
-[121] nlme_3.1-164              zoo_1.8-12               
-[123] GlobalOptions_0.1.2       KernSmooth_2.23-24       
-[125] parallel_4.4.0            miniUI_0.1.1.1           
-[127] RcppZiggurat_0.1.6        pillar_1.9.0             
-[129] grid_4.4.0                vctrs_0.6.5              
-[131] RANN_2.6.1                promises_1.3.0           
-[133] BiocSingular_1.20.0       beachmat_2.20.0          
-[135] xtable_1.8-4              cluster_2.1.6            
-[137] evaluate_0.23             cli_3.6.2                
-[139] compiler_4.4.0            rlang_1.1.3              
-[141] crayon_1.5.2              future.apply_1.11.2      
-[143] labeling_0.4.3            ps_1.7.6                 
-[145] plyr_1.8.9                stringi_1.8.4            
-[147] deldir_2.0-4              viridisLite_0.4.2        
-[149] BiocParallel_1.38.0       assertthat_0.2.1         
-[151] munsell_0.5.1             lazyeval_0.2.2           
-[153] spatstat.geom_3.2-9       PCAtools_2.16.0          
-[155] Matrix_1.7-0              RcppHNSW_0.6.0           
-[157] hms_1.1.3                 patchwork_1.2.0          
-[159] bit64_4.0.5               sparseMatrixStats_1.16.0 
-[161] future_1.33.2             shiny_1.8.1.1            
-[163] ROCR_1.0-11               Rfast_2.1.0              
-[165] igraph_2.0.3              RcppParallel_5.1.7       
-[167] bit_4.0.5                </code></pre>
+  [1] RcppAnnoy_0.0.22            splines_4.5.2              
+  [3] later_1.4.2                 polyclip_1.10-7            
+  [5] hardhat_1.4.1               pROC_1.18.5                
+  [7] rpart_4.1.24                fastDummies_1.7.5          
+  [9] lifecycle_1.0.4             doParallel_1.0.17          
+ [11] processx_3.8.6              globals_0.18.0             
+ [13] MASS_7.3-65                 dendextend_1.19.0          
+ [15] magrittr_2.0.4              plotly_4.11.0              
+ [17] rmarkdown_2.29              yaml_2.3.10                
+ [19] httpuv_1.6.16               Seurat_5.2.1               
+ [21] sctransform_0.4.2           spam_2.11-1                
+ [23] sp_2.2-0                    spatstat.sparse_3.1-0      
+ [25] reticulate_1.42.0           cowplot_1.1.3              
+ [27] pbapply_1.7-2               RColorBrewer_1.1-3         
+ [29] abind_1.4-8                 GenomicRanges_1.60.0       
+ [31] Rtsne_0.17                  BiocGenerics_0.54.0        
+ [33] coro_1.1.0                  torch_0.14.2               
+ [35] ipred_0.9-15                GenomeInfoDbData_1.2.14    
+ [37] circlize_0.4.16             lava_1.8.1                 
+ [39] IRanges_2.42.0              S4Vectors_0.46.0           
+ [41] ggrepel_0.9.6               irlba_2.3.5.1              
+ [43] listenv_0.9.1               spatstat.utils_3.1-4       
+ [45] goftest_1.2-3               RSpectra_0.16-2            
+ [47] spatstat.random_3.4-1       fitdistrplus_1.2-2         
+ [49] parallelly_1.45.0           codetools_0.2-20           
+ [51] DelayedArray_0.34.1         tidyselect_1.2.1           
+ [53] shape_1.4.6.1               UCSC.utils_1.4.0           
+ [55] farver_2.1.2                viridis_0.6.5              
+ [57] ScaledMatrix_1.16.0         matrixStats_1.5.0          
+ [59] stats4_4.5.2                spatstat.explore_3.4-2     
+ [61] jsonlite_2.0.0              GetoptLong_1.0.5           
+ [63] gghalves_0.1.4              progressr_0.15.1           
+ [65] ggridges_0.5.6              survival_3.8-3             
+ [67] iterators_1.0.14            foreach_1.5.2              
+ [69] tools_4.5.2                 ica_1.0-3                  
+ [71] Rcpp_1.0.14                 glue_1.8.0                 
+ [73] prodlim_2025.04.28          gridExtra_2.3              
+ [75] SparseArray_1.8.0           xfun_0.52                  
+ [77] MatrixGenerics_1.20.0       ggthemes_5.1.0             
+ [79] GenomeInfoDb_1.44.0         withr_3.0.2                
+ [81] fastmap_1.2.0               callr_3.7.6                
+ [83] digest_0.6.37               rsvd_1.0.5                 
+ [85] timechange_0.3.0            R6_2.6.1                   
+ [87] mime_0.13                   colorspace_2.1-1           
+ [89] scattermore_1.2             tensor_1.5                 
+ [91] spatstat.data_3.1-6         generics_0.1.3             
+ [93] recipes_1.3.0               class_7.3-23               
+ [95] httr_1.4.7                  htmlwidgets_1.6.4          
+ [97] S4Arrays_1.8.0              uwot_0.2.3                 
+ [99] ModelMetrics_1.2.2.2        pkgconfig_2.0.3            
+[101] gtable_0.3.6                timeDate_4041.110          
+[103] ComplexHeatmap_2.24.0       lmtest_0.9-40              
+[105] S7_0.2.1                    SingleCellExperiment_1.30.0
+[107] XVector_0.48.0              htmltools_0.5.8.1          
+[109] dotCall64_1.2               zigg_0.0.2                 
+[111] clue_0.3-66                 Biobase_2.68.0             
+[113] SeuratObject_5.1.0          scales_1.4.0               
+[115] png_0.1-8                   gower_1.0.2                
+[117] spatstat.univar_3.1-3       knitr_1.50                 
+[119] tzdb_0.5.0                  reshape2_1.4.4             
+[121] rjson_0.2.23                nlme_3.1-168               
+[123] proxy_0.4-27                zoo_1.8-14                 
+[125] GlobalOptions_0.1.2         KernSmooth_2.23-26         
+[127] parallel_4.5.2              miniUI_0.1.2               
+[129] pillar_1.10.2               grid_4.5.2                 
+[131] vctrs_0.6.5                 RANN_2.6.2                 
+[133] promises_1.3.2              BiocSingular_1.24.0        
+[135] beachmat_2.24.0             xtable_1.8-4               
+[137] cluster_2.1.8.1             evaluate_1.0.3             
+[139] cli_3.6.5                   compiler_4.5.2             
+[141] rlang_1.1.6                 crayon_1.5.3               
+[143] future.apply_1.20.0         labeling_0.4.3             
+[145] ps_1.9.1                    plyr_1.8.9                 
+[147] stringi_1.8.7               deldir_2.0-4               
+[149] viridisLite_0.4.2           BiocParallel_1.42.0        
+[151] assertthat_0.2.1            lazyeval_0.2.2             
+[153] spatstat.geom_3.4-1         Matrix_1.7-4               
+[155] RcppHNSW_0.6.0              hms_1.1.3                  
+[157] patchwork_1.3.2             bit64_4.6.0-1              
+[159] future_1.58.0               shiny_1.11.0               
+[161] SummarizedExperiment_1.38.1 ROCR_1.0-11                
+[163] Rfast_2.1.5.1               igraph_2.1.4               
+[165] RcppParallel_5.1.10         bit_4.6.0                  </code></pre>
 </div>
 </div>
 
@@ -1143,18 +1204,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1186,11 +1236,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1200,8 +1289,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1213,7 +1311,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1257,6 +1478,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1282,6 +1504,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1342,6 +1590,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

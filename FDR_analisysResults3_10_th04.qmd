@@ -140,7 +140,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -436,7 +436,7 @@ roc_resultMonocle <- roc(deaMonocle_tot$value, 1 - deaMonocle_tot$marker_test_p_
 #plot(roc_resultMonocle)
 ```
 
-### ROC from Scanpy
+### ROC from Scampy
 
 ```{r Scanpy1, echo=TRUE, eval=TRUE}
 deaScanpy_tot <- NA
@@ -575,7 +575,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -1008,7 +1008,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -1443,7 +1443,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -1876,7 +1876,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2310,7 +2310,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2748,7 +2748,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -3182,7 +3182,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -3620,7 +3620,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod ="none")
   genesLambda <- getLambda(dataset)
   genesLambda <- as.data.frame(genesLambda)
   genesLambda$genes <- rownames(genesLambda)

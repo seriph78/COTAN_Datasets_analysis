@@ -110,7 +110,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -426,7 +426,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -535,7 +535,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -851,7 +851,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -960,7 +960,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -1276,7 +1276,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -1387,7 +1387,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -1703,7 +1703,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -1812,7 +1812,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2128,7 +2128,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -2237,7 +2237,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2553,7 +2553,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -2664,7 +2664,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -2980,7 +2980,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -3089,7 +3089,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -3405,7 +3405,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -3516,7 +3516,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   dataset <- readRDS(file = file.path(dataSetDir,paste0(file.code,".RDS")))
   deaCOTAN <- getClusterizationData(dataset,clName = "mergedClusters")[[2]]
   pvalCOTAN <- pValueFromDEA(deaCOTAN,
-              numCells = getNumCells(dataset),method = "none")
+              numCells = getNumCells(dataset),adjustmentMethod = "none")
   
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   cl.names <- NA
@@ -3832,7 +3832,7 @@ for (ind in 1:dim(subset.datasets_csv)[1]) {
   clusterization <- getClusterizationData(dataset, clName = "mergedClusters")[[1]]
   #print(file.code)
   
-  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScamPy_DEA_genes.csv")),
+  deaScamPy <- read.csv(file.path(dirOut,paste0(file.code,"ScanPy_DEA_genes.csv")),
                         row.names = 1) 
   
   cl.names <- NA
@@ -3902,9 +3902,9 @@ ggarrange(ThreeClusters_evenPL,ThreeClusters_unevenPL, NULL, FiveClusters_uneven
           labels = c("3_Even", "3_Uneven", "", "5_Uneven"),
           ncol = 2, nrow = 2, common.legend = T, legend = "bottom")
 ```
+
 ## Footer
 
 ```{r}
 sessionInfo()
 ```
-

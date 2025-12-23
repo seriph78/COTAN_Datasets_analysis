@@ -21,7 +21,7 @@ options(parallelly.fork.enable = TRUE)
 advChecker <- new("AdvancedGDIUniformityCheck")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 setLoggingFile("Data/PBMC1/LogClustering.log")
 
 pbmc1 <- clean(pbmc1)
@@ -45,7 +45,7 @@ write.csv(cl.merged$clusters,"Data/PBMC1/COTAN/AB_CoexEigenMergeCluster.csv")
 saveRDS(pbmc1,"Data/PBMC1/COTAN/PBMC1.cotan.RDS")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 
 cl <- cellsUniformClustering(pbmc1,cores = 5,#initialResolution = 3.8,
                              optimizeForSpeed = T,
@@ -64,7 +64,7 @@ write.csv(cl$clusters,"Data/PBMC1/COTAN/LL_CoexEigenSplitCluster.csv")
 write.csv(cl.merged$clusters,"Data/PBMC1/COTAN/LL_CoexEigenMergeCluster.csv")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 saveRDS(pbmc1,"Data/PBMC1/COTAN/PBMC1.cotan.RDS")
 ```
 
@@ -75,7 +75,7 @@ saveRDS(pbmc1,"Data/PBMC1/COTAN/PBMC1.cotan.RDS")
 pbmc2 <- readRDS("Data/PBMC2/filtered/PBMC2.cotan.RDS")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 setLoggingFile("Data/PBMC2/LogClustering.log")
 
 pbmc2 <- clean(pbmc2)
@@ -97,7 +97,7 @@ write.csv(cl$clusters,"Data/PBMC2/COTAN/AB_CoexEigenSplitCluster.csv")
 write.csv(cl.merged$clusters,"Data/PBMC2/COTAN/AB_CoexEigenMergeCluster.csv")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 cl <- cellsUniformClustering(pbmc2,cores = 5,#initialResolution = 3.8,
                              optimizeForSpeed = T,
                              checker = advChecker,
@@ -115,12 +115,8 @@ write.csv(cl$clusters,"Data/PBMC2/COTAN/LL_CoexEigenSplitCluster.csv")
 write.csv(cl.merged$clusters,"Data/PBMC2/COTAN/LL_CoexEigenMergeCluster.csv")
 ```
 
-```{r}
 
-```
-
-
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 cl <- cellsUniformClustering(pbmc2,cores = 5,#initialResolution = 3.8,
                              optimizeForSpeed = T,
                              checker = advChecker,
@@ -138,7 +134,7 @@ write.csv(cl$clusters,"Data/PBMC2/COTAN/LL_CoexEigenSplitCluster.csv")
 write.csv(cl.merged$clusters,"Data/PBMC2/COTAN/LL_CoexEigenMergeCluster.csv")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 saveRDS(pbmc2,"Data/PBMC1/COTAN/PBMC2.cotan.RDS")
 ```
 
@@ -150,7 +146,7 @@ saveRDS(pbmc2,"Data/PBMC1/COTAN/PBMC2.cotan.RDS")
 PBMC3 <- readRDS("Data/PBMC3/filtered/PBMC3.cotan.RDS")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 setLoggingFile("Data/PBMC3/LogClustering.log")
 
 PBMC3 <- clean(PBMC3)
@@ -172,7 +168,7 @@ write.csv(cl$clusters,"Data/PBMC3/COTAN/AB_CoexEigenSplitCluster.csv")
 write.csv(cl.merged$clusters,"Data/PBMC3/COTAN/AB_CoexEigenMergeCluster.csv")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 cl <- cellsUniformClustering(PBMC3,cores = 5,#initialResolution = 3.8,
                              optimizeForSpeed = T,
                              checker = advChecker,
@@ -190,7 +186,7 @@ write.csv(cl$clusters,"Data/PBMC3/COTAN/LL_CoexEigenSplitCluster.csv")
 write.csv(cl.merged$clusters,"Data/PBMC3/COTAN/LL_CoexEigenMergeCluster.csv")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 cl <- cellsUniformClustering(PBMC3,cores = 5,#initialResolution = 3.8,
                              optimizeForSpeed = T,
                              checker = advChecker,
@@ -214,7 +210,7 @@ write.csv(cl.merged$clusters,"Data/PBMC3/COTAN/LL_CoexEigenMergeCluster.csv")
 PBMC4 <- readRDS("Data/PBMC4/filtered/PBMC4.cotan.RDS")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 setLoggingFile("Data/PBMC4/LogClustering.log")
 
 PBMC4 <- clean(PBMC4)
@@ -236,7 +232,7 @@ write.csv(cl$clusters,"Data/PBMC4/COTAN/AB_CoexEigenSplitCluster.csv")
 write.csv(cl.merged$clusters,"Data/PBMC4/COTAN/AB_CoexEigenMergeCluster.csv")
 ```
 
-```{r}
+```{r,eval=FALSE,echo=TRUE}
 cl <- cellsUniformClustering(PBMC4,cores = 5,#initialResolution = 3.8,
                              optimizeForSpeed = T,
                              checker = advChecker,

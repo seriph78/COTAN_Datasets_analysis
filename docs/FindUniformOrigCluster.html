@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>COTAN Datasets analysis - Find uniform given cluster in Forebrain Dorsal E15.0</title>
+<title>Find uniform given cluster in Forebrain Dorsal E15.0 – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -79,7 +79,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,6 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -104,13 +111,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./OriginalClustersDistanceEvaluation.html">GDI sensitivity</a></li><li class="breadcrumb-item"><a href="./FindUniformOrigCluster.html">Cluster Unifomity and GDI score</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./OriginalClustersDistanceEvaluation.html">GDI sensitivity</a></li><li class="breadcrumb-item"><a href="./FindUniformOrigCluster.html">Cluster Unifomity and GDI score</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -119,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">COTAN Datasets analysis</a> 
@@ -140,18 +147,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Datasets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Loo 2019</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -172,9 +179,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -207,9 +214,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Brain LaManno 2021</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -260,9 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">CD14+</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,9 +284,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">PBMC form 10X site</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,9 +321,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Coex score evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -331,9 +338,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
  <span class="menu-text">GDI sensitivity</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -360,9 +367,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
  <span class="menu-text">Cluster evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -401,9 +408,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -428,9 +435,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">FDR and TPR - ROC curves</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -465,9 +472,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Additional code and scripts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -484,20 +491,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">ScamPy FDR code</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scanpy.ipynb" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example of scanpy clustering and DEA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scvi-tools.ipynb" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example of ScVI clustering and DEA</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./OriginalClustersDistanceEvaluation.html">GDI sensitivity</a></li><li class="breadcrumb-item"><a href="./FindUniformOrigCluster.html">Cluster Unifomity and GDI score</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Find uniform given cluster in Forebrain Dorsal E15.0</h1>
 </div>
@@ -512,7 +531,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -543,7 +564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>clusterIsUniform <span class="ot">&lt;-</span> <span class="cf">function</span>(objCOTAN, cluster, cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>) {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  cores <span class="ot">&lt;-</span> 14L</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  cores <span class="ot">&lt;-</span> <span class="dv">14</span>L</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(objCOTAN)[<span class="sc">!</span><span class="fu">getCells</span>(objCOTAN) <span class="sc">%in%</span> cells]</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -559,7 +580,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  gdi <span class="ot">&lt;-</span> <span class="fu">sort</span>(gdi, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Plot GDI</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  genesToRemark <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"Top 10 GDI genes"</span> <span class="ot">=</span> <span class="fu">names</span>(gdi)[1L<span class="sc">:</span>5L])</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  genesToRemark <span class="ot">=</span> <span class="fu">list</span>(<span class="st">"Top 10 GDI genes"</span> <span class="ot">=</span> <span class="fu">names</span>(gdi)[<span class="dv">1</span>L<span class="sc">:</span><span class="dv">5</span>L])</span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  genesToRemark <span class="ot">&lt;-</span> <span class="fu">append</span>(genesToRemark, genesList)</span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  plot <span class="ot">&lt;-</span> <span class="fu">GDIPlot</span>(objCOTAN, <span class="at">GDIIn =</span> GDIData,</span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                  <span class="at">GDIThreshold =</span> GDIThreshold,</span>
@@ -668,7 +689,11 @@ Neur674 Neur675 Neur676 Neur677 Neur678 Neur679 Neur686
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Cajal-Retzius"</span>,</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_CaRe_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Cajal-Retzius' is uniform"
@@ -698,7 +723,11 @@ Neur568 Neur569 Neur570 Neur571 Neur572 Neur573 Neur574 Neur575 Neur747
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Forebrain_GABAergic"</span>,</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_GABA_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Forebrain_GABAergic' is not uniform"
@@ -728,7 +757,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Cortical or hippocampal glutamatergic"</span>,</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_CHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Cortical or hippocampal glutamatergic' is not uniform"
@@ -746,7 +779,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur679"</span>,</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur679' is uniform"
@@ -764,7 +801,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568"</span>,</span>
 <span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur568' is uniform"
@@ -782,7 +823,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur525"</span>,</span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur525_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur525' is not uniform"
@@ -800,7 +845,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508"</span>,</span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508' is uniform"
@@ -818,7 +867,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509"</span>,</span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur509' is uniform"
@@ -836,7 +889,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur507"</span>,</span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur507' is uniform"
@@ -856,7 +913,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur509"</span>,</span>
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur509_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.Neur509' is not uniform"
@@ -876,7 +937,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur507"</span>,</span>
 <span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.Neur507' is not uniform"
@@ -896,7 +961,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur679"</span>,</span>
 <span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.Neur679' is not uniform"
@@ -916,7 +985,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.Neur568"</span>,</span>
 <span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.Neur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.Neur568' is not uniform"
@@ -936,7 +1009,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.Neur679"</span>,</span>
 <span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur509.Neur679' is not uniform"
@@ -956,7 +1033,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur507.Neur679"</span>,</span>
 <span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur507.Neur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur507.Neur679' is not uniform"
@@ -982,7 +1063,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s40oNeur679"</span>,</span>
 <span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s40oNeur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.s40oNeur679' is not uniform"
@@ -1008,7 +1093,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s20oNeur679"</span>,</span>
 <span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s20oNeur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.s20oNeur679' is not uniform"
@@ -1034,7 +1123,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s10oNeur679"</span>,</span>
 <span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s10oNeur679_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.s10oNeur679' is not uniform"
@@ -1060,7 +1153,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s40oNonCHGl"</span>,</span>
 <span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s40oNonCHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.s40oNonCHGl' is not uniform"
@@ -1086,7 +1183,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s20oNonCHGl"</span>,</span>
 <span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s20oNonCHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.s20oNonCHGl' is not uniform"
@@ -1112,7 +1213,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur508.s10oNonCHGl"</span>,</span>
 <span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur508.s10oNonCHGl_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur508.s10oNonCHGl' is uniform"
@@ -1138,7 +1243,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.s40oNeur568"</span>,</span>
 <span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.s40oNeur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur509.s40oNeur568' is not uniform"
@@ -1164,7 +1273,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.s20oNeur568"</span>,</span>
 <span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.s20oNeur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur509.s20oNeur568' is not uniform"
@@ -1190,7 +1303,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur509.s10oNeur568"</span>,</span>
 <span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur509.s10oNeur568_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur509.s10oNeur568' is not uniform"
@@ -1216,7 +1333,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb84-8"><a href="#cb84-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568.s20oNeur507"</span>,</span>
 <span id="cb84-9"><a href="#cb84-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568.s20oNeur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur568.s20oNeur507' is not uniform"
@@ -1242,7 +1363,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568.s10oNeur507"</span>,</span>
 <span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568.s10oNeur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur568.s10oNeur507' is not uniform"
@@ -1268,7 +1393,11 @@ Neur524 Neur525 Neur526 Neur527 Neur528
 <span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clusterIsUniform</span>(fb150Obj, <span class="at">cluster =</span> <span class="st">"Neur568.s5oNeur507"</span>,</span>
 <span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">cells =</span> FB_Neur568.s5oNeur507_Cells, <span class="at">GDIThreshold =</span> <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="FindUniformOrigCluster_files/figure-html/unnamed-chunk-33-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "The cluster 'Neur568.s5oNeur507' is uniform"
@@ -1390,18 +1519,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1433,11 +1551,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1447,8 +1604,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1460,7 +1626,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1504,6 +1793,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1529,6 +1819,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1589,6 +1905,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

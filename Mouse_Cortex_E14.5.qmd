@@ -14,7 +14,7 @@ library(stringr)
 ```
 
 ```{r}
-e14_dge = read.table("../COTAN_small_paper/data/MouseCortex/E14_combined_matrix.txt.gz",header=T,sep="\t",row.names=1)
+e14_dge = read.table("Data/MouseCortex/OriginalData/E14_combined_matrix.txt.gz",header=T,sep="\t",row.names=1)
 
 print(dim(e14_dge))
 
@@ -33,6 +33,11 @@ obj <- initializeMetaDataset(obj,
                              GEO = "GSE123335",
                              sequencingMethod = "Drop_seq",
                              sampleCondition = cond)
+
+CellCond <- str_split(getCells(obj),pattern = "_",simplify = T)[,1]
+names(CellCond) <- getCells(obj)
+obj <- addCondition(obj,"CellCond",CellCond)
+
 rm(e14_dge)
 ```
 
@@ -41,15 +46,15 @@ ECDPlot(obj, yCut = 400L)
 ```
 
 ```{r}
-cellSizePlot(obj,splitPattern = "_",numCol = 1)
+cellSizePlot(obj,condName = "CellCond")
 ```
 
 ```{r}
-genesSizePlot(obj,splitPattern = "_",numCol = 1)
+genesSizePlot(obj,condName = "CellCond")
 ```
 
 ```{r}
-mit <- mitochondrialPercentagePlot(obj, genePrefix = "^mt-",splitPattern = "_",numCol = 1)
+mit <- mitochondrialPercentagePlot(obj, genePrefix = "^mt-",condName = "CellCond")
 mit[["plot"]]
 ```
 
@@ -58,11 +63,11 @@ To drop cells by cell library size:
 ```{r}
 cells_to_rem <- getCells(obj)[getCellsSize(obj) > 15000]
 obj <- dropGenesCells(obj, cells = cells_to_rem)
-cellSizePlot(obj,splitPattern = "_",numCol = 1)
+cellSizePlot(obj,condName = "CellCond")
 ```
 
 ```{r}
-genesSizePlot(obj,splitPattern = "_",numCol = 1)
+genesSizePlot(obj,condName = "CellCond")
 ```
 
 To drop cells by mitochondrial percentage:
@@ -72,13 +77,13 @@ to_rem <- mit[["sizes"]][["mit.percentage"]] > 7.5
 cells_to_rem <- rownames(mit[["sizes"]])[to_rem]
 obj <- dropGenesCells(obj, cells = cells_to_rem)
 
-mit <- mitochondrialPercentagePlot(obj, genePrefix = "^mt-",splitPattern = "_",numCol = 1)
+mit <- mitochondrialPercentagePlot(obj, genePrefix = "^mt-",condName = "CellCond")
 
 mit[["plot"]]
 ```
 
 ```{r}
-cellSizePlot(obj,splitPattern = "_",numCol = 1)
+cellSizePlot(obj,condName = "CellCond")
 ```
 
 ```{r}
@@ -171,24 +176,33 @@ ggplot(UDEPlot$data, aes(PC2,PC5,color = groups)) + geom_point(size = 0.5, alpha
 In this part, all the contingency tables are computed and used to get the statistics.
 
 ```{r}
+obj <- estimateLambdaLinear(obj)
 obj <- estimateDispersionBisection(obj, cores = 15L)
 ```
 
 `COEX` evaluation and storing
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, include=TRUE}
 obj <- calculateCoex(obj)
 ```
 
-```{r eval=FALSE, include=TRUE}
+```{r, eval=FALSE, include=TRUE}
 # saving the structure
 saveRDS(obj, file = file.path(outDir, paste0(cond, ".cotan.RDS")))
 ```
 
 ```{r, eval=TRUE}
+objTemp <- obj
 obj <- readRDS(file = file.path(outDir, paste0(cond, ".cotan.RDS")))
 ```
 
+(Next code... just check that the already stored data is identical to the re-calculated)
+
+```{r, eval=TRUE, include=TRUE}
+identical(getRawData(obj),getRawData(objTemp))
+```
+
 ```{r}
+
 sessionInfo()
 ```

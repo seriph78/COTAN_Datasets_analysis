@@ -5,7 +5,6 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -41,12 +40,9 @@ if (!file.exists(outDir)) {
 result.df <- data.frame()
 ```
 
-In this part we want to show that if COTAN detects more division for cluster defined by other methods, this division is consitent and real. To test it we will use a simple logistic regression. 
-
+In this part we want to show that if COTAN detects more division for cluster defined by other methods, this division is consitent and real. To test it we will use a simple logistic regression.
 
 ## Cluster 525 e15.0
-
-
 
 ```{r, eval=FALSE, echo=TRUE}
 e15.0 <- readRDS(paste0(inDir,"e15.0_ForebrainDorsal.cotan.RDS")
@@ -78,7 +74,6 @@ colnames(result.df) <- c("OriginalCluster","CellNumber","COTANClusterNumber","Ac
 result.df
 ```
 
-
 ```{r}
 cl525GDI <- calculateGDI(cl525)
 
@@ -98,6 +93,7 @@ cl525 <- addClusterization(cl525, clName = "split",
 
 table(list.cl.CT$clusters)
 ```
+
 ```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF) %<-%
   mergeUniformCellsClusters(cl525, clusters = list.cl.CT$clusters,
@@ -116,9 +112,8 @@ table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClus
 
 So there isn't a perfect separation due to the cell bar code.
 
-
 ```{r}
-cl525ClsMarkers <- findClustersMarkers(cl525,n = 200,method = "BH")
+cl525ClsMarkers <- findClustersMarkers(cl525,n = 200,adjustmentMethod = "BH")
 
 head(cl525ClsMarkers)
 ```
@@ -127,7 +122,6 @@ head(cl525ClsMarkers)
 write.csv(cl525ClsMarkers,paste0(outDir,"cl525/ClustersMarkers.csv"))
 write.csv(getClusterizationData(cl525)[[1]],file = paste0(outDir,"cl525/CellClusters.csv"))
 ```
-
 
 ```{r}
 data <- getNormalizedData(cl525)
@@ -164,7 +158,6 @@ test.data <- data.small[-training.samples, ]
 head(train.data)
 ```
 
-
 ```{r}
 train.data$COTAN_Cl.code <- as.factor(train.data$COTAN_Cl.code)
 test.data$COTAN_Cl.code <- as.factor(test.data$COTAN_Cl.code)
@@ -185,22 +178,21 @@ accuracy <- mean(predicted.classes == test.data$COTAN_Cl.code)
 result.df[nrow(result.df),"Accuracy"] <- accuracy
 print(accuracy)
 ```
+
 So also a simple logistic regression confirm that this cluster is in fact formed by four different cell populations.
 
 Now lets try to search the identity of these cells.
 
 Since COTAN can detect also very lowly expressed genes, but all the literature methods not, the online methods are bias for highly expressed genes. So, we will take all genes detected as enriched by COTAN and filter also for the highly expressed ones.
 
-
 ```{r}
 top <- cl525ClsMarkers[cl525ClsMarkers$Gene %in% rownames(cl525GDI[cl525GDI$sum.raw.norm > 7,]) & cl525ClsMarkers$Score > 0,]
 top
 ```
+
 ```{r}
 write.csv(top,paste0(outDir,"cl525/TopClustersMarkers.csv"))
 ```
-
-
 
 ## Cluster 511 e15.0
 
@@ -218,6 +210,7 @@ cl511 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
                                        calcCoex = T)
 
 ```
+
 ```{r, eval=TRUE,echo=FALSE}
 cl511 <- readRDS(paste0(outDir,"cl511.cotan.RDS"))
 
@@ -248,6 +241,7 @@ cl511 <- addClusterization(cl511, clName = "split",
 
 table(list.cl.CT$clusters)
 ```
+
 ```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF) %<-%
   mergeUniformCellsClusters(cl511, clusters = list.cl.CT$clusters,
@@ -263,9 +257,6 @@ saveRDS(cl511,paste0(outDir,"cl511.cotan.RDS"))
 
 table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
 ```
-
-
-
 
 ```{r}
 data <- getNormalizedData(cl511)
@@ -301,7 +292,6 @@ test.data <- data.small[-training.samples, ]
 head(train.data)
 ```
 
-
 ```{r}
 # Fit the model
 model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
@@ -320,7 +310,7 @@ accuracy
 So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
 
 ```{r}
-cl511ClsMarkers <- findClustersMarkers(cl511,n = 200,method = "BH")
+cl511ClsMarkers <- findClustersMarkers(cl511,n = 200,adjustmentMethod = "BH")
 cl511ClsMarkers
 ```
 
@@ -342,7 +332,6 @@ result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
 result.df
 ```
 
-
 ```{r, eval=FALSE, echo=TRUE}
 cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "184"]
 
@@ -357,7 +346,6 @@ cl184 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
                                        calcCoex = T)
 
 ```
-
 
 ```{r}
 cl184GDI <- calculateGDI(cl184)
@@ -378,6 +366,7 @@ cl184 <- addClusterization(cl184, clName = "split",
 
 table(list.cl.CT$clusters)
 ```
+
 ```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF) %<-%
   mergeUniformCellsClusters(cl184, clusters = list.cl.CT$clusters,
@@ -393,8 +382,6 @@ saveRDS(cl184,paste0(outDir,"cl184.cotan.RDS"))
 
 table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
 ```
-
-
 
 ```{r}
 data <- getNormalizedData(cl184)
@@ -430,7 +417,6 @@ test.data <- data.small[-training.samples, ]
 head(train.data)
 ```
 
-
 ```{r}
 # Fit the model
 model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
@@ -450,7 +436,7 @@ accuracy
 So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
 
 ```{r}
-cl184ClsMarkers <- findClustersMarkers(cl184,n = 200,method = "BH")
+cl184ClsMarkers <- findClustersMarkers(cl184,n = 200,adjustmentMethod = "BH")
 cl184ClsMarkers
 ```
 
@@ -471,7 +457,6 @@ result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
 result.df
 
 ```
-
 
 ```{r, echo=TRUE, eval=FALSE}
 e13.5 <- readRDS(paste0(inDir,"e13.5_ForebrainDorsal.cotan.RDS"))
@@ -508,6 +493,7 @@ cl432 <- addClusterization(cl432, clName = "split",
 
 table(list.cl.CT$clusters)
 ```
+
 ```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF) %<-%
   mergeUniformCellsClusters(cl432, clusters = list.cl.CT$clusters,
@@ -523,8 +509,6 @@ saveRDS(cl432,paste0(outDir,"cl432.cotan.RDS"))
 
 table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
 ```
-
-
 
 ```{r}
 data <- getNormalizedData(cl432)
@@ -560,7 +544,6 @@ test.data <- data.small[-training.samples, ]
 head(train.data)
 ```
 
-
 ```{r}
 # Fit the model
 model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
@@ -580,7 +563,7 @@ accuracy
 So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
 
 ```{r}
-cl432ClsMarkers <- findClustersMarkers(cl432,n = 200,method = "BH")
+cl432ClsMarkers <- findClustersMarkers(cl432,n = 200, adjustmentMethod = "BH")
 cl432ClsMarkers
 ```
 
@@ -588,8 +571,6 @@ cl432ClsMarkers
 write.csv(cl432ClsMarkers,paste0(outDir,"cl432/ClustersMarkers.csv"))
 write.csv(getClusterizationData(cl432)[[1]],file = paste0(outDir,"cl432/CellClusters.csv"))
 ```
-
-
 
 ## Cluster 510 e15.0
 
@@ -603,7 +584,6 @@ n.cls <- length(unique(getClusters(cl510e15.0)))
 result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
 result.df
 ```
-
 
 ```{r,eval=FALSE, echo=TRUE}
 cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "510"]
@@ -639,6 +619,7 @@ cl510e15.0 <- addClusterization(cl510e15.0, clName = "split",
 
 table(list.cl.CT$clusters)
 ```
+
 ```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF) %<-%
   mergeUniformCellsClusters(cl510e15.0, clusters = list.cl.CT$clusters,
@@ -654,8 +635,6 @@ saveRDS(cl510e15.0,paste0(outDir,"cl510e15.0.cotan.RDS"))
 
 table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
 ```
-
-
 
 ```{r}
 data <- getNormalizedData(cl510e15.0)
@@ -691,7 +670,6 @@ test.data <- data.small[-training.samples, ]
 head(train.data)
 ```
 
-
 ```{r}
 # Fit the model
 model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
@@ -711,7 +689,7 @@ accuracy
 So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
 
 ```{r}
-cl510e15.0ClsMarkers <- findClustersMarkers(cl510e15.0,n = 200,method = "BH")
+cl510e15.0ClsMarkers <- findClustersMarkers(cl510e15.0,n = 200,adjustmentMethod = "BH")
 cl510e15.0ClsMarkers
 ```
 
@@ -733,8 +711,6 @@ result.df <- rbind(result.df,c(cl,n.cells,n.cls,NA))
 result.df
 ```
 
-
-
 ```{r,eval=FALSE, echo=TRUE}
 cells <- getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]][getClusterizationData(e15.0,clName = "CL_original.clusters")[[1]] == "511"]
 
@@ -749,7 +725,6 @@ cl511e15.0 <-  automaticCOTANObjectCreation(raw = getRawData(e15.0)[,cells],
                                        calcCoex = T)
 
 ```
-
 
 ```{r}
 cl511e15.0GDI <- calculateGDI(cl511e15.0)
@@ -770,6 +745,7 @@ cl511e15.0 <- addClusterization(cl511e15.0, clName = "split",
 
 table(list.cl.CT$clusters)
 ```
+
 ```{r, eval=FALSE, echo=TRUE}
 c(mergedClusters, mergedCoexDF) %<-%
   mergeUniformCellsClusters(cl511e15.0, clusters = list.cl.CT$clusters,
@@ -785,8 +761,6 @@ saveRDS(cl511e15.0,paste0(outDir,"cl511e15.0.cotan.RDS"))
 
 table(str_split(names(mergedClusters),pattern = "_",simplify = T)[,1],mergedClusters)
 ```
-
-
 
 ```{r}
 data <- getNormalizedData(cl511e15.0)
@@ -822,7 +796,6 @@ test.data <- data.small[-training.samples, ]
 head(train.data)
 ```
 
-
 ```{r}
 # Fit the model
 model <- glm( COTAN_Cl.code ~., data = train.data, family = binomial,control = list(maxit = 50))
@@ -842,7 +815,7 @@ accuracy
 So also in this case a logistic regression confirm the difference in cell population detected by COTAN.
 
 ```{r}
-cl511e15.0ClsMarkers <- findClustersMarkers(cl511e15.0,n = 200,method = "BH")
+cl511e15.0ClsMarkers <- findClustersMarkers(cl511e15.0,n = 200,adjustmentMethod = "BH")
 cl511e15.0ClsMarkers
 ```
 
@@ -856,8 +829,6 @@ write.csv(getClusterizationData(cl511e15.0)[[1]],file = paste0(outDir,"cl511e15.
 ```{r}
 result.df
 ```
-
-
 
 ------------------------------------------------------------------------
 

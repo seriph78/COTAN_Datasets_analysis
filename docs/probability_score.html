@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.47">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Probability score computation – COTAN Datasets analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./probability_score.html">PBMCs probability score</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">COTAN Datasets analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Datasets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Loo 2019</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Mouse_Cortex_E14.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDataset1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coexpression analaysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861511_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861514_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Brain LaManno 2021</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E150-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E15.0 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE15.0MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E15.0</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainLaManno2021ClustersGDI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Original Clusters GDI evaluation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">CD14+</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ Cleaning and cell clustering</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">PBMC form 10X site</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC1_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC2_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC3_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC4_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Coex score evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./generalCoexAssess.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General Coex Evaluation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">GDI sensitivity</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./OriginalClustersDistanceEvaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clusters Distance Evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FindUniformOrigCluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cluster Unifomity and GDI score</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./GDI_Increment_From_Mixing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GDI Increment From Mixing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cluster evaluation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./NonCT_clusters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Not UT cluster with LR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Real_UT_clustersByCotan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Real UT clusters with LR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ clusterizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PBMCs clustering comparison</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_score.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">PBMCs probability score</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">DEA evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DEA_Type1Er.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Type I error</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneExpressionAnalysisUniformClusters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explorative analysis of gene expression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDR analysis - define DE genes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">FDR and TPR - ROC curves</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 3% 10%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5_20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5% 20%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analysisResultsLFC.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - Log Fold Change</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
+ <span class="menu-text">Additional code and scripts</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./src/scanpyTypeIError.py" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ScamPy Type I Error code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./src/scanpyFDR.py" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ScamPy FDR code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scanpy.ipynb" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example of scanpy clustering and DEA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scvi-tools.ipynb" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example of ScVI clustering and DEA</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#pbmc1" id="toc-pbmc1" class="nav-link active" data-scroll-target="#pbmc1">PBMC1</a></li>
+  <li><a href="#pbmc2" id="toc-pbmc2" class="nav-link" data-scroll-target="#pbmc2">PBMC2</a></li>
+  <li><a href="#pbmc3" id="toc-pbmc3" class="nav-link" data-scroll-target="#pbmc3">PBMC3</a></li>
+  <li><a href="#pbmc4" id="toc-pbmc4" class="nav-link" data-scroll-target="#pbmc4">PBMC4</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./probability_score.html">PBMCs probability score</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Probability score computation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(testthat)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aricode)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(funtimes)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(monocle3)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cluster)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(COTAN)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>tunings <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'default'</span>, <span class="st">'antibody'</span>, <span class="st">'celltypist'</span>)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>tools <span class="ot">=</span> <span class="fu">c</span>(<span class="st">'monocle'</span>, <span class="st">'scanpy'</span>, <span class="st">'seurat'</span>, <span class="st">'scvi-tools'</span>, <span class="st">'COTAN'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>averageClustersDistance <span class="ot">&lt;-</span> <span class="cf">function</span>(probMatrixDF,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                                    clustersList, numDim) {</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  squareDist <span class="ot">&lt;-</span> <span class="cf">function</span>(subMatrix) {</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    subMatrix <span class="ot">&lt;-</span> <span class="fu">scale</span>(subMatrix, <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">center =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="fu">sum</span>(<span class="fu">rowSums</span>(subMatrix<span class="sc">^</span><span class="dv">2</span>)))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  pca <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> numDim, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  residual_variance <span class="ot">=</span> <span class="dv">100</span> <span class="sc">-</span> <span class="fu">sum</span>(pca[[<span class="st">"variance"</span>]])</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  normMatrix <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="at">x =</span> pca[[<span class="st">"rotated"</span>]], <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(normMatrix) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(probMatrixDF)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  final_dimensions <span class="ot">=</span> <span class="fu">dim</span>(normMatrix)[<span class="dv">2</span>]</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  sumDist <span class="ot">&lt;-</span> <span class="fl">0.0</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (cl <span class="cf">in</span> clustersList) {</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    sumDist <span class="ot">&lt;-</span> sumDist <span class="sc">+</span> <span class="fu">squareDist</span>(normMatrix[cl, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  score <span class="ot">=</span> sumDist <span class="sc">/</span> <span class="fu">ncol</span>(normMatrix) <span class="sc">/</span> (<span class="fu">nrow</span>(normMatrix) <span class="sc">-</span> <span class="fu">length</span>(clustersList))</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(<span class="st">"residual_variance"</span> <span class="ot">=</span> residual_variance, <span class="st">"final_dimensions"</span> <span class="ot">=</span> final_dimensions, <span class="st">"score"</span> <span class="ot">=</span> score))</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="pbmc1" class="level2">
+<h2 class="anchored" data-anchor-id="pbmc1">PBMC1</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">=</span> <span class="st">'PBMC1'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>celltypistPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/celltypist/Immune_All_Low_probability_matrix.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>outPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probabilistic_score.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Load CellTypist clusterization</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(celltypistPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(probMatrixDF, <span class="at">var =</span> <span class="st">"X"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[.]"</span>, <span class="st">":"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"X10X"</span>, <span class="st">"10X"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">rownames</span>(probMatrixDF), <span class="dv">1</span>, <span class="fu">nchar</span>(<span class="fu">rownames</span>(probMatrixDF)) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Estimate number of dimensions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>nDims <span class="ot">&lt;-</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calculate the projection to spherical distribution [Malahanobis distance]: the sum of square distances from center of sub-cluster in pca-projected space</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">=</span> <span class="fu">data.frame</span>()<span class="co">#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (tool <span class="cf">in</span> tools) {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (tuning <span class="cf">in</span> tunings) {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    labelsPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/'</span>, tool, <span class="st">'/'</span>, tuning, <span class="st">'/clustering_labels.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    labels <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(labelsPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    clustersList<span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">as.character</span>(labels<span class="sc">$</span>cell), labels<span class="sc">$</span>cluster)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    score_data <span class="ot">=</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, clustersList,<span class="at">numDim =</span> nDims)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    scores <span class="ot">=</span> <span class="fu">rbind</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      scores,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tool"</span> <span class="ot">=</span> tool,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dataset"</span> <span class="ot">=</span> dataset,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tuning"</span> <span class="ot">=</span> tuning,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"score"</span> <span class="ot">=</span> score_data<span class="sc">$</span>score,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"residual_variance"</span> <span class="ot">=</span> score_data<span class="sc">$</span>residual_variance,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"final_dimensions"</span> <span class="ot">=</span> score_data<span class="sc">$</span>final_dimensions</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(scores, outPath, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         tool dataset     tuning     score residual_variance final_dimensions
+1     monocle   PBMC1    default 0.9064319         0.6614691               20
+2     monocle   PBMC1   antibody 0.7098190         0.6614691               20
+3     monocle   PBMC1 celltypist 0.6698957         0.6614691               20
+4      scanpy   PBMC1    default 0.5717224         0.6614691               20
+5      scanpy   PBMC1   antibody 0.6405931         0.6614691               20
+6      scanpy   PBMC1 celltypist 0.5765256         0.6614691               20
+7      seurat   PBMC1    default 0.6290241         0.6614691               20
+8      seurat   PBMC1   antibody 0.6275275         0.6614691               20
+9      seurat   PBMC1 celltypist 0.5283759         0.6614691               20
+10 scvi-tools   PBMC1    default 0.6027325         0.6614691               20
+11 scvi-tools   PBMC1   antibody 0.6605860         0.6614691               20
+12 scvi-tools   PBMC1 celltypist 0.5735559         0.6614691               20
+13      COTAN   PBMC1    default 0.5470015         0.6614691               20
+14      COTAN   PBMC1   antibody 0.5467247         0.6614691               20
+15      COTAN   PBMC1 celltypist 0.5799735         0.6614691               20</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>shuffledCells <span class="ot">&lt;-</span> <span class="fu">rownames</span>(probMatrixDF)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>rndDist <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  clusters <span class="ot">&lt;-</span> <span class="fu">set_names</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">ceiling</span>(<span class="dv">9000</span><span class="sc">/</span>n))[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(probMatrixDF)], shuffledCells)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  cluster_list <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">names</span>(clusters), clusters)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, cluster_list,nDims)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(d<span class="sc">$</span>score)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="fu">seq</span>(<span class="dv">60</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">seq</span>(<span class="dv">150</span>, <span class="dv">1000</span>, <span class="at">by =</span> <span class="dv">50</span>), <span class="fu">seq</span>(<span class="dv">1500</span>, <span class="dv">9000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>sizesToDists <span class="ot">&lt;-</span> <span class="fu">vapply</span>(sizes,rndDist, <span class="fu">numeric</span>(<span class="dv">1</span>)) </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sizesToDists) <span class="ot">&lt;-</span> sizes</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probability_score_dim_dependency.pdf'</span>, <span class="at">sep=</span><span class="st">''</span>))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>png 
+  2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pbmc2" class="level2">
+<h2 class="anchored" data-anchor-id="pbmc2">PBMC2</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">=</span> <span class="st">'PBMC2'</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>celltypistPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/celltypist/Immune_All_Low_probability_matrix.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>outPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probabilistic_score.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Load CellTypist clusterization</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(celltypistPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(probMatrixDF, <span class="at">var =</span> <span class="st">"X"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[.]"</span>, <span class="st">":"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"X10X"</span>, <span class="st">"10X"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">rownames</span>(probMatrixDF), <span class="dv">1</span>, <span class="fu">nchar</span>(<span class="fu">rownames</span>(probMatrixDF)) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Estimate number of dimensions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>nDims <span class="ot">&lt;-</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calculate the projection to spherical distribution [Malahanobis distance]: the sum of square distances from center of sub-cluster in pca-projected space</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">=</span> <span class="fu">data.frame</span>()<span class="co">#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (tool <span class="cf">in</span> tools) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (tuning <span class="cf">in</span> tunings) {</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    labelsPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/'</span>, tool, <span class="st">'/'</span>, tuning, <span class="st">'/clustering_labels.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    labels <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(labelsPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    clustersList<span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">as.character</span>(labels<span class="sc">$</span>cell), labels<span class="sc">$</span>cluster)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    score_data <span class="ot">=</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, clustersList,<span class="at">numDim =</span> nDims)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    scores <span class="ot">=</span> <span class="fu">rbind</span>(</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>      scores,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tool"</span> <span class="ot">=</span> tool,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dataset"</span> <span class="ot">=</span> dataset,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tuning"</span> <span class="ot">=</span> tuning,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"score"</span> <span class="ot">=</span> score_data<span class="sc">$</span>score,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"residual_variance"</span> <span class="ot">=</span> score_data<span class="sc">$</span>residual_variance,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"final_dimensions"</span> <span class="ot">=</span> score_data<span class="sc">$</span>final_dimensions</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(scores, outPath, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         tool dataset     tuning     score residual_variance final_dimensions
+1     monocle   PBMC2    default 0.9547651          0.632864               20
+2     monocle   PBMC2   antibody 0.7238461          0.632864               20
+3     monocle   PBMC2 celltypist 0.6804478          0.632864               20
+4      scanpy   PBMC2    default 0.5757901          0.632864               20
+5      scanpy   PBMC2   antibody 0.4720212          0.632864               20
+6      scanpy   PBMC2 celltypist 0.5721244          0.632864               20
+7      seurat   PBMC2    default 0.5494186          0.632864               20
+8      seurat   PBMC2   antibody 0.3949425          0.632864               20
+9      seurat   PBMC2 celltypist 0.4951102          0.632864               20
+10 scvi-tools   PBMC2    default 0.5851914          0.632864               20
+11 scvi-tools   PBMC2   antibody 0.4727416          0.632864               20
+12 scvi-tools   PBMC2 celltypist 0.5576107          0.632864               20
+13      COTAN   PBMC2    default 0.5468319          0.632864               20
+14      COTAN   PBMC2   antibody 0.6612736          0.632864               20
+15      COTAN   PBMC2 celltypist 0.5599573          0.632864               20</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>shuffledCells <span class="ot">&lt;-</span> <span class="fu">rownames</span>(probMatrixDF)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>rndDist <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  clusters <span class="ot">&lt;-</span> <span class="fu">set_names</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">ceiling</span>(<span class="dv">9000</span><span class="sc">/</span>n))[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(probMatrixDF)], shuffledCells)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  cluster_list <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">names</span>(clusters), clusters)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, cluster_list,nDims)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(d<span class="sc">$</span>score)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="fu">seq</span>(<span class="dv">60</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>),</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">seq</span>(<span class="dv">150</span>, <span class="dv">1000</span>, <span class="at">by =</span> <span class="dv">50</span>), <span class="fu">seq</span>(<span class="dv">1500</span>, <span class="dv">9000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>sizesToDists <span class="ot">&lt;-</span> <span class="fu">vapply</span>(sizes, rndDist, <span class="fu">numeric</span>(<span class="dv">1</span>)) </span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sizesToDists) <span class="ot">&lt;-</span> sizes</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probability_score_dim_dependency.pdf'</span>, <span class="at">sep=</span><span class="st">''</span>))</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>png 
+  2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pbmc3" class="level2">
+<h2 class="anchored" data-anchor-id="pbmc3">PBMC3</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">=</span> <span class="st">'PBMC3'</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>celltypistPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/celltypist/Immune_All_Low_probability_matrix.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>outPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probabilistic_score.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Load CellTypist clusterization</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(celltypistPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(probMatrixDF, <span class="at">var =</span> <span class="st">"X"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[.]"</span>, <span class="st">":"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"X10X"</span>, <span class="st">"10X"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">rownames</span>(probMatrixDF), <span class="dv">1</span>, <span class="fu">nchar</span>(<span class="fu">rownames</span>(probMatrixDF)) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Estimate number of dimensions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>nDims <span class="ot">&lt;-</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calculate the projection to spherical distribution [Malahanobis distance]: the sum of square distances from center of sub-cluster in pca-projected space</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">=</span> <span class="fu">data.frame</span>()<span class="co">#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (tool <span class="cf">in</span> tools) {</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (tuning <span class="cf">in</span> tunings) {</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    labelsPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/'</span>, tool, <span class="st">'/'</span>, tuning, <span class="st">'/clustering_labels.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    labels <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(labelsPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    clustersList<span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">as.character</span>(labels<span class="sc">$</span>cell), labels<span class="sc">$</span>cluster)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    score_data <span class="ot">=</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, clustersList,<span class="at">numDim =</span> nDims)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    scores <span class="ot">=</span> <span class="fu">rbind</span>(</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>      scores,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tool"</span> <span class="ot">=</span> tool,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dataset"</span> <span class="ot">=</span> dataset,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tuning"</span> <span class="ot">=</span> tuning,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"score"</span> <span class="ot">=</span> score_data<span class="sc">$</span>score,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"residual_variance"</span> <span class="ot">=</span> score_data<span class="sc">$</span>residual_variance,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"final_dimensions"</span> <span class="ot">=</span> score_data<span class="sc">$</span>final_dimensions</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(scores, outPath, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         tool dataset     tuning     score residual_variance final_dimensions
+1     monocle   PBMC3    default 0.9116157          0.666637               20
+2     monocle   PBMC3   antibody 0.7342920          0.666637               20
+3     monocle   PBMC3 celltypist 0.7235588          0.666637               20
+4      scanpy   PBMC3    default 0.5771388          0.666637               20
+5      scanpy   PBMC3   antibody 0.4865492          0.666637               20
+6      scanpy   PBMC3 celltypist 0.5750278          0.666637               20
+7      seurat   PBMC3    default 0.5237283          0.666637               20
+8      seurat   PBMC3   antibody 0.4024118          0.666637               20
+9      seurat   PBMC3 celltypist 0.5238608          0.666637               20
+10 scvi-tools   PBMC3    default 0.5606163          0.666637               20
+11 scvi-tools   PBMC3   antibody 0.4673312          0.666637               20
+12 scvi-tools   PBMC3 celltypist 0.5082920          0.666637               20
+13      COTAN   PBMC3    default 0.4794518          0.666637               20
+14      COTAN   PBMC3   antibody 0.6774677          0.666637               20
+15      COTAN   PBMC3 celltypist 0.5843296          0.666637               20</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>shuffledCells <span class="ot">&lt;-</span> <span class="fu">rownames</span>(probMatrixDF)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>rndDist <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  clusters <span class="ot">&lt;-</span> <span class="fu">set_names</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">ceiling</span>(<span class="dv">9000</span><span class="sc">/</span>n))[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(probMatrixDF)], shuffledCells)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  cluster_list <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">names</span>(clusters), clusters)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, cluster_list,nDims)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(d<span class="sc">$</span>score)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="fu">seq</span>(<span class="dv">60</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>),</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">seq</span>(<span class="dv">150</span>, <span class="dv">1000</span>, <span class="at">by =</span> <span class="dv">50</span>), <span class="fu">seq</span>(<span class="dv">1500</span>, <span class="dv">9000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>sizesToDists <span class="ot">&lt;-</span> <span class="fu">vapply</span>(sizes, rndDist, <span class="fu">numeric</span>(<span class="dv">1</span>)) </span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sizesToDists) <span class="ot">&lt;-</span> sizes</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probability_score_dim_dependency.pdf'</span>, <span class="at">sep=</span><span class="st">''</span>))</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>png 
+  2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="pbmc4" class="level2">
+<h2 class="anchored" data-anchor-id="pbmc4">PBMC4</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">=</span> <span class="st">'PBMC4'</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>celltypistPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/celltypist/Immune_All_Low_probability_matrix.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>outPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probabilistic_score.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Load CellTypist clusterization</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(celltypistPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>probMatrixDF <span class="ot">&lt;-</span> <span class="fu">column_to_rownames</span>(probMatrixDF, <span class="at">var =</span> <span class="st">"X"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"[.]"</span>, <span class="st">":"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"X10X"</span>, <span class="st">"10X"</span>, <span class="fu">rownames</span>(probMatrixDF))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(probMatrixDF) <span class="ot">&lt;-</span> <span class="fu">substr</span>(<span class="fu">rownames</span>(probMatrixDF), <span class="dv">1</span>, <span class="fu">nchar</span>(<span class="fu">rownames</span>(probMatrixDF)) <span class="sc">-</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Estimate number of dimensions</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>nDims <span class="ot">&lt;-</span> <span class="dv">20</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Calculate the projection to spherical distribution [Malahanobis distance]: the sum of square distances from center of sub-cluster in pca-projected space</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">=</span> <span class="fu">data.frame</span>()<span class="co">#"tool" = NA, "dataset" = dataset, "tuning" = NA, "score" = NA, "residual_variance" = NA, "final_dimensions" = NA)</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (tool <span class="cf">in</span> tools) {</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (tuning <span class="cf">in</span> tunings) {</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    labelsPath <span class="ot">=</span> <span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/'</span>, tool, <span class="st">'/'</span>, tuning, <span class="st">'/clustering_labels.csv'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    labels <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(labelsPath, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>    clustersList<span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">as.character</span>(labels<span class="sc">$</span>cell), labels<span class="sc">$</span>cluster)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>    score_data <span class="ot">=</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, clustersList,<span class="at">numDim =</span> nDims)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    scores <span class="ot">=</span> <span class="fu">rbind</span>(</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>      scores,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">data.frame</span>(</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tool"</span> <span class="ot">=</span> tool,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dataset"</span> <span class="ot">=</span> dataset,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tuning"</span> <span class="ot">=</span> tuning,</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"score"</span> <span class="ot">=</span> score_data<span class="sc">$</span>score,</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"residual_variance"</span> <span class="ot">=</span> score_data<span class="sc">$</span>residual_variance,</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"final_dimensions"</span> <span class="ot">=</span> score_data<span class="sc">$</span>final_dimensions</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(scores, outPath, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         tool dataset     tuning     score residual_variance final_dimensions
+1     monocle   PBMC4    default 0.9079955         0.7881445               20
+2     monocle   PBMC4   antibody 0.6896226         0.7881445               20
+3     monocle   PBMC4 celltypist 0.6513185         0.7881445               20
+4      scanpy   PBMC4    default 0.5667508         0.7881445               20
+5      scanpy   PBMC4   antibody 0.5639221         0.7881445               20
+6      scanpy   PBMC4 celltypist 0.5916285         0.7881445               20
+7      seurat   PBMC4    default 0.5272270         0.7881445               20
+8      seurat   PBMC4   antibody 0.4877846         0.7881445               20
+9      seurat   PBMC4 celltypist 0.5265706         0.7881445               20
+10 scvi-tools   PBMC4    default 0.6212800         0.7881445               20
+11 scvi-tools   PBMC4   antibody 0.5174726         0.7881445               20
+12 scvi-tools   PBMC4 celltypist 0.5219027         0.7881445               20
+13      COTAN   PBMC4    default 0.5155869         0.7881445               20
+14      COTAN   PBMC4   antibody 0.6737801         0.7881445               20
+15      COTAN   PBMC4 celltypist 0.6209524         0.7881445               20</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>shuffledCells <span class="ot">&lt;-</span> <span class="fu">rownames</span>(probMatrixDF)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>rndDist <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  clusters <span class="ot">&lt;-</span> <span class="fu">set_names</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>n, <span class="fu">ceiling</span>(<span class="dv">9000</span><span class="sc">/</span>n))[<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(probMatrixDF)], shuffledCells)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  cluster_list <span class="ot">&lt;-</span> <span class="fu">split</span>(<span class="fu">names</span>(clusters), clusters)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">averageClustersDistance</span>(probMatrixDF, cluster_list,nDims)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(d<span class="sc">$</span>score)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>sizes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>, <span class="fu">seq</span>(<span class="dv">20</span>, <span class="dv">50</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="fu">seq</span>(<span class="dv">60</span>, <span class="dv">100</span>, <span class="at">by =</span> <span class="dv">10</span>),</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>           <span class="fu">seq</span>(<span class="dv">150</span>, <span class="dv">1000</span>, <span class="at">by =</span> <span class="dv">50</span>), <span class="fu">seq</span>(<span class="dv">1500</span>, <span class="dv">9000</span>, <span class="at">by =</span> <span class="dv">500</span>))</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>sizesToDists <span class="ot">&lt;-</span> <span class="fu">vapply</span>(sizes, rndDist, <span class="fu">numeric</span>(<span class="dv">1</span>)) </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sizesToDists) <span class="ot">&lt;-</span> sizes</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste</span>(<span class="st">'Data/'</span>, dataset, <span class="st">'/probability_score_dim_dependency.pdf'</span>, <span class="at">sep=</span><span class="st">''</span>))</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>png 
+  2 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2025-12-18 09:12:39 CET"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+
+locale:
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+
+time zone: Europe/Rome
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] COTAN_2.9.4                 cluster_2.1.8.1            
+ [3] monocle3_1.3.7              SingleCellExperiment_1.30.0
+ [5] SummarizedExperiment_1.38.1 GenomicRanges_1.60.0       
+ [7] GenomeInfoDb_1.44.0         IRanges_2.42.0             
+ [9] S4Vectors_0.46.0            MatrixGenerics_1.20.0      
+[11] matrixStats_1.5.0           Biobase_2.68.0             
+[13] BiocGenerics_0.54.0         generics_0.1.3             
+[15] funtimes_10.0               aricode_1.0.3              
+[17] Seurat_5.2.1                SeuratObject_5.1.0         
+[19] sp_2.2-0                    zeallot_0.2.0              
+[21] tibble_3.3.0                ggplot2_4.0.1              
+[23] testthat_3.2.3              rlang_1.1.6                
+
+loaded via a namespace (and not attached):
+  [1] spatstat.sparse_3.1-0     gghalves_0.1.4           
+  [3] httr_1.4.7                RColorBrewer_1.1-3       
+  [5] doParallel_1.0.17         tools_4.5.2              
+  [7] sctransform_0.4.2         backports_1.5.0          
+  [9] R6_2.6.1                  lazyeval_0.2.2           
+ [11] uwot_0.2.3                GetoptLong_1.0.5         
+ [13] withr_3.0.2               gridExtra_2.3            
+ [15] parallelDist_0.2.6        fdrtool_1.2.18           
+ [17] progressr_0.15.1          qgraph_1.9.8             
+ [19] cli_3.6.5                 spatstat.explore_3.4-2   
+ [21] fastDummies_1.7.5         mvtnorm_1.3-3            
+ [23] S7_0.2.1                  spatstat.data_3.1-6      
+ [25] proxy_0.4-27              ggridges_0.5.6           
+ [27] pbapply_1.7-2             pbivnorm_0.6.0           
+ [29] foreign_0.8-90            dbscan_1.2.3             
+ [31] parallelly_1.45.0         rstudioapi_0.17.1        
+ [33] shape_1.4.6.1             gtools_3.9.5             
+ [35] ica_1.0-3                 spatstat.random_3.4-1    
+ [37] dendextend_1.19.0         graphicalVAR_0.3.4       
+ [39] dplyr_1.1.4               Matrix_1.7-4             
+ [41] abind_1.4-8               PCAtools_2.20.0          
+ [43] lifecycle_1.0.4           yaml_2.3.10              
+ [45] clusterGeneration_1.3.8   SparseArray_1.8.0        
+ [47] Rtsne_0.17                grid_4.5.2               
+ [49] lavaan_0.6-20             mlVAR_0.5.2              
+ [51] dqrng_0.4.1               promises_1.3.2           
+ [53] crayon_1.5.3              miniUI_0.1.2             
+ [55] lattice_0.22-7            beachmat_2.24.0          
+ [57] cowplot_1.1.3             pillar_1.10.2            
+ [59] knitr_1.50                ComplexHeatmap_2.24.0    
+ [61] rjson_0.2.23              boot_1.3-32              
+ [63] corpcor_1.6.10            future.apply_1.20.0      
+ [65] codetools_0.2-20          glue_1.8.0               
+ [67] spatstat.univar_3.1-3     data.table_1.17.0        
+ [69] vctrs_0.6.5               png_0.1-8                
+ [71] spam_2.11-1               Rdpack_2.6.4             
+ [73] gtable_0.3.6              assertthat_0.2.1         
+ [75] gsubfn_0.7                zigg_0.0.2               
+ [77] xfun_0.52                 rbibutils_2.3            
+ [79] S4Arrays_1.8.0            mime_0.13                
+ [81] Rfast_2.1.5.1             coda_0.19-4.1            
+ [83] reformulas_0.4.1          survival_3.8-3           
+ [85] iterators_1.0.14          MplusAutomation_1.2      
+ [87] fitdistrplus_1.2-2        ROCR_1.0-11              
+ [89] nlme_3.1-168              RcppAnnoy_0.0.22         
+ [91] irlba_2.3.5.1             KernSmooth_2.23-26       
+ [93] rpart_4.1.24              colorspace_2.1-1         
+ [95] Hmisc_5.2-3               nnet_7.3-20              
+ [97] mnormt_2.1.1              tidyselect_1.2.1         
+ [99] compiler_4.5.2            glmnet_4.1-8             
+[101] htmlTable_2.4.3           DelayedArray_0.34.1      
+[103] plotly_4.11.0             checkmate_2.3.2          
+[105] scales_1.4.0              psych_2.5.3              
+[107] lmtest_0.9-40             quadprog_1.5-8           
+[109] stringr_1.5.1             digest_0.6.37            
+[111] goftest_1.2-3             spatstat.utils_3.1-4     
+[113] minqa_1.2.8               rmarkdown_2.29           
+[115] XVector_0.48.0            htmltools_0.5.8.1        
+[117] pkgconfig_2.0.3           jpeg_0.1-11              
+[119] base64enc_0.1-3           lme4_1.1-37              
+[121] sparseMatrixStats_1.20.0  fastmap_1.2.0            
+[123] ggthemes_5.1.0            GlobalOptions_0.1.2      
+[125] htmlwidgets_1.6.4         UCSC.utils_1.4.0         
+[127] DelayedMatrixStats_1.30.0 shiny_1.11.0             
+[129] farver_2.1.2              zoo_1.8-14               
+[131] jsonlite_2.0.0            BiocParallel_1.42.0      
+[133] BiocSingular_1.24.0       magrittr_2.0.4           
+[135] Formula_1.2-5             GenomeInfoDbData_1.2.14  
+[137] dotCall64_1.2             patchwork_1.3.2          
+[139] texreg_1.39.4             Rcpp_1.0.14              
+[141] viridis_0.6.5             proto_1.0.0              
+[143] reticulate_1.42.0         stringi_1.8.7            
+[145] brio_1.1.5                MASS_7.3-65              
+[147] plyr_1.8.9                parallel_4.5.2           
+[149] listenv_0.9.1             ggrepel_0.9.6            
+[151] deldir_2.0-4              splines_4.5.2            
+[153] pander_0.6.6              tensor_1.5               
+[155] circlize_0.4.16           igraph_2.1.4             
+[157] spatstat.geom_3.4-1       RcppHNSW_0.6.0           
+[159] reshape2_1.4.4            ScaledMatrix_1.16.0      
+[161] evaluate_1.0.3            RcppParallel_5.1.10      
+[163] nloptr_2.2.1              foreach_1.5.2            
+[165] httpuv_1.6.16             RANN_2.6.2               
+[167] tidyr_1.3.1               purrr_1.2.0              
+[169] polyclip_1.10-7           future_1.58.0            
+[171] clue_0.3-66               scattermore_1.2          
+[173] rsvd_1.0.5                xtable_1.8-4             
+[175] RSpectra_0.16-2           later_1.4.2              
+[177] glasso_1.11               viridisLite_0.4.2        
+[179] arm_1.14-4                globals_0.18.0           </code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
