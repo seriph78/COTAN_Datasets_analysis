@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Silvia Galfrè">
-<meta name="dcterms.date" content="2024-04-19">
+<meta name="dcterms.date" content="2025-12-16">
 
-<title>COTAN Datasets analysis - Real UT clusters</title>
+<title>Real UT clusters – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -35,7 +35,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -106,13 +113,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./Real_UT_clustersByCotan.html">Real UT clusters with LR</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./Real_UT_clustersByCotan.html">Real UT clusters with LR</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -121,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">COTAN Datasets analysis</a> 
@@ -142,18 +149,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Datasets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Loo 2019</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -174,9 +181,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -209,9 +216,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Brain LaManno 2021</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -262,9 +269,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">CD14+</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -279,9 +286,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">PBMC form 10X site</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -316,9 +323,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Coex score evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -333,9 +340,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">GDI sensitivity</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -362,9 +369,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
  <span class="menu-text">Cluster evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -403,9 +410,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -430,9 +437,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">FDR and TPR - ROC curves</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -441,12 +448,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Results - thresholds true 3% 10%</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./FDR_analisysResults3_10_th04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Results - thresholds true 3% 10% threshold 0.4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -473,9 +474,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Additional code and scripts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -509,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -525,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./Real_UT_clustersByCotan.html">Real UT clusters with LR</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Real UT clusters</h1>
 </div>
@@ -544,7 +545,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 19, 2024</p>
+      <p class="date">December 16, 2025</p>
     </div>
   </div>
   
@@ -552,7 +553,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p>Cl432 E13.5 E15.0</p>
 <section id="preamble" class="level2">
@@ -605,7 +608,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">GDIPlot</span>(cl428_cl434,<span class="at">genes =</span> <span class="st">""</span>,<span class="at">GDIIn =</span> cl428_cl434GDI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Real_UT_clustersByCotan_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Real_UT_clustersByCotan_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -864,163 +871,163 @@ glm(formula = COTAN_Cl.code ~ ., family = binomial, data = train.data,
 
 Coefficients:
                  Estimate Std. Error    z value Pr(&gt;|z|)    
-(Intercept)    -1.686e+15  5.418e+07  -31111735   &lt;2e-16 ***
-Abracl         -4.715e+13  1.108e+06  -42568677   &lt;2e-16 ***
-Cdkn1c          1.198e+14  8.449e+05  141835339   &lt;2e-16 ***
-Cited2         -1.123e+14  1.158e+06  -96984394   &lt;2e-16 ***
-Mllt3          -1.480e+13  9.271e+05  -15963843   &lt;2e-16 ***
-Fam210b         5.776e+12  7.886e+05    7324089   &lt;2e-16 ***
-Mfap4           1.224e+13  1.105e+06   11082390   &lt;2e-16 ***
-Cxcl12          9.768e+12  8.228e+05   11871498   &lt;2e-16 ***
-Cdc42ep3        2.679e+13  8.102e+05   33062536   &lt;2e-16 ***
-Limch1          3.888e+13  7.629e+05   50956797   &lt;2e-16 ***
-Ier2           -1.941e+13  8.096e+05  -23978642   &lt;2e-16 ***
-Ptprk          -1.101e+13  7.877e+05  -13974326   &lt;2e-16 ***
-Gm29260        -1.365e+14  8.513e+05 -160329184   &lt;2e-16 ***
-Sfrp1          -5.195e+13  7.665e+05  -67769176   &lt;2e-16 ***
-Pantr1         -6.604e+13  1.184e+06  -55777291   &lt;2e-16 ***
-Magi2           2.868e+13  7.718e+05   37162645   &lt;2e-16 ***
-Tmem108         2.640e+13  8.406e+05   31407609   &lt;2e-16 ***
-Ddr1           -7.295e+13  7.777e+05  -93801889   &lt;2e-16 ***
-Ezr            -4.928e+12  8.165e+05   -6035217   &lt;2e-16 ***
-Sncaip         -9.105e+13  7.615e+05 -119561130   &lt;2e-16 ***
-CT025619.1      7.755e+13  7.693e+05  100806643   &lt;2e-16 ***
-Fabp7          -7.246e+12  7.987e+05   -9071616   &lt;2e-16 ***
-Ctnnd2          4.181e+13  7.989e+05   52332613   &lt;2e-16 ***
-Ptn            -6.993e+13  8.866e+05  -78870444   &lt;2e-16 ***
-Frmd4a         -8.510e+12  8.139e+05  -10455059   &lt;2e-16 ***
-Sorbs2          8.519e+13  1.040e+06   81931351   &lt;2e-16 ***
-Hes6            4.145e+13  8.207e+05   50507058   &lt;2e-16 ***
-Dcc            -7.059e+13  1.091e+06  -64717826   &lt;2e-16 ***
-Neurog2         1.400e+13  8.991e+05   15569920   &lt;2e-16 ***
-Tcf12           5.909e+13  7.580e+05   77960833   &lt;2e-16 ***
-Fam110a        -1.887e+13  7.726e+05  -24430882   &lt;2e-16 ***
-Dhrs4          -8.288e+13  8.280e+05 -100100195   &lt;2e-16 ***
-Ccnd2          -6.734e+12  8.477e+05   -7943945   &lt;2e-16 ***
-Elavl4          7.681e+13  1.040e+06   73878040   &lt;2e-16 ***
-Ank3            3.085e+13  8.158e+05   37815294   &lt;2e-16 ***
-Klf12           2.096e+13  8.113e+05   25830911   &lt;2e-16 ***
-Slc17a6         4.704e+13  7.777e+05   60486563   &lt;2e-16 ***
-Lzts1           1.221e+13  7.629e+05   16006958   &lt;2e-16 ***
-Map2           -2.064e+13  1.049e+06  -19667725   &lt;2e-16 ***
-Lhx2            7.691e+13  1.073e+06   71697568   &lt;2e-16 ***
-Neurod2         1.553e+14  1.308e+06  118766112   &lt;2e-16 ***
-Sstr2          -1.201e+13  1.123e+06  -10693159   &lt;2e-16 ***
-Eomes           4.862e+13  8.998e+05   54037701   &lt;2e-16 ***
-Vps37b          5.989e+13  7.719e+05   77580428   &lt;2e-16 ***
-Ier5           -7.104e+13  7.933e+05  -89558067   &lt;2e-16 ***
-Cttnbp2        -6.238e+12  1.026e+06   -6082076   &lt;2e-16 ***
-Tmem178         4.639e+13  7.711e+05   60164738   &lt;2e-16 ***
-Plxna4          2.699e+13  8.247e+05   32726248   &lt;2e-16 ***
-Aff3            2.566e+13  8.494e+05   30215978   &lt;2e-16 ***
-Tiam2           3.867e+13  8.431e+05   45865723   &lt;2e-16 ***
-Ppp2r2b         7.367e+12  1.343e+06    5487241   &lt;2e-16 ***
-Zeb2           -8.699e+13  8.214e+05 -105905030   &lt;2e-16 ***
-Gria2           4.712e+12  8.115e+05    5807339   &lt;2e-16 ***
-Nbea           -3.057e+13  7.864e+05  -38878840   &lt;2e-16 ***
-Ptprd          -1.635e+13  8.432e+05  -19394693   &lt;2e-16 ***
-Sox5            7.997e+11  9.521e+05     839948   &lt;2e-16 ***
-Mpped2         -1.178e+13  9.316e+05  -12640992   &lt;2e-16 ***
-Bcl11b         -8.699e+13  8.186e+05 -106261338   &lt;2e-16 ***
-Epha5           7.789e+13  1.438e+06   54158015   &lt;2e-16 ***
-Nol4            4.350e+13  8.773e+05   49578826   &lt;2e-16 ***
-Grik2           2.092e+13  7.828e+05   26717635   &lt;2e-16 ***
-Mir124.2hg     -1.978e+13  8.306e+05  -23811113   &lt;2e-16 ***
-Pcp4           -7.976e+12  7.703e+05  -10354354   &lt;2e-16 ***
-Ccser1          7.204e+13  1.011e+06   71225614   &lt;2e-16 ***
-Kcnb2          -6.638e+13  7.809e+05  -85011877   &lt;2e-16 ***
-Dscaml1        -2.009e+13  8.061e+05  -24923932   &lt;2e-16 ***
-Kcnh7          -6.348e+13  8.216e+05  -77260888   &lt;2e-16 ***
-Pam            -1.908e+13  9.566e+05  -19940070   &lt;2e-16 ***
-Negr1          -5.593e+13  8.125e+05  -68845519   &lt;2e-16 ***
-Ppm1e          -5.188e+12  7.777e+05   -6670744   &lt;2e-16 ***
-Myt1l          -1.775e+13  9.473e+05  -18739638   &lt;2e-16 ***
-Foxp2           1.982e+13  7.833e+05   25304938   &lt;2e-16 ***
-Gpc6            4.766e+12  7.945e+05    5999112   &lt;2e-16 ***
-Masp1           4.384e+13  7.665e+05   57188102   &lt;2e-16 ***
-Serpini1        2.141e+13  8.061e+05   26565876   &lt;2e-16 ***
-Pcdh7           4.264e+13  8.073e+05   52814591   &lt;2e-16 ***
-Rbfox1         -2.540e+12  8.031e+05   -3162771   &lt;2e-16 ***
-Robo2          -1.937e+13  1.420e+06  -13639796   &lt;2e-16 ***
-Fhod3           4.406e+13  7.980e+05   55209662   &lt;2e-16 ***
-Rprm            5.339e+13  7.835e+05   68145974   &lt;2e-16 ***
-Gng3           -2.037e+13  7.680e+05  -26522083   &lt;2e-16 ***
-Uchl1           7.239e+12  7.594e+05    9531581   &lt;2e-16 ***
-Tmem176b        3.088e+13  8.030e+05   38459013   &lt;2e-16 ***
-Nrn1           -5.860e+13  9.557e+05  -61323738   &lt;2e-16 ***
-Snap25         -2.782e+13  7.898e+05  -35221750   &lt;2e-16 ***
-Nrg1           -1.037e+14  1.511e+06  -68676296   &lt;2e-16 ***
-Cdh8           -6.110e+13  9.459e+05  -64591781   &lt;2e-16 ***
-Trim17         -4.393e+13  7.920e+05  -55467510   &lt;2e-16 ***
-Chga            3.352e+13  7.864e+05   42626343   &lt;2e-16 ***
-Rpl26          -1.541e+14  1.158e+06 -133038070   &lt;2e-16 ***
-Rack1          -1.958e+13  1.065e+06  -18388573   &lt;2e-16 ***
-Hsp90b1         1.180e+13  7.764e+05   15202488   &lt;2e-16 ***
-Aldoa           5.076e+13  7.895e+05   64297711   &lt;2e-16 ***
-Tuba1b         -2.882e+13  7.673e+05  -37556112   &lt;2e-16 ***
-Sf3b6          -8.811e+12  7.754e+05  -11363341   &lt;2e-16 ***
-Top1           -7.822e+13  1.256e+06  -62293981   &lt;2e-16 ***
-Tpr             4.572e+13  8.111e+05   56364549   &lt;2e-16 ***
-Smc3            7.762e+12  7.864e+05    9869483   &lt;2e-16 ***
-Rplp1           4.751e+13  1.506e+06   31536103   &lt;2e-16 ***
-Rpl22           5.640e+13  9.818e+05   57449909   &lt;2e-16 ***
-Rpl36a          5.228e+13  1.286e+06   40661251   &lt;2e-16 ***
-Rps21          -6.595e+12  9.803e+05   -6728251   &lt;2e-16 ***
-Eif4a1          5.623e+13  1.107e+06   50779647   &lt;2e-16 ***
-Erh             5.627e+13  8.249e+05   68215509   &lt;2e-16 ***
-Mdk             1.403e+13  1.311e+06   10698211   &lt;2e-16 ***
-Pde4d           7.496e+13  8.054e+05   93072149   &lt;2e-16 ***
-Pgrmc1          2.521e+13  7.890e+05   31958231   &lt;2e-16 ***
-Ube2r2          2.252e+13  7.630e+05   29515130   &lt;2e-16 ***
-Bri3           -1.631e+13  7.624e+05  -21389061   &lt;2e-16 ***
-Rps28           5.956e+12  1.081e+06    5511164   &lt;2e-16 ***
-Mbtd1          -1.601e+13  8.020e+05  -19968438   &lt;2e-16 ***
-Rpl15           1.769e+13  1.056e+06   16743069   &lt;2e-16 ***
-Macf1          -2.359e+13  7.456e+05  -31643581   &lt;2e-16 ***
-Phf21a         -2.270e+13  7.941e+05  -28584159   &lt;2e-16 ***
-Oaz2           -1.602e+13  7.671e+05  -20878553   &lt;2e-16 ***
-Gnb1            2.115e+13  7.786e+05   27161497   &lt;2e-16 ***
-Zfp422         -1.520e+13  7.937e+05  -19144492   &lt;2e-16 ***
-Rpl35a         -7.101e+13  1.012e+06  -70148519   &lt;2e-16 ***
-Cox8a           8.371e+12  9.384e+05    8920618   &lt;2e-16 ***
-Nt5dc2         -3.363e+13  7.820e+05  -43000354   &lt;2e-16 ***
-X4930402H24Rik  1.789e+12  8.011e+05    2232956   &lt;2e-16 ***
-Ttc28           7.823e+12  9.395e+05    8326198   &lt;2e-16 ***
-Ckb            -9.743e+13  8.412e+05 -115823225   &lt;2e-16 ***
-Sh3bgrl        -2.330e+13  7.831e+05  -29748021   &lt;2e-16 ***
-Top2b           5.521e+13  7.850e+05   70331459   &lt;2e-16 ***
-Ndufa10        -7.000e+13  7.998e+05  -87527429   &lt;2e-16 ***
-C530008M17Rik  -5.369e+13  8.134e+05  -66011040   &lt;2e-16 ***
-Basp1           1.162e+14  1.002e+06  115896331   &lt;2e-16 ***
-Gpatch8         1.888e+13  7.653e+05   24675271   &lt;2e-16 ***
-Map1b          -2.937e+13  9.207e+05  -31901455   &lt;2e-16 ***
-Ccdc88a         3.041e+13  7.736e+05   39301701   &lt;2e-16 ***
-Xist            1.730e+13  7.861e+05   22010505   &lt;2e-16 ***
-Ctnna2         -4.172e+13  9.718e+05  -42928048   &lt;2e-16 ***
-Rnf7           -2.193e+13  8.067e+05  -27182858   &lt;2e-16 ***
-Fabp5           6.984e+13  9.924e+05   70373006   &lt;2e-16 ***
-Usmg5           5.091e+13  7.931e+05   64193211   &lt;2e-16 ***
-Phip            2.855e+13  7.823e+05   36499842   &lt;2e-16 ***
-Rbmx            1.080e+13  7.791e+05   13857287   &lt;2e-16 ***
-Zbtb20         -3.542e+13  1.022e+06  -34653461   &lt;2e-16 ***
-Eif1b          -5.204e+13  1.019e+06  -51060909   &lt;2e-16 ***
-Lcor            1.071e+13  7.874e+05   13600823   &lt;2e-16 ***
-Nsg1           -6.878e+12  9.945e+05   -6915923   &lt;2e-16 ***
-Evl            -3.260e+13  7.905e+05  -41243490   &lt;2e-16 ***
-Meg3            6.629e+13  8.077e+05   82077606   &lt;2e-16 ***
-Eif4a2         -3.223e+13  7.879e+05  -40902790   &lt;2e-16 ***
-Rab10          -3.146e+13  7.727e+05  -40719594   &lt;2e-16 ***
-Mllt11          1.398e+14  1.233e+06  113408602   &lt;2e-16 ***
+(Intercept)    -1.392e+15  5.418e+07  -25692175   &lt;2e-16 ***
+Abracl         -3.668e+13  1.108e+06  -33117531   &lt;2e-16 ***
+Cdkn1c          9.057e+13  8.449e+05  107200885   &lt;2e-16 ***
+Cited2         -1.192e+14  1.158e+06 -102925237   &lt;2e-16 ***
+Mllt3          -1.411e+12  9.271e+05   -1522016   &lt;2e-16 ***
+Fam210b        -4.090e+12  7.886e+05   -5185950   &lt;2e-16 ***
+Mfap4          -6.719e+12  1.105e+06   -6082731   &lt;2e-16 ***
+Cxcl12          3.911e+13  8.228e+05   47537816   &lt;2e-16 ***
+Cdc42ep3        1.404e+13  8.102e+05   17326401   &lt;2e-16 ***
+Limch1          4.103e+13  7.629e+05   53781940   &lt;2e-16 ***
+Ier2           -1.632e+13  8.096e+05  -20155968   &lt;2e-16 ***
+Ptprk          -3.990e+13  7.877e+05  -50648051   &lt;2e-16 ***
+Gm29260        -1.591e+14  8.513e+05 -186868495   &lt;2e-16 ***
+Sfrp1          -1.001e+13  7.665e+05  -13056648   &lt;2e-16 ***
+Pantr1         -4.908e+13  1.184e+06  -41449633   &lt;2e-16 ***
+Magi2           2.042e+13  7.718e+05   26452066   &lt;2e-16 ***
+Tmem108         3.884e+13  8.406e+05   46203169   &lt;2e-16 ***
+Ddr1           -6.061e+13  7.777e+05  -77935451   &lt;2e-16 ***
+Ezr            -1.538e+12  8.165e+05   -1883070   &lt;2e-16 ***
+Sncaip         -6.607e+13  7.615e+05  -86758312   &lt;2e-16 ***
+CT025619.1      5.786e+13  7.693e+05   75220795   &lt;2e-16 ***
+Fabp7          -1.160e+13  7.987e+05  -14523404   &lt;2e-16 ***
+Ctnnd2          5.243e+13  7.989e+05   65626431   &lt;2e-16 ***
+Ptn            -5.180e+13  8.866e+05  -58423528   &lt;2e-16 ***
+Frmd4a         -9.865e+12  8.139e+05  -12119603   &lt;2e-16 ***
+Sorbs2          7.082e+13  1.040e+06   68115662   &lt;2e-16 ***
+Hes6            5.248e+13  8.207e+05   63952536   &lt;2e-16 ***
+Dcc            -1.086e+14  1.091e+06  -99558297   &lt;2e-16 ***
+Neurog2         8.885e+12  8.991e+05    9882478   &lt;2e-16 ***
+Tcf12           4.439e+13  7.580e+05   58560212   &lt;2e-16 ***
+Fam110a        -3.762e+12  7.726e+05   -4870098   &lt;2e-16 ***
+Dhrs4          -6.585e+13  8.280e+05  -79533727   &lt;2e-16 ***
+Ccnd2           2.088e+13  8.477e+05   24635620   &lt;2e-16 ***
+Elavl4          5.882e+13  1.040e+06   56574947   &lt;2e-16 ***
+Ank3            1.621e+12  8.158e+05    1986603   &lt;2e-16 ***
+Klf12           1.858e+13  8.113e+05   22905550   &lt;2e-16 ***
+Slc17a6         3.336e+13  7.777e+05   42892923   &lt;2e-16 ***
+Lzts1          -3.340e+11  7.629e+05    -437779   &lt;2e-16 ***
+Map2            1.529e+13  1.049e+06   14565916   &lt;2e-16 ***
+Lhx2            6.076e+13  1.073e+06   56647519   &lt;2e-16 ***
+Neurod2         1.156e+14  1.308e+06   88402243   &lt;2e-16 ***
+Sstr2           2.958e+13  1.123e+06   26328080   &lt;2e-16 ***
+Eomes           2.323e+13  8.998e+05   25818313   &lt;2e-16 ***
+Vps37b          2.378e+13  7.719e+05   30806540   &lt;2e-16 ***
+Ier5           -6.635e+13  7.933e+05  -83638912   &lt;2e-16 ***
+Cttnbp2         7.413e+12  1.026e+06    7226886   &lt;2e-16 ***
+Tmem178         5.869e+13  7.711e+05   76112402   &lt;2e-16 ***
+Plxna4          6.142e+12  8.247e+05    7447401   &lt;2e-16 ***
+Aff3            3.216e+13  8.494e+05   37865603   &lt;2e-16 ***
+Tiam2           3.504e+13  8.431e+05   41564359   &lt;2e-16 ***
+Ppp2r2b         1.014e+12  1.343e+06     755110   &lt;2e-16 ***
+Zeb2           -8.426e+13  8.214e+05 -102580264   &lt;2e-16 ***
+Gria2           3.458e+13  8.115e+05   42614466   &lt;2e-16 ***
+Nbea           -2.142e+13  7.864e+05  -27232237   &lt;2e-16 ***
+Ptprd          -8.085e+12  8.432e+05   -9588010   &lt;2e-16 ***
+Sox5            1.043e+13  9.521e+05   10952629   &lt;2e-16 ***
+Mpped2          1.653e+13  9.316e+05   17741622   &lt;2e-16 ***
+Bcl11b         -5.000e+13  8.186e+05  -61072633   &lt;2e-16 ***
+Epha5           7.168e+13  1.438e+06   49838920   &lt;2e-16 ***
+Nol4            5.393e+13  8.773e+05   61475929   &lt;2e-16 ***
+Grik2          -8.502e+12  7.828e+05  -10860942   &lt;2e-16 ***
+Mir124.2hg      3.667e+12  8.306e+05    4415594   &lt;2e-16 ***
+Pcp4           -9.935e+12  7.703e+05  -12897946   &lt;2e-16 ***
+Ccser1          6.731e+13  1.011e+06   66545181   &lt;2e-16 ***
+Kcnb2          -3.395e+13  7.809e+05  -43477366   &lt;2e-16 ***
+Dscaml1        -3.299e+13  8.061e+05  -40923228   &lt;2e-16 ***
+Kcnh7          -3.625e+13  8.216e+05  -44124624   &lt;2e-16 ***
+Pam            -2.266e+13  9.566e+05  -23682478   &lt;2e-16 ***
+Negr1          -5.486e+13  8.125e+05  -67527681   &lt;2e-16 ***
+Ppm1e          -1.101e+13  7.777e+05  -14161188   &lt;2e-16 ***
+Myt1l           1.275e+13  9.473e+05   13455861   &lt;2e-16 ***
+Foxp2          -4.217e+12  7.833e+05   -5382953   &lt;2e-16 ***
+Gpc6           -7.684e+12  7.945e+05   -9671234   &lt;2e-16 ***
+Masp1           4.292e+13  7.665e+05   55993994   &lt;2e-16 ***
+Serpini1       -5.105e+12  8.061e+05   -6333133   &lt;2e-16 ***
+Pcdh7           5.837e+13  8.073e+05   72299867   &lt;2e-16 ***
+Rbfox1          7.461e+12  8.031e+05    9289560   &lt;2e-16 ***
+Robo2          -6.876e+13  1.420e+06  -48418494   &lt;2e-16 ***
+Fhod3           4.399e+13  7.980e+05   55121613   &lt;2e-16 ***
+Rprm            3.484e+13  7.835e+05   44465376   &lt;2e-16 ***
+Gng3            2.281e+13  7.680e+05   29706841   &lt;2e-16 ***
+Uchl1          -1.332e+13  7.594e+05  -17544470   &lt;2e-16 ***
+Tmem176b        8.467e+12  8.030e+05   10544314   &lt;2e-16 ***
+Nrn1           -5.681e+13  9.557e+05  -59447760   &lt;2e-16 ***
+Snap25         -4.422e+13  7.898e+05  -55987310   &lt;2e-16 ***
+Nrg1           -3.190e+13  1.511e+06  -21119116   &lt;2e-16 ***
+Cdh8           -9.450e+13  9.459e+05  -99906199   &lt;2e-16 ***
+Trim17         -5.827e+13  7.920e+05  -73573697   &lt;2e-16 ***
+Chga            1.515e+13  7.864e+05   19260283   &lt;2e-16 ***
+Rpl26          -1.381e+14  1.158e+06 -119242819   &lt;2e-16 ***
+Rack1          -3.030e+13  1.065e+06  -28463399   &lt;2e-16 ***
+Hsp90b1         1.513e+12  7.764e+05    1949079   &lt;2e-16 ***
+Aldoa           5.999e+13  7.895e+05   75985414   &lt;2e-16 ***
+Tuba1b         -2.984e+13  7.673e+05  -38893858   &lt;2e-16 ***
+Sf3b6          -1.751e+13  7.754e+05  -22583944   &lt;2e-16 ***
+Top1           -4.635e+13  1.256e+06  -36914861   &lt;2e-16 ***
+Tpr             2.535e+13  8.111e+05   31258405   &lt;2e-16 ***
+Smc3            1.778e+13  7.864e+05   22614692   &lt;2e-16 ***
+Rplp1           6.245e+13  1.506e+06   41453287   &lt;2e-16 ***
+Rpl22           5.820e+13  9.818e+05   59284313   &lt;2e-16 ***
+Rpl36a          7.624e+13  1.286e+06   59290521   &lt;2e-16 ***
+Rps21          -1.722e+13  9.803e+05  -17562653   &lt;2e-16 ***
+Eif4a1          3.635e+13  1.107e+06   32824725   &lt;2e-16 ***
+Erh             3.879e+13  8.249e+05   47018259   &lt;2e-16 ***
+Mdk             6.137e+13  1.311e+06   46812498   &lt;2e-16 ***
+Pde4d           9.697e+13  8.054e+05  120403478   &lt;2e-16 ***
+Pgrmc1          4.160e+13  7.890e+05   52731940   &lt;2e-16 ***
+Ube2r2         -4.281e+12  7.630e+05   -5610419   &lt;2e-16 ***
+Bri3           -4.674e+12  7.624e+05   -6130738   &lt;2e-16 ***
+Rps28           2.337e+13  1.081e+06   21624714   &lt;2e-16 ***
+Mbtd1          -3.431e+13  8.020e+05  -42787850   &lt;2e-16 ***
+Rpl15           4.540e+13  1.056e+06   42976360   &lt;2e-16 ***
+Macf1          -3.898e+13  7.456e+05  -52271693   &lt;2e-16 ***
+Phf21a         -1.085e+13  7.941e+05  -13663454   &lt;2e-16 ***
+Oaz2           -2.184e+13  7.671e+05  -28476312   &lt;2e-16 ***
+Gnb1            3.086e+13  7.786e+05   39638926   &lt;2e-16 ***
+Zfp422         -2.665e+13  7.937e+05  -33579867   &lt;2e-16 ***
+Rpl35a         -4.777e+13  1.012e+06  -47191386   &lt;2e-16 ***
+Cox8a           3.798e+12  9.384e+05    4047518   &lt;2e-16 ***
+Nt5dc2         -2.355e+13  7.820e+05  -30114999   &lt;2e-16 ***
+X4930402H24Rik -3.421e+13  8.011e+05  -42703505   &lt;2e-16 ***
+Ttc28          -2.613e+13  9.395e+05  -27807041   &lt;2e-16 ***
+Ckb            -4.380e+13  8.412e+05  -52071863   &lt;2e-16 ***
+Sh3bgrl        -1.422e+13  7.831e+05  -18158721   &lt;2e-16 ***
+Top2b           4.336e+13  7.850e+05   55234013   &lt;2e-16 ***
+Ndufa10        -8.308e+13  7.998e+05 -103871878   &lt;2e-16 ***
+C530008M17Rik  -4.875e+13  8.134e+05  -59928713   &lt;2e-16 ***
+Basp1           1.084e+14  1.002e+06  108114394   &lt;2e-16 ***
+Gpatch8         4.789e+12  7.653e+05    6257168   &lt;2e-16 ***
+Map1b          -3.338e+13  9.207e+05  -36254006   &lt;2e-16 ***
+Ccdc88a         9.193e+12  7.736e+05   11882326   &lt;2e-16 ***
+Xist           -2.576e+13  7.861e+05  -32765738   &lt;2e-16 ***
+Ctnna2         -4.233e+13  9.718e+05  -43552178   &lt;2e-16 ***
+Rnf7           -5.865e+11  8.067e+05    -727059   &lt;2e-16 ***
+Fabp5           6.801e+13  9.924e+05   68526316   &lt;2e-16 ***
+Usmg5           3.478e+13  7.931e+05   43858152   &lt;2e-16 ***
+Phip            3.203e+13  7.823e+05   40942232   &lt;2e-16 ***
+Rbmx            5.754e+12  7.791e+05    7384674   &lt;2e-16 ***
+Zbtb20         -4.798e+13  1.022e+06  -46936751   &lt;2e-16 ***
+Eif1b          -7.349e+13  1.019e+06  -72109569   &lt;2e-16 ***
+Lcor            1.574e+13  7.874e+05   19989987   &lt;2e-16 ***
+Nsg1           -8.545e+12  9.945e+05   -8592451   &lt;2e-16 ***
+Evl            -1.350e+13  7.905e+05  -17079400   &lt;2e-16 ***
+Meg3            4.731e+13  8.077e+05   58571895   &lt;2e-16 ***
+Eif4a2         -3.366e+13  7.879e+05  -42721584   &lt;2e-16 ***
+Rab10          -3.012e+13  7.727e+05  -38981490   &lt;2e-16 ***
+Mllt11          9.241e+13  1.233e+06   74972937   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
     Null deviance:  653.13  on 472  degrees of freedom
-Residual deviance: 4757.76  on 326  degrees of freedom
-AIC: 5051.8
+Residual deviance: 4685.67  on 326  degrees of freedom
+AIC: 4979.7
 
-Number of Fisher Scoring iterations: 46</code></pre>
+Number of Fisher Scoring iterations: 32</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>probabilities <span class="ot">&lt;-</span> model <span class="sc">%&gt;%</span> <span class="fu">predict</span>(test.data, <span class="at">type =</span> <span class="st">"response"</span>)</span>
@@ -1028,7 +1035,7 @@ Number of Fisher Scoring iterations: 46</code></pre>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Model accuracy</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(predicted.classes <span class="sc">==</span> test.data<span class="sc">$</span>COTAN_Cl.code)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6694915</code></pre>
+<pre><code>[1] 0.6949153</code></pre>
 </div>
 </div>
 </section>
@@ -1038,19 +1045,19 @@ Number of Fisher Scoring iterations: 46</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-04-19 12:11:58 CEST"</code></pre>
+<pre><code>[1] "2025-12-16 18:58:42 CET"</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.6 LTS
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -1065,96 +1072,96 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
- [1] torch_0.12.0       nnet_7.3-19        COTAN_2.5.0        caret_6.0-94      
- [5] lattice_0.22-5     lubridate_1.9.2    forcats_1.0.0      stringr_1.5.0     
- [9] dplyr_1.1.2        purrr_1.0.1        readr_2.1.4        tibble_3.2.1      
-[13] tidyverse_2.0.0    tidyr_1.3.0        parallelDist_0.2.6 data.table_1.15.0 
-[17] zeallot_0.1.0      ggplot2_3.5.0     
+ [1] nnet_7.3-20        COTAN_2.9.4        caret_7.0-1        lattice_0.22-7    
+ [5] lubridate_1.9.4    forcats_1.0.0      stringr_1.5.1      dplyr_1.1.4       
+ [9] purrr_1.2.0        readr_2.1.5        tibble_3.3.0       tidyverse_2.0.0   
+[13] tidyr_1.3.1        parallelDist_0.2.6 data.table_1.17.0  zeallot_0.2.0     
+[17] ggplot2_4.0.1     
 
 loaded via a namespace (and not attached):
-  [1] RcppAnnoy_0.0.21          splines_4.3.2            
-  [3] later_1.3.1               polyclip_1.10-4          
-  [5] hardhat_1.3.0             pROC_1.18.4              
-  [7] rpart_4.1.23              fastDummies_1.7.3        
-  [9] lifecycle_1.0.3           doParallel_1.0.17        
- [11] processx_3.8.2            globals_0.16.2           
- [13] MASS_7.3-60               dendextend_1.17.1        
- [15] magrittr_2.0.3            plotly_4.10.2            
- [17] rmarkdown_2.24            yaml_2.3.7               
- [19] httpuv_1.6.11             Seurat_5.0.0             
- [21] sctransform_0.4.1         askpass_1.2.0            
- [23] spam_2.10-0               spatstat.sparse_3.0-2    
- [25] sp_2.1-1                  reticulate_1.35.0        
- [27] cowplot_1.1.1             pbapply_1.7-2            
- [29] RColorBrewer_1.1-3        abind_1.4-5              
- [31] Rtsne_0.17                BiocGenerics_0.46.0      
- [33] coro_1.0.4                ipred_0.9-14             
- [35] circlize_0.4.15           lava_1.8.0               
- [37] IRanges_2.34.1            S4Vectors_0.38.1         
- [39] ggrepel_0.9.5             irlba_2.3.5.1            
- [41] spatstat.utils_3.0-3      listenv_0.9.0            
- [43] umap_0.2.10.0             goftest_1.2-3            
- [45] RSpectra_0.16-1           spatstat.random_3.2-1    
- [47] dqrng_0.3.0               fitdistrplus_1.1-11      
- [49] parallelly_1.37.1         DelayedMatrixStats_1.22.5
- [51] leiden_0.4.3              codetools_0.2-19         
- [53] DelayedArray_0.26.7       tidyselect_1.2.0         
- [55] shape_1.4.6               farver_2.1.1             
- [57] viridis_0.6.4             ScaledMatrix_1.8.1       
- [59] spatstat.explore_3.2-1    matrixStats_1.2.0        
- [61] stats4_4.3.2              jsonlite_1.8.7           
- [63] GetoptLong_1.0.5          ellipsis_0.3.2           
- [65] progressr_0.14.0          ggridges_0.5.4           
- [67] survival_3.5-8            iterators_1.0.14         
- [69] foreach_1.5.2             tools_4.3.2              
- [71] ica_1.0-3                 Rcpp_1.0.11              
- [73] glue_1.7.0                gridExtra_2.3            
- [75] prodlim_2023.08.28        xfun_0.39                
- [77] MatrixGenerics_1.12.3     ggthemes_5.1.0           
- [79] withr_3.0.0               fastmap_1.1.1            
- [81] fansi_1.0.4               openssl_2.1.0            
- [83] callr_3.7.3               digest_0.6.33            
- [85] rsvd_1.0.5                timechange_0.3.0         
- [87] R6_2.5.1                  mime_0.12                
- [89] colorspace_2.1-0          scattermore_1.2          
- [91] tensor_1.5                spatstat.data_3.0-1      
- [93] utf8_1.2.3                generics_0.1.3           
- [95] recipes_1.0.8             class_7.3-22             
- [97] httr_1.4.6                htmlwidgets_1.6.2        
- [99] S4Arrays_1.2.0            uwot_0.1.16              
-[101] ModelMetrics_1.2.2.2      pkgconfig_2.0.3          
-[103] gtable_0.3.3              timeDate_4032.109        
-[105] ComplexHeatmap_2.16.0     lmtest_0.9-40            
-[107] htmltools_0.5.8           dotCall64_1.1-0          
-[109] clue_0.3-64               SeuratObject_5.0.0       
-[111] scales_1.3.0              png_0.1-8                
-[113] gower_1.0.1               knitr_1.43               
-[115] rstudioapi_0.15.0         tzdb_0.4.0               
-[117] reshape2_1.4.4            rjson_0.2.21             
-[119] nlme_3.1-163              zoo_1.8-12               
-[121] GlobalOptions_0.1.2       KernSmooth_2.23-22       
-[123] parallel_4.3.2            miniUI_0.1.1.1           
-[125] RcppZiggurat_0.1.6        pillar_1.9.0             
-[127] grid_4.3.2                vctrs_0.6.3              
-[129] RANN_2.6.1                promises_1.2.0.1         
-[131] BiocSingular_1.16.0       beachmat_2.16.0          
-[133] xtable_1.8-4              cluster_2.1.6            
-[135] evaluate_0.21             cli_3.6.1                
-[137] compiler_4.3.2            rlang_1.1.1              
-[139] crayon_1.5.2              future.apply_1.11.0      
-[141] labeling_0.4.2            ps_1.7.5                 
-[143] plyr_1.8.8                stringi_1.8.1            
-[145] deldir_2.0-2              viridisLite_0.4.2        
-[147] BiocParallel_1.34.2       assertthat_0.2.1         
-[149] munsell_0.5.0             lazyeval_0.2.2           
-[151] spatstat.geom_3.2-4       PCAtools_2.14.0          
-[153] Matrix_1.6-3              RcppHNSW_0.6.0           
-[155] hms_1.1.3                 patchwork_1.2.0          
-[157] bit64_4.0.5               sparseMatrixStats_1.12.2 
-[159] future_1.33.0             shiny_1.8.0              
-[161] ROCR_1.0-11               Rfast_2.1.0              
-[163] igraph_2.0.3              RcppParallel_5.1.7       
-[165] bit_4.0.5                </code></pre>
+  [1] RcppAnnoy_0.0.22            splines_4.5.2              
+  [3] later_1.4.2                 polyclip_1.10-7            
+  [5] hardhat_1.4.1               pROC_1.18.5                
+  [7] rpart_4.1.24                fastDummies_1.7.5          
+  [9] lifecycle_1.0.4             doParallel_1.0.17          
+ [11] processx_3.8.6              globals_0.18.0             
+ [13] MASS_7.3-65                 dendextend_1.19.0          
+ [15] magrittr_2.0.4              plotly_4.11.0              
+ [17] rmarkdown_2.29              yaml_2.3.10                
+ [19] httpuv_1.6.16               Seurat_5.2.1               
+ [21] sctransform_0.4.2           spam_2.11-1                
+ [23] sp_2.2-0                    spatstat.sparse_3.1-0      
+ [25] reticulate_1.42.0           cowplot_1.1.3              
+ [27] pbapply_1.7-2               RColorBrewer_1.1-3         
+ [29] abind_1.4-8                 GenomicRanges_1.60.0       
+ [31] Rtsne_0.17                  BiocGenerics_0.54.0        
+ [33] coro_1.1.0                  torch_0.14.2               
+ [35] ipred_0.9-15                GenomeInfoDbData_1.2.14    
+ [37] circlize_0.4.16             lava_1.8.1                 
+ [39] IRanges_2.42.0              S4Vectors_0.46.0           
+ [41] ggrepel_0.9.6               irlba_2.3.5.1              
+ [43] listenv_0.9.1               spatstat.utils_3.1-4       
+ [45] goftest_1.2-3               RSpectra_0.16-2            
+ [47] spatstat.random_3.4-1       fitdistrplus_1.2-2         
+ [49] parallelly_1.45.0           codetools_0.2-20           
+ [51] DelayedArray_0.34.1         tidyselect_1.2.1           
+ [53] shape_1.4.6.1               UCSC.utils_1.4.0           
+ [55] farver_2.1.2                viridis_0.6.5              
+ [57] ScaledMatrix_1.16.0         matrixStats_1.5.0          
+ [59] stats4_4.5.2                spatstat.explore_3.4-2     
+ [61] jsonlite_2.0.0              GetoptLong_1.0.5           
+ [63] gghalves_0.1.4              progressr_0.15.1           
+ [65] ggridges_0.5.6              survival_3.8-3             
+ [67] iterators_1.0.14            foreach_1.5.2              
+ [69] tools_4.5.2                 ica_1.0-3                  
+ [71] Rcpp_1.0.14                 glue_1.8.0                 
+ [73] prodlim_2025.04.28          gridExtra_2.3              
+ [75] SparseArray_1.8.0           xfun_0.52                  
+ [77] MatrixGenerics_1.20.0       ggthemes_5.1.0             
+ [79] GenomeInfoDb_1.44.0         withr_3.0.2                
+ [81] fastmap_1.2.0               callr_3.7.6                
+ [83] digest_0.6.37               rsvd_1.0.5                 
+ [85] timechange_0.3.0            R6_2.6.1                   
+ [87] mime_0.13                   colorspace_2.1-1           
+ [89] scattermore_1.2             tensor_1.5                 
+ [91] spatstat.data_3.1-6         generics_0.1.3             
+ [93] recipes_1.3.0               class_7.3-23               
+ [95] httr_1.4.7                  htmlwidgets_1.6.4          
+ [97] S4Arrays_1.8.0              uwot_0.2.3                 
+ [99] ModelMetrics_1.2.2.2        pkgconfig_2.0.3            
+[101] gtable_0.3.6                timeDate_4041.110          
+[103] ComplexHeatmap_2.24.0       lmtest_0.9-40              
+[105] S7_0.2.1                    SingleCellExperiment_1.30.0
+[107] XVector_0.48.0              htmltools_0.5.8.1          
+[109] dotCall64_1.2               zigg_0.0.2                 
+[111] clue_0.3-66                 Biobase_2.68.0             
+[113] SeuratObject_5.1.0          scales_1.4.0               
+[115] png_0.1-8                   gower_1.0.2                
+[117] spatstat.univar_3.1-3       knitr_1.50                 
+[119] tzdb_0.5.0                  reshape2_1.4.4             
+[121] rjson_0.2.23                nlme_3.1-168               
+[123] proxy_0.4-27                zoo_1.8-14                 
+[125] GlobalOptions_0.1.2         KernSmooth_2.23-26         
+[127] parallel_4.5.2              miniUI_0.1.2               
+[129] pillar_1.10.2               grid_4.5.2                 
+[131] vctrs_0.6.5                 RANN_2.6.2                 
+[133] promises_1.3.2              BiocSingular_1.24.0        
+[135] beachmat_2.24.0             xtable_1.8-4               
+[137] cluster_2.1.8.1             evaluate_1.0.3             
+[139] cli_3.6.5                   compiler_4.5.2             
+[141] rlang_1.1.6                 crayon_1.5.3               
+[143] future.apply_1.20.0         labeling_0.4.3             
+[145] ps_1.9.1                    plyr_1.8.9                 
+[147] stringi_1.8.7               deldir_2.0-4               
+[149] viridisLite_0.4.2           BiocParallel_1.42.0        
+[151] assertthat_0.2.1            lazyeval_0.2.2             
+[153] spatstat.geom_3.4-1         Matrix_1.7-4               
+[155] RcppHNSW_0.6.0              hms_1.1.3                  
+[157] patchwork_1.3.2             bit64_4.6.0-1              
+[159] future_1.58.0               shiny_1.11.0               
+[161] SummarizedExperiment_1.38.1 ROCR_1.0-11                
+[163] Rfast_2.1.5.1               igraph_2.1.4               
+[165] RcppParallel_5.1.10         bit_4.6.0                  </code></pre>
 </div>
 </div>
 
@@ -1197,18 +1204,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1240,11 +1236,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/seriph78\.github\.io\/COTAN_Datasets_analysis\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1254,8 +1289,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1267,7 +1311,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1311,6 +1478,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1336,6 +1504,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1396,6 +1590,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

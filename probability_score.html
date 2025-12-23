@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.47">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>COTAN Datasets analysis - Probability score computation</title>
+<title>Probability score computation – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -79,7 +79,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,6 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -104,13 +111,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./probability_score.html">PBMCs probability score</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./probability_score.html">PBMCs probability score</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -119,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">COTAN Datasets analysis</a> 
@@ -140,18 +147,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Datasets</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Loo 2019</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -172,9 +179,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -207,9 +214,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
  <span class="menu-text">Mouse Brain LaManno 2021</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -260,9 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">CD14+</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -277,9 +284,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">PBMC form 10X site</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -314,9 +321,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Coex score evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -331,9 +338,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">GDI sensitivity</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -360,9 +367,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
  <span class="menu-text">Cluster evaluation</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -401,9 +408,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -428,9 +435,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
  <span class="menu-text">FDR and TPR - ROC curves</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -439,12 +446,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Results - thresholds true 3% 10%</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./FDR_analisysResults3_10_th04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Results - thresholds true 3% 10% threshold 0.4</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -471,9 +472,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false">
  <span class="menu-text">Additional code and scripts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -507,7 +508,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -524,7 +525,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./NonCT_clusters.html">Cluster evaluation</a></li><li class="breadcrumb-item"><a href="./probability_score.html">PBMCs probability score</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Probability score computation</h1>
 </div>
@@ -539,7 +540,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)</span>
@@ -603,7 +606,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -647,9 +654,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 scvi-tools   PBMC1    default 0.6027325         0.6614691               20
 11 scvi-tools   PBMC1   antibody 0.6605860         0.6614691               20
 12 scvi-tools   PBMC1 celltypist 0.5735559         0.6614691               20
-13      COTAN   PBMC1    default 0.5945573         0.6614691               20
-14      COTAN   PBMC1   antibody 0.7028721         0.6614691               20
-15      COTAN   PBMC1 celltypist 0.5945573         0.6614691               20</code></pre>
+13      COTAN   PBMC1    default 0.5470015         0.6614691               20
+14      COTAN   PBMC1   antibody 0.5467247         0.6614691               20
+15      COTAN   PBMC1 celltypist 0.5799735         0.6614691               20</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -674,7 +681,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -698,7 +709,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -742,7 +757,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 scvi-tools   PBMC2    default 0.5851914          0.632864               20
 11 scvi-tools   PBMC2   antibody 0.4727416          0.632864               20
 12 scvi-tools   PBMC2 celltypist 0.5576107          0.632864               20
-13      COTAN   PBMC2    default 0.5599573          0.632864               20
+13      COTAN   PBMC2    default 0.5468319          0.632864               20
 14      COTAN   PBMC2   antibody 0.6612736          0.632864               20
 15      COTAN   PBMC2 celltypist 0.5599573          0.632864               20</code></pre>
 </div>
@@ -769,7 +784,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -793,7 +812,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -837,9 +860,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 scvi-tools   PBMC3    default 0.5606163          0.666637               20
 11 scvi-tools   PBMC3   antibody 0.4673312          0.666637               20
 12 scvi-tools   PBMC3 celltypist 0.5082920          0.666637               20
-13      COTAN   PBMC3    default 0.5034928          0.666637               20
+13      COTAN   PBMC3    default 0.4794518          0.666637               20
 14      COTAN   PBMC3   antibody 0.6774677          0.666637               20
-15      COTAN   PBMC3 celltypist 0.6318363          0.666637               20</code></pre>
+15      COTAN   PBMC3 celltypist 0.5843296          0.666637               20</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -864,7 +887,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -888,7 +915,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>prc <span class="ot">&lt;-</span> PCAtools<span class="sc">::</span><span class="fu">pca</span>(<span class="at">mat =</span> probMatrixDF, <span class="at">rank =</span> <span class="dv">50</span>, <span class="at">transposed =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(prc<span class="sc">$</span>sdev)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell">
@@ -932,9 +963,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 scvi-tools   PBMC4    default 0.6212800         0.7881445               20
 11 scvi-tools   PBMC4   antibody 0.5174726         0.7881445               20
 12 scvi-tools   PBMC4 celltypist 0.5219027         0.7881445               20
-13      COTAN   PBMC4    default 0.5755159         0.7881445               20
-14      COTAN   PBMC4   antibody 0.6613133         0.7881445               20
-15      COTAN   PBMC4 celltypist 0.5825237         0.7881445               20</code></pre>
+13      COTAN   PBMC4    default 0.5155869         0.7881445               20
+14      COTAN   PBMC4   antibody 0.6737801         0.7881445               20
+15      COTAN   PBMC4 celltypist 0.6209524         0.7881445               20</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -959,26 +990,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">names</span>(sizesToDists), sizesToDists)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="probability_score_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="probability_score_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <hr>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2024-05-10 17:40:27 CEST"</code></pre>
+<pre><code>[1] "2025-12-18 09:12:39 CET"</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.6 LTS
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
-LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/liblapack.so.3;  LAPACK version 3.9.0
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
@@ -994,113 +1029,110 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] COTAN_2.5.0                 cluster_2.1.6              
- [3] monocle3_1.3.4              SingleCellExperiment_1.22.0
- [5] SummarizedExperiment_1.30.2 GenomicRanges_1.52.0       
- [7] GenomeInfoDb_1.36.1         IRanges_2.34.1             
- [9] S4Vectors_0.38.1            MatrixGenerics_1.12.3      
-[11] matrixStats_1.2.0           Biobase_2.60.0             
-[13] BiocGenerics_0.46.0         funtimes_9.1               
-[15] aricode_1.0.3               Seurat_5.0.0               
-[17] SeuratObject_5.0.0          sp_2.1-1                   
-[19] zeallot_0.1.0               tibble_3.2.1               
-[21] ggplot2_3.5.0               testthat_3.2.0             
-[23] rlang_1.1.1                
+ [1] COTAN_2.9.4                 cluster_2.1.8.1            
+ [3] monocle3_1.3.7              SingleCellExperiment_1.30.0
+ [5] SummarizedExperiment_1.38.1 GenomicRanges_1.60.0       
+ [7] GenomeInfoDb_1.44.0         IRanges_2.42.0             
+ [9] S4Vectors_0.46.0            MatrixGenerics_1.20.0      
+[11] matrixStats_1.5.0           Biobase_2.68.0             
+[13] BiocGenerics_0.54.0         generics_0.1.3             
+[15] funtimes_10.0               aricode_1.0.3              
+[17] Seurat_5.2.1                SeuratObject_5.1.0         
+[19] sp_2.2-0                    zeallot_0.2.0              
+[21] tibble_3.3.0                ggplot2_4.0.1              
+[23] testthat_3.2.3              rlang_1.1.6                
 
 loaded via a namespace (and not attached):
-  [1] spatstat.sparse_3.0-2     bitops_1.0-7             
-  [3] httr_1.4.6                RColorBrewer_1.1-3       
-  [5] doParallel_1.0.17         tools_4.3.2              
-  [7] sctransform_0.4.1         backports_1.4.1          
-  [9] utf8_1.2.3                R6_2.5.1                 
- [11] lazyeval_0.2.2            uwot_0.1.16              
- [13] GetoptLong_1.0.5          withr_3.0.0              
- [15] gridExtra_2.3             parallelDist_0.2.6       
- [17] fdrtool_1.2.17            progressr_0.14.0         
- [19] qgraph_1.9.8              cli_3.6.1                
- [21] spatstat.explore_3.2-1    fastDummies_1.7.3        
- [23] mvtnorm_1.2-2             spatstat.data_3.0-1      
- [25] askpass_1.2.0             ggridges_0.5.4           
+  [1] spatstat.sparse_3.1-0     gghalves_0.1.4           
+  [3] httr_1.4.7                RColorBrewer_1.1-3       
+  [5] doParallel_1.0.17         tools_4.5.2              
+  [7] sctransform_0.4.2         backports_1.5.0          
+  [9] R6_2.6.1                  lazyeval_0.2.2           
+ [11] uwot_0.2.3                GetoptLong_1.0.5         
+ [13] withr_3.0.2               gridExtra_2.3            
+ [15] parallelDist_0.2.6        fdrtool_1.2.18           
+ [17] progressr_0.15.1          qgraph_1.9.8             
+ [19] cli_3.6.5                 spatstat.explore_3.4-2   
+ [21] fastDummies_1.7.5         mvtnorm_1.3-3            
+ [23] S7_0.2.1                  spatstat.data_3.1-6      
+ [25] proxy_0.4-27              ggridges_0.5.6           
  [27] pbapply_1.7-2             pbivnorm_0.6.0           
- [29] foreign_0.8-86            dbscan_1.1-11            
- [31] parallelly_1.37.1         rstudioapi_0.15.0        
- [33] generics_0.1.3            shape_1.4.6              
- [35] gtools_3.9.4              ica_1.0-3                
- [37] spatstat.random_3.2-1     dendextend_1.17.1        
- [39] graphicalVAR_0.3.3        dplyr_1.1.2              
- [41] Matrix_1.6-3              fansi_1.0.4              
- [43] abind_1.4-5               PCAtools_2.14.0          
- [45] terra_1.7-39              lifecycle_1.0.3          
- [47] yaml_2.3.7                clusterGeneration_1.3.8  
- [49] Rtsne_0.17                grid_4.3.2               
- [51] lavaan_0.6-16             mlVAR_0.5.1              
- [53] dqrng_0.3.0               promises_1.2.0.1         
- [55] crayon_1.5.2              miniUI_0.1.1.1           
- [57] lattice_0.22-5            beachmat_2.16.0          
- [59] cowplot_1.1.1             pillar_1.9.0             
- [61] knitr_1.43                ComplexHeatmap_2.16.0    
- [63] rjson_0.2.21              boot_1.3-28              
- [65] corpcor_1.6.10            future.apply_1.11.0      
- [67] codetools_0.2-19          leiden_0.4.3             
- [69] glue_1.7.0                data.table_1.15.0        
- [71] vctrs_0.6.3               png_0.1-8                
- [73] spam_2.10-0               Rdpack_2.6               
- [75] gtable_0.3.3              assertthat_0.2.1         
- [77] gsubfn_0.7                xfun_0.39                
- [79] rbibutils_2.2.15          S4Arrays_1.2.0           
- [81] mime_0.12                 Rfast_2.1.0              
- [83] coda_0.19-4               survival_3.5-8           
- [85] Kendall_2.2.1             iterators_1.0.14         
- [87] MplusAutomation_1.1.0     ellipsis_0.3.2           
- [89] fitdistrplus_1.1-11       ROCR_1.0-11              
- [91] nlme_3.1-163              RcppAnnoy_0.0.21         
- [93] irlba_2.3.5.1             KernSmooth_2.23-22       
- [95] rpart_4.1.23              colorspace_2.1-0         
- [97] Hmisc_5.1-0               nnet_7.3-19              
- [99] mnormt_2.1.1              tidyselect_1.2.0         
-[101] compiler_4.3.2            glmnet_4.1-8             
-[103] htmlTable_2.4.1           DelayedArray_0.26.7      
-[105] plotly_4.10.2             checkmate_2.3.0          
-[107] scales_1.3.0              psych_2.4.3              
-[109] lmtest_0.9-40             quadprog_1.5-8           
-[111] stringr_1.5.0             digest_0.6.33            
-[113] goftest_1.2-3             spatstat.utils_3.0-3     
-[115] minqa_1.2.5               rmarkdown_2.24           
-[117] XVector_0.40.0            htmltools_0.5.8          
-[119] pkgconfig_2.0.3           jpeg_0.1-10              
-[121] base64enc_0.1-3           umap_0.2.10.0            
-[123] lme4_1.1-34               sparseMatrixStats_1.12.2 
-[125] fastmap_1.1.1             ggthemes_5.1.0           
-[127] GlobalOptions_0.1.2       htmlwidgets_1.6.2        
-[129] DelayedMatrixStats_1.22.5 shiny_1.8.0              
-[131] zoo_1.8-12                jsonlite_1.8.7           
-[133] BiocParallel_1.34.2       BiocSingular_1.16.0      
-[135] RCurl_1.98-1.12           magrittr_2.0.3           
-[137] Formula_1.2-5             GenomeInfoDbData_1.2.10  
-[139] dotCall64_1.1-0           patchwork_1.2.0          
-[141] texreg_1.39.3             munsell_0.5.0            
-[143] Rcpp_1.0.11               viridis_0.6.4            
-[145] proto_1.0.0               reticulate_1.36.1        
-[147] RcppZiggurat_0.1.6        stringi_1.8.1            
-[149] brio_1.1.3                zlibbioc_1.46.0          
-[151] MASS_7.3-60               plyr_1.8.8               
-[153] parallel_4.3.2            listenv_0.9.0            
-[155] ggrepel_0.9.5             deldir_2.0-2             
-[157] splines_4.3.2             pander_0.6.5             
-[159] tensor_1.5                circlize_0.4.15          
-[161] igraph_2.0.3              spatstat.geom_3.2-4      
-[163] RcppHNSW_0.6.0            reshape2_1.4.4           
-[165] ScaledMatrix_1.8.1        evaluate_0.21            
-[167] RcppParallel_5.1.7        nloptr_2.0.3             
-[169] foreach_1.5.2             httpuv_1.6.11            
-[171] openssl_2.1.0             RANN_2.6.1               
-[173] tidyr_1.3.0               purrr_1.0.1              
-[175] polyclip_1.10-4           clue_0.3-64              
-[177] future_1.33.0             scattermore_1.2          
-[179] rsvd_1.0.5                xtable_1.8-4             
-[181] RSpectra_0.16-1           later_1.3.1              
-[183] glasso_1.11               viridisLite_0.4.2        
-[185] arm_1.13-1                globals_0.16.2           </code></pre>
+ [29] foreign_0.8-90            dbscan_1.2.3             
+ [31] parallelly_1.45.0         rstudioapi_0.17.1        
+ [33] shape_1.4.6.1             gtools_3.9.5             
+ [35] ica_1.0-3                 spatstat.random_3.4-1    
+ [37] dendextend_1.19.0         graphicalVAR_0.3.4       
+ [39] dplyr_1.1.4               Matrix_1.7-4             
+ [41] abind_1.4-8               PCAtools_2.20.0          
+ [43] lifecycle_1.0.4           yaml_2.3.10              
+ [45] clusterGeneration_1.3.8   SparseArray_1.8.0        
+ [47] Rtsne_0.17                grid_4.5.2               
+ [49] lavaan_0.6-20             mlVAR_0.5.2              
+ [51] dqrng_0.4.1               promises_1.3.2           
+ [53] crayon_1.5.3              miniUI_0.1.2             
+ [55] lattice_0.22-7            beachmat_2.24.0          
+ [57] cowplot_1.1.3             pillar_1.10.2            
+ [59] knitr_1.50                ComplexHeatmap_2.24.0    
+ [61] rjson_0.2.23              boot_1.3-32              
+ [63] corpcor_1.6.10            future.apply_1.20.0      
+ [65] codetools_0.2-20          glue_1.8.0               
+ [67] spatstat.univar_3.1-3     data.table_1.17.0        
+ [69] vctrs_0.6.5               png_0.1-8                
+ [71] spam_2.11-1               Rdpack_2.6.4             
+ [73] gtable_0.3.6              assertthat_0.2.1         
+ [75] gsubfn_0.7                zigg_0.0.2               
+ [77] xfun_0.52                 rbibutils_2.3            
+ [79] S4Arrays_1.8.0            mime_0.13                
+ [81] Rfast_2.1.5.1             coda_0.19-4.1            
+ [83] reformulas_0.4.1          survival_3.8-3           
+ [85] iterators_1.0.14          MplusAutomation_1.2      
+ [87] fitdistrplus_1.2-2        ROCR_1.0-11              
+ [89] nlme_3.1-168              RcppAnnoy_0.0.22         
+ [91] irlba_2.3.5.1             KernSmooth_2.23-26       
+ [93] rpart_4.1.24              colorspace_2.1-1         
+ [95] Hmisc_5.2-3               nnet_7.3-20              
+ [97] mnormt_2.1.1              tidyselect_1.2.1         
+ [99] compiler_4.5.2            glmnet_4.1-8             
+[101] htmlTable_2.4.3           DelayedArray_0.34.1      
+[103] plotly_4.11.0             checkmate_2.3.2          
+[105] scales_1.4.0              psych_2.5.3              
+[107] lmtest_0.9-40             quadprog_1.5-8           
+[109] stringr_1.5.1             digest_0.6.37            
+[111] goftest_1.2-3             spatstat.utils_3.1-4     
+[113] minqa_1.2.8               rmarkdown_2.29           
+[115] XVector_0.48.0            htmltools_0.5.8.1        
+[117] pkgconfig_2.0.3           jpeg_0.1-11              
+[119] base64enc_0.1-3           lme4_1.1-37              
+[121] sparseMatrixStats_1.20.0  fastmap_1.2.0            
+[123] ggthemes_5.1.0            GlobalOptions_0.1.2      
+[125] htmlwidgets_1.6.4         UCSC.utils_1.4.0         
+[127] DelayedMatrixStats_1.30.0 shiny_1.11.0             
+[129] farver_2.1.2              zoo_1.8-14               
+[131] jsonlite_2.0.0            BiocParallel_1.42.0      
+[133] BiocSingular_1.24.0       magrittr_2.0.4           
+[135] Formula_1.2-5             GenomeInfoDbData_1.2.14  
+[137] dotCall64_1.2             patchwork_1.3.2          
+[139] texreg_1.39.4             Rcpp_1.0.14              
+[141] viridis_0.6.5             proto_1.0.0              
+[143] reticulate_1.42.0         stringi_1.8.7            
+[145] brio_1.1.5                MASS_7.3-65              
+[147] plyr_1.8.9                parallel_4.5.2           
+[149] listenv_0.9.1             ggrepel_0.9.6            
+[151] deldir_2.0-4              splines_4.5.2            
+[153] pander_0.6.6              tensor_1.5               
+[155] circlize_0.4.16           igraph_2.1.4             
+[157] spatstat.geom_3.4-1       RcppHNSW_0.6.0           
+[159] reshape2_1.4.4            ScaledMatrix_1.16.0      
+[161] evaluate_1.0.3            RcppParallel_5.1.10      
+[163] nloptr_2.2.1              foreach_1.5.2            
+[165] httpuv_1.6.16             RANN_2.6.2               
+[167] tidyr_1.3.1               purrr_1.2.0              
+[169] polyclip_1.10-7           future_1.58.0            
+[171] clue_0.3-66               scattermore_1.2          
+[173] rsvd_1.0.5                xtable_1.8-4             
+[175] RSpectra_0.16-2           later_1.4.2              
+[177] glasso_1.11               viridisLite_0.4.2        
+[179] arm_1.14-4                globals_0.18.0           </code></pre>
 </div>
 </div>
 
@@ -1143,18 +1175,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1186,11 +1207,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/seriph78\.github\.io\/COTAN_Datasets_analysis\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1200,8 +1260,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1213,7 +1282,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1257,6 +1449,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1282,6 +1475,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1342,6 +1561,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
