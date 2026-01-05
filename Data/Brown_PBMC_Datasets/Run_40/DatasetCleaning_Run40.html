@@ -555,6 +555,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#redo-all-the-plots" id="toc-redo-all-the-plots" class="nav-link" data-scroll-target="#redo-all-the-plots">Redo all the plots</a></li>
   </ul></li>
   <li><a href="#finalize-object-and-save" id="toc-finalize-object-and-save" class="nav-link" data-scroll-target="#finalize-object-and-save">Finalize object and save</a></li>
+  <li><a href="#check-uniform-clusters" id="toc-check-uniform-clusters" class="nav-link" data-scroll-target="#check-uniform-clusters">Check uniform clusters</a></li>
   </ul>
 </nav>
     </div>
@@ -653,7 +654,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="clean-using-standard-thresholds" class="level3">
 <h3 class="anchored" data-anchor-id="clean-using-standard-thresholds">clean() using standard thresholds</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">clean</span>(aRunObj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>cellsToDrop <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c4"</span>)[[<span class="dv">1</span>]][<span class="fu">is.na</span>(<span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c4"</span>)[[<span class="dv">1</span>]])])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(aRunObj, <span class="at">cells =</span> cellsToDrop)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">clean</span>(aRunObj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="check-the-initial-plots" class="level3">
@@ -702,36 +707,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mitPerDf[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> <span class="fl">15.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 163</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mitPerDf[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> <span class="fl">13.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 209</code></pre>
+<pre><code>[1] 4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mitPerDf[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> <span class="fl">11.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 276</code></pre>
+<pre><code>[1] 7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mitPerDf[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> <span class="fl">10.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 309</code></pre>
+<pre><code>[1] 13</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop above 11%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mitPerThr <span class="ot">&lt;-</span> <span class="fl">11.0</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addElementToMetaDataset</span>(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    aRunObj,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mitochondrial percentage threshold"</span>, mitPerThr)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(aRunObj)[<span class="fu">which</span>(mitPerDf[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> mitPerThr)]</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(aRunObj, <span class="at">cells =</span> cellsToDrop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(mitPerDf[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> <span class="fl">8.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 64</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop above 11%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>mitPerThr <span class="ot">&lt;-</span> <span class="fl">8.0</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addElementToMetaDataset</span>(</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    aRunObj,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mitochondrial percentage threshold"</span>, mitPerThr)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(aRunObj)[<span class="fu">which</span>(mitPerDf[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> mitPerThr)]</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(aRunObj, <span class="at">cells =</span> cellsToDrop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="redo-the-plots" class="level3">
 <h3 class="anchored" data-anchor-id="redo-the-plots">Redo the plots</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -739,7 +748,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -747,7 +756,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterPlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterPlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -755,10 +764,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -771,40 +780,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="remove-cells-with-too-high-size" class="level3">
 <h3 class="anchored" data-anchor-id="remove-cells-with-too-high-size">Remove cells with too high size</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>librarySize <span class="ot">&lt;-</span> <span class="fu">getCellsSize</span>(aRunObj)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">25000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>librarySize <span class="ot">&lt;-</span> <span class="fu">getCellsSize</span>(aRunObj)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">25000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 18</code></pre>
+<pre><code>[1] 14</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">20000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">20000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 36</code></pre>
+<pre><code>[1] 28</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">18000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">18000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 65</code></pre>
+<pre><code>[1] 54</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">15000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">15000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 124</code></pre>
+<pre><code>[1] 106</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop above 11%</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>cellSizeThr <span class="ot">&lt;-</span> <span class="dv">18000</span></span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addElementToMetaDataset</span>(</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    aRunObj,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cell size threshold"</span>, cellSizeThr)</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(aRunObj)[<span class="fu">which</span>(librarySize <span class="sc">&gt;</span> cellSizeThr)]</span>
-<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(aRunObj, <span class="at">cells =</span> cellsToDrop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(librarySize <span class="sc">&gt;</span> <span class="dv">10000</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 397</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop above 11%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>cellSizeThr <span class="ot">&lt;-</span> <span class="dv">15000</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addElementToMetaDataset</span>(</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    aRunObj,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cell size threshold"</span>, cellSizeThr)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(aRunObj)[<span class="fu">which</span>(librarySize <span class="sc">&gt;</span> cellSizeThr)]</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(aRunObj, <span class="at">cells =</span> cellsToDrop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="redo-the-plots-1" class="level3">
 <h3 class="anchored" data-anchor-id="redo-the-plots-1">Redo the plots</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -812,7 +825,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -820,7 +833,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterPlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterPlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -828,10 +841,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>,</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -844,16 +857,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="check-for-spurious-clusters" class="level3">
 <h3 class="anchored" data-anchor-id="check-for-spurious-clusters">Check for spurious clusters</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">clean</span>(aRunObj)</span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCells, pcaCellsData, genes, UDE, nu, zoomedNu) <span class="sc">%&lt;-%</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cleanPlots</span>(aRunObj, <span class="at">includePCA =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">clean</span>(aRunObj)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCells, pcaCellsData, genes, UDE, nu, zoomedNu) <span class="sc">%&lt;-%</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cleanPlots</span>(aRunObj, <span class="at">includePCA =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="plot-pca-and-nu" class="level3">
 <h3 class="anchored" data-anchor-id="plot-pca-and-nu">Plot PCA and Nu</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCells)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCells)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -861,7 +874,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -869,7 +882,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -877,7 +890,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -885,7 +898,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -893,7 +906,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -906,42 +919,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="remove-cells-below-nu-elbow-point" class="level3">
 <h3 class="anchored" data-anchor-id="remove-cells-below-nu-elbow-point">Remove cells below nu elbow point</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> <span class="fu">getNu</span>(aRunObj)</span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nu <span class="sc">&lt;</span> <span class="fl">0.15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>nu <span class="ot">&lt;-</span> <span class="fu">getNu</span>(aRunObj)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nu <span class="sc">&lt;</span> <span class="fl">0.15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
+<pre><code>[1] 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nu <span class="sc">&lt;</span> <span class="fl">0.18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nu <span class="sc">&lt;</span> <span class="fl">0.18</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nu <span class="sc">&lt;</span> <span class="fl">0.20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nu <span class="sc">&lt;</span> <span class="fl">0.20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(nu <span class="sc">&lt;</span> <span class="fl">0.37</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 8</code></pre>
+<pre><code>[1] 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop above 11%</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>lowNuThr <span class="ot">&lt;-</span> <span class="fl">0.18</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addElementToMetaDataset</span>(</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    aRunObj,</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Low Nu threshold"</span>, lowNuThr)</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(aRunObj)[<span class="fu">which</span>(nu <span class="sc">&lt;</span> lowNuThr)]</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(aRunObj, <span class="at">cells =</span> cellsToDrop)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop above 11%</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>lowNuThr <span class="ot">&lt;-</span> <span class="fl">0.37</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addElementToMetaDataset</span>(</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>    aRunObj,</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Low Nu threshold"</span>, lowNuThr)</span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>cells_to_rem <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pcaCellsData)[pcaCellsData[[<span class="st">"groups"</span>]] <span class="sc">==</span> <span class="st">"B"</span>]</span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>cellsToDrop <span class="ot">&lt;-</span> <span class="fu">getCells</span>(aRunObj)[<span class="fu">which</span>(nu <span class="sc">&lt;</span> lowNuThr)]</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(aRunObj, <span class="at">cells =</span> <span class="fu">c</span>(cellsToDrop,cells_to_rem))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="redo-all-the-plots" class="level3">
 <h3 class="anchored" data-anchor-id="redo-all-the-plots">Redo all the plots</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">clean</span>(aRunObj)</span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCells, pcaCellsData, genes, UDE, nu, zoomedNu) <span class="sc">%&lt;-%</span></span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cleanPlots</span>(aRunObj, <span class="at">includePCA =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">clean</span>(aRunObj)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCells, pcaCellsData, genes, UDE, nu, zoomedNu) <span class="sc">%&lt;-%</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cleanPlots</span>(aRunObj, <span class="at">includePCA =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCells)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCells)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -949,7 +968,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -957,7 +976,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(pcaCellsData)</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -965,7 +986,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -973,7 +994,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -981,7 +1002,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -989,7 +1010,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -997,7 +1018,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterPlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1005,22 +1026,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterPlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-14-9.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
-<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">condName =</span> <span class="st">"Participant.IDs"</span>,</span>
-<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
-<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-14-10.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1030,12 +1043,635 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="finalize-object-and-save" class="level2">
 <h2 class="anchored" data-anchor-id="finalize-object-and-save">Finalize object and save</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">proceedToCoex</span>(aRunObj, <span class="at">calcCoex =</span> <span class="cn">FALSE</span>, <span class="at">cores =</span> <span class="dv">1</span>L, <span class="at">saveObj =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">proceedToCoex</span>(aRunObj, <span class="at">calcCoex =</span> <span class="cn">FALSE</span>, <span class="at">cores =</span> <span class="dv">1</span>L, <span class="at">saveObj =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>fileNameOut <span class="ot">&lt;-</span> <span class="fu">paste0</span>(globalCondition, <span class="st">"-Run_"</span>, thisRun, <span class="st">"-Cleaned"</span>, <span class="st">".RDS"</span>)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(aRunObj, <span class="at">file =</span> <span class="fu">file.path</span>(inDir, fileNameOut))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>fileNameOut <span class="ot">&lt;-</span> <span class="fu">paste0</span>(globalCondition, <span class="st">"-Run_"</span>, thisRun, <span class="st">"-Cleaned"</span>, <span class="st">".RDS"</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(aRunObj, <span class="at">file =</span> <span class="fu">file.path</span>(inDir, fileNameOut))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj,<span class="at">conditions =</span> <span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c2"</span>)[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj,<span class="at">conditions =</span> <span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c2"</span>)[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">conditions =</span> <span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c2"</span>)[[<span class="dv">1</span>]],</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(aRunObj,<span class="at">conditions =</span> <span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c3"</span>)[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(aRunObj,<span class="at">conditions =</span> <span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c3"</span>)[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPerPlot, mitPerDf) <span class="sc">%&lt;-%</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(aRunObj, <span class="at">conditions =</span> <span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c3"</span>)[[<span class="dv">1</span>]],</span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">genePrefix =</span> <span class="st">"^MT-"</span>)</span>
+<span id="cb77-4"><a href="#cb77-4" aria-hidden="true" tabindex="-1"></a>mitPerPlot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="DatasetCleaning_Run40_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">getClusterizationData</span>(aRunObj,<span class="st">"c3"</span>)[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                                 pDC                          CD4 T Cells 
+                                  18                                 4608 
+                 Gamma-Delta T Cells                                 cDC2 
+                                 266                                    7 
+              Intermediate Monocytes                                 cDC3 
+                                  49                                    4 
+                CD56 Bright NK Cells             Classical Memory B Cells 
+                                  66                                   48 
+Mucosal-Associated Invariant T Cells                    CD56 Dim NK Cells 
+                                 276                                  436 
+                 Classical Monocytes                          CD8 T Cells 
+                                 314                                 1562 
+              Nonclassical Monocytes                        Naive B Cells 
+                                  97                                  315 
+                                asDC                   IgM Memory B Cells 
+                                   1                                   62 
+              Age-associated B Cells                    Adaptive NK Cells 
+                                   6                                   24 </code></pre>
+</div>
+</div>
+</section>
+<section id="check-uniform-clusters" class="level2">
+<h2 class="anchored" data-anchor-id="check-uniform-clusters">Check uniform clusters</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a>getClData <span class="ot">&lt;-</span> <span class="cf">function</span>(objCOTAN, clList, cl) {</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  checker <span class="ot">&lt;-</span> <span class="fu">new</span>(<span class="st">"SimpleGDIUniformityCheck"</span>)</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  checker<span class="sc">@</span>check<span class="sc">@</span>maxRatioBeyond  <span class="ot">&lt;-</span> <span class="fl">0.02</span></span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>  cluster <span class="ot">&lt;-</span> <span class="fu">names</span>(clList)[[cl]]</span>
+<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a>  cells <span class="ot">&lt;-</span> clList[[cl]]</span>
+<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> <span class="fu">checkClusterUniformity</span>(objCOTAN, <span class="at">cluster =</span> cluster, <span class="at">cells =</span> cells,<span class="at">checker =</span> checker, </span>
+<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">cores =</span> <span class="dv">6</span>, <span class="at">saveObj =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>newCl <span class="ot">&lt;-</span> <span class="fu">paste</span>(aRunObj<span class="sc">@</span>metaCells<span class="sc">$</span>Sample.IDs,aRunObj<span class="sc">@</span>metaCells<span class="sc">$</span>CL_c3,<span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(newCl) <span class="ot">&lt;-</span> <span class="fu">getCells</span>(aRunObj)</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>newCl <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.factor</span>(newCl)</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">addClusterization</span>(aRunObj, <span class="at">clName =</span> <span class="st">"Sample_C3"</span>, <span class="at">clusters =</span> newCl)</span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a>originalC3Cl <span class="ot">&lt;-</span> <span class="fu">getClusters</span>(aRunObj, <span class="at">clName =</span> <span class="st">"Sample_C3"</span>)</span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-9"><a href="#cb81-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(originalC3Cl), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>originalC3Cl
+                          95_CD4 T Cells 
+                                    2479 
+                         424_CD4 T Cells 
+                                    2129 
+                         424_CD8 T Cells 
+                                     845 
+                          95_CD8 T Cells 
+                                     717 
+                   424_CD56 Dim NK Cells 
+                                     267 
+                  95_Classical Monocytes 
+                                     228 
+424_Mucosal-Associated Invariant T Cells 
+                                     176 
+                    95_CD56 Dim NK Cells 
+                                     169 
+                       424_Naive B Cells 
+                                     159 
+                        95_Naive B Cells 
+                                     156 
+                 424_Gamma-Delta T Cells 
+                                     154 
+                  95_Gamma-Delta T Cells 
+                                     112 
+ 95_Mucosal-Associated Invariant T Cells 
+                                     100 
+                 424_Classical Monocytes 
+                                      86 
+               95_Nonclassical Monocytes 
+                                      69 
+                  424_IgM Memory B Cells 
+                                      42 
+            424_Classical Memory B Cells 
+                                      39 
+                 95_CD56 Bright NK Cells 
+                                      34 
+                424_CD56 Bright NK Cells 
+                                      32 
+              424_Nonclassical Monocytes 
+                                      28 
+               95_Intermediate Monocytes 
+                                      27 
+              424_Intermediate Monocytes 
+                                      22 
+                   95_IgM Memory B Cells 
+                                      20 
+                   424_Adaptive NK Cells 
+                                      18 
+                                 424_pDC 
+                                      10 
+             95_Classical Memory B Cells 
+                                       9 
+                                  95_pDC 
+                                       8 
+                    95_Adaptive NK Cells 
+                                       6 
+              424_Age-associated B Cells 
+                                       5 
+                                 95_cDC2 
+                                       4 
+                                424_cDC2 
+                                       3 
+                                424_cDC3 
+                                       2 
+                                 95_cDC3 
+                                       2 
+               95_Age-associated B Cells 
+                                       1 
+                                 95_asDC 
+                                       1 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>largeCl <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">table</span>(originalC3Cl) <span class="sc">&gt;=</span> <span class="dv">50</span>)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>largeOrigCl <span class="ot">&lt;-</span> originalC3Cl[(originalC3Cl <span class="sc">%in%</span> <span class="fu">names</span>(largeCl)),</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>                                drop <span class="ot">=</span> <span class="cn">TRUE</span>]</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a>largeOrigCl <span class="ot">&lt;-</span> <span class="fu">toClustersList</span>(largeOrigCl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(largeOrigCl, length, <span class="fu">integer</span>(<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         424_CD4 T Cells 
+                                    2129 
+                   424_CD56 Dim NK Cells 
+                                     267 
+                         424_CD8 T Cells 
+                                     845 
+                 424_Classical Monocytes 
+                                      86 
+                 424_Gamma-Delta T Cells 
+                                     154 
+424_Mucosal-Associated Invariant T Cells 
+                                     176 
+                       424_Naive B Cells 
+                                     159 
+                          95_CD4 T Cells 
+                                    2479 
+                    95_CD56 Dim NK Cells 
+                                     169 
+                          95_CD8 T Cells 
+                                     717 
+                  95_Classical Monocytes 
+                                     228 
+                  95_Gamma-Delta T Cells 
+                                     112 
+ 95_Mucosal-Associated Invariant T Cells 
+                                     100 
+                        95_Naive B Cells 
+                                     156 
+               95_Nonclassical Monocytes 
+                                      69 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>resData <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(largeOrigCl), <span class="at">FUN =</span> getClData,</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">objCOTAN =</span> aRunObj, <span class="at">clList =</span> largeOrigCl)</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a>clData <span class="ot">&lt;-</span> <span class="fu">checkersToDF</span>(resData)</span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(clData) <span class="ot">&lt;-</span> <span class="fu">names</span>(largeOrigCl)</span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>clData</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                            class
+424_CD4 T Cells                          SimpleGDIUniformityCheck
+424_CD56 Dim NK Cells                    SimpleGDIUniformityCheck
+424_CD8 T Cells                          SimpleGDIUniformityCheck
+424_Classical Monocytes                  SimpleGDIUniformityCheck
+424_Gamma-Delta T Cells                  SimpleGDIUniformityCheck
+424_Mucosal-Associated Invariant T Cells SimpleGDIUniformityCheck
+424_Naive B Cells                        SimpleGDIUniformityCheck
+95_CD4 T Cells                           SimpleGDIUniformityCheck
+95_CD56 Dim NK Cells                     SimpleGDIUniformityCheck
+95_CD8 T Cells                           SimpleGDIUniformityCheck
+95_Classical Monocytes                   SimpleGDIUniformityCheck
+95_Gamma-Delta T Cells                   SimpleGDIUniformityCheck
+95_Mucosal-Associated Invariant T Cells  SimpleGDIUniformityCheck
+95_Naive B Cells                         SimpleGDIUniformityCheck
+95_Nonclassical Monocytes                SimpleGDIUniformityCheck
+                                         check.isCheckAbove check.GDIThreshold
+424_CD4 T Cells                                       FALSE                1.4
+424_CD56 Dim NK Cells                                 FALSE                1.4
+424_CD8 T Cells                                       FALSE                1.4
+424_Classical Monocytes                               FALSE                1.4
+424_Gamma-Delta T Cells                               FALSE                1.4
+424_Mucosal-Associated Invariant T Cells              FALSE                1.4
+424_Naive B Cells                                     FALSE                1.4
+95_CD4 T Cells                                        FALSE                1.4
+95_CD56 Dim NK Cells                                  FALSE                1.4
+95_CD8 T Cells                                        FALSE                1.4
+95_Classical Monocytes                                FALSE                1.4
+95_Gamma-Delta T Cells                                FALSE                1.4
+95_Mucosal-Associated Invariant T Cells               FALSE                1.4
+95_Naive B Cells                                      FALSE                1.4
+95_Nonclassical Monocytes                             FALSE                1.4
+                                         check.maxRatioBeyond
+424_CD4 T Cells                                          0.02
+424_CD56 Dim NK Cells                                    0.02
+424_CD8 T Cells                                          0.02
+424_Classical Monocytes                                  0.02
+424_Gamma-Delta T Cells                                  0.02
+424_Mucosal-Associated Invariant T Cells                 0.02
+424_Naive B Cells                                        0.02
+95_CD4 T Cells                                           0.02
+95_CD56 Dim NK Cells                                     0.02
+95_CD8 T Cells                                           0.02
+95_Classical Monocytes                                   0.02
+95_Gamma-Delta T Cells                                   0.02
+95_Mucosal-Associated Invariant T Cells                  0.02
+95_Naive B Cells                                         0.02
+95_Nonclassical Monocytes                                0.02
+                                         check.maxRankBeyond
+424_CD4 T Cells                                            0
+424_CD56 Dim NK Cells                                      0
+424_CD8 T Cells                                            0
+424_Classical Monocytes                                    0
+424_Gamma-Delta T Cells                                    0
+424_Mucosal-Associated Invariant T Cells                   0
+424_Naive B Cells                                          0
+95_CD4 T Cells                                             0
+95_CD56 Dim NK Cells                                       0
+95_CD8 T Cells                                             0
+95_Classical Monocytes                                     0
+95_Gamma-Delta T Cells                                     0
+95_Mucosal-Associated Invariant T Cells                    0
+95_Naive B Cells                                           0
+95_Nonclassical Monocytes                                  0
+                                         check.fractionBeyond
+424_CD4 T Cells                                   0.436382682
+424_CD56 Dim NK Cells                             0.083955520
+424_CD8 T Cells                                   0.308175182
+424_Classical Monocytes                           0.002353126
+424_Gamma-Delta T Cells                           0.055655701
+424_Mucosal-Associated Invariant T Cells          0.066896668
+424_Naive B Cells                                 0.056034824
+95_CD4 T Cells                                    0.411493289
+95_CD56 Dim NK Cells                              0.036352951
+95_CD8 T Cells                                    0.182027484
+95_Classical Monocytes                            0.027725416
+95_Gamma-Delta T Cells                            0.022713178
+95_Mucosal-Associated Invariant T Cells           0.001213101
+95_Naive B Cells                                  0.082220826
+95_Nonclassical Monocytes                         0.010374453
+                                         check.thresholdRank
+424_CD4 T Cells                                            0
+424_CD56 Dim NK Cells                                      0
+424_CD8 T Cells                                            0
+424_Classical Monocytes                                    0
+424_Gamma-Delta T Cells                                    0
+424_Mucosal-Associated Invariant T Cells                   0
+424_Naive B Cells                                          0
+95_CD4 T Cells                                             0
+95_CD56 Dim NK Cells                                       0
+95_CD8 T Cells                                             0
+95_Classical Monocytes                                     0
+95_Gamma-Delta T Cells                                     0
+95_Mucosal-Associated Invariant T Cells                    0
+95_Naive B Cells                                           0
+95_Nonclassical Monocytes                                  0
+                                         check.quantileAtRatio
+424_CD4 T Cells                                       2.278537
+424_CD56 Dim NK Cells                                 1.500102
+424_CD8 T Cells                                       1.971642
+424_Classical Monocytes                               1.332758
+424_Gamma-Delta T Cells                               1.477327
+424_Mucosal-Associated Invariant T Cells              1.483368
+424_Naive B Cells                                     1.487906
+95_CD4 T Cells                                        2.205437
+95_CD56 Dim NK Cells                                  1.431180
+95_CD8 T Cells                                        1.699952
+95_Classical Monocytes                                1.415837
+95_Gamma-Delta T Cells                                1.409228
+95_Mucosal-Associated Invariant T Cells               1.304723
+95_Naive B Cells                                      1.544503
+95_Nonclassical Monocytes                             1.367864
+                                         check.quantileAtRank isUniform
+424_CD4 T Cells                                           NaN     FALSE
+424_CD56 Dim NK Cells                                     NaN     FALSE
+424_CD8 T Cells                                           NaN     FALSE
+424_Classical Monocytes                                   NaN      TRUE
+424_Gamma-Delta T Cells                                   NaN     FALSE
+424_Mucosal-Associated Invariant T Cells                  NaN     FALSE
+424_Naive B Cells                                         NaN     FALSE
+95_CD4 T Cells                                            NaN     FALSE
+95_CD56 Dim NK Cells                                      NaN     FALSE
+95_CD8 T Cells                                            NaN     FALSE
+95_Classical Monocytes                                    NaN     FALSE
+95_Gamma-Delta T Cells                                    NaN     FALSE
+95_Mucosal-Associated Invariant T Cells                   NaN      TRUE
+95_Naive B Cells                                          NaN     FALSE
+95_Nonclassical Monocytes                                 NaN      TRUE
+                                         clusterSize
+424_CD4 T Cells                                 2129
+424_CD56 Dim NK Cells                            267
+424_CD8 T Cells                                  845
+424_Classical Monocytes                           86
+424_Gamma-Delta T Cells                          154
+424_Mucosal-Associated Invariant T Cells         176
+424_Naive B Cells                                159
+95_CD4 T Cells                                  2479
+95_CD56 Dim NK Cells                             169
+95_CD8 T Cells                                   717
+95_Classical Monocytes                           228
+95_Gamma-Delta T Cells                           112
+95_Mucosal-Associated Invariant T Cells          100
+95_Naive B Cells                                 156
+95_Nonclassical Monocytes                         69</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>originalC3Cl <span class="ot">&lt;-</span> <span class="fu">getClusters</span>(aRunObj, <span class="at">clName =</span> <span class="st">"c3"</span>)</span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(<span class="fu">table</span>(originalC3Cl), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>originalC3Cl
+                         CD4 T Cells                          CD8 T Cells 
+                                4608                                 1562 
+                   CD56 Dim NK Cells                        Naive B Cells 
+                                 436                                  315 
+                 Classical Monocytes Mucosal-Associated Invariant T Cells 
+                                 314                                  276 
+                 Gamma-Delta T Cells               Nonclassical Monocytes 
+                                 266                                   97 
+                CD56 Bright NK Cells                   IgM Memory B Cells 
+                                  66                                   62 
+              Intermediate Monocytes             Classical Memory B Cells 
+                                  49                                   48 
+                   Adaptive NK Cells                                  pDC 
+                                  24                                   18 
+                                cDC2               Age-associated B Cells 
+                                   7                                    6 
+                                cDC3                                 asDC 
+                                   4                                    1 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>largeCl <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">table</span>(originalC3Cl) <span class="sc">&gt;=</span> <span class="dv">50</span>)</span>
+<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>largeOrigCl <span class="ot">&lt;-</span> originalC3Cl[(originalC3Cl <span class="sc">%in%</span> <span class="fu">names</span>(largeCl)),</span>
+<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a>                                drop <span class="ot">=</span> <span class="cn">TRUE</span>]</span>
+<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a>largeOrigCl <span class="ot">&lt;-</span> <span class="fu">toClustersList</span>(largeOrigCl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(largeOrigCl, length, <span class="fu">integer</span>(<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                         CD4 T Cells                  Gamma-Delta T Cells 
+                                4608                                  266 
+                CD56 Bright NK Cells Mucosal-Associated Invariant T Cells 
+                                  66                                  276 
+                   CD56 Dim NK Cells                  Classical Monocytes 
+                                 436                                  314 
+                         CD8 T Cells               Nonclassical Monocytes 
+                                1562                                   97 
+                       Naive B Cells                   IgM Memory B Cells 
+                                 315                                   62 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>resDataC3 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">seq_along</span>(largeOrigCl), <span class="at">FUN =</span> getClData,</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">objCOTAN =</span> aRunObj, <span class="at">clList =</span> largeOrigCl)</span>
+<span id="cb93-3"><a href="#cb93-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-4"><a href="#cb93-4" aria-hidden="true" tabindex="-1"></a>clDataC3 <span class="ot">&lt;-</span> <span class="fu">checkersToDF</span>(resDataC3)</span>
+<span id="cb93-5"><a href="#cb93-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(clDataC3) <span class="ot">&lt;-</span> <span class="fu">names</span>(largeOrigCl)</span>
+<span id="cb93-6"><a href="#cb93-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-7"><a href="#cb93-7" aria-hidden="true" tabindex="-1"></a>clDataC3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                                        class
+CD4 T Cells                          SimpleGDIUniformityCheck
+Gamma-Delta T Cells                  SimpleGDIUniformityCheck
+CD56 Bright NK Cells                 SimpleGDIUniformityCheck
+Mucosal-Associated Invariant T Cells SimpleGDIUniformityCheck
+CD56 Dim NK Cells                    SimpleGDIUniformityCheck
+Classical Monocytes                  SimpleGDIUniformityCheck
+CD8 T Cells                          SimpleGDIUniformityCheck
+Nonclassical Monocytes               SimpleGDIUniformityCheck
+Naive B Cells                        SimpleGDIUniformityCheck
+IgM Memory B Cells                   SimpleGDIUniformityCheck
+                                     check.isCheckAbove check.GDIThreshold
+CD4 T Cells                                       FALSE                1.4
+Gamma-Delta T Cells                               FALSE                1.4
+CD56 Bright NK Cells                              FALSE                1.4
+Mucosal-Associated Invariant T Cells              FALSE                1.4
+CD56 Dim NK Cells                                 FALSE                1.4
+Classical Monocytes                               FALSE                1.4
+CD8 T Cells                                       FALSE                1.4
+Nonclassical Monocytes                            FALSE                1.4
+Naive B Cells                                     FALSE                1.4
+IgM Memory B Cells                                FALSE                1.4
+                                     check.maxRatioBeyond check.maxRankBeyond
+CD4 T Cells                                          0.02                   0
+Gamma-Delta T Cells                                  0.02                   0
+CD56 Bright NK Cells                                 0.02                   0
+Mucosal-Associated Invariant T Cells                 0.02                   0
+CD56 Dim NK Cells                                    0.02                   0
+Classical Monocytes                                  0.02                   0
+CD8 T Cells                                          0.02                   0
+Nonclassical Monocytes                               0.02                   0
+Naive B Cells                                        0.02                   0
+IgM Memory B Cells                                   0.02                   0
+                                     check.fractionBeyond check.thresholdRank
+CD4 T Cells                                    0.59185376                   0
+Gamma-Delta T Cells                            0.13579484                   0
+CD56 Bright NK Cells                           0.01411669                   0
+Mucosal-Associated Invariant T Cells           0.06833570                   0
+CD56 Dim NK Cells                              0.11024672                   0
+Classical Monocytes                            0.04550257                   0
+CD8 T Cells                                    0.40154085                   0
+Nonclassical Monocytes                         0.03734893                   0
+Naive B Cells                                  0.17055569                   0
+IgM Memory B Cells                             0.03816860                   0
+                                     check.quantileAtRatio check.quantileAtRank
+CD4 T Cells                                       2.681373                  NaN
+Gamma-Delta T Cells                               1.585636                  NaN
+CD56 Bright NK Cells                              1.384844                  NaN
+Mucosal-Associated Invariant T Cells              1.486693                  NaN
+CD56 Dim NK Cells                                 1.559117                  NaN
+Classical Monocytes                               1.444505                  NaN
+CD8 T Cells                                       2.231140                  NaN
+Nonclassical Monocytes                            1.446414                  NaN
+Naive B Cells                                     1.709865                  NaN
+IgM Memory B Cells                                1.453679                  NaN
+                                     isUniform clusterSize
+CD4 T Cells                              FALSE        4608
+Gamma-Delta T Cells                      FALSE         266
+CD56 Bright NK Cells                      TRUE          66
+Mucosal-Associated Invariant T Cells     FALSE         276
+CD56 Dim NK Cells                        FALSE         436
+Classical Monocytes                      FALSE         314
+CD8 T Cells                              FALSE        1562
+Nonclassical Monocytes                   FALSE          97
+Naive B Cells                            FALSE         315
+IgM Memory B Cells                       FALSE          62</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-01-05 09:52:01 CET"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+
+locale:
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+
+time zone: Europe/Rome
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] COTAN_2.11.1     Matrix_1.7-4     conflicted_1.2.0 zeallot_0.2.0   
+[5] ggplot2_4.0.1    assertthat_0.2.1
+
+loaded via a namespace (and not attached):
+  [1] RcppAnnoy_0.0.22            splines_4.5.2              
+  [3] later_1.4.2                 tibble_3.3.0               
+  [5] polyclip_1.10-7             fastDummies_1.7.5          
+  [7] lifecycle_1.0.4             doParallel_1.0.17          
+  [9] processx_3.8.6              globals_0.18.0             
+ [11] lattice_0.22-7              MASS_7.3-65                
+ [13] ggdist_3.3.3                dendextend_1.19.0          
+ [15] magrittr_2.0.4              plotly_4.11.0              
+ [17] rmarkdown_2.29              yaml_2.3.10                
+ [19] httpuv_1.6.16               Seurat_5.2.1               
+ [21] sctransform_0.4.2           spam_2.11-1                
+ [23] sp_2.2-0                    spatstat.sparse_3.1-0      
+ [25] reticulate_1.42.0           cowplot_1.2.0              
+ [27] pbapply_1.7-2               RColorBrewer_1.1-3         
+ [29] abind_1.4-8                 Rtsne_0.17                 
+ [31] GenomicRanges_1.60.0        purrr_1.2.0                
+ [33] BiocGenerics_0.54.0         coro_1.1.0                 
+ [35] torch_0.14.2                circlize_0.4.16            
+ [37] GenomeInfoDbData_1.2.14     IRanges_2.44.0             
+ [39] S4Vectors_0.48.0            ggrepel_0.9.6              
+ [41] irlba_2.3.5.1               listenv_0.9.1              
+ [43] spatstat.utils_3.1-4        goftest_1.2-3              
+ [45] RSpectra_0.16-2             spatstat.random_3.4-1      
+ [47] fitdistrplus_1.2-2          parallelly_1.46.0          
+ [49] codetools_0.2-20            DelayedArray_0.34.1        
+ [51] tidyselect_1.2.1            shape_1.4.6.1              
+ [53] UCSC.utils_1.4.0            farver_2.1.2               
+ [55] ScaledMatrix_1.16.0         viridis_0.6.5              
+ [57] matrixStats_1.5.0           stats4_4.5.2               
+ [59] spatstat.explore_3.4-2      jsonlite_2.0.0             
+ [61] GetoptLong_1.0.5            progressr_0.15.1           
+ [63] ggridges_0.5.6              survival_3.8-3             
+ [65] iterators_1.0.14            foreach_1.5.2              
+ [67] tools_4.5.2                 ica_1.0-3                  
+ [69] Rcpp_1.0.14                 glue_1.8.0                 
+ [71] gridExtra_2.3               SparseArray_1.10.8         
+ [73] xfun_0.52                   MatrixGenerics_1.20.0      
+ [75] distributional_0.5.0        ggthemes_5.2.0             
+ [77] GenomeInfoDb_1.44.0         dplyr_1.1.4                
+ [79] withr_3.0.2                 fastmap_1.2.0              
+ [81] callr_3.7.6                 digest_0.6.37              
+ [83] rsvd_1.0.5                  parallelDist_0.2.6         
+ [85] R6_2.6.1                    mime_0.13                  
+ [87] colorspace_2.1-1            scattermore_1.2            
+ [89] tensor_1.5                  spatstat.data_3.1-6        
+ [91] tidyr_1.3.1                 generics_0.1.3             
+ [93] data.table_1.17.0           httr_1.4.7                 
+ [95] htmlwidgets_1.6.4           S4Arrays_1.10.1            
+ [97] uwot_0.2.3                  pkgconfig_2.0.3            
+ [99] gtable_0.3.6                ComplexHeatmap_2.26.0      
+[101] lmtest_0.9-40               S7_0.2.1                   
+[103] SingleCellExperiment_1.32.0 XVector_0.50.0             
+[105] htmltools_0.5.8.1           dotCall64_1.2              
+[107] zigg_0.0.2                  clue_0.3-66                
+[109] SeuratObject_5.1.0          scales_1.4.0               
+[111] Biobase_2.68.0              png_0.1-8                  
+[113] spatstat.univar_3.1-3       knitr_1.50                 
+[115] reshape2_1.4.4              rjson_0.2.23               
+[117] nlme_3.1-168                proxy_0.4-27               
+[119] cachem_1.1.0                zoo_1.8-14                 
+[121] GlobalOptions_0.1.2         stringr_1.6.0              
+[123] KernSmooth_2.23-26          parallel_4.5.2             
+[125] miniUI_0.1.2                pillar_1.10.2              
+[127] grid_4.5.2                  vctrs_0.6.5                
+[129] RANN_2.6.2                  promises_1.3.2             
+[131] BiocSingular_1.26.1         beachmat_2.26.0            
+[133] xtable_1.8-4                cluster_2.1.8.1            
+[135] evaluate_1.0.3              cli_3.6.5                  
+[137] compiler_4.5.2              rlang_1.1.6                
+[139] crayon_1.5.3                future.apply_1.20.0        
+[141] labeling_0.4.3              ps_1.9.1                   
+[143] plyr_1.8.9                  stringi_1.8.7              
+[145] viridisLite_0.4.2           deldir_2.0-4               
+[147] BiocParallel_1.44.0         lazyeval_0.2.2             
+[149] spatstat.geom_3.4-1         RcppHNSW_0.6.0             
+[151] patchwork_1.3.2             bit64_4.6.0-1              
+[153] future_1.58.0               shiny_1.11.0               
+[155] SummarizedExperiment_1.38.1 ROCR_1.0-11                
+[157] Rfast_2.1.5.1               igraph_2.1.4               
+[159] memoise_2.0.1               RcppParallel_5.1.10        
+[161] bit_4.6.0                  </code></pre>
+</div>
 </div>
 
 
