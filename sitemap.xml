@@ -14,7 +14,11 @@
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain2V2.html</loc>
-    <lastmod>2026-01-10T10:30:16.137Z</lastmod>
+    <lastmod>2026-01-11T16:45:57.145Z</lastmod>
+  </url>
+  <url>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain1V2.html</loc>
+    <lastmod>2026-01-11T16:46:08.910Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDataset1.html</loc>
@@ -102,7 +106,7 @@
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/index.html</loc>
-    <lastmod>2026-01-10T08:27:10.084Z</lastmod>
+    <lastmod>2026-01-11T16:49:04.833Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/Looms_preview.html</loc>
@@ -181,8 +185,12 @@
     <lastmod>2026-01-08T17:31:58.500Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain1V2.html</loc>
-    <lastmod>2026-01-10T09:12:49.269Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain1SS2.html</loc>
+    <lastmod>2026-01-11T16:46:04.347Z</lastmod>
+  </url>
+  <url>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain2SS2.html</loc>
+    <lastmod>2026-01-11T16:44:52.387Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/NonCT_clusters.html</loc>
