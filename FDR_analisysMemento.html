@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Silvia Giulia Galfrè">
 
-<title>COTAN V2.0 Datasets analysis – COTAN Datasets analysis</title>
+<title>FDR analysis - define DE genes - Memento – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -80,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DEA_Type1Er.html">DEA evaluation</a></li><li class="breadcrumb-item"><a href="./FDR_analisysMemento.html">FDR analysis - define DE genes - Memento</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -107,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -497,13 +532,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true">
  <span class="menu-text">DEA evaluation</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./DEA_Type1Er.html" class="sidebar-item-text sidebar-link">
@@ -524,7 +559,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./FDR_analisysMemento.html" class="sidebar-item-text sidebar-link">
+  <a href="./FDR_analisysMemento.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">FDR analysis - define DE genes - Memento</span></a>
   </div>
 </li>
@@ -617,27 +652,27 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#schematic-data-sets-information" id="toc-schematic-data-sets-information" class="nav-link active" data-scroll-target="#schematic-data-sets-information">Schematic data-sets information</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./DEA_Type1Er.html">DEA evaluation</a></li><li class="breadcrumb-item"><a href="./FDR_analisysMemento.html">FDR analysis - define DE genes - Memento</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">COTAN V2.0 Datasets analysis</h1>
+<h1 class="title">FDR analysis - define DE genes - Memento</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Silvia Giulia Galfrè </p>
+          </div>
+  </div>
     
   
     
@@ -648,1174 +683,156 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="schematic-data-sets-information" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="schematic-data-sets-information">Schematic data-sets information</h2>
-<div class="column-screen-inset-right">
-<table style="width:69%;">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: center;">
-<p>
-Number
-</p>
-</th>
-<th>
-<p>
-Data-set name
-</p>
-</th>
-<th>
-<p>
-Tissue
-</p>
-</th>
-<th style="text-align: center;">
-<p>
-Organism
-</p>
-</th>
-<th style="text-align: center;">
-<p>
-Initial cell number
-</p>
-</th>
-<th style="text-align: center;">
-<p>
-Original paper
-</p>
-</th>
-<th style="text-align: center;">
-<p>
-Database code
-</p>
-</th>
-<th style="text-align: center;">
-<p>
-Cell number after cleaning
-</p>
-</th>
-<th style="text-align: center;">
-<p>
-sc Method
-</p>
-</th>
-<th style="text-align: center;">
-<p>
-Labelled/Surface proteins
-</p>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">
-<p>
-1
-</p>
-</td>
-<td>
-<p>
-E14.5 Mouse Cortex Loo 2019
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-11069
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://www.nature.com/articles/s41467-018-08079-9">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE123335
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10864
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-Drop-seq
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-NO
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-2
-</p>
-</td>
-<td>
-<p>
-E13.5 Mouse Cortex Yuzwa 2017
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-1137
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://doi.org/10.1016/j.celrep.2017.12.017">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE107122
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-1112
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-Drop-seq
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-NO
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-3
-</p>
-</td>
-<td>
-<p>
-E17.5 Mouse Cortex Yuzwa 2017
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-880
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://doi.org/10.1016/j.celrep.2017.12.017">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE107122
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-874
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-Drop-seq
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-NO
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-4
-</p>
-</td>
-<td>
-<p>
-E13.5 Forebrain La Manno 2021
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-5376
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://www.nature.com/articles/s41586-021-03775-x">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-PRJNA637987
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-4981
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X v1
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-Yes
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-5
-</p>
-</td>
-<td>
-<p>
-E15.0 Forebrain La Manno 2021
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-8987
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://www.nature.com/articles/s41586-021-03775-x">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-PRJNA637987
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-8562
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X v1
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-Yes
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-6
-</p>
-</td>
-<td>
-<p>
-E17.5 Forebrain La Manno 2021
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-2611
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://www.nature.com/articles/s41586-021-03775-x">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-PRJNA637987
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-2467
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X v1
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-Yes
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-7
-</p>
-</td>
-<td>
-<p>
-CD14+
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-2612
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://www.nature.com/articles/ncomms14049">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-SRP073767
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-2434
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-NO
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-8
-</p>
-</td>
-<td>
-<p>
-PBMC1
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-5 527
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X website
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-3610
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-yes
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-9
-</p>
-</td>
-<td>
-<p>
-PBMC2
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-6574
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X website
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-5975
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-yes
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-10
-</p>
-</td>
-<td>
-<p>
-PBMC3
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-11715
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X website
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10944
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-yes
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-11
-</p>
-</td>
-<td>
-<p>
-PBMC4
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-8258
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X website
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-6966
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-yes
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-12
-</p>
-</td>
-<td>
-<p>
-Brown_PBMC
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://zenodo.org/records/8020792">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X v3
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-12A
-</p>
-</td>
-<td>
-<p>
-Brown_PBMC_40
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://zenodo.org/records/8020792">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X v3.1 3 Prime HT
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-12B
-</p>
-</td>
-<td>
-<p>
-Brown_PBMC_41
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://zenodo.org/records/8020792">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X v3.1 3 Prime HT
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-12C
-</p>
-</td>
-<td>
-<p>
-Brown_PBMC_77
-</p>
-</td>
-<td>
-<p>
-PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://zenodo.org/records/8020792">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X v3.1 3 Prime
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-16
-</p>
-</td>
-<td>
-<p>
-MouseBrainOP
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-14249
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://openproblems.bio/datasets/openproblems_v1/allen_brain_atlas">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-SMARTer seq
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-17
-</p>
-</td>
-<td>
-<p>
-Ding_general
-</p>
-</td>
-<td>
-<p>
-Brain/PBMC
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://pubmed.ncbi.nlm.nih.gov/32341560/">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE132044
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-18
-</p>
-</td>
-<td>
-<p>
-Ding_Brain1_SS2
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://pubmed.ncbi.nlm.nih.gov/32341560/">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE132044
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-SmartSeq2
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-19
-</p>
-</td>
-<td>
-<p>
-Ding_Brain2_SS2
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://pubmed.ncbi.nlm.nih.gov/32341560/">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE132044
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-SmartSeq2
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-20
-</p>
-</td>
-<td>
-<p>
-Ding_Brain1_V2
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-1792
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://pubmed.ncbi.nlm.nih.gov/32341560/">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE132044
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-1586
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X V2
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-18
-</p>
-</td>
-<td>
-<p>
-Ding_Brain2_V2
-</p>
-</td>
-<td>
-<p>
-Brain
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-mm
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-5372
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-<a href="https://pubmed.ncbi.nlm.nih.gov/32341560/">📖</a>
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-GSE132044
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-4375
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-10X V2
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-19
-</p>
-</td>
-<td>
-<p>
-TumorData500
-</p>
-</td>
-<td>
-<p>
-Cell lines
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-H.s.
-</p>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-<tr>
-<td style="text-align: center;">
-<p>
-20
-</p>
-</td>
-<td>
-</td>
-<td>
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-</td>
-<td style="text-align: center;">
-<p>
-10X
-</p>
-</td>
-<td style="text-align: center;">
-<p>
-no
-</p>
-</td>
-</tr>
-</tbody>
-</table>
+<div id="62f6aa6b" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy <span class="im">import</span> sparse</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="f4e44bf9" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>os.getcwd()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Path to the folder containing mementoTypeIError.py</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>src_path <span class="op">=</span> Path.cwd() <span class="op">/</span> <span class="st">"src"</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(src_path))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mementoTypeIError</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="6bdc6aad" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dirOut <span class="op">=</span> <span class="st">"Results/FDR/"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dataSetDir <span class="op">=</span> <span class="st">"Data/MouseCortexFromLoom/FDR/MergedClusters_For_FDR/"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>datasetOutDir <span class="op">=</span> <span class="st">"Results/FDR_dataset/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="d6e651eb" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>datasets_csv <span class="op">=</span> pd.read_csv(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    os.path.join(dataSetDir, <span class="st">"Cells_Usage_DataFrame.csv"</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    index_col<span class="op">=</span><span class="dv">0</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>datasets_csv.shape[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>17</code></pre>
+</div>
+</div>
+<div id="fd141a84" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _, row <span class="kw">in</span> datasets_csv.iterrows():</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    file_code <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>row[<span class="st">'Group'</span>]<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>row[<span class="st">'Collection'</span>]<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(file_code)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    raw_path <span class="op">=</span> datasetOutDir<span class="op">+</span><span class="st">"/"</span><span class="op">+</span><span class="ss">f"</span><span class="sc">{</span>file_code<span class="sc">}</span><span class="ss">_RawData.csv"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    genes_path <span class="op">=</span> datasetOutDir<span class="op">+</span><span class="st">"/"</span><span class="op">+</span><span class="ss">f"</span><span class="sc">{</span>file_code<span class="sc">}</span><span class="ss">_Genes.csv"</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    barcodes_path <span class="op">=</span> datasetOutDir<span class="op">+</span><span class="st">"/"</span><span class="op">+</span><span class="ss">f"</span><span class="sc">{</span>file_code<span class="sc">}</span><span class="ss">_barcodes.csv"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    clusters_path <span class="op">=</span> datasetOutDir<span class="op">+</span><span class="st">"/"</span><span class="op">+</span><span class="ss">f"</span><span class="sc">{</span>file_code<span class="sc">}</span><span class="ss">_clusters.csv"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Raw counts matrix (likely genes x cells), with rownames/colnames saved by R</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    raw_df <span class="op">=</span> pd.read_csv(raw_path, index_col<span class="op">=</span><span class="dv">0</span>)  <span class="co"># keeps rownames as index</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to sparse (optional, but recommended)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    dataRaw <span class="op">=</span> sparse.csc_matrix(raw_df.values)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Genes/cells saved by write.csv are usually 1-column with an index column</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    genes_df <span class="op">=</span> pd.read_csv(genes_path, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    genes <span class="op">=</span> genes_df.iloc[:, <span class="dv">0</span>].astype(<span class="bu">str</span>).to_list()</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>    barcodes_df <span class="op">=</span> pd.read_csv(barcodes_path, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    barcodes <span class="op">=</span> barcodes_df.iloc[:, <span class="dv">0</span>].astype(<span class="bu">str</span>).to_list()</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clusters: has fake_cluster and barcode columns (plus an index column from write.csv)</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    clusters_df <span class="op">=</span> pd.read_csv(clusters_path, index_col<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># ensure columns are strings</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    clusters_df[<span class="st">"barcode"</span>] <span class="op">=</span> clusters_df[<span class="st">"barcode"</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    clusters_df[<span class="st">"fake_cluster"</span>] <span class="op">=</span> clusters_df[<span class="st">"fake_cluster"</span>].astype(<span class="bu">str</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> mementoTypeIError.mementoDEA(</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        dataRaw<span class="op">=</span>dataRaw,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>        genes<span class="op">=</span>genes,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>        barcodes<span class="op">=</span>barcodes,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>        code<span class="op">=</span>file_code,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>        labels_df<span class="op">=</span>clusters_df,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        dirOut<span class="op">=</span>dirOut,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        num_cpus<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>        num_boot<span class="op">=</span><span class="dv">5000</span>,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>        capture_rate<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>        obs_key<span class="op">=</span><span class="st">"fake_cluster"</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div id="2ede31fd" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime, timezone</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>datetime.now()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>datetime.datetime(2026, 1, 17, 17, 59, 59, 283548)</code></pre>
+</div>
+</div>
+<div id="41dc6505" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib.metadata <span class="im">as</span> md</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> session_packages_with_versions():</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    pkgs <span class="op">=</span> <span class="bu">sorted</span>({name.split(<span class="st">"."</span>)[<span class="dv">0</span>] <span class="cf">for</span> name <span class="kw">in</span> sys.modules.keys() <span class="cf">if</span> name <span class="kw">and</span> <span class="kw">not</span> name.startswith(<span class="st">"_"</span>)})</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    rows <span class="op">=</span> []</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> pkgs:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">try</span>:</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            v <span class="op">=</span> md.version(p)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">except</span> md.PackageNotFoundError:</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>            v <span class="op">=</span> <span class="va">None</span>  <span class="co"># stdlib or not a distribution name</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> v <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>            rows.append((p, v))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> rows</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, ver <span class="kw">in</span> session_packages_with_versions():</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">==</span><span class="sc">{</span>ver<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>IPython==8.38.0
+anndata==0.11.4
+asttokens==3.0.1
+colorama==0.4.4
+comm==0.2.3
+cycler==0.12.1
+debugpy==1.8.19
+decorator==5.2.1
+exceptiongroup==1.3.1
+executing==2.2.1
+h5py==3.15.1
+ipykernel==7.1.0
+jedi==0.19.2
+joblib==1.5.3
+jupyter_client==8.8.0
+jupyter_core==5.9.1
+kiwisolver==1.4.9
+legacy_api_wrap==1.5
+llvmlite==0.46.0
+matplotlib==3.10.8
+matplotlib_inline==0.2.1
+natsort==8.4.0
+numba==0.63.1
+numpy==2.2.6
+packaging==25.0
+pandas==2.3.3
+parso==0.8.5
+patsy==1.0.2
+platformdirs==4.5.1
+prompt_toolkit==3.0.52
+psutil==7.2.1
+pure_eval==0.2.3
+pygments==2.19.2
+pyparsing==3.3.1
+pytz==2022.1
+scanpy==1.11.5
+scipy==1.15.3
+six==1.16.0
+stack_data==0.6.3
+statsmodels==0.14.6
+threadpoolctl==3.6.0
+tornado==6.5.4
+traitlets==5.14.3
+typing_extensions==4.15.0
+tzdata==2025.3
+wcwidth==0.2.14</code></pre>
+</div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
