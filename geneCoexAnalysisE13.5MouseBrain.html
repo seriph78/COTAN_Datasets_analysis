@@ -294,13 +294,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PBMC1_filtering.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Cleaning PBMC1</span></a>
+ <span class="menu-text">Cleaning PBMC 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 1</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PBMC2_filtering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cleaning PBMC2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 2</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -442,6 +454,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./geneCoexAnalysisDingMouseBrain2SS2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Correlation analysis for Ding Brain 2 Smart-seq2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/MouseBrainMorabito/Dataset_Cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Morabito Brain Split-seq cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisMouseBrainMorabito.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for Morabito Brain Split-seq</span></a>
   </div>
 </li>
       </ul>
@@ -663,13 +687,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#seurat-sc-transform" id="toc-seurat-sc-transform" class="nav-link" data-scroll-target="#seurat-sc-transform">Seurat SC Transform</a></li>
   </ul></li>
   <li><a href="#monocle" id="toc-monocle" class="nav-link" data-scroll-target="#monocle">Monocle</a></li>
-  <li><a href="#scanpy" id="toc-scanpy" class="nav-link" data-scroll-target="#scanpy">ScanPy</a></li>
   <li><a href="#cs-core" id="toc-cs-core" class="nav-link" data-scroll-target="#cs-core">Cs-Core</a>
   <ul class="collapse">
   <li><a href="#convert-to-seurat-obj" id="toc-convert-to-seurat-obj" class="nav-link" data-scroll-target="#convert-to-seurat-obj">Convert to Seurat obj</a></li>
   <li><a href="#extract-cs_core-corr-matrix" id="toc-extract-cs_core-corr-matrix" class="nav-link" data-scroll-target="#extract-cs_core-corr-matrix">Extract CS_CORE corr matrix</a></li>
   <li><a href="#save-cs_core-matrix" id="toc-save-cs_core-matrix" class="nav-link" data-scroll-target="#save-cs_core-matrix">Save CS_CORE matrix</a></li>
   </ul></li>
+  <li><a href="#baseline-spearman-on-umi-counts" id="toc-baseline-spearman-on-umi-counts" class="nav-link" data-scroll-target="#baseline-spearman-on-umi-counts">Baseline: Spearman on UMI counts</a></li>
   </ul>
 </nav>
     </div>
@@ -950,8 +974,8 @@ Syt6         5.144411 2.559922  2.6902228   layers   0.78723640</code></pre>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  10181082  543.8   17770774  949.1  17770774  949.1
-Vcells 260497931 1987.5  610405008 4657.1 761989957 5813.6</code></pre>
+Ncells  10009140  534.6   17888881  955.4  17888881  955.4
+Vcells 260146059 1984.8  610068843 4654.5 761707017 5811.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1000,8 +1024,8 @@ Vcells 260497931 1987.5  610405008 4657.1 761989957 5813.6</code></pre>
 <span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  10507698  561.2   17770774  949.1  17770774  949.1
-Vcells 310526348 2369.2  610405008 4657.1 761989957 5813.6</code></pre>
+Ncells  10337655  552.1   17888881  955.4  17888881  955.4
+Vcells 310178791 2366.5  610068843 4654.5 761707017 5811.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1072,8 +1096,8 @@ Vcells 310526348 2369.2  610405008 4657.1 761989957 5813.6</code></pre>
 <span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  10694139  571.2   17770774  949.1  17770774  949.1
-Vcells 312779384 2386.4  610405008 4657.1 761989957 5813.6</code></pre>
+Ncells  10531901  562.5   17888881  955.4  17888881  955.4
+Vcells 312446658 2383.8  610068843 4654.5 761707017 5811.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1085,155 +1109,83 @@ Vcells 312779384 2386.4  610405008 4657.1 761989957 5813.6</code></pre>
 </div>
 </div>
 </section>
-<section id="scanpy" class="level2">
-<h2 class="anchored" data-anchor-id="scanpy">ScanPy</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>dirOutScP <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"CoexData/ScanPy/"</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(dirOutScP)) {</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(dirOutScP)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">Sys.info</span>()[[<span class="st">"sysname"</span>]] <span class="sc">==</span> <span class="st">"Windows"</span>){</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">use_python</span>(<span class="st">"C:/Users/Silvia/miniconda3/envs/r-scanpy/python.exe"</span>, <span class="at">required =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#Sys.setenv(RETICULATE_PYTHON = "C:/Users/Silvia/AppData/Local/Python/pythoncore-3.14-64/python.exe" )</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>}<span class="cf">else</span>{</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.setenv</span>(<span class="at">RETICULATE_PYTHON =</span> <span class="st">"../../../bin/python3"</span>)</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  py <span class="ot">&lt;-</span> <span class="fu">import</span>(<span class="st">"sys"</span>)</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source_python</span>(<span class="st">"src/scanpyGenesExpression.py"</span>)</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scanpyFDR</span>(<span class="fu">getRawData</span>(obj), </span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">getMetadataCells</span>(obj), </span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">getMetadataGenes</span>(obj), </span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"mt"</span>, </span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>                   dirOutScP, </span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>                   file_code,</span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>            int.genes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>inizio
-open pdf</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste0</span>(dirOutScP,</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                                     file_code,<span class="st">"_Scanpy_expression_all_genes.gz"</span>),<span class="at">header =</span> T,<span class="at">row.names =</span> <span class="dv">1</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span> <span class="fu">t</span>(normalized_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove genes with all zeros</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>normalized_counts <span class="ot">&lt;-</span>normalized_counts[<span class="fu">rowSums</span>(normalized_counts) <span class="sc">&gt;</span> <span class="dv">0</span>,]</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>corr.pval.list <span class="ot">&lt;-</span> <span class="fu">correlation_pvalues</span>(normalized_counts,</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>                                      genesFromListExpressed,</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">n.cells =</span> <span class="fu">getNumCells</span>(obj))</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>ScanPy.data.cor.big <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Matrix<span class="sc">::</span><span class="fu">forceSymmetric</span>(corr.pval.list<span class="sc">$</span>data.cor, <span class="at">uplo =</span> <span class="st">"U"</span>))</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">correlation_plot</span>(<span class="at">data.cor.big =</span> ScanPy.data.cor.big,</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>                         genesList,</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">title =</span> <span class="st">"ScanPy corr"</span>)</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>p_values.from.ScanPy <span class="ot">&lt;-</span> corr.pval.list<span class="sc">$</span>p_values</span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>ScanPy.data.cor.big <span class="ot">&lt;-</span> corr.pval.list<span class="sc">$</span>data.cor</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(corr.pval.list)</span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  10714417  572.3   17770774  949.1  17770774  949.1
-Vcells 382438997 2917.8  610405008 4657.1 761989957 5813.6</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="geneCoexAnalysisE13.5MouseBrain_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 <section id="cs-core" class="level2">
 <h2 class="anchored" data-anchor-id="cs-core">Cs-Core</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CSCORE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(CSCORE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="convert-to-seurat-obj" class="level3">
 <h3 class="anchored" data-anchor-id="convert-to-seurat-obj">Convert to Seurat obj</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>sceObj <span class="ot">&lt;-</span> <span class="fu">convertToSingleCellExperiment</span>(obj)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct: assay=NULL (or omit), data=NULL (since no logcounts)</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>seuratObj <span class="ot">&lt;-</span> <span class="fu">as.Seurat</span>(</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x       =</span> sceObj,</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">counts  =</span> <span class="st">"counts"</span>,</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> <span class="cn">NULL</span>,</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">assay   =</span> <span class="cn">NULL</span>,      <span class="co"># IMPORTANT: do NOT set to "RNA" here</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">"COTAN"</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># as.Seurat(SCE) creates assay "originalexp" by default; rename it to RNA</span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>seuratObj <span class="ot">&lt;-</span> <span class="fu">RenameAssays</span>(seuratObj, <span class="at">originalexp =</span> <span class="st">"RNA"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="fu">DefaultAssay</span>(seuratObj) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: keep COTAN payload</span></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>seuratObj<span class="sc">@</span>misc<span class="sc">$</span>COTAN <span class="ot">&lt;-</span> S4Vectors<span class="sc">::</span><span class="fu">metadata</span>(sceObj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sceObj <span class="ot">&lt;-</span> <span class="fu">convertToSingleCellExperiment</span>(obj)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Correct: assay=NULL (or omit), data=NULL (since no logcounts)</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>seuratObj <span class="ot">&lt;-</span> <span class="fu">as.Seurat</span>(</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x       =</span> sceObj,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">counts  =</span> <span class="st">"counts"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data    =</span> <span class="cn">NULL</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">assay   =</span> <span class="cn">NULL</span>,      <span class="co"># IMPORTANT: do NOT set to "RNA" here</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">project =</span> <span class="st">"COTAN"</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># as.Seurat(SCE) creates assay "originalexp" by default; rename it to RNA</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>seuratObj <span class="ot">&lt;-</span> <span class="fu">RenameAssays</span>(seuratObj, <span class="at">originalexp =</span> <span class="st">"RNA"</span>, <span class="at">verbose =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">DefaultAssay</span>(seuratObj) <span class="ot">&lt;-</span> <span class="st">"RNA"</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: keep COTAN payload</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>seuratObj<span class="sc">@</span>misc<span class="sc">$</span>COTAN <span class="ot">&lt;-</span> S4Vectors<span class="sc">::</span><span class="fu">metadata</span>(sceObj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="extract-cs_core-corr-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="extract-cs_core-corr-matrix">Extract CS_CORE corr matrix</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#seuratObj@assays$RNA@counts &lt;- ceiling(seuratObj@assays$RNA@counts)</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>csCoreRes <span class="ot">&lt;-</span> <span class="fu">CSCORE</span>(seuratObj, <span class="at">genes =</span> genesFromListExpressed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#seuratObj@assays$RNA@counts &lt;- ceiling(seuratObj@assays$RNA@counts)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>csCoreRes <span class="ot">&lt;-</span> <span class="fu">CSCORE</span>(seuratObj, <span class="at">genes =</span> genesFromListExpressed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[INFO] IRLS converged after 2 iterations.
-[INFO] Starting WLS for covariance at Fri Jan  9 18:12:00 2026
+[INFO] Starting WLS for covariance at Tue Jan 20 10:45:51 2026
 [INFO] 0.1253% co-expression estimates were greater than 1 and were set to 1.
 [INFO] 0.0000% co-expression estimates were smaller than -1 and were set to -1.
-[INFO] Finished WLS. Elapsed time: 0.1206 seconds.</code></pre>
+[INFO] Finished WLS. Elapsed time: 0.1024 seconds.</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(csCoreRes<span class="sc">$</span>est)</span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">sum</span>(genesList[[<span class="st">"NPGs"</span>]] <span class="sc">%in%</span> genesFromListExpressed)),</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">sum</span>(genesList[[<span class="st">"hk"</span>]] <span class="sc">%in%</span> genesFromListExpressed)),</span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">sum</span>(genesList[[<span class="st">"PNGs"</span>]] <span class="sc">%in%</span> genesFromListExpressed))</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>                        ),</span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(mat[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]),</span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(coexMat)*unit(2.5, "mm"), </span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(mat)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
-<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
-<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
-<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
-<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
-<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
-<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"CS-CORE"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
-<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
-<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
-<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>     )</span>
-<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>   )</span>
-<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(csCoreRes<span class="sc">$</span>est)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(mat) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>split.genes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"NPGs"</span>,<span class="fu">sum</span>(genesList[[<span class="st">"NPGs"</span>]] <span class="sc">%in%</span> genesFromListExpressed)),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"HK"</span>,<span class="fu">sum</span>(genesList[[<span class="st">"hk"</span>]] <span class="sc">%in%</span> genesFromListExpressed)),</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">rep</span>(<span class="st">"PNGs"</span>,<span class="fu">sum</span>(genesList[[<span class="st">"PNGs"</span>]] <span class="sc">%in%</span> genesFromListExpressed))</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>                        ),</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"NPGs"</span>,<span class="st">"HK"</span>,<span class="st">"PNGs"</span>))</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>f1 <span class="ot">=</span> <span class="fu">colorRamp2</span>(<span class="fu">seq</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>, <span class="at">length =</span> <span class="dv">3</span>), <span class="fu">c</span>(<span class="st">"#DC0000B2"</span>, <span class="st">"white"</span>,<span class="st">"#3C5488B2"</span> ))</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">Heatmap</span>(<span class="fu">as.matrix</span>(mat[<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs),<span class="fu">c</span>(genesList<span class="sc">$</span>NPGs,genesList<span class="sc">$</span>hk,genesList<span class="sc">$</span>PNGs)]),</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">#width = ncol(coexMat)*unit(2.5, "mm"), </span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">height =</span> <span class="fu">nrow</span>(mat)<span class="sc">*</span><span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">"mm"</span>),</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_rows =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_columns =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> f1,</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_side =</span> <span class="st">"left"</span>,</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_names_gp =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_names_gp  =</span> <span class="fu">gpar</span>(<span class="at">fontsize =</span> <span class="dv">11</span>),</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">column_split =</span> split.genes,</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">row_split =</span> split.genes,</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">cluster_row_slices =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">cluster_column_slices =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">heatmap_legend_param =</span> <span class="fu">list</span>(</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="st">"CS-CORE"</span>, <span class="at">at =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>, <span class="dv">0</span>, <span class="fl">0.5</span>),</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>         <span class="at">direction =</span> <span class="st">"horizontal"</span>,</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>         <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"-0.5"</span>, <span class="st">"0"</span>, <span class="st">"0.5"</span>)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>     )</span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>   )</span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="geneCoexAnalysisE13.5MouseBrain_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="geneCoexAnalysisE13.5MouseBrain_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1242,141 +1194,176 @@ Vcells 382438997 2917.8  610405008 4657.1 761989957 5813.6</code></pre>
 <section id="save-cs_core-matrix" class="level3">
 <h3 class="anchored" data-anchor-id="save-cs_core-matrix">Save CS_CORE matrix</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_fst</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>est), <span class="at">path =</span> <span class="fu">paste0</span>(<span class="st">"CoexData/CS_CORECorr_"</span>, file_code,<span class="st">".fst"</span>),<span class="at">compress =</span> <span class="dv">100</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_fst</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>p_value), <span class="at">path =</span> <span class="fu">paste0</span>(<span class="st">"CoexData/CS_COREPValues_"</span>, file_code,<span class="st">".fst"</span>),<span class="at">compress =</span> <span class="dv">100</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>p_value), <span class="fu">paste0</span>(<span class="st">"CoexData/CS_COREPValues_"</span>, file_code,<span class="st">".csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_fst</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>est), <span class="at">path =</span> <span class="fu">paste0</span>(<span class="st">"CoexData/CS_CORECorr_"</span>, file_code,<span class="st">".fst"</span>),<span class="at">compress =</span> <span class="dv">100</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_fst</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>p_value), <span class="at">path =</span> <span class="fu">paste0</span>(<span class="st">"CoexData/CS_COREPValues_"</span>, file_code,<span class="st">".fst"</span>),<span class="at">compress =</span> <span class="dv">100</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>p_value), <span class="fu">paste0</span>(<span class="st">"CoexData/CS_COREPValues_"</span>, file_code,<span class="st">".csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="baseline-spearman-on-umi-counts" class="level2">
+<h2 class="anchored" data-anchor-id="baseline-spearman-on-umi-counts">Baseline: Spearman on UMI counts</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>corr.pval.list <span class="ot">&lt;-</span> <span class="fu">correlation_pvaluesSpearman</span>(<span class="at">data =</span> <span class="fu">getRawData</span>(obj),</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                                      genesFromListExpressed,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">n.cells =</span> <span class="fu">getNumCells</span>(obj))</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>data.cor.big <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Matrix<span class="sc">::</span><span class="fu">forceSymmetric</span>(corr.pval.list<span class="sc">$</span>data.cor, <span class="at">uplo =</span> <span class="st">"U"</span>))</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">correlation_plot</span>(data.cor.big, </span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>                         genesList, <span class="at">title=</span><span class="st">"UMI baseline S. corr"</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>p_values.fromSp.C <span class="ot">&lt;-</span> corr.pval.list<span class="sc">$</span>p_values</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>data.cor.bigSp.C <span class="ot">&lt;-</span> corr.pval.list<span class="sc">$</span>data.cor</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(corr.pval.list)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  10540609  563.0   17888881  955.4  17888881  955.4
+Vcells 312769361 2386.3  610068843 4654.5 761707017 5811.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geneCoexAnalysisE13.5MouseBrain_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(p_values.fromSp.C), <span class="fu">paste0</span>(<span class="st">"CoexData/BaselineUMISpCorrPValues_"</span>, file_code,<span class="st">".csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2026-01-09 18:12:00 CET"</code></pre>
+<pre><code>[1] "2026-01-20 10:45:54 CET"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.2 (2025-10-31)
-Platform: x86_64-pc-linux-gnu
-Running under: Ubuntu 22.04.5 LTS
+<pre><code>R version 4.5.2 (2025-10-31 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26200)
 
 Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+  LAPACK version 3.12.1
 
 locale:
- [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+[1] LC_COLLATE=English_United States.utf8 
+[2] LC_CTYPE=English_United States.utf8   
+[3] LC_MONETARY=English_United States.utf8
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.utf8    
 
 time zone: Europe/Rome
-tzcode source: system (glibc)
+tzcode source: internal
 
 attached base packages:
  [1] stats4    parallel  grid      stats     graphics  grDevices utils    
  [8] datasets  methods   base     
 
 other attached packages:
- [1] CSCORE_1.0.2                reticulate_1.42.0          
- [3] monocle3_1.3.7              SingleCellExperiment_1.32.0
- [5] SummarizedExperiment_1.38.1 GenomicRanges_1.62.1       
- [7] Seqinfo_1.0.0               IRanges_2.44.0             
- [9] S4Vectors_0.48.0            MatrixGenerics_1.22.0      
-[11] matrixStats_1.5.0           Biobase_2.70.0             
-[13] BiocGenerics_0.56.0         generics_0.1.3             
-[15] fstcore_0.10.0              fst_0.9.8                  
-[17] stringr_1.6.0               HiClimR_2.2.1              
-[19] doParallel_1.0.17           iterators_1.0.14           
-[21] foreach_1.5.2               Rfast_2.1.5.1              
-[23] RcppParallel_5.1.10         zigg_0.0.2                 
-[25] Rcpp_1.1.0                  patchwork_1.3.2            
-[27] Seurat_5.2.1                SeuratObject_5.1.0         
-[29] sp_2.2-0                    Hmisc_5.2-3                
-[31] dplyr_1.1.4                 circlize_0.4.16            
-[33] ComplexHeatmap_2.26.0       COTAN_2.11.1               
+ [1] CSCORE_1.0.2                monocle3_1.4.26            
+ [3] SingleCellExperiment_1.32.0 SummarizedExperiment_1.40.0
+ [5] GenomicRanges_1.62.0        Seqinfo_1.0.0              
+ [7] IRanges_2.44.0              S4Vectors_0.48.0           
+ [9] MatrixGenerics_1.22.0       matrixStats_1.5.0          
+[11] Biobase_2.70.0              BiocGenerics_0.56.0        
+[13] generics_0.1.4              fstcore_0.10.0             
+[15] fst_0.9.8                   stringr_1.6.0              
+[17] HiClimR_2.2.1               doParallel_1.0.17          
+[19] iterators_1.0.14            foreach_1.5.2              
+[21] Rfast_2.1.5.2               RcppParallel_5.1.11-1      
+[23] zigg_0.0.2                  Rcpp_1.1.0                 
+[25] patchwork_1.3.2             Seurat_5.3.1               
+[27] SeuratObject_5.3.0          sp_2.2-0                   
+[29] Hmisc_5.2-4                 dplyr_1.1.4                
+[31] circlize_0.4.17             ComplexHeatmap_2.26.0      
+[33] COTAN_2.11.1               
 
 loaded via a namespace (and not attached):
   [1] RcppAnnoy_0.0.22          splines_4.5.2            
-  [3] later_1.4.2               tibble_3.3.0             
+  [3] later_1.4.4               tibble_3.3.0             
   [5] polyclip_1.10-7           rpart_4.1.24             
   [7] fastDummies_1.7.5         lifecycle_1.0.4          
   [9] Rdpack_2.6.4              globals_0.18.0           
  [11] lattice_0.22-7            MASS_7.3-65              
  [13] backports_1.5.0           ggdist_3.3.3             
- [15] dendextend_1.19.0         magrittr_2.0.4           
- [17] plotly_4.11.0             rmarkdown_2.29           
- [19] yaml_2.3.10               httpuv_1.6.16            
- [21] glmGamPoi_1.20.0          sctransform_0.4.2        
- [23] spam_2.11-1               spatstat.sparse_3.1-0    
- [25] minqa_1.2.8               cowplot_1.2.0            
- [27] pbapply_1.7-2             RColorBrewer_1.1-3       
- [29] abind_1.4-8               Rtsne_0.17               
- [31] purrr_1.2.0               nnet_7.3-20              
- [33] GenomeInfoDbData_1.2.14   ggrepel_0.9.6            
- [35] irlba_2.3.5.1             listenv_0.9.1            
- [37] spatstat.utils_3.1-4      goftest_1.2-3            
- [39] RSpectra_0.16-2           spatstat.random_3.4-1    
- [41] fitdistrplus_1.2-2        parallelly_1.46.0        
- [43] DelayedMatrixStats_1.30.0 ncdf4_1.24               
- [45] codetools_0.2-20          DelayedArray_0.36.0      
- [47] tidyselect_1.2.1          shape_1.4.6.1            
- [49] UCSC.utils_1.4.0          farver_2.1.2             
- [51] lme4_1.1-37               ScaledMatrix_1.16.0      
+ [15] dendextend_1.19.1         magrittr_2.0.4           
+ [17] plotly_4.11.0             rmarkdown_2.30           
+ [19] yaml_2.3.12               httpuv_1.6.16            
+ [21] otel_0.2.0                glmGamPoi_1.22.0         
+ [23] sctransform_0.4.2         spam_2.11-1              
+ [25] spatstat.sparse_3.1-0     reticulate_1.44.1        
+ [27] minqa_1.2.8               cowplot_1.2.0            
+ [29] pbapply_1.7-4             RColorBrewer_1.1-3       
+ [31] abind_1.4-8               Rtsne_0.17               
+ [33] purrr_1.2.0               nnet_7.3-20              
+ [35] ggrepel_0.9.6             irlba_2.3.5.1            
+ [37] listenv_0.10.0            spatstat.utils_3.2-0     
+ [39] goftest_1.2-3             RSpectra_0.16-2          
+ [41] spatstat.random_3.4-3     fitdistrplus_1.2-4       
+ [43] parallelly_1.46.0         DelayedMatrixStats_1.32.0
+ [45] ncdf4_1.24                codetools_0.2-20         
+ [47] DelayedArray_0.36.0       tidyselect_1.2.1         
+ [49] shape_1.4.6.1             farver_2.1.2             
+ [51] lme4_1.1-38               ScaledMatrix_1.18.0      
  [53] viridis_0.6.5             base64enc_0.1-3          
- [55] spatstat.explore_3.4-2    jsonlite_2.0.0           
- [57] GetoptLong_1.0.5          Formula_1.2-5            
- [59] progressr_0.15.1          ggridges_0.5.6           
+ [55] spatstat.explore_3.6-0    jsonlite_2.0.0           
+ [57] GetoptLong_1.1.0          progressr_0.18.0         
+ [59] Formula_1.2-5             ggridges_0.5.7           
  [61] survival_3.8-3            tools_4.5.2              
  [63] ica_1.0-3                 glue_1.8.0               
- [65] gridExtra_2.3             SparseArray_1.10.8       
- [67] xfun_0.52                 distributional_0.5.0     
- [69] ggthemes_5.2.0            GenomeInfoDb_1.44.0      
- [71] withr_3.0.2               fastmap_1.2.0            
- [73] boot_1.3-32               digest_0.6.37            
- [75] rsvd_1.0.5                parallelDist_0.2.6       
- [77] R6_2.6.1                  mime_0.13                
- [79] colorspace_2.1-1          Cairo_1.6-2              
- [81] scattermore_1.2           tensor_1.5               
- [83] spatstat.data_3.1-6       tidyr_1.3.1              
- [85] data.table_1.17.0         httr_1.4.7               
- [87] htmlwidgets_1.6.4         S4Arrays_1.10.1          
- [89] uwot_0.2.3                pkgconfig_2.0.3          
- [91] gtable_0.3.6              lmtest_0.9-40            
- [93] S7_0.2.1                  XVector_0.50.0           
- [95] htmltools_0.5.8.1         dotCall64_1.2            
- [97] clue_0.3-66               scales_1.4.0             
- [99] png_0.1-8                 reformulas_0.4.1         
-[101] spatstat.univar_3.1-3     rstudioapi_0.17.1        
-[103] knitr_1.50                reshape2_1.4.4           
-[105] rjson_0.2.23              nloptr_2.2.1             
-[107] checkmate_2.3.2           nlme_3.1-168             
-[109] proxy_0.4-27              zoo_1.8-14               
-[111] GlobalOptions_0.1.2       KernSmooth_2.23-26       
-[113] miniUI_0.1.2              foreign_0.8-90           
-[115] pillar_1.10.2             vctrs_0.6.5              
-[117] RANN_2.6.2                promises_1.3.2           
-[119] BiocSingular_1.26.1       beachmat_2.26.0          
-[121] xtable_1.8-4              cluster_2.1.8.1          
-[123] htmlTable_2.4.3           evaluate_1.0.3           
-[125] magick_2.8.6              zeallot_0.2.0            
-[127] cli_3.6.5                 compiler_4.5.2           
-[129] rlang_1.1.6               crayon_1.5.3             
-[131] future.apply_1.20.0       labeling_0.4.3           
-[133] plyr_1.8.9                stringi_1.8.7            
-[135] viridisLite_0.4.2         deldir_2.0-4             
-[137] BiocParallel_1.44.0       assertthat_0.2.1         
-[139] lazyeval_0.2.2            spatstat.geom_3.4-1      
-[141] Matrix_1.7-4              RcppHNSW_0.6.0           
-[143] sparseMatrixStats_1.20.0  future_1.58.0            
-[145] ggplot2_4.0.1             shiny_1.11.0             
-[147] rbibutils_2.3             ROCR_1.0-11              
-[149] igraph_2.1.4             </code></pre>
+ [65] gridExtra_2.3             SparseArray_1.10.2       
+ [67] xfun_0.54                 distributional_0.6.0     
+ [69] ggthemes_5.2.0            withr_3.0.2              
+ [71] fastmap_1.2.0             boot_1.3-32              
+ [73] digest_0.6.39             rsvd_1.0.5               
+ [75] parallelDist_0.2.7        R6_2.6.1                 
+ [77] mime_0.13                 colorspace_2.1-2         
+ [79] Cairo_1.7-0               scattermore_1.2          
+ [81] tensor_1.5.1              spatstat.data_3.1-9      
+ [83] tidyr_1.3.1               data.table_1.18.0        
+ [85] httr_1.4.7                htmlwidgets_1.6.4        
+ [87] S4Arrays_1.10.0           uwot_0.2.4               
+ [89] pkgconfig_2.0.3           gtable_0.3.6             
+ [91] lmtest_0.9-40             S7_0.2.1                 
+ [93] XVector_0.50.0            htmltools_0.5.9          
+ [95] dotCall64_1.2             clue_0.3-66              
+ [97] scales_1.4.0              png_0.1-8                
+ [99] reformulas_0.4.2          spatstat.univar_3.1-5    
+[101] rstudioapi_0.18.0         knitr_1.51               
+[103] reshape2_1.4.5            rjson_0.2.23             
+[105] nloptr_2.2.1              checkmate_2.3.3          
+[107] nlme_3.1-168              proxy_0.4-28             
+[109] zoo_1.8-14                GlobalOptions_0.1.3      
+[111] KernSmooth_2.23-26        miniUI_0.1.2             
+[113] foreign_0.8-90            pillar_1.11.1            
+[115] vctrs_0.6.5               RANN_2.6.2               
+[117] promises_1.5.0            BiocSingular_1.26.1      
+[119] beachmat_2.26.0           xtable_1.8-4             
+[121] cluster_2.1.8.1           htmlTable_2.4.3          
+[123] evaluate_1.0.5            magick_2.9.0             
+[125] zeallot_0.2.0             cli_3.6.5                
+[127] compiler_4.5.2            rlang_1.1.6              
+[129] crayon_1.5.3              future.apply_1.20.1      
+[131] labeling_0.4.3            plyr_1.8.9               
+[133] stringi_1.8.7             viridisLite_0.4.2        
+[135] deldir_2.0-4              BiocParallel_1.44.0      
+[137] assertthat_0.2.1          lazyeval_0.2.2           
+[139] spatstat.geom_3.6-1       Matrix_1.7-4             
+[141] RcppHNSW_0.6.0            sparseMatrixStats_1.22.0 
+[143] future_1.69.0             ggplot2_4.0.1            
+[145] shiny_1.12.1              rbibutils_2.4            
+[147] ROCR_1.0-11               igraph_2.2.1             </code></pre>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

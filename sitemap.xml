@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/FDR_analisysResults3_10.html</loc>
-    <lastmod>2026-01-17T14:11:35.074Z</lastmod>
+    <lastmod>2026-01-19T11:15:11.763Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/FDR_analisysResults3_10_th04.html</loc>
@@ -17,36 +17,40 @@
     <lastmod>2026-01-11T16:45:57.145Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDataset1.html</loc>
-    <lastmod>2026-01-09T16:42:52.600Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisMouseBrainOP.html</loc>
+    <lastmod>2026-01-08T17:31:58.500Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisE17.5Yuzwa.html</loc>
-    <lastmod>2026-01-09T16:45:35.357Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisE17.5MouseBrain.html</loc>
+    <lastmod>2026-01-09T16:45:17.000Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisE15.0MouseBrain.html</loc>
-    <lastmod>2026-01-09T16:42:11.351Z</lastmod>
+    <lastmod>2026-01-20T08:50:38.936Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisE13.5MouseBrain.html</loc>
-    <lastmod>2026-01-09T16:44:18.222Z</lastmod>
+    <lastmod>2026-01-20T08:51:27.553Z</lastmod>
+  </url>
+  <url>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisPBMC1.html</loc>
+    <lastmod>2026-01-20T07:32:59.819Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain1SS2.html</loc>
     <lastmod>2026-01-12T15:13:59.716Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/Brown_PBMC_Datasets/Run_40/DatasetCleaning_Run40.html</loc>
-    <lastmod>2026-01-05T14:23:36.294Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainDorsal_E150-analysis.html</loc>
+    <lastmod>2025-12-23T08:24:26.566Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/CorticalCells_GSM2861511_E135-analysis.html</loc>
-    <lastmod>2025-12-25T15:50:58.756Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/FindUniformOrigCluster.html</loc>
+    <lastmod>2025-12-23T08:24:26.502Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/PBMC3_filtering.html</loc>
-    <lastmod>2025-12-23T08:24:28.335Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/PBMC4_filtering.html</loc>
+    <lastmod>2025-12-23T08:24:28.352Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/PBMC1_filtering.html</loc>
@@ -65,28 +69,32 @@
     <lastmod>2026-01-12T15:12:02.865Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainDorsal_E175-analysis.html</loc>
-    <lastmod>2025-12-23T08:24:26.598Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/PBMC2_filtering.html</loc>
+    <lastmod>2026-01-20T08:26:40.521Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainDorsal_E135-analysis.html</loc>
-    <lastmod>2025-12-23T08:24:26.518Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/CorticalCells_GSM2861514_E175-analysis.html</loc>
+    <lastmod>2025-12-23T08:24:26.007Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainLaManno2021ClustersGDI.html</loc>
-    <lastmod>2025-12-23T08:24:26.645Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-10XV2_Cortex2_specimen1_cell2.html</loc>
+    <lastmod>2026-01-10T22:22:52.432Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-10XV2_Cortex1_specimen1_cell2.html</loc>
-    <lastmod>2026-01-10T22:22:55.100Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/MouseBrainOpenProblemCleaning.html</loc>
+    <lastmod>2026-01-09T17:12:00.580Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/cd14_clusterizations_comparisons.html</loc>
-    <lastmod>2025-12-23T08:24:48.065Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/Brown_PBMC_Datasets/Run_77/DatasetCleaning_Run77.html</loc>
+    <lastmod>2026-01-05T11:15:04.678Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/OriginalClustersDistanceEvaluation.html</loc>
-    <lastmod>2025-12-23T08:24:28.252Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/GDI_Increment_From_Mixing.html</loc>
+    <lastmod>2025-12-23T08:24:26.679Z</lastmod>
+  </url>
+  <url>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/MouseBrainMorabito/Dataset_Cleaning.html</loc>
+    <lastmod>2026-01-18T21:23:10.089Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/FDR_analisys.html</loc>
@@ -102,7 +110,7 @@
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/index.html</loc>
-    <lastmod>2026-01-16T08:05:38.359Z</lastmod>
+    <lastmod>2026-01-19T15:10:14.012Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/clustering_comparison.html</loc>
@@ -125,24 +133,28 @@
     <lastmod>2025-12-23T08:24:28.605Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/GDI_Increment_From_Mixing.html</loc>
-    <lastmod>2025-12-23T08:24:26.679Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/OriginalClustersDistanceEvaluation.html</loc>
+    <lastmod>2025-12-23T08:24:28.252Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/Brown_PBMC_Datasets/Run_77/DatasetCleaning_Run77.html</loc>
-    <lastmod>2026-01-05T11:15:04.678Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/cd14_clusterizations_comparisons.html</loc>
+    <lastmod>2025-12-23T08:24:48.065Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/MouseBrainOpenProblemCleaning.html</loc>
-    <lastmod>2026-01-09T17:12:00.580Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-10XV2_Cortex1_specimen1_cell2.html</loc>
+    <lastmod>2026-01-10T22:22:55.100Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-10XV2_Cortex2_specimen1_cell2.html</loc>
-    <lastmod>2026-01-10T22:22:52.432Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainLaManno2021ClustersGDI.html</loc>
+    <lastmod>2025-12-23T08:24:26.645Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/CorticalCells_GSM2861514_E175-analysis.html</loc>
-    <lastmod>2025-12-23T08:24:26.007Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainDorsal_E135-analysis.html</loc>
+    <lastmod>2025-12-23T08:24:26.518Z</lastmod>
+  </url>
+  <url>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainDorsal_E175-analysis.html</loc>
+    <lastmod>2025-12-23T08:24:26.598Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/cd14_analysis.html</loc>
@@ -161,36 +173,40 @@
     <lastmod>2025-12-23T08:25:57.422Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/PBMC2_filtering.html</loc>
-    <lastmod>2025-12-23T08:24:28.302Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/PBMC3_filtering.html</loc>
+    <lastmod>2025-12-23T08:24:28.335Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/PBMC4_filtering.html</loc>
-    <lastmod>2025-12-23T08:24:28.352Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/CorticalCells_GSM2861511_E135-analysis.html</loc>
+    <lastmod>2025-12-25T15:50:58.756Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/FindUniformOrigCluster.html</loc>
-    <lastmod>2025-12-23T08:24:26.502Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/Data/Brown_PBMC_Datasets/Run_40/DatasetCleaning_Run40.html</loc>
+    <lastmod>2026-01-05T14:23:36.294Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/ForebrainDorsal_E150-analysis.html</loc>
-    <lastmod>2025-12-23T08:24:26.566Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisMouseBrainMorabito.html</loc>
+    <lastmod>2026-01-19T18:18:09.289Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain2SS2.html</loc>
     <lastmod>2026-01-12T15:14:27.583Z</lastmod>
   </url>
   <url>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisPBMC2.html</loc>
+    <lastmod>2026-01-20T08:21:53.795Z</lastmod>
+  </url>
+  <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisE13.5Yuzwa.html</loc>
-    <lastmod>2026-01-09T16:44:47.945Z</lastmod>
+    <lastmod>2026-01-20T08:51:04.306Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisE17.5MouseBrain.html</loc>
-    <lastmod>2026-01-09T16:45:17.000Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDataset1.html</loc>
+    <lastmod>2026-01-20T09:27:32.555Z</lastmod>
   </url>
   <url>
-    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisMouseBrainOP.html</loc>
-    <lastmod>2026-01-08T17:31:58.500Z</lastmod>
+    <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisE17.5Yuzwa.html</loc>
+    <lastmod>2026-01-09T16:45:35.357Z</lastmod>
   </url>
   <url>
     <loc>https://seriph78.github.io/COTAN_Datasets_analysis/geneCoexAnalysisDingMouseBrain1V2.html</loc>
