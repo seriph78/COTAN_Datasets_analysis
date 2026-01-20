@@ -323,8 +323,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./PBMC4_filtering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cleaning PBMC4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 4</span></a>
   </div>
 </li>
       </ul>
@@ -693,6 +705,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#extract-cs_core-corr-matrix" id="toc-extract-cs_core-corr-matrix" class="nav-link" data-scroll-target="#extract-cs_core-corr-matrix">Extract CS_CORE corr matrix</a></li>
   <li><a href="#save-cs_core-matrix" id="toc-save-cs_core-matrix" class="nav-link" data-scroll-target="#save-cs_core-matrix">Save CS_CORE matrix</a></li>
   </ul></li>
+  <li><a href="#baseline-spearman-on-umi-counts" id="toc-baseline-spearman-on-umi-counts" class="nav-link" data-scroll-target="#baseline-spearman-on-umi-counts">Baseline: Spearman on UMI counts</a></li>
   </ul>
 </nav>
     </div>
@@ -761,16 +774,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Some layer marker genes</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hkGenes  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/Housekeeping_GenesHuman.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>hkGenes  <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"Data/Housekeeping_TranscriptsHuman.csv"</span>, <span class="at">sep =</span> <span class="st">";"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>genesList <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CD4 T cells"</span><span class="ot">=</span> </span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"TRBC2"</span>,<span class="st">"CD3D"</span>,<span class="st">"CD3G"</span>,<span class="st">"CD3E"</span>,<span class="st">"IL7R"</span>,<span class="st">"LTB"</span>,<span class="st">"LEF1"</span>),</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"B cells"</span><span class="ot">=</span> </span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"PAX5"</span>,<span class="st">"MS4A1"</span>,<span class="st">"CD19"</span>,<span class="st">"CD74"</span>,<span class="st">"CD79A"</span>,<span class="st">"IGHD"</span>,<span class="st">"HLA-DRA"</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"hk"</span><span class="ot">=</span> hkGenes<span class="sc">$</span>Gene.name[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>], <span class="co"># from https://housekeeping.unicamp.br/</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"hk"</span><span class="ot">=</span> hkGenes<span class="sc">$</span>Gene_symbol[<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>], <span class="co"># from https://housekeeping.unicamp.br/</span></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"general PBMC markers"</span> <span class="ot">=</span> </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"FOXP3"</span>,<span class="st">"TBX21"</span>,<span class="st">"GATA3"</span>,<span class="st">"RUNX1"</span>,<span class="st">"BCL6"</span>,<span class="st">"EOMES"</span>,<span class="st">"EOMES"</span>,<span class="st">"TBX21"</span>,<span class="st">"BATF3"</span>,<span class="st">"IRF2"</span>,<span class="st">"TCF4"</span>,<span class="st">"STAT5A"</span>,<span class="st">"RUNX3"</span>,<span class="st">"STAT6"</span>,<span class="st">"BATF"</span>,<span class="st">"STAT3"</span>,<span class="st">"TBX21"</span>,<span class="st">"TBX21"</span>,<span class="st">"IRF8"</span>,<span class="st">"IRF4"</span>,<span class="st">"AHR"</span>,<span class="st">"STAT1"</span>,<span class="st">"IRF4"</span>,<span class="st">"RELB"</span>) </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"FOXP3"</span>,<span class="st">"TBX21"</span>,<span class="st">"GATA3"</span>,<span class="st">"RUNX1"</span>,<span class="st">"BCL6"</span>,<span class="st">"EOMES"</span>,<span class="st">"EOMES"</span>,<span class="st">"TBX21"</span>,<span class="st">"BATF3"</span>,<span class="st">"IRF2"</span>,<span class="st">"TCF4"</span>,<span class="st">"STAT5A"</span>,<span class="st">"RUNX3"</span>,<span class="st">"STAT6"</span>,<span class="st">"BATF"</span>,<span class="st">"STAT3"</span>,<span class="st">"TBX21"</span>,<span class="st">"TBX21"</span>,<span class="st">"IRF8"</span>,<span class="st">"IRF4"</span>,<span class="st">"AHR"</span>,<span class="st">"STAT1"</span>,<span class="st">"IRF4"</span>,<span class="st">"RELB"</span>) </span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
@@ -857,22 +870,22 @@ ARF5          8.563852 2.764955 53.214820                   hk  1.210128321
 M6PR          8.109273 1.974448 40.521681                   hk  0.111201816
 RALA          7.091094 1.485644 17.743811                   hk -0.568312957
 DVL2          6.294122 1.629314  8.273800                   hk -0.368588242
-RHBDD2        7.163132 1.621079 18.076092                   hk -0.380036315
 TSR3          6.766440 1.660841 13.390929                   hk -0.324760837
 NDUFAB1       7.836478 2.365630 34.108656                   hk  0.655004578
 RPS20         9.808344 2.495299 85.878053                   hk  0.835265447
 RANBP9        6.051715 1.479756  6.462868                   hk -0.576497224
 SS18L2        7.424429 1.449109 24.173451                   hk -0.619102198
 PPP5C         6.693324 1.669007 11.496926                   hk -0.313408563
-COX15         5.776181 1.584164  5.183585                   hk -0.431354228
 VDAC3         7.620449 1.512049 27.629174                   hk -0.531605309
 RTF2          7.706813 1.850551 30.586476                   hk -0.061034856
 B4GALT7       5.962397 1.557339  6.113972                   hk -0.468645637
 GABARAPL2     8.264321 1.829995 45.871407                   hk -0.089610300
 MRPS10        6.725642 1.372117 12.543612                   hk -0.726132831
-GRN           8.069337 4.721165 22.428975                   hk  3.929564826
 VAMP3         6.672157 3.415034 12.311015                   hk  2.113839573
 RCN1          5.479894 1.900039  3.887689                   hk  0.007760737
+FAM168A       5.181261 1.441315  2.857618                   hk -0.629936856
+CDC27         6.518552 1.504954 10.533311                   hk -0.541467710
+RPL18        11.765343 1.500865 99.568035                   hk -0.547152265
 FOXP3         5.328925 1.717890  1.694634 general PBMC markers -0.245454100
 TBX21         7.506181 3.363727 12.377471 general PBMC markers  2.042515240
 GATA3         7.754832 3.175327 25.386277 general PBMC markers  1.780609377
@@ -974,8 +987,8 @@ RELB          7.201781 3.294886 18.009636 general PBMC markers  1.946815081</cod
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  10172643  543.3   18160454  969.9  18160454  969.9
-Vcells 251492391 1918.8  579067586 4418.0 712580531 5436.6</code></pre>
+Ncells  10153149  542.3   17741362  947.5  17741362  947.5
+Vcells 251443460 1918.4  579083108 4418.1 723346292 5518.7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1024,8 +1037,8 @@ Vcells 251492391 1918.8  579067586 4418.0 712580531 5436.6</code></pre>
 <span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  10505015  561.1   18160454  969.9  18160454  969.9
-Vcells 283657680 2164.2  694961103 5302.2 712580531 5436.6</code></pre>
+Ncells  10481677  559.8   17741362  947.5  17741362  947.5
+Vcells 297058500 2266.4  694979729 5302.3 723346292 5518.7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1095,9 +1108,9 @@ Vcells 283657680 2164.2  694961103 5302.2 712580531 5436.6</code></pre>
 <span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(corr.pval.list)</span>
 <span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            used (Mb) gc trigger   (Mb)  max used   (Mb)
-Ncells  10691413  571   18160454  969.9  18160454  969.9
-Vcells 285988262 2182  694961103 5302.2 712580531 5436.6</code></pre>
+<pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  10667930  569.8   17741362  947.5  17741362  947.5
+Vcells 299388762 2284.2  694979729 5302.3 723346292 5518.7</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1143,11 +1156,11 @@ Vcells 285988262 2182  694961103 5302.2 712580531 5436.6</code></pre>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>csCoreRes <span class="ot">&lt;-</span> <span class="fu">CSCORE</span>(seuratObj, <span class="at">genes =</span> genesFromListExpressed)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[INFO] IRLS converged after 3 iterations.
-[INFO] Starting WLS for covariance at Tue Jan 20 10:14:27 2026
-[INFO] 9 among 58 genes have invalid variance estimates. Their co-expressions with other genes were set to 0.
-[INFO] 1.5729% co-expression estimates were greater than 1 and were set to 1.
+[INFO] Starting WLS for covariance at Tue Jan 20 15:10:21 2026
+[INFO] 10 among 58 genes have invalid variance estimates. Their co-expressions with other genes were set to 0.
+[INFO] 1.3309% co-expression estimates were greater than 1 and were set to 1.
 [INFO] 0.4840% co-expression estimates were smaller than -1 and were set to -1.
-[INFO] Finished WLS. Elapsed time: 0.6621 seconds.</code></pre>
+[INFO] Finished WLS. Elapsed time: 0.6063 seconds.</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -1199,15 +1212,52 @@ Vcells 285988262 2182  694961103 5302.2 712580531 5436.6</code></pre>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_fst</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>p_value), <span class="at">path =</span> <span class="fu">paste0</span>(<span class="st">"CoexData/CS_COREPValues_"</span>, file_code,<span class="st">".fst"</span>),<span class="at">compress =</span> <span class="dv">100</span>)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(csCoreRes<span class="sc">$</span>p_value), <span class="fu">paste0</span>(<span class="st">"CoexData/CS_COREPValues_"</span>, file_code,<span class="st">".csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+</section>
+<section id="baseline-spearman-on-umi-counts" class="level2">
+<h2 class="anchored" data-anchor-id="baseline-spearman-on-umi-counts">Baseline: Spearman on UMI counts</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>corr.pval.list <span class="ot">&lt;-</span> <span class="fu">correlation_pvaluesSpearman</span>(<span class="at">data =</span> <span class="fu">getRawData</span>(obj),</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                                      genesFromListExpressed,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">n.cells =</span> <span class="fu">getNumCells</span>(obj))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>data.cor.big <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(Matrix<span class="sc">::</span><span class="fu">forceSymmetric</span>(corr.pval.list<span class="sc">$</span>data.cor, <span class="at">uplo =</span> <span class="st">"U"</span>))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>htmp <span class="ot">&lt;-</span> <span class="fu">correlation_plot</span>(data.cor.big, </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                         genesList, <span class="at">title=</span><span class="st">"UMI baseline S. corr"</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>p_values.fromSp.C <span class="ot">&lt;-</span> corr.pval.list<span class="sc">$</span>p_values</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>data.cor.bigSp.C <span class="ot">&lt;-</span> corr.pval.list<span class="sc">$</span>data.cor</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(corr.pval.list)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="fu">gc</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            used   (Mb) gc trigger   (Mb)  max used   (Mb)
+Ncells  10795328  576.6   17741362  947.5  17741362  947.5
+Vcells 299709780 2286.7  694979729 5302.3 723346292 5518.7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">draw</span>(htmp, <span class="at">heatmap_legend_side=</span><span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="geneCoexAnalysisPBMC2_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(p_values.fromSp.C), <span class="fu">paste0</span>(<span class="st">"CoexData/BaselineUMISpCorrPValues_"</span>, file_code,<span class="st">".csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <hr>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2026-01-20 10:14:28 CET"</code></pre>
+<pre><code>[1] "2026-01-20 15:10:26 CET"</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R version 4.5.2 (2025-10-31)
 Platform: x86_64-pc-linux-gnu
@@ -1231,7 +1281,7 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] CSCORE_1.0.2                testthat_3.2.3             
+ [1] CSCORE_1.0.2                testthat_3.3.2             
  [3] monocle3_1.3.7              SingleCellExperiment_1.32.0
  [5] SummarizedExperiment_1.38.1 GenomicRanges_1.62.1       
  [7] Seqinfo_1.0.0               IRanges_2.44.0             
@@ -1244,7 +1294,7 @@ other attached packages:
 [21] foreach_1.5.2               Rfast_2.1.5.1              
 [23] RcppParallel_5.1.10         zigg_0.0.2                 
 [25] Rcpp_1.1.0                  patchwork_1.3.2            
-[27] Seurat_5.2.1                SeuratObject_5.1.0         
+[27] Seurat_5.4.0                SeuratObject_5.3.0         
 [29] sp_2.2-0                    Hmisc_5.2-3                
 [31] dplyr_1.1.4                 circlize_0.4.16            
 [33] ComplexHeatmap_2.26.0       COTAN_2.11.1               
@@ -1256,32 +1306,32 @@ loaded via a namespace (and not attached):
   [7] tools_4.5.2               sctransform_0.4.2        
   [9] backports_1.5.0           R6_2.6.1                 
  [11] lazyeval_0.2.2            uwot_0.2.3               
- [13] ggdist_3.3.3              GetoptLong_1.0.5         
+ [13] ggdist_3.3.3              GetoptLong_1.1.0         
  [15] urlchecker_1.0.1          withr_3.0.2              
  [17] gridExtra_2.3             parallelDist_0.2.6       
- [19] progressr_0.15.1          cli_3.6.5                
- [21] Cairo_1.6-2               spatstat.explore_3.4-2   
+ [19] progressr_0.18.0          cli_3.6.5                
+ [21] Cairo_1.7-0               spatstat.explore_3.6-0   
  [23] fastDummies_1.7.5         labeling_0.4.3           
- [25] S7_0.2.1                  spatstat.data_3.1-6      
- [27] proxy_0.4-27              ggridges_0.5.6           
+ [25] S7_0.2.1                  spatstat.data_3.1-9      
+ [27] proxy_0.4-29              ggridges_0.5.6           
  [29] pbapply_1.7-2             foreign_0.8-90           
  [31] sessioninfo_1.2.3         parallelly_1.46.0        
- [33] rstudioapi_0.17.1         shape_1.4.6.1            
- [35] ica_1.0-3                 spatstat.random_3.4-1    
- [37] distributional_0.5.0      dendextend_1.19.0        
+ [33] rstudioapi_0.18.0         shape_1.4.6.1            
+ [35] ica_1.0-3                 spatstat.random_3.4-3    
+ [37] distributional_0.6.0      dendextend_1.19.0        
  [39] Matrix_1.7-4              abind_1.4-8              
  [41] lifecycle_1.0.4           yaml_2.3.10              
  [43] SparseArray_1.10.8        Rtsne_0.17               
- [45] glmGamPoi_1.20.0          promises_1.3.2           
+ [45] glmGamPoi_1.20.0          promises_1.5.0           
  [47] crayon_1.5.3              miniUI_0.1.2             
  [49] lattice_0.22-7            beachmat_2.26.0          
- [51] cowplot_1.2.0             magick_2.8.6             
- [53] zeallot_0.2.0             pillar_1.10.2            
+ [51] cowplot_1.2.0             magick_2.9.0             
+ [53] zeallot_0.2.0             pillar_1.11.1            
  [55] knitr_1.50                rjson_0.2.23             
  [57] boot_1.3-32               future.apply_1.20.0      
  [59] codetools_0.2-20          glue_1.8.0               
- [61] spatstat.univar_3.1-3     remotes_2.5.0            
- [63] data.table_1.17.0         vctrs_0.6.5              
+ [61] spatstat.univar_3.1-6     remotes_2.5.0            
+ [63] data.table_1.18.0         vctrs_0.7.0              
  [65] png_0.1-8                 spam_2.11-1              
  [67] Rdpack_2.6.4              gtable_0.3.6             
  [69] assertthat_0.2.1          cachem_1.1.0             
@@ -1290,54 +1340,53 @@ loaded via a namespace (and not attached):
  [75] reformulas_0.4.1          survival_3.8-3           
  [77] ncdf4_1.24                ellipsis_0.3.2           
  [79] fitdistrplus_1.2-2        ROCR_1.0-11              
- [81] nlme_3.1-168              usethis_3.1.0            
- [83] RcppAnnoy_0.0.22          rprojroot_2.0.4          
+ [81] nlme_3.1-168              usethis_3.2.1            
+ [83] RcppAnnoy_0.0.22          rprojroot_2.1.1          
  [85] GenomeInfoDb_1.44.0       irlba_2.3.5.1            
- [87] KernSmooth_2.23-26        rpart_4.1.24             
- [89] colorspace_2.1-1          nnet_7.3-20              
- [91] tidyselect_1.2.1          compiler_4.5.2           
- [93] htmlTable_2.4.3           desc_1.4.3               
- [95] DelayedArray_0.36.0       plotly_4.11.0            
- [97] checkmate_2.3.2           scales_1.4.0             
- [99] lmtest_0.9-40             digest_0.6.37            
-[101] goftest_1.2-3             spatstat.utils_3.1-4     
-[103] minqa_1.2.8               rmarkdown_2.29           
-[105] XVector_0.50.0            htmltools_0.5.8.1        
-[107] pkgconfig_2.0.3           base64enc_0.1-3          
-[109] lme4_1.1-37               sparseMatrixStats_1.20.0 
-[111] fastmap_1.2.0             rlang_1.1.6              
-[113] GlobalOptions_0.1.2       htmlwidgets_1.6.4        
-[115] ggthemes_5.2.0            UCSC.utils_1.4.0         
-[117] shiny_1.11.0              DelayedMatrixStats_1.30.0
-[119] farver_2.1.2              zoo_1.8-14               
-[121] jsonlite_2.0.0            BiocParallel_1.44.0      
-[123] BiocSingular_1.26.1       magrittr_2.0.4           
-[125] Formula_1.2-5             GenomeInfoDbData_1.2.14  
-[127] dotCall64_1.2             viridis_0.6.5            
-[129] reticulate_1.42.0         stringi_1.8.7            
-[131] brio_1.1.5                MASS_7.3-65              
-[133] pkgbuild_1.4.7            plyr_1.8.9               
-[135] listenv_0.9.1             ggrepel_0.9.6            
-[137] deldir_2.0-4              splines_4.5.2            
-[139] tensor_1.5                igraph_2.1.4             
-[141] spatstat.geom_3.4-1       RcppHNSW_0.6.0           
-[143] pkgload_1.4.0             reshape2_1.4.4           
-[145] ScaledMatrix_1.16.0       evaluate_1.0.3           
-[147] nloptr_2.2.1              httpuv_1.6.16            
-[149] RANN_2.6.2                tidyr_1.3.1              
-[151] purrr_1.2.0               polyclip_1.10-7          
-[153] future_1.58.0             clue_0.3-66              
-[155] scattermore_1.2           ggplot2_4.0.1            
-[157] rsvd_1.0.5                xtable_1.8-4             
-[159] RSpectra_0.16-2           later_1.4.2              
-[161] viridisLite_0.4.2         tibble_3.3.0             
-[163] memoise_2.0.1             cluster_2.1.8.1          
-[165] globals_0.18.0           </code></pre>
+ [87] KernSmooth_2.23-26        otel_0.2.0               
+ [89] rpart_4.1.24              colorspace_2.1-1         
+ [91] nnet_7.3-20               tidyselect_1.2.1         
+ [93] compiler_4.5.2            htmlTable_2.4.3          
+ [95] desc_1.4.3                DelayedArray_0.36.0      
+ [97] plotly_4.11.0             checkmate_2.3.2          
+ [99] scales_1.4.0              lmtest_0.9-40            
+[101] digest_0.6.37             goftest_1.2-3            
+[103] spatstat.utils_3.2-1      minqa_1.2.8              
+[105] rmarkdown_2.29            XVector_0.50.0           
+[107] htmltools_0.5.8.1         pkgconfig_2.0.3          
+[109] base64enc_0.1-3           lme4_1.1-37              
+[111] sparseMatrixStats_1.20.0  fastmap_1.2.0            
+[113] rlang_1.1.7               GlobalOptions_0.1.2      
+[115] htmlwidgets_1.6.4         ggthemes_5.2.0           
+[117] UCSC.utils_1.4.0          shiny_1.12.1             
+[119] DelayedMatrixStats_1.30.0 farver_2.1.2             
+[121] zoo_1.8-14                jsonlite_2.0.0           
+[123] BiocParallel_1.44.0       BiocSingular_1.26.1      
+[125] magrittr_2.0.4            Formula_1.2-5            
+[127] GenomeInfoDbData_1.2.14   dotCall64_1.2            
+[129] viridis_0.6.5             reticulate_1.44.1        
+[131] stringi_1.8.7             brio_1.1.5               
+[133] MASS_7.3-65               pkgbuild_1.4.7           
+[135] plyr_1.8.9                listenv_0.10.0           
+[137] ggrepel_0.9.6             deldir_2.0-4             
+[139] splines_4.5.2             tensor_1.5               
+[141] igraph_2.2.1              spatstat.geom_3.6-1      
+[143] RcppHNSW_0.6.0            pkgload_1.4.0            
+[145] reshape2_1.4.4            ScaledMatrix_1.16.0      
+[147] evaluate_1.0.5            nloptr_2.2.1             
+[149] httpuv_1.6.16             RANN_2.6.2               
+[151] tidyr_1.3.1               purrr_1.2.0              
+[153] polyclip_1.10-7           future_1.69.0            
+[155] clue_0.3-66               scattermore_1.2          
+[157] ggplot2_4.0.1             rsvd_1.0.5               
+[159] xtable_1.8-4              RSpectra_0.16-2          
+[161] later_1.4.2               viridisLite_0.4.2        
+[163] tibble_3.3.0              memoise_2.0.1            
+[165] cluster_2.1.8.1           globals_0.18.0           </code></pre>
 </div>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

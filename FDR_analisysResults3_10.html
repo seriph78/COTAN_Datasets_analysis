@@ -325,8 +325,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./PBMC4_filtering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cleaning PBMC4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 4</span></a>
   </div>
 </li>
       </ul>
@@ -6212,11 +6224,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb156-48"><a href="#cb156-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert TRUE/FALSE to 1/0</span></span>
 <span id="cb156-49"><a href="#cb156-49" aria-hidden="true" tabindex="-1"></a>deaMemento_tot<span class="sc">$</span>value <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(deaMemento_tot<span class="sc">$</span>value)</span>
 <span id="cb156-50"><a href="#cb156-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-51"><a href="#cb156-51" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the ROC curve - note that we invert the p-values with 1 - p_values</span></span>
-<span id="cb156-52"><a href="#cb156-52" aria-hidden="true" tabindex="-1"></a>roc_resultMemento <span class="ot">&lt;-</span> <span class="fu">roc</span>(deaMemento_tot<span class="sc">$</span>value,  <span class="sc">-</span> deaMemento_tot<span class="sc">$</span>de_pval)</span>
-<span id="cb156-53"><a href="#cb156-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb156-54"><a href="#cb156-54" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the ROC curve</span></span>
-<span id="cb156-55"><a href="#cb156-55" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(roc_resultMemento)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb156-51"><a href="#cb156-51" aria-hidden="true" tabindex="-1"></a>memento.threshold.pval <span class="ot">&lt;-</span> <span class="fu">quantile</span>(deaMemento_tot[deaMemento_tot<span class="sc">$</span>value <span class="sc">==</span> <span class="dv">0</span>,]<span class="sc">$</span>de_pval,<span class="at">probs =</span> <span class="fl">0.05</span>)</span>
+<span id="cb156-52"><a href="#cb156-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-53"><a href="#cb156-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the ROC curve - note that we invert the p-values with 1 - p_values</span></span>
+<span id="cb156-54"><a href="#cb156-54" aria-hidden="true" tabindex="-1"></a>roc_resultMemento <span class="ot">&lt;-</span> <span class="fu">roc</span>(deaMemento_tot<span class="sc">$</span>value,  <span class="sc">-</span> deaMemento_tot<span class="sc">$</span>de_pval)</span>
+<span id="cb156-55"><a href="#cb156-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb156-56"><a href="#cb156-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the ROC curve</span></span>
+<span id="cb156-57"><a href="#cb156-57" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(roc_resultMemento)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="roc-for-scvi-8" class="level3">
@@ -6357,7 +6371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb165"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb165-1"><a href="#cb165-1" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggarrange</span>(Two_Clusters_uneven_farPL,Three_Clusters_unevenPL, Five_Clusters_unevenPL,</span>
 <span id="cb165-2"><a href="#cb165-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),</span>
-<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">common.legend =</span> T, <span class="at">legend =</span> <span class="st">"none"</span>)</span>
+<span id="cb165-3"><a href="#cb165-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">common.legend =</span> T, <span class="at">legend =</span> <span class="st">"none"</span>)</span>
 <span id="cb165-4"><a href="#cb165-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb165-5"><a href="#cb165-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(dirOut,<span class="st">"ROC_three_main.pdf"</span>),<span class="at">width =</span> <span class="dv">15</span>,<span class="at">height =</span> <span class="dv">5</span>)</span>
 <span id="cb165-6"><a href="#cb165-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(plot3)</span>
@@ -6431,11 +6445,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb168-50"><a href="#cb168-50" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">by=</span><span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"set_number"</span>,<span class="st">"clusters"</span>),</span>
 <span id="cb168-51"><a href="#cb168-51" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">all.x =</span> T, <span class="at">all.y=</span> <span class="cn">FALSE</span>)</span>
 <span id="cb168-52"><a href="#cb168-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-53"><a href="#cb168-53" aria-hidden="true" tabindex="-1"></a>ground_truth_tot_subset <span class="ot">&lt;-</span> ground_truth_tot_subset <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">lambda_bin =</span> <span class="fu">cut</span>(genesLambda, <span class="at">breaks=</span><span class="dv">50</span>))</span>
+<span id="cb168-53"><a href="#cb168-53" aria-hidden="true" tabindex="-1"></a><span class="co">#data_SCvi NON POSSIBLE FOR ABSENCE OF P-VALUES</span></span>
 <span id="cb168-54"><a href="#cb168-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-55"><a href="#cb168-55" aria-hidden="true" tabindex="-1"></a>ground_truth_tot_subset[<span class="fu">is.na</span>(ground_truth_tot_subset)] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb168-56"><a href="#cb168-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb168-57"><a href="#cb168-57" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ground_truth_tot_subset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb168-55"><a href="#cb168-55" aria-hidden="true" tabindex="-1"></a>data_Memento <span class="ot">&lt;-</span> deaMemento_tot[,<span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"set_number"</span>,<span class="st">"clusters"</span>, <span class="st">"de_pval"</span>)]</span>
+<span id="cb168-56"><a href="#cb168-56" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(data_Memento) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"set_number"</span>,<span class="st">"clusters"</span>,<span class="st">"p_value_Memento"</span>)</span>
+<span id="cb168-57"><a href="#cb168-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-58"><a href="#cb168-58" aria-hidden="true" tabindex="-1"></a>ground_truth_tot_subset <span class="ot">&lt;-</span> <span class="fu">merge</span>(ground_truth_tot_subset,</span>
+<span id="cb168-59"><a href="#cb168-59" aria-hidden="true" tabindex="-1"></a>                                 data_Memento,</span>
+<span id="cb168-60"><a href="#cb168-60" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">by=</span><span class="fu">c</span>(<span class="st">"genes"</span>,<span class="st">"set_number"</span>,<span class="st">"clusters"</span>),</span>
+<span id="cb168-61"><a href="#cb168-61" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">all.x =</span> T, <span class="at">all.y=</span> <span class="cn">FALSE</span>)</span>
+<span id="cb168-62"><a href="#cb168-62" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb168-63"><a href="#cb168-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-64"><a href="#cb168-64" aria-hidden="true" tabindex="-1"></a>ground_truth_tot_subset <span class="ot">&lt;-</span> ground_truth_tot_subset <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">lambda_bin =</span> <span class="fu">cut</span>(genesLambda, <span class="at">breaks=</span><span class="dv">50</span>))</span>
+<span id="cb168-65"><a href="#cb168-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-66"><a href="#cb168-66" aria-hidden="true" tabindex="-1"></a>ground_truth_tot_subset[<span class="fu">is.na</span>(ground_truth_tot_subset)] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb168-67"><a href="#cb168-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb168-68"><a href="#cb168-68" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ground_truth_tot_subset)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          genes set_number  clusters value          data_set p_value_COTAN
 1 A330008L17Rik          1 E13.5-432  TRUE 5_Clusters_uneven  2.397295e-10
@@ -6451,22 +6476,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 4  0.08024691   2.547529e-07        1.579015e-07         1.104961e-05
 5  0.03431373   1.000000e+00        1.000000e+00         2.718294e-04
 6  0.06617647   1.632048e-12        7.812652e-13         1.731541e-09
-  p_value_Monocle p_value_Scanpy       lambda_bin
-1    7.760581e-09    0.012422646    (0.069,0.134]
-2    5.065628e-02    0.266934766    (0.069,0.134]
-3    2.001536e-01    0.671631728 (0.000846,0.069]
-4    1.989451e-06    0.028717392    (0.069,0.134]
-5    1.935776e-01    0.793509146 (0.000846,0.069]
-6    1.328598e-09    0.004754579 (0.000846,0.069]</code></pre>
+  p_value_Monocle p_value_Scanpy p_value_Memento       lambda_bin
+1    7.760581e-09    0.012422646    1.630156e-06    (0.069,0.134]
+2    5.065628e-02    0.266934766    6.878624e-02    (0.069,0.134]
+3    2.001536e-01    0.671631728    1.423734e-01 (0.000846,0.069]
+4    1.989451e-06    0.028717392    2.085985e-06    (0.069,0.134]
+5    1.935776e-01    0.793509146    9.602861e-03 (0.000846,0.069]
+6    1.328598e-09    0.004754579    1.271282e-08 (0.000846,0.069]</code></pre>
 </div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb170"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href="#cb170-1" aria-hidden="true" tabindex="-1"></a>bins <span class="ot">&lt;-</span> <span class="fu">levels</span>(ground_truth_tot_subset<span class="sc">$</span>lambda_bin)</span>
 <span id="cb170-2"><a href="#cb170-2" aria-hidden="true" tabindex="-1"></a>bins <span class="ot">&lt;-</span> bins[<span class="sc">!</span><span class="fu">is.na</span>(bins)]</span>
 <span id="cb170-3"><a href="#cb170-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-4"><a href="#cb170-4" aria-hidden="true" tabindex="-1"></a>forBarChart <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(bins),<span class="at">ncol =</span> <span class="dv">7</span>,<span class="at">data =</span> <span class="dv">0</span>))</span>
+<span id="cb170-4"><a href="#cb170-4" aria-hidden="true" tabindex="-1"></a>forBarChart <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">matrix</span>(<span class="at">nrow =</span> <span class="fu">length</span>(bins),<span class="at">ncol =</span> <span class="dv">8</span>,<span class="at">data =</span> <span class="dv">0</span>))</span>
 <span id="cb170-5"><a href="#cb170-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-6"><a href="#cb170-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(forBarChart) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bins"</span>,<span class="st">"COTAN"</span>,<span class="st">"Seurat"</span>,<span class="st">"Seurat_Bimod"</span>,<span class="st">"Seurat_scTr"</span>,<span class="st">"Monocle"</span>, <span class="st">"Scanpy"</span>)</span>
+<span id="cb170-6"><a href="#cb170-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(forBarChart) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bins"</span>,<span class="st">"COTAN"</span>,<span class="st">"Seurat"</span>,<span class="st">"Seurat_Bimod"</span>,<span class="st">"Seurat_scTr"</span>,<span class="st">"Monocle"</span>, <span class="st">"Scanpy"</span>,<span class="st">"Memento"</span>)</span>
 <span id="cb170-7"><a href="#cb170-7" aria-hidden="true" tabindex="-1"></a>forBarChart<span class="sc">$</span>bins <span class="ot">&lt;-</span> bins</span>
 <span id="cb170-8"><a href="#cb170-8" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(forBarChart) <span class="ot">&lt;-</span> forBarChart<span class="sc">$</span>bins</span>
 <span id="cb170-9"><a href="#cb170-9" aria-hidden="true" tabindex="-1"></a></span>
@@ -6484,52 +6509,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb170-21"><a href="#cb170-21" aria-hidden="true" tabindex="-1"></a>  forBarChart[ i,<span class="st">"Monocle"</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(ground_truth_tot_subset<span class="sc">$</span>lambda_bin <span class="sc">==</span> i <span class="sc">&amp;</span> ground_truth_tot_subset<span class="sc">$</span>p_value_Monocle <span class="sc">&lt;=</span> monocle.threshold.pval)</span>
 <span id="cb170-22"><a href="#cb170-22" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb170-23"><a href="#cb170-23" aria-hidden="true" tabindex="-1"></a>  forBarChart[ i,<span class="st">"Scanpy"</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(ground_truth_tot_subset<span class="sc">$</span>lambda_bin <span class="sc">==</span> i <span class="sc">&amp;</span> ground_truth_tot_subset<span class="sc">$</span>p_value_Scanpy <span class="sc">&lt;=</span> scanpy.threshold.pval)</span>
-<span id="cb170-24"><a href="#cb170-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb170-25"><a href="#cb170-25" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb170-26"><a href="#cb170-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-27"><a href="#cb170-27" aria-hidden="true" tabindex="-1"></a>temp.bin <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">str_split</span>(forBarChart<span class="sc">$</span>bins,<span class="at">pattern =</span> <span class="st">","</span>,<span class="at">simplify =</span> T))</span>
-<span id="cb170-28"><a href="#cb170-28" aria-hidden="true" tabindex="-1"></a>temp.bin[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(temp.bin[,<span class="dv">1</span>],<span class="at">pattern =</span> <span class="st">"[(]"</span>))</span>
-<span id="cb170-29"><a href="#cb170-29" aria-hidden="true" tabindex="-1"></a>temp.bin[,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(temp.bin[,<span class="dv">2</span>],<span class="at">pattern =</span> <span class="st">"[]]"</span>))</span>
-<span id="cb170-30"><a href="#cb170-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-31"><a href="#cb170-31" aria-hidden="true" tabindex="-1"></a>forBarChart<span class="sc">$</span>bins <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rowMeans</span>(temp.bin),<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb170-32"><a href="#cb170-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-24"><a href="#cb170-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-25"><a href="#cb170-25" aria-hidden="true" tabindex="-1"></a>  forBarChart[ i,<span class="st">"Memento"</span>] <span class="ot">&lt;-</span> <span class="fu">sum</span>(ground_truth_tot_subset<span class="sc">$</span>lambda_bin <span class="sc">==</span> i <span class="sc">&amp;</span> ground_truth_tot_subset<span class="sc">$</span>p_value_Memento <span class="sc">&lt;=</span> memento.threshold.pval)</span>
+<span id="cb170-26"><a href="#cb170-26" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb170-27"><a href="#cb170-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-28"><a href="#cb170-28" aria-hidden="true" tabindex="-1"></a>temp.bin <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">str_split</span>(forBarChart<span class="sc">$</span>bins,<span class="at">pattern =</span> <span class="st">","</span>,<span class="at">simplify =</span> T))</span>
+<span id="cb170-29"><a href="#cb170-29" aria-hidden="true" tabindex="-1"></a>temp.bin[,<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(temp.bin[,<span class="dv">1</span>],<span class="at">pattern =</span> <span class="st">"[(]"</span>))</span>
+<span id="cb170-30"><a href="#cb170-30" aria-hidden="true" tabindex="-1"></a>temp.bin[,<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">str_remove</span>(temp.bin[,<span class="dv">2</span>],<span class="at">pattern =</span> <span class="st">"[]]"</span>))</span>
+<span id="cb170-31"><a href="#cb170-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-32"><a href="#cb170-32" aria-hidden="true" tabindex="-1"></a>forBarChart<span class="sc">$</span>bins <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">rowMeans</span>(temp.bin),<span class="at">digits =</span> <span class="dv">2</span>)</span>
 <span id="cb170-33"><a href="#cb170-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-34"><a href="#cb170-34" aria-hidden="true" tabindex="-1"></a>forBarChart <span class="ot">&lt;-</span> forBarChart[<span class="fu">rowSums</span>(forBarChart[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(forBarChart)]) <span class="sc">&gt;</span> <span class="dv">0</span>,]</span>
-<span id="cb170-35"><a href="#cb170-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-36"><a href="#cb170-36" aria-hidden="true" tabindex="-1"></a>forBarChart.perc <span class="ot">&lt;-</span> forBarChart[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,]</span>
-<span id="cb170-37"><a href="#cb170-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-38"><a href="#cb170-38" aria-hidden="true" tabindex="-1"></a>forBarChart.perc<span class="sc">$</span>tot <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(forBarChart.perc[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(forBarChart.perc)])</span>
-<span id="cb170-39"><a href="#cb170-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-40"><a href="#cb170-40" aria-hidden="true" tabindex="-1"></a>forBarChart.perc[,<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart.perc)<span class="sc">-</span><span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="fu">round</span>(forBarChart.perc[,<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart.perc)<span class="sc">-</span><span class="dv">1</span>)]<span class="sc">/</span>forBarChart.perc<span class="sc">$</span>tot,<span class="at">digits =</span> <span class="dv">4</span>)</span>
-<span id="cb170-41"><a href="#cb170-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-42"><a href="#cb170-42" aria-hidden="true" tabindex="-1"></a>forBarChart.perc <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(forBarChart.perc,</span>
-<span id="cb170-43"><a href="#cb170-43" aria-hidden="true" tabindex="-1"></a>                               <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart.perc)<span class="sc">-</span><span class="dv">1</span>),</span>
-<span id="cb170-44"><a href="#cb170-44" aria-hidden="true" tabindex="-1"></a>                               <span class="at">names_to =</span> <span class="st">"Methods"</span>)</span>
-<span id="cb170-45"><a href="#cb170-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-46"><a href="#cb170-46" aria-hidden="true" tabindex="-1"></a>forBarChart.number <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(forBarChart[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,],</span>
-<span id="cb170-47"><a href="#cb170-47" aria-hidden="true" tabindex="-1"></a>                               <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart)),</span>
-<span id="cb170-48"><a href="#cb170-48" aria-hidden="true" tabindex="-1"></a>                               <span class="at">names_to =</span> <span class="st">"Methods"</span>)</span>
-<span id="cb170-49"><a href="#cb170-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-50"><a href="#cb170-50" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(forBarChart.number) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bins"</span>,<span class="st">"Methods"</span>, <span class="st">"valueOriginal"</span>)</span>
-<span id="cb170-51"><a href="#cb170-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-52"><a href="#cb170-52" aria-hidden="true" tabindex="-1"></a>forBarChart.perc <span class="ot">&lt;-</span> <span class="fu">merge</span>(forBarChart.perc,forBarChart.number, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"bins"</span>,<span class="st">"Methods"</span>))</span>
-<span id="cb170-53"><a href="#cb170-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-54"><a href="#cb170-54" aria-hidden="true" tabindex="-1"></a>barChart <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(forBarChart.perc,<span class="fu">aes</span>(<span class="at">x=</span>bins,<span class="at">y=</span>value,<span class="at">fill=</span>Methods))<span class="sc">+</span></span>
-<span id="cb170-55"><a href="#cb170-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
-<span id="cb170-56"><a href="#cb170-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> valueOriginal), </span>
-<span id="cb170-57"><a href="#cb170-57" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>),  <span class="at">size=</span><span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb170-58"><a href="#cb170-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
-<span id="cb170-59"><a href="#cb170-59" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> methods.color)<span class="sc">+</span></span>
-<span id="cb170-60"><a href="#cb170-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
-<span id="cb170-61"><a href="#cb170-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span>forBarChart.perc<span class="sc">$</span>bins)<span class="sc">+</span></span>
-<span id="cb170-62"><a href="#cb170-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_blank</span>(),<span class="at">axis.title.x=</span><span class="fu">element_blank</span>(),</span>
-<span id="cb170-63"><a href="#cb170-63" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position=</span><span class="st">"none"</span>,<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>)</span>
-<span id="cb170-64"><a href="#cb170-64" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
-<span id="cb170-65"><a href="#cb170-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>())</span>
-<span id="cb170-66"><a href="#cb170-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb170-67"><a href="#cb170-67" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(dirOut,<span class="st">"EnrichedGenesForExpressionLevel.pdf"</span>),<span class="at">height =</span> <span class="dv">3</span>,<span class="at">width =</span> <span class="dv">5</span>)</span>
-<span id="cb170-68"><a href="#cb170-68" aria-hidden="true" tabindex="-1"></a>barChart</span>
-<span id="cb170-69"><a href="#cb170-69" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb170-34"><a href="#cb170-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-35"><a href="#cb170-35" aria-hidden="true" tabindex="-1"></a>forBarChart <span class="ot">&lt;-</span> forBarChart[<span class="fu">rowSums</span>(forBarChart[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(forBarChart)]) <span class="sc">&gt;</span> <span class="dv">0</span>,]</span>
+<span id="cb170-36"><a href="#cb170-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-37"><a href="#cb170-37" aria-hidden="true" tabindex="-1"></a>forBarChart.perc <span class="ot">&lt;-</span> forBarChart[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,]</span>
+<span id="cb170-38"><a href="#cb170-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-39"><a href="#cb170-39" aria-hidden="true" tabindex="-1"></a>forBarChart.perc<span class="sc">$</span>tot <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(forBarChart.perc[,<span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(forBarChart.perc)])</span>
+<span id="cb170-40"><a href="#cb170-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-41"><a href="#cb170-41" aria-hidden="true" tabindex="-1"></a>forBarChart.perc[,<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart.perc)<span class="sc">-</span><span class="dv">1</span>)] <span class="ot">&lt;-</span> <span class="fu">round</span>(forBarChart.perc[,<span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart.perc)<span class="sc">-</span><span class="dv">1</span>)]<span class="sc">/</span>forBarChart.perc<span class="sc">$</span>tot,<span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb170-42"><a href="#cb170-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-43"><a href="#cb170-43" aria-hidden="true" tabindex="-1"></a>forBarChart.perc <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(forBarChart.perc,</span>
+<span id="cb170-44"><a href="#cb170-44" aria-hidden="true" tabindex="-1"></a>                               <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart.perc)<span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb170-45"><a href="#cb170-45" aria-hidden="true" tabindex="-1"></a>                               <span class="at">names_to =</span> <span class="st">"Methods"</span>)</span>
+<span id="cb170-46"><a href="#cb170-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-47"><a href="#cb170-47" aria-hidden="true" tabindex="-1"></a>forBarChart.number <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(forBarChart[<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,],</span>
+<span id="cb170-48"><a href="#cb170-48" aria-hidden="true" tabindex="-1"></a>                               <span class="at">cols =</span> <span class="dv">2</span><span class="sc">:</span>(<span class="fu">ncol</span>(forBarChart)),</span>
+<span id="cb170-49"><a href="#cb170-49" aria-hidden="true" tabindex="-1"></a>                               <span class="at">names_to =</span> <span class="st">"Methods"</span>)</span>
+<span id="cb170-50"><a href="#cb170-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-51"><a href="#cb170-51" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(forBarChart.number) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"bins"</span>,<span class="st">"Methods"</span>, <span class="st">"valueOriginal"</span>)</span>
+<span id="cb170-52"><a href="#cb170-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-53"><a href="#cb170-53" aria-hidden="true" tabindex="-1"></a>forBarChart.perc <span class="ot">&lt;-</span> <span class="fu">merge</span>(forBarChart.perc,forBarChart.number, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"bins"</span>,<span class="st">"Methods"</span>))</span>
+<span id="cb170-54"><a href="#cb170-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-55"><a href="#cb170-55" aria-hidden="true" tabindex="-1"></a>barChart <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(forBarChart.perc,<span class="fu">aes</span>(<span class="at">x=</span>bins,<span class="at">y=</span>value,<span class="at">fill=</span>Methods))<span class="sc">+</span></span>
+<span id="cb170-56"><a href="#cb170-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">"identity"</span>)<span class="sc">+</span></span>
+<span id="cb170-57"><a href="#cb170-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> valueOriginal), </span>
+<span id="cb170-58"><a href="#cb170-58" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">vjust =</span> <span class="fl">0.5</span>),  <span class="at">size=</span><span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb170-59"><a href="#cb170-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb170-60"><a href="#cb170-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> methods.color)<span class="sc">+</span></span>
+<span id="cb170-61"><a href="#cb170-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()<span class="sc">+</span></span>
+<span id="cb170-62"><a href="#cb170-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span>forBarChart.perc<span class="sc">$</span>bins)<span class="sc">+</span></span>
+<span id="cb170-63"><a href="#cb170-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title.y=</span><span class="fu">element_blank</span>(),<span class="at">axis.title.x=</span><span class="fu">element_blank</span>(),</span>
+<span id="cb170-64"><a href="#cb170-64" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position=</span><span class="st">"none"</span>,<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust=</span><span class="dv">1</span>)</span>
+<span id="cb170-65"><a href="#cb170-65" aria-hidden="true" tabindex="-1"></a>    )<span class="sc">+</span></span>
+<span id="cb170-66"><a href="#cb170-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>())</span>
+<span id="cb170-67"><a href="#cb170-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb170-68"><a href="#cb170-68" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(dirOut,<span class="st">"EnrichedGenesForExpressionLevel.pdf"</span>),<span class="at">height =</span> <span class="dv">3</span>,<span class="at">width =</span> <span class="dv">5</span>)</span>
+<span id="cb170-69"><a href="#cb170-69" aria-hidden="true" tabindex="-1"></a>barChart</span>
+<span id="cb170-70"><a href="#cb170-70" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>png 
   2 </code></pre>
@@ -6547,10 +6573,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb173"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb173-1"><a href="#cb173-1" aria-hidden="true" tabindex="-1"></a>plot.with.inset <span class="ot">&lt;-</span></span>
 <span id="cb173-2"><a href="#cb173-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggdraw</span>() <span class="sc">+</span></span>
 <span id="cb173-3"><a href="#cb173-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_plot</span>(plot3) <span class="sc">+</span></span>
-<span id="cb173-4"><a href="#cb173-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_plot</span>(<span class="fu">as_ggplot</span>(lg), <span class="at">x =</span> <span class="fl">0.18</span>, <span class="at">y =</span> <span class="fl">0.1</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> .<span class="dv">45</span>)<span class="sc">+</span></span>
-<span id="cb173-5"><a href="#cb173-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_plot</span>(barChart, <span class="at">x =</span> <span class="fl">0.78</span>, <span class="at">y =</span> <span class="fl">0.09</span>, <span class="at">width =</span> <span class="fl">0.22</span>, <span class="at">height =</span> .<span class="dv">5</span>)</span>
+<span id="cb173-4"><a href="#cb173-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_plot</span>(<span class="fu">as_ggplot</span>(lg), <span class="at">x =</span> <span class="fl">0.3</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> .<span class="dv">45</span>)<span class="sc">+</span></span>
+<span id="cb173-5"><a href="#cb173-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">draw_plot</span>(barChart, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">height =</span> .<span class="dv">5</span>)</span>
 <span id="cb173-6"><a href="#cb173-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb173-7"><a href="#cb173-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(dirOut,<span class="st">"Plot3WihtGenesExLevel.pdf"</span>),<span class="at">height =</span> <span class="dv">5</span>,<span class="at">width =</span> <span class="dv">15</span>)</span>
+<span id="cb173-7"><a href="#cb173-7" aria-hidden="true" tabindex="-1"></a><span class="fu">pdf</span>(<span class="fu">paste0</span>(dirOut,<span class="st">"Plot3WihtGenesExLevel.pdf"</span>),<span class="at">height =</span> <span class="dv">10</span>,<span class="at">width =</span> <span class="dv">10</span>)</span>
 <span id="cb173-8"><a href="#cb173-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(plot.with.inset)</span>
 <span id="cb173-9"><a href="#cb173-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -6561,7 +6587,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="FDR_analisysResults3_10_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="1440"></p>
+<p><img src="FDR_analisysResults3_10_files/figure-html/unnamed-chunk-54-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
@@ -6572,92 +6598,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb176"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>R version 4.5.2 (2025-10-31 ucrt)
-Platform: x86_64-w64-mingw32/x64
-Running under: Windows 11 x64 (build 26200)
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
 
 Matrix products: default
-  LAPACK version 3.12.1
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
 
 locale:
-[1] LC_COLLATE=English_United States.utf8 
-[2] LC_CTYPE=English_United States.utf8   
-[3] LC_MONETARY=English_United States.utf8
-[4] LC_NUMERIC=C                          
-[5] LC_TIME=English_United States.utf8    
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 
 time zone: Europe/Rome
-tzcode source: internal
+tzcode source: system (glibc)
 
 attached base packages:
 [1] stats4    stats     graphics  grDevices utils     datasets  methods  
 [8] base     
 
 other attached packages:
- [1] ggpubr_0.6.2                ggplot2_4.0.1              
+ [1] ggpubr_0.6.0                ggplot2_4.0.1              
  [3] tidyr_1.3.1                 dplyr_1.1.4                
  [5] stringr_1.6.0               cowplot_1.2.0              
- [7] reticulate_1.44.1           monocle3_1.4.26            
- [9] SingleCellExperiment_1.32.0 SummarizedExperiment_1.40.0
-[11] GenomicRanges_1.62.0        Seqinfo_1.0.0              
+ [7] reticulate_1.44.1           monocle3_1.3.7             
+ [9] SingleCellExperiment_1.32.0 SummarizedExperiment_1.38.1
+[11] GenomicRanges_1.62.1        Seqinfo_1.0.0              
 [13] IRanges_2.44.0              S4Vectors_0.48.0           
 [15] MatrixGenerics_1.22.0       matrixStats_1.5.0          
 [17] Biobase_2.70.0              BiocGenerics_0.56.0        
-[19] generics_0.1.4              Seurat_5.3.1               
+[19] generics_0.1.3              Seurat_5.4.0               
 [21] SeuratObject_5.3.0          sp_2.2-0                   
 [23] pROC_1.19.0.1               COTAN_2.11.1               
 
 loaded via a namespace (and not attached):
-  [1] RcppAnnoy_0.0.22       splines_4.5.2          later_1.4.4           
-  [4] tibble_3.3.0           polyclip_1.10-7        fastDummies_1.7.5     
-  [7] lifecycle_1.0.4        rstatix_0.7.3          Rdpack_2.6.4          
- [10] doParallel_1.0.17      globals_0.18.0         lattice_0.22-7        
- [13] MASS_7.3-65            backports_1.5.0        ggdist_3.3.3          
- [16] dendextend_1.19.1      magrittr_2.0.4         plotly_4.11.0         
- [19] rmarkdown_2.30         yaml_2.3.12            httpuv_1.6.16         
- [22] otel_0.2.0             sctransform_0.4.2      spam_2.11-1           
- [25] spatstat.sparse_3.1-0  minqa_1.2.8            pbapply_1.7-4         
- [28] RColorBrewer_1.1-3     abind_1.4-8            Rtsne_0.17            
- [31] purrr_1.2.0            circlize_0.4.17        ggrepel_0.9.6         
- [34] irlba_2.3.5.1          listenv_0.10.0         spatstat.utils_3.2-0  
- [37] goftest_1.2-3          RSpectra_0.16-2        spatstat.random_3.4-3 
- [40] fitdistrplus_1.2-4     parallelly_1.46.0      codetools_0.2-20      
- [43] DelayedArray_0.36.0    tidyselect_1.2.1       shape_1.4.6.1         
- [46] farver_2.1.2           lme4_1.1-38            ScaledMatrix_1.18.0   
- [49] viridis_0.6.5          spatstat.explore_3.6-0 jsonlite_2.0.0        
- [52] GetoptLong_1.1.0       Formula_1.2-5          progressr_0.18.0      
- [55] ggridges_0.5.7         survival_3.8-3         iterators_1.0.14      
- [58] foreach_1.5.2          tools_4.5.2            ica_1.0-3             
- [61] Rcpp_1.1.0             glue_1.8.0             gridExtra_2.3         
- [64] SparseArray_1.10.2     xfun_0.54              distributional_0.6.0  
- [67] ggthemes_5.2.0         withr_3.0.2            fastmap_1.2.0         
- [70] boot_1.3-32            digest_0.6.39          rsvd_1.0.5            
- [73] parallelDist_0.2.7     R6_2.6.1               mime_0.13             
- [76] colorspace_2.1-2       scattermore_1.2        tensor_1.5.1          
- [79] spatstat.data_3.1-9    utf8_1.2.6             data.table_1.18.0     
- [82] httr_1.4.7             htmlwidgets_1.6.4      S4Arrays_1.10.0       
- [85] uwot_0.2.4             pkgconfig_2.0.3        gtable_0.3.6          
- [88] ComplexHeatmap_2.26.0  lmtest_0.9-40          S7_0.2.1              
- [91] XVector_0.50.0         htmltools_0.5.9        carData_3.0-5         
- [94] dotCall64_1.2          zigg_0.0.2             clue_0.3-66           
- [97] scales_1.4.0           png_0.1-8              reformulas_0.4.2      
-[100] spatstat.univar_3.1-5  knitr_1.51             reshape2_1.4.5        
-[103] rjson_0.2.23           nloptr_2.2.1           nlme_3.1-168          
-[106] proxy_0.4-28           zoo_1.8-14             GlobalOptions_0.1.3   
-[109] KernSmooth_2.23-26     parallel_4.5.2         miniUI_0.1.2          
-[112] pillar_1.11.1          grid_4.5.2             vctrs_0.6.5           
-[115] RANN_2.6.2             promises_1.5.0         car_3.1-3             
-[118] BiocSingular_1.26.1    beachmat_2.26.0        xtable_1.8-4          
-[121] cluster_2.1.8.1        evaluate_1.0.5         zeallot_0.2.0         
-[124] cli_3.6.5              compiler_4.5.2         rlang_1.1.6           
-[127] crayon_1.5.3           ggsignif_0.6.4         future.apply_1.20.1   
-[130] labeling_0.4.3         plyr_1.8.9             stringi_1.8.7         
-[133] viridisLite_0.4.2      deldir_2.0-4           BiocParallel_1.44.0   
-[136] assertthat_0.2.1       lazyeval_0.2.2         spatstat.geom_3.6-1   
-[139] Matrix_1.7-4           RcppHNSW_0.6.0         patchwork_1.3.2       
-[142] future_1.69.0          shiny_1.12.1           rbibutils_2.4         
-[145] ROCR_1.0-11            Rfast_2.1.5.2          broom_1.0.11          
-[148] igraph_2.2.1           RcppParallel_5.1.11-1 </code></pre>
+  [1] RcppAnnoy_0.0.22        splines_4.5.2           later_1.4.2            
+  [4] tibble_3.3.0            polyclip_1.10-7         fastDummies_1.7.5      
+  [7] lifecycle_1.0.4         rstatix_0.7.2           Rdpack_2.6.4           
+ [10] doParallel_1.0.17       globals_0.18.0          lattice_0.22-7         
+ [13] MASS_7.3-65             backports_1.5.0         ggdist_3.3.3           
+ [16] dendextend_1.19.0       magrittr_2.0.4          plotly_4.11.0          
+ [19] rmarkdown_2.29          yaml_2.3.10             httpuv_1.6.16          
+ [22] otel_0.2.0              sctransform_0.4.2       spam_2.11-1            
+ [25] spatstat.sparse_3.1-0   minqa_1.2.8             pbapply_1.7-2          
+ [28] RColorBrewer_1.1-3      abind_1.4-8             Rtsne_0.17             
+ [31] purrr_1.2.0             circlize_0.4.16         GenomeInfoDbData_1.2.14
+ [34] ggrepel_0.9.6           irlba_2.3.5.1           listenv_0.10.0         
+ [37] spatstat.utils_3.2-1    goftest_1.2-3           RSpectra_0.16-2        
+ [40] spatstat.random_3.4-3   fitdistrplus_1.2-2      parallelly_1.46.0      
+ [43] codetools_0.2-20        DelayedArray_0.36.0     tidyselect_1.2.1       
+ [46] shape_1.4.6.1           UCSC.utils_1.4.0        farver_2.1.2           
+ [49] lme4_1.1-37             ScaledMatrix_1.16.0     viridis_0.6.5          
+ [52] spatstat.explore_3.6-0  jsonlite_2.0.0          GetoptLong_1.1.0       
+ [55] Formula_1.2-5           progressr_0.18.0        ggridges_0.5.6         
+ [58] survival_3.8-3          iterators_1.0.14        foreach_1.5.2          
+ [61] tools_4.5.2             ica_1.0-3               Rcpp_1.1.0             
+ [64] glue_1.8.0              gridExtra_2.3           SparseArray_1.10.8     
+ [67] xfun_0.52               distributional_0.6.0    ggthemes_5.2.0         
+ [70] GenomeInfoDb_1.44.0     withr_3.0.2             fastmap_1.2.0          
+ [73] boot_1.3-32             digest_0.6.37           rsvd_1.0.5             
+ [76] parallelDist_0.2.6      R6_2.6.1                mime_0.13              
+ [79] colorspace_2.1-1        scattermore_1.2         tensor_1.5             
+ [82] spatstat.data_3.1-9     utf8_1.2.5              data.table_1.18.0      
+ [85] httr_1.4.7              htmlwidgets_1.6.4       S4Arrays_1.10.1        
+ [88] uwot_0.2.3              pkgconfig_2.0.3         gtable_0.3.6           
+ [91] ComplexHeatmap_2.26.0   lmtest_0.9-40           S7_0.2.1               
+ [94] XVector_0.50.0          htmltools_0.5.8.1       carData_3.0-5          
+ [97] dotCall64_1.2           zigg_0.0.2              clue_0.3-66            
+[100] scales_1.4.0            png_0.1-8               reformulas_0.4.1       
+[103] spatstat.univar_3.1-6   knitr_1.50              reshape2_1.4.4         
+[106] rjson_0.2.23            nloptr_2.2.1            nlme_3.1-168           
+[109] proxy_0.4-29            zoo_1.8-14              GlobalOptions_0.1.2    
+[112] KernSmooth_2.23-26      parallel_4.5.2          miniUI_0.1.2           
+[115] pillar_1.11.1           grid_4.5.2              vctrs_0.7.0            
+[118] RANN_2.6.2              promises_1.5.0          car_3.1-3              
+[121] BiocSingular_1.26.1     beachmat_2.26.0         xtable_1.8-4           
+[124] cluster_2.1.8.1         evaluate_1.0.5          zeallot_0.2.0          
+[127] cli_3.6.5               compiler_4.5.2          rlang_1.1.7            
+[130] crayon_1.5.3            ggsignif_0.6.4          future.apply_1.20.0    
+[133] labeling_0.4.3          plyr_1.8.9              stringi_1.8.7          
+[136] viridisLite_0.4.2       deldir_2.0-4            BiocParallel_1.44.0    
+[139] assertthat_0.2.1        lazyeval_0.2.2          spatstat.geom_3.6-1    
+[142] Matrix_1.7-4            RcppHNSW_0.6.0          patchwork_1.3.2        
+[145] future_1.69.0           shiny_1.12.1            rbibutils_2.3          
+[148] ROCR_1.0-11             Rfast_2.1.5.1           broom_1.0.8            
+[151] igraph_2.2.1            RcppParallel_5.1.10    </code></pre>
 </div>
 </div>
 
