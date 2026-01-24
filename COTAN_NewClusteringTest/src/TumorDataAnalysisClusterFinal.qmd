@@ -1,0 +1,382 @@
+---
+title: "Tumor dataset"
+format: html
+editor: visual
+---
+
+In this file we want to compare what appened when we fix the resolution and the number of PC considered
+
+```{r}
+library(stringr)
+library(RSpectra)
+library(matrixStats)
+library(COTAN)
+library(umap)
+library(ggplot2)
+library(zeallot)
+library(poem)
+library(sctransform)
+library(Seurat)
+library(tidyr)
+
+npc = 30
+
+methods.color <- c("COTAN"="#F73604","Seurat"="#ABD9E9","Seurat_scTr"="#74ADD1","Seurat_Bimod"="#4575B4", "Monocle"="#DAABE9", "Scanpy"="#7F9B5C" )
+
+methods.color2 <- c("MatAutovetSc"="#F73604","MatAutovet"="#F78604","SeuratStandard"="#ABD9E9","SeuratSCTransform"="#74ADD1" )
+```
+
+```{r, eval=FALSE}
+outDir <- "../results/CollectionWhole/"
+logDir <- "../results/CollectionWhole/logs/"
+
+if (!dir.exists(outDir)) {
+  dir.create(outDir)
+}
+if (!dir.exists(logDir)) {
+  dir.create(logDir)
+}
+
+setLoggingLevel(2L)
+setLoggingFile(file.path(logDir, "ClusteringTestTumorData.log"))
+
+#Functions
+
+LogLike <- function(obj){
+  matrix  <- COTAN:::calculateLikelihoodOfObserved(obj)
+  matrix <- log(matrix)
+  return(matrix)
+}
+
+Bin <- function(obj){
+  BinarizedCounts <- COTAN::getZeroOneProj(obj)
+  ProbOfZero <- COTAN::getProbabilityOfZero(obj)
+  matrix <- as.matrix(BinarizedCounts + ProbOfZero - 1)
+  return(matrix)
+}
+
+Derivative <- function(obj){
+  BinarizedCounts <- COTAN::getZeroOneProj(obj)
+  ProbOfZero <- COTAN::getProbabilityOfZero(obj)
+  matrix <- as.matrix(BinarizedCounts/(1 - ProbOfZero) - (1 - BinarizedCounts)/ProbOfZero)
+  return(matrix)
+}
+
+
+
+LogSignedLike <- function(obj){
+  BinarizedCounts <- COTAN::getZeroOneProj(obj)
+  ProbOfZero <- COTAN::getProbabilityOfZero(obj)
+  matrix <- as.matrix(BinarizedCounts * log(1 - ProbOfZero) - (1 - BinarizedCounts)*log(ProbOfZero))
+  return(matrix)
+}
+
+SeuratStandard <- function(data, npc, resolution){
+  pbmc <- CreateSeuratObject(counts = data)
+  pbmc <- NormalizeData(pbmc)
+  pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
+  all.genes <- rownames(pbmc)
+  pbmc <- ScaleData(pbmc, features = all.genes)
+  
+  pbmc <- RunPCA(pbmc, verbose = FALSE)
+  pbmc <- RunUMAP(pbmc, dims = 1:npc, verbose = FALSE)
+  
+  pbmc <- FindNeighbors(pbmc, dims = 1:npc, verbose = FALSE)
+  pbmc <- FindClusters(pbmc, verbose = FALSE, resolution = resolution)
+  cl <- pbmc@meta.data$seurat_clusters
+  names(cl) <- rownames(pbmc@meta.data)
+  return(cl)
+}
+
+SeuratSCtransform <- function(data, npc, resolution){
+  pbmc <- CreateSeuratObject(counts = data)
+  pbmc <- PercentageFeatureSet(pbmc, pattern = "MT-", col.name = "percent.mt")
+  pbmc <- SCTransform(pbmc, vars.to.regress = "percent.mt", verbose = FALSE)
+  pbmc <- RunPCA(pbmc, verbose = FALSE)
+  pbmc <- RunUMAP(pbmc, dims = 1:npc, verbose = FALSE)
+  
+  pbmc <- FindNeighbors(pbmc, dims = 1:npc, verbose = FALSE)
+  pbmc <- FindClusters(pbmc, verbose = FALSE, resolution = resolution)
+  cl <- pbmc@meta.data$seurat_clusters
+  names(cl) <- rownames(pbmc@meta.data)
+  return(cl)
+}
+
+
+```
+
+```{r, eval=F}
+obj <- readRDS("../Data/BE1.cotan.RDS")
+
+cond <- "TumorData"
+```
+
+```{r, eval=FALSE}
+res <-  eigs_sym(as.matrix(obj@genesCoex), k = 30, which = "LM") 
+autovettori <- res$vectors[,1:npc]
+```
+
+```{r, eval=FALSE}
+dfReportTot <- 1
+clTot <- list()
+tableTot <- list()
+
+for (resolution in seq(from = 0.16,to = 0.5,by = 0.02)) {
+  for (approch in c("Derivative")) {
+    if(approch == "LogLike"){
+      matrix <- LogLike(obj)
+    }else if (approch == "LogSignedLike") {
+      matrix <- LogSignedLike(obj)
+    }else if (approch == "Bin") {
+      matrix <- Bin(obj)
+    }else if (approch == "Derivative") {
+      matrix <- Derivative(obj)
+    }
+    
+    MatAutovet <- t(autovettori) %*% matrix  
+    
+    cellNorms <- sqrt(colMeans(as.matrix(MatAutovet**2)))
+    MatAutovetNew <- t(t(as.matrix(MatAutovet))/cellNorms)
+    
+    FindNeighborsTest <- Seurat::FindNeighbors(t(as.matrix(MatAutovet)))
+    ClusterSeuratMatAutovet <- Seurat:::RunModularityClustering(FindNeighborsTest$snn,resolution = resolution)
+    
+    FindNeighborsTest <- Seurat::FindNeighbors(t(MatAutovetNew))
+    ClusterSeuratMatAutovetNew <- Seurat:::RunModularityClustering(FindNeighborsTest$snn,resolution = resolution)
+    
+    cl.SeuratStandard <- SeuratStandard(data = getRawData(obj),npc = npc,resolution = resolution)
+    clTot <- append(clTot, list(cl.SeuratStandard))
+    names(clTot)[length(clTot)] <- paste0("SeuratStandard_",resolution,"_",approch)
+    
+    cl.SeuratScTr <- SeuratSCtransform(data = getRawData(obj),npc = npc,resolution = resolution)
+    clTot <- append(clTot, list(cl.SeuratScTr))
+    names(clTot)[length(clTot)] <- paste0("SeuratScTr_",resolution,"_",approch)
+    
+    tumorLine <- factor(conditionsFromNames(colnames(MatAutovet),
+                                            splitPattern = ".1_", fragmentNum = 2L))
+    
+    tableTot <- append(tableTot, list(table(tumorLine,cl.SeuratStandard)))
+    names(tableTot)[length(tableTot)] <- paste0("SeuratStandard_",resolution,"_",approch)
+    
+    tableTot <- append(tableTot, list(table(tumorLine,cl.SeuratScTr)))
+    names(tableTot)[length(tableTot)] <- paste0("SeuratScTr_",resolution,"_",approch)
+    # Report
+    
+    clTot <- append(clTot,list(ClusterSeuratMatAutovet))
+    names(clTot)[length(clTot)] <- paste0("MatAutovet_",resolution,"_",approch)
+    
+    tableTot <- append(tableTot, 
+                       list(table(tumorLine,
+                                  ClusterSeuratMatAutovet)))
+    names(tableTot)[length(tableTot)] <- paste0("MatAutovet_",resolution,"_",approch)
+    
+    clTot <- append(clTot,list(ClusterSeuratMatAutovetNew))
+    names(clTot)[length(clTot)] <- paste0("MatAutovetSc_",resolution,"_",approch)
+    
+    tableTot <- append(tableTot, list(table(tumorLine,ClusterSeuratMatAutovetNew)))
+    names(tableTot)[length(tableTot)] <- paste0("MatAutovetSc_",resolution,"_",approch)
+    
+    dfReport <- cbind(as.data.frame(getPartitionMetrics(true = tumorLine[names(tumorLine) %in% names(cl.SeuratStandard)],
+                                                        pred = cl.SeuratStandard,
+                                                        level = "dataset")),
+                      "N.cl"=length(unique(cl.SeuratStandard)))
+    rownames(dfReport) <- "SeuratStandard"
+    
+    
+    dfReport <- rbind(dfReport, 
+                      cbind(as.data.frame(getPartitionMetrics(true = tumorLine,
+                                                              pred = cl.SeuratScTr,
+                           level = "dataset")),
+                   "N.cl"=length(unique(cl.SeuratScTr))))
+    rownames(dfReport)[nrow(dfReport)] <- "SeuratSCTransform"
+
+    dfReport <- rbind(dfReport, 
+                      cbind(as.data.frame(getPartitionMetrics(true = tumorLine,
+                                                              pred = ClusterSeuratMatAutovet,level = "dataset")),
+                            "N.cl"= length(unique(ClusterSeuratMatAutovet))))
+    rownames(dfReport)[nrow(dfReport)] <- "MatAutovet"
+    
+    dfReport <- rbind(dfReport, 
+                      cbind(as.data.frame(getPartitionMetrics(true = tumorLine,
+                                                              pred = ClusterSeuratMatAutovetNew,level = "dataset")),
+                            "N.cl"= length(unique(ClusterSeuratMatAutovetNew))))
+    rownames(dfReport)[nrow(dfReport)] <- "MatAutovetSc"
+    
+    dfReport$approch <- approch
+    
+    dfReport$resolution <- resolution
+    
+    dfReport$npc <- npc
+    
+    dfReport$Tool <- rownames(dfReport)
+    
+    if (length(dfReportTot) == 1) {
+      dfReportTot <-   dfReport
+    }else{
+      dfReportTot <- rbind(dfReportTot,dfReport)  
+    }
+    
+  }
+  
+}
+```
+
+```{r eval=FALSE}
+write.csv(dfReportTot,file = "results/dfReportTotWholeFinal0.16_0.5.csv")
+saveRDS(tableTot,file = "results/tableTotWholeFinal0.16_0.5.RDS")
+saveRDS(clTot,file = "results/clTotWholeFinal0.16_0.5.RDS")
+```
+
+```{r, eval=TRUE, echo=FALSE}
+
+dfReportTot <- read.csv("../results/dfReportTotWholeFinal0.16_0.5.csv")
+tableTot <- readRDS("../results/tableTotWholeFinal0.16_0.5.RDS")
+clTot <- readRDS("../results/clTotWholeFinal0.16_0.5.RDS")
+
+
+```
+
+```{r,fig.height= 7, fig.width=7, warning=FALSE}
+dfReportTot <- pivot_longer(dfReportTot,cols = c(2:15),names_to = "metric")
+
+plotScores <- ggplot(dfReportTot[dfReportTot$Tool != "MatAutovet" & dfReportTot$metric %in% c("ARI","AMI","EH","EC") & dfReportTot$N.cl > 9 & dfReportTot$N.cl < 16,],aes(x=N.cl,y=value,color = Tool))+
+  geom_point(size = 1.5,alpha = 0.8)+# geom_line()+
+  geom_smooth(alpha = 0.4,linewidth = 0.5,se = F,method = "loess")  + 
+  facet_wrap(~metric , scales = "free" , ncol = 2) +
+  #theme_bw()+scale_color_brewer(palette = "Set1")+
+  theme_light()+theme(legend.position="bottom")+
+  scale_colour_manual("", values = methods.color2,name = "Method", labels = c("COTAN", "Seurat SC Transform", "Seurat"))  #+
+  #scale_color_discrete(name = "Method", labels = c("COTAN", "Seurat SC Transform", "Seurat"))
+
+plotScores
+```
+
+```{r}
+pdf(paste0(outDir,"PlotsMetricheClustering.pdf"),height = 5,width =5)
+plot(plotScores)
+dev.off()
+```
+
+Confusion matrix examples
+
+```{r}
+tableTot$SeuratStandard_0.22_Derivative
+```
+
+```{r}
+tableTot$SeuratScTr_0.2_Derivative
+```
+
+```{r}
+tableTot$MatAutovetSc_0.2_Derivative
+```
+
+```{r}
+tableTot$SeuratStandard_0.4_Derivative
+```
+
+```{r}
+tableTot$MatAutovetSc_0.46_Derivative
+```
+
+```{r}
+res <-  eigs_sym(as.matrix(obj@genesCoex), k = 25, which = "LM") 
+autovettori <- res$vectors[,1:20]
+
+BinarizedCounts <- COTAN::getZeroOneProj(obj)
+ProbOfZero <- COTAN::getProbabilityOfZero(obj)
+matrix <- as.matrix(BinarizedCounts/(1 - ProbOfZero) - (1 - BinarizedCounts)/ProbOfZero)
+gc()
+MatAutovet <- t(autovettori) %*% matrix  
+    
+cellNorms <- sqrt(colMeans(as.matrix(MatAutovet**2)))
+MatAutovetScaled <- t(t(as.matrix(MatAutovet))/cellNorms)
+
+umapMatAutovetScaled <- umap(t(as.matrix(MatAutovetScaled)),
+                   umap.method = "uwot",
+  n.neighbors = 20,
+  metric = "cosine",
+  n.epochs = NULL,
+  learning.rate = 1,
+  min.dist = 0.3,
+  spread = 1,
+  set.op.mix.ratio = 1,
+  local.connectivity = 1L,
+  repulsion.strength = 1,
+  negative.sample.rate = 5,
+  uwot.sgd = FALSE,
+  seed.use = 42,
+  metric.kwds = NULL,
+  angular.rp.forest = FALSE,
+  densmap = FALSE,
+  dens.lambda = 2,
+  dens.frac = 0.3,
+  dens.var.shift = 0.1,
+  verbose = TRUE) #res 0.4
+
+tumorLine <- factor(conditionsFromNames(colnames(MatAutovet),
+                                            splitPattern = "-1_", fragmentNum = 2L))
+
+dfumapMatAutovetScaled <- data.frame(x = umapMatAutovetScaled$layout[,1],
+                 y = umapMatAutovetScaled$layout[,2],
+                 CellType = tumorLine,
+                 COTAN_cl = clTot$MatAutovetSc_0.4_Derivative, 
+                 nu = getNu(obj),
+                 CellSize = COTAN::getCellsSize(obj)
+)
+
+ggplot(dfumapMatAutovetScaled, aes(x, y, colour = tumorLine)) +#xlim(-25, 30)+
+  geom_point(alpha = 0.8,size = 0.5) +
+  xlab("UMAP 1") + ylab("UMAP 2")+ 
+  scale_color_discrete(name = "Cell Lines")+ scale_color_brewer(palette="Dark2")
+```
+
+```{r}
+ggplot(dfumapMatAutovetScaled, aes(x, y, colour = as.character(COTAN_cl))) +#xlim(-25, 30)+
+  geom_point(alpha = 0.8,size = 0.5)
+```
+
+```{r}
+pbmc <- CreateSeuratObject(counts = getRawData(obj))
+pbmc <- NormalizeData(pbmc)
+pbmc <- FindVariableFeatures(pbmc, selection.method = "vst", nfeatures = 2000)
+all.genes <- rownames(pbmc)
+pbmc <- ScaleData(pbmc, features = all.genes)
+
+gc()
+
+pbmc <- RunPCA(pbmc, verbose = FALSE)
+pbmc <- RunUMAP(pbmc, dims = 1:20, verbose = FALSE)
+
+pbmc@meta.data$CL_SeuratStandard_0.4 <- clTot$SeuratStandard_0.4_Derivative
+pbmc@meta.data$TumorLine <- tumorLine
+
+DimPlot(pbmc,reduction = "umap",group.by = "CL_SeuratStandard_0.4")
+```
+
+```{r}
+DimPlot(pbmc,reduction = "umap",group.by = "TumorLine")
+```
+
+```{r}
+clDF <- as.data.frame(tumorLine)
+clDF <- cbind(clDF,clTot$MatAutovetSc_0.4_Derivative)
+clDF <- cbind(clDF,as.vector(clTot$SeuratStandard_0.4_Derivative))
+
+colnames(clDF) <- c("CellLines","COTAN_Clusters","Seurat_Clusters")
+library(ggsankey)
+mjvt_split.table <- clDF %>% make_long(CellLines,COTAN_Clusters)
+
+ggplot(mjvt_split.table,
+       aes(x = x,
+           next_x = next_x,
+           node = node,
+           next_node = next_node,
+           fill = factor(node),
+           label = node)) +
+  geom_sankey(flow.alpha = 0.55, node.color = 1) +
+  geom_sankey_label(size = 3.5, color = 1, fill = "white") +
+  scale_fill_viridis_d(option = "A", alpha = 0.75) +
+  theme_sankey(base_size = 16) +xlab("")+
+  theme(legend.position = "none")
+```
