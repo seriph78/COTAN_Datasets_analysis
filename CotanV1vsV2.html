@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2024-01-19">
 
-<title>Filtering of PBMC3 using COTAN – COTAN Datasets analysis</title>
+<title>COTAN comparision version – COTAN Datasets analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="./PBMC1_filtering.html">PBMC form 10X site</a></li><li class="breadcrumb-item"><a href="./PBMC3_filtering.html">Cleaning PBMC3</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./CotanV1vsV2.html">COTAN chages in version 2</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -148,19 +147,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CotanV1vsV2.html" class="sidebar-item-text sidebar-link">
+  <a href="./CotanV1vsV2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">COTAN chages in version 2</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Datasets</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
@@ -291,13 +290,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">PBMC form 10X site</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./PBMC1_filtering.html" class="sidebar-item-text sidebar-link">
@@ -324,7 +323,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./PBMC3_filtering.html" class="sidebar-item-text sidebar-link active">
+  <a href="./PBMC3_filtering.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cleaning PBMC3</span></a>
   </div>
 </li>
@@ -729,15 +728,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a.-old-first-bioconductor-release-era-exports-were-small-and-monolithic" id="toc-a.-old-first-bioconductor-release-era-exports-were-small-and-monolithic" class="nav-link active" data-scroll-target="#a.-old-first-bioconductor-release-era-exports-were-small-and-monolithic">A. “Old / first Bioconductor release era” exports were small and monolithic</a></li>
+  <li><a href="#b.-current-v2-exports-are-modular-and-much-broader-qc-clustering-metadata-uniformity" id="toc-b.-current-v2-exports-are-modular-and-much-broader-qc-clustering-metadata-uniformity" class="nav-link" data-scroll-target="#b.-current-v2-exports-are-modular-and-much-broader-qc-clustering-metadata-uniformity">B. “Current v2” exports are modular and much broader (QC + clustering + metadata + uniformity)</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="./PBMC1_filtering.html">PBMC form 10X site</a></li><li class="breadcrumb-item"><a href="./PBMC3_filtering.html">Cleaning PBMC3</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Filtering of PBMC3 using COTAN</h1>
+<h1 class="title">COTAN comparision version</h1>
 </div>
 
 
@@ -745,12 +751,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">January 19, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -760,494 +760,107 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Library import</p>
+<section id="a.-old-first-bioconductor-release-era-exports-were-small-and-monolithic" class="level2">
+<h2 class="anchored" data-anchor-id="a.-old-first-bioconductor-release-era-exports-were-small-and-monolithic">A. “Old / first Bioconductor release era” exports were small and monolithic</h2>
+<p>Using the Bioconductor 3.15 reference manual (COTAN v1-era), the exported surface is compact and centered on a single legacy class scCOTAN plus a small set of procedural functions for:</p>
+<ul>
+<li><p>Object creation / initialization: automatic.COTAN.object.creation, initRaw</p></li>
+<li><p>Cleaning / filtering: clean, drop.genes.cells</p></li>
+<li><p>Core stats: cotan_analysis, get.GDI, get.pval, plus contingency-table getters like get.expected.ct, get.observed.ct</p></li>
+<li><p>Coexpression extraction: extract.coex, get.coex</p></li>
+<li><p>Plots: plot_GDI, plot_heatmap, plot_general.heatmap</p></li>
+<li><p>Helpers: mat2vec_rfast, vec2mat_rfast</p></li>
+</ul>
+<p>This is the “classic COTAN” feel: few entry points, user does a linear workflow, and most operations are directly on the legacy object.</p>
+</section>
+<section id="b.-current-v2-exports-are-modular-and-much-broader-qc-clustering-metadata-uniformity" class="level2">
+<h2 class="anchored" data-anchor-id="b.-current-v2-exports-are-modular-and-much-broader-qc-clustering-metadata-uniformity">B. “Current v2” exports are modular and much broader (QC + clustering + metadata + uniformity)</h2>
+<p>In the current reference manual (v2-era), the exports are clearly organized into distinct user-facing modules. You can see whole families of functions dedicated to:</p>
+<ol type="1">
+<li>Object model + conversions (interoperability)</li>
+</ol>
+<p>COTAN / COTAN-class and conversions to/from SingleCellExperiment (convertFromSingleCellExperiment, convertToSingleCellExperiment)</p>
+<ol start="2" type="1">
+<li>Clusterization management (a first-class concept now)</li>
+</ol>
+<p>Add/drop/reorder clusterizations: addClusterization, dropClusterization, reorderClusterization</p>
+<p>Cluster-level analytics: DEAOnClusters, findClustersMarkers, clusterGeneContingencyTables, clustersSummaryData, clustersTreePlot</p>
+<ol start="3" type="1">
+<li>Dataset metadata + conditions are explicit</li>
+</ol>
+<p>addCondition, dropCondition, getAllConditions, plus metadata utilities like datasetTags, initializeMetaDataset, addElementToMetaDataset</p>
+<ol start="4" type="1">
+<li>Raw-data QC / cleaning became a full toolbox (not just “clean()”)</li>
+</ol>
+<p>Functions and plots like cellSizePlot, mitochondrialPercentagePlot, screePlot, scatterPlot, and a suite of “fully expressed genes/cells” utilities (findFullyExpressedGenes, flagNotFullyExpressedGenes, etc.)</p>
+<ol start="5" type="1">
+<li>“Uniform clusters” / transcript uniformity checks (signature v2 feature)</li>
+</ol>
+<p>cellsUniformClustering, checkClusterUniformity, mergeUniformCellsClusters, plus checker classes like AdvancedGDIUniformityCheck-class, SimpleGDIUniformityCheck-class, and threshold shifting helpers</p>
+<ol start="6" type="1">
+<li>Performance / modern compute hooks</li>
+</ol>
+<p>Multi-threading controls (handleMultiCore, canUseTorch) and explicit references to torch installation/usage pathways</p>
+<ol start="7" type="1">
+<li>Backward compatibility is explicitly preserved (important for reviewers)</li>
+</ol>
+<p>You can still see scCOTAN-class and legacy helpers grouped under a “legacy” area in the docs/index, which signals a conscious compatibility strategy rather than a breaking rewrite.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(COTAN)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Seurat)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DropletUtils)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Settings</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datasetName <span class="ot">=</span> <span class="st">'PBMC3'</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>datasetFolder <span class="ot">=</span> <span class="st">'./Data/'</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>inDir  <span class="ot">=</span> <span class="fu">paste</span>(datasetFolder, datasetName, <span class="st">'/raw/10X/'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>outDir <span class="ot">=</span> <span class="fu">paste</span>(datasetFolder, datasetName, <span class="st">'/filtered/'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dir10X <span class="ot">=</span> <span class="fu">paste</span>(outDir, <span class="st">'10X/'</span>, <span class="at">sep=</span><span class="st">''</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(outDir)) {</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(outDir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingLevel</span>(<span class="dv">2</span>)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">setLoggingFile</span>(<span class="fu">paste</span>(outDir, <span class="st">"logfile.log"</span>, <span class="at">sep=</span><span class="st">""</span>))</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">parallelly.fork.enable =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Data loading</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">=</span> <span class="fu">Read10X</span>(<span class="at">data.dir =</span> inDir, <span class="at">strip.suffix =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">=</span> dataset[[<span class="dv">1</span>]]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sampleCond <span class="ot">&lt;-</span> datasetName</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">COTAN</span>(<span class="at">raw =</span> dataset)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">initializeMetaDataset</span>(</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  PBMC3,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">GEO =</span> <span class="fu">paste</span>(<span class="st">"10X "</span>, datasetName, <span class="at">sep=</span><span class="st">""</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sequencingMethod =</span> <span class="st">"10X"</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sampleCond =</span> sampleCond</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Inspect cells’ sizes</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(PBMC3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Drop cells with too many reads as they are probably doublets</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cellsSizeThr <span class="ot">&lt;-</span> <span class="dv">20000</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(PBMC3, <span class="st">"Cells size threshold"</span>, cellsSizeThr)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cellsToRem <span class="ot">&lt;-</span> <span class="fu">getCells</span>(PBMC3)[<span class="fu">getCellsSize</span>(PBMC3) <span class="sc">&gt;</span> cellsSizeThr]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(PBMC3, <span class="at">cells =</span> cellsToRem)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(PBMC3, <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Inspect the number of expressed genes per cell</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(PBMC3, <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Drop cells with too high genes expression as they are probably doublets</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>geneSizeThr <span class="ot">&lt;-</span> <span class="dv">3500</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(PBMC3, <span class="st">"Num genes threshold"</span>, geneSizeThr)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>numExprGenes <span class="ot">&lt;-</span> <span class="fu">getNumExpressedGenes</span>(PBMC3)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>cellsToRem <span class="ot">&lt;-</span> <span class="fu">names</span>(numExprGenes)[numExprGenes <span class="sc">&gt;</span> geneSizeThr]</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(PBMC3, <span class="at">cells =</span> cellsToRem)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(PBMC3, <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Check number of mithocondrial genes expressed in each cell</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>mitGenesPattern <span class="ot">&lt;-</span> <span class="st">"^[Mm][Tt]-"</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getGenes</span>(PBMC3)[<span class="fu">grep</span>(mitGenesPattern, <span class="fu">getGenes</span>(PBMC3))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>get_exports_from_ref <span class="ot">&lt;-</span> <span class="cf">function</span>(ref, lib) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(lib, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  old_libpaths <span class="ot">&lt;-</span> <span class="fu">.libPaths</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">on.exit</span>(<span class="fu">.libPaths</span>(old_libpaths), <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">.libPaths</span>(<span class="fu">c</span>(lib, old_libpaths))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"remotes"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) <span class="fu">install.packages</span>(<span class="st">"remotes"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Install from GitHub ref (commit hash or branch name)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  remotes<span class="sc">::</span><span class="fu">install_github</span>(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">repo =</span> <span class="st">"seriph78/COTAN"</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ref  =</span> ref,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">upgrade =</span> <span class="st">"never"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">dependencies =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Load and extract exports</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(COTAN))</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(<span class="fu">getNamespaceExports</span>(<span class="st">"COTAN"</span>))</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>lib_head <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">"cotan_head"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>lib_old  <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">"cotan_7ea9d48"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>exports_head <span class="ot">&lt;-</span> <span class="fu">get_exports_from_ref</span>(<span class="st">"devel"</span>, lib_head)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>exports_old  <span class="ot">&lt;-</span> <span class="fu">get_exports_from_ref</span>(<span class="st">"7ea9d488addf651e5641052771ced4125009c151"</span>, lib_old)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>added   <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(exports_head, exports_old)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>removed <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(exports_old,  exports_head)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>common  <span class="ot">&lt;-</span> <span class="fu">intersect</span>(exports_head, exports_old)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_old =</span> <span class="fu">length</span>(exports_old),</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_head =</span> <span class="fu">length</span>(exports_head),</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_added =</span> <span class="fu">length</span>(added),</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_removed =</span> <span class="fu">length</span>(removed)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "MT-ND1"  "MT-ND2"  "MT-CO1"  "MT-CO2"  "MT-ATP8" "MT-ATP6" "MT-CO3" 
- [8] "MT-ND3"  "MT-ND4L" "MT-ND4"  "MT-ND5"  "MT-ND6"  "MT-CYB" </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPlot, mitSizes) <span class="sc">%&lt;-%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(PBMC3, <span class="at">genePrefix =</span> mitGenesPattern,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mitPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>We drop cells with a too high percentage of mitocondrial genes (are likely dead)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mitPercThr <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(PBMC3, <span class="st">"Mitoc. perc. threshold"</span>, mitPercThr)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>cellsToRem <span class="ot">&lt;-</span> <span class="fu">rownames</span>(mitSizes)[mitSizes[[<span class="st">"mit.percentage"</span>]] <span class="sc">&gt;</span> mitPercThr]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(PBMC3, <span class="at">cells =</span> cellsToRem)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mitPlot, mitSizes) <span class="sc">%&lt;-%</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(PBMC3, <span class="at">genePrefix =</span> mitGenesPattern,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mitPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Check number of ribosomial genes expressed in each cell</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ribGenesPattern <span class="ot">&lt;-</span> <span class="st">"^RP[SL]</span><span class="sc">\\</span><span class="st">d+"</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getGenes</span>(PBMC3)[<span class="fu">grep</span>(ribGenesPattern, <span class="fu">getGenes</span>(PBMC3))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "RPL22"          "RPL11"          "RPS6KA1"        "RPS8"          
-  [5] "RPL5"           "RPS27"          "RPS6KC1"        "RPS7"          
-  [9] "RPS27A"         "RPL31"          "RPL37A"         "RPL32"         
- [13] "RPL15"          "RPL14"          "RPL29"          "RPL24"         
- [17] "RPL22L1"        "RPL39L"         "RPL35A"         "RPL9"          
- [21] "RPL34-AS1"      "RPL34"          "RPS3A"          "RPL37"         
- [25] "RPS23"          "RPS14"          "RPL26L1"        "RPS18"         
- [29] "RPS10-NUDT3"    "RPS10"          "RPL10A"         "RPL7L1"        
- [33] "RPS12"          "RPS6KA2"        "RPS6KA2-AS1"    "RPS6KA3"       
- [37] "RPS4X"          "RPS6KA6"        "RPL36A"         "RPL36A-HNRNPH2"
- [41] "RPL39"          "RPL10"          "RPS20"          "RPL7"          
- [45] "RPL30"          "RPL8"           "RPS6"           "RPL35"         
- [49] "RPL12"          "RPL7A"          "RPL27A"         "RPS13"         
- [53] "RPS6KA4"        "RPS6KB2"        "RPS6KB2-AS1"    "RPS3"          
- [57] "RPS25"          "RPS24"          "RPS26"          "RPL41"         
- [61] "RPL6"           "RPL21"          "RPL10L"         "RPS29"         
- [65] "RPL36AL"        "RPS6KL1"        "RPS6KA5"        "RPS27L"        
- [69] "RPL4"           "RPS17"          "RPL3L"          "RPS2"          
- [73] "RPS15A"         "RPL13"          "RPL26"          "RPL23A"        
- [77] "RPL23"          "RPL19"          "RPL27"          "RPS6KB1"       
- [81] "RPL38"          "RPL17-C18orf32" "RPL17"          "RPS21"         
- [85] "RPS15"          "RPL36"          "RPS28"          "RPL18A"        
- [89] "RPS16"          "RPS19"          "RPL18"          "RPL13A"        
- [93] "RPS11"          "RPS9"           "RPL28"          "RPS5"          
- [97] "RPS4Y1"         "RPS4Y2"         "RPL3"           "RPS19BP1"      </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(ribPlot, ribSizes) <span class="sc">%&lt;-%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mitochondrialPercentagePlot</span>(PBMC3, <span class="at">genePrefix =</span> ribGenesPattern,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ribPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Check no further outliers after all the culling</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cellSizePlot</span>(PBMC3, <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">genesSizePlot</span>(PBMC3, <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Cleaning, round 1</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">clean</span>(PBMC3)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(PBMC3)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(PBMC3, <span class="st">"Num drop B group"</span>, <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDEPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nuPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNuPlot)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>yset<span class="ot">=</span><span class="fl">0.16</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nuDf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">"nu"</span> <span class="ot">=</span> <span class="fu">sort</span>(<span class="fu">getNu</span>(PBMC3)), <span class="st">"n"</span> <span class="ot">=</span> <span class="fu">seq_along</span>(<span class="fu">getNu</span>(PBMC3)))</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">addElementToMetaDataset</span>(PBMC3, <span class="st">"Threshold low UDE cells:"</span>, yset)</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>cellsToRem <span class="ot">&lt;-</span><span class="fu">rownames</span>(nuDf)[nuDf[[<span class="st">"nu"</span>]] <span class="sc">&lt;</span> yset]</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">dropGenesCells</span>(PBMC3, <span class="at">cells =</span> cellsToRem)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Cleaning, round 2</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>PBMC3 <span class="ot">&lt;-</span> <span class="fu">clean</span>(PBMC3)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(pcaCellsPlot, pcaCellsData, genesPlot, UDEPlot, nuPlot, zoomedNuPlot) <span class="sc">%&lt;-%</span> <span class="fu">cleanPlots</span>(PBMC3)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pcaCellsData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(genesPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(UDEPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nuPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(zoomedNuPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">cellSizePlot</span>(PBMC3, <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">genesSizePlot</span>(PBMC3, <span class="at">splitPattern =</span> <span class="st">"-"</span>, <span class="at">numCol =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="PBMC3_filtering_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Save the filtered dataset</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">dir.exists</span>(dir10X)) {</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write10xCounts</span>(dir10X, <span class="fu">getRawData</span>(PBMC3))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(PBMC3, <span class="at">file =</span> <span class="fu">paste0</span>(outDir, sampleCond, <span class="st">".cotan.RDS"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>R version 4.3.2 (2023-10-31)
-Platform: x86_64-pc-linux-gnu (64-bit)
-Running under: Ubuntu 20.04.6 LTS
+<pre><code>$n_old
+[1] 210
 
-Matrix products: default
-BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.9.0 
-LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.9.0
+$n_head
+[1] 210
 
-locale:
- [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
- [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
- [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+$n_added
+[1] 0
 
-time zone: Europe/Rome
-tzcode source: system (glibc)
-
-attached base packages:
-[1] stats4    stats     graphics  grDevices utils     datasets  methods  
-[8] base     
-
-other attached packages:
- [1] DropletUtils_1.20.0         SingleCellExperiment_1.22.0
- [3] SummarizedExperiment_1.30.2 Biobase_2.60.0             
- [5] GenomicRanges_1.52.0        GenomeInfoDb_1.36.1        
- [7] IRanges_2.34.1              S4Vectors_0.38.1           
- [9] BiocGenerics_0.46.0         MatrixGenerics_1.12.3      
-[11] matrixStats_1.2.0           zeallot_0.1.0              
-[13] ggplot2_3.4.2               tibble_3.2.1               
-[15] Seurat_5.0.0                SeuratObject_5.0.0         
-[17] sp_2.1-1                    COTAN_2.3.0                
-[19] dplyr_1.1.2                
-
-loaded via a namespace (and not attached):
-  [1] RcppAnnoy_0.0.21          splines_4.3.2            
-  [3] later_1.3.1               bitops_1.0-7             
-  [5] R.oo_1.25.0               polyclip_1.10-4          
-  [7] fastDummies_1.7.3         lifecycle_1.0.3          
-  [9] edgeR_3.42.4              doParallel_1.0.17        
- [11] globals_0.16.2            lattice_0.22-5           
- [13] MASS_7.3-60               dendextend_1.17.1        
- [15] magrittr_2.0.3            limma_3.56.2             
- [17] plotly_4.10.2             rmarkdown_2.24           
- [19] yaml_2.3.7                httpuv_1.6.11            
- [21] sctransform_0.4.1         spam_2.10-0              
- [23] askpass_1.2.0             spatstat.sparse_3.0-2    
- [25] reticulate_1.34.0         cowplot_1.1.1            
- [27] pbapply_1.7-2             RColorBrewer_1.1-3       
- [29] zlibbioc_1.46.0           abind_1.4-5              
- [31] Rtsne_0.16                R.utils_2.12.2           
- [33] purrr_1.0.1               RCurl_1.98-1.12          
- [35] circlize_0.4.15           GenomeInfoDbData_1.2.10  
- [37] ggrepel_0.9.3             irlba_2.3.5.1            
- [39] listenv_0.9.0             spatstat.utils_3.0-3     
- [41] umap_0.2.10.0             goftest_1.2-3            
- [43] RSpectra_0.16-1           spatstat.random_3.2-1    
- [45] dqrng_0.3.0               fitdistrplus_1.1-11      
- [47] parallelly_1.36.0         DelayedMatrixStats_1.22.5
- [49] leiden_0.4.3              codetools_0.2-19         
- [51] DelayedArray_0.26.7       scuttle_1.10.2           
- [53] tidyselect_1.2.0          shape_1.4.6              
- [55] farver_2.1.1              ScaledMatrix_1.8.1       
- [57] viridis_0.6.4             spatstat.explore_3.2-1   
- [59] jsonlite_1.8.7            GetoptLong_1.0.5         
- [61] ellipsis_0.3.2            progressr_0.14.0         
- [63] ggridges_0.5.4            survival_3.5-7           
- [65] iterators_1.0.14          foreach_1.5.2            
- [67] tools_4.3.2               ica_1.0-3                
- [69] Rcpp_1.0.11               glue_1.6.2               
- [71] gridExtra_2.3             xfun_0.39                
- [73] ggthemes_5.0.0            HDF5Array_1.28.1         
- [75] withr_2.5.0               fastmap_1.1.1            
- [77] rhdf5filters_1.12.1       fansi_1.0.4              
- [79] openssl_2.1.0             digest_0.6.33            
- [81] rsvd_1.0.5                parallelDist_0.2.6       
- [83] R6_2.5.1                  mime_0.12                
- [85] colorspace_2.1-0          scattermore_1.2          
- [87] tensor_1.5                spatstat.data_3.0-1      
- [89] R.methodsS3_1.8.2         utf8_1.2.3               
- [91] tidyr_1.3.0               generics_0.1.3           
- [93] data.table_1.14.8         httr_1.4.6               
- [95] htmlwidgets_1.6.2         S4Arrays_1.2.0           
- [97] uwot_0.1.16               pkgconfig_2.0.3          
- [99] gtable_0.3.3              ComplexHeatmap_2.16.0    
-[101] lmtest_0.9-40             XVector_0.40.0           
-[103] htmltools_0.5.7           dotCall64_1.1-0          
-[105] clue_0.3-64               scales_1.3.0             
-[107] png_0.1-8                 knitr_1.43               
-[109] rstudioapi_0.15.0         reshape2_1.4.4           
-[111] rjson_0.2.21              nlme_3.1-163             
-[113] rhdf5_2.44.0              zoo_1.8-12               
-[115] GlobalOptions_0.1.2       stringr_1.5.0            
-[117] KernSmooth_2.23-22        parallel_4.3.2           
-[119] miniUI_0.1.1.1            RcppZiggurat_0.1.6       
-[121] pillar_1.9.0              grid_4.3.2               
-[123] vctrs_0.6.3               RANN_2.6.1               
-[125] promises_1.2.0.1          BiocSingular_1.16.0      
-[127] beachmat_2.16.0           xtable_1.8-4             
-[129] cluster_2.1.6             evaluate_0.21            
-[131] locfit_1.5-9.8            cli_3.6.1                
-[133] compiler_4.3.2            rlang_1.1.1              
-[135] crayon_1.5.2              future.apply_1.11.0      
-[137] labeling_0.4.2            plyr_1.8.8               
-[139] stringi_1.8.1             viridisLite_0.4.2        
-[141] deldir_2.0-2              BiocParallel_1.34.2      
-[143] assertthat_0.2.1          munsell_0.5.0            
-[145] lazyeval_0.2.2            spatstat.geom_3.2-4      
-[147] PCAtools_2.14.0           Matrix_1.6-3             
-[149] RcppHNSW_0.5.0            patchwork_1.1.2          
-[151] sparseMatrixStats_1.12.2  future_1.33.0            
-[153] Rhdf5lib_1.22.0           shiny_1.8.0              
-[155] ROCR_1.0-11               Rfast_2.1.0              
-[157] igraph_1.6.0              RcppParallel_5.1.7       </code></pre>
+$n_removed
+[1] 0</code></pre>
 </div>
 </div>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

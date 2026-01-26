@@ -1,0 +1,548 @@
+---
+title: "DatasetCleaning_Run40"
+format: html
+editor: source
+width: 9
+height: 5
+columns: 132
+---
+
+## Preamble
+
+```{r}
+# Util libs
+library(assertthat)
+library(ggplot2)
+library(zeallot)
+library(conflicted)
+library(Matrix)
+
+# Data processing libs
+if (!suppressWarnings(require(COTAN))) {
+  devtools::load_all("~/dev/COTAN/COTAN/")
+}
+
+conflicts_prefer(zeallot::`%->%`, zeallot::`%<-%`)
+
+options(parallelly.fork.enable = TRUE)
+
+setLoggingLevel(2L)
+```
+
+## List input files
+
+```{r}
+inDir <- file.path("..")
+outDir <- file.path(".")
+
+list.files(path = inDir, pattern = "\\.RDS$")
+
+globalCondition <- "capillary_blood_samples_pbmcs"
+
+thisRun <- "40"
+fileNameIn <- paste0(globalCondition, "-Run_", thisRun, ".RDS")
+
+setLoggingFile(file.path(outDir, paste0("DatasetCleaning_Run", thisRun, ".log")))
+```
+
+## Load dataset
+
+```{r}
+aRunObj <- readRDS(file = file.path(inDir, fileNameIn))
+
+getAllConditions(aRunObj)
+getClusterizations(aRunObj)
+
+dim(getRawData(aRunObj))
+```
+
+## Cleaning
+
+### clean() using standard thresholds
+
+```{r}
+cellsToDrop <- names(getClusterizationData(aRunObj,"c4")[[1]][is.na(getClusterizationData(aRunObj,"c4")[[1]])])
+
+aRunObj <- dropGenesCells(aRunObj, cells = cellsToDrop)
+
+aRunObj <- clean(aRunObj)
+```
+
+### Check the initial plots
+
+```{r}
+cellSizePlot(aRunObj, condName = "Participant.IDs")
+genesSizePlot(aRunObj, condName = "Participant.IDs")
+scatterPlot(aRunObj, condName = "Participant.IDs")
+
+c(mitPerPlot, mitPerDf) %<-%
+  mitochondrialPercentagePlot(aRunObj, condName = "Participant.IDs",
+                              genePrefix = "^MT-")
+mitPerPlot
+```
+
+### Remove too high mitochondrial percentage cells
+
+Expected percentages are around 6%-10%: too high percentage imply dead cells
+
+```{r}
+sum(mitPerDf[["mit.percentage"]] > 15.0)
+sum(mitPerDf[["mit.percentage"]] > 13.0)
+sum(mitPerDf[["mit.percentage"]] > 11.0)
+sum(mitPerDf[["mit.percentage"]] > 10.0)
+sum(mitPerDf[["mit.percentage"]] > 8.0)
+# drop above 11%
+mitPerThr <- 8.0
+aRunObj <-
+  addElementToMetaDataset(
+    aRunObj,
+    "Mitochondrial percentage threshold", mitPerThr)
+
+cellsToDrop <- getCells(aRunObj)[which(mitPerDf[["mit.percentage"]] > mitPerThr)]
+
+aRunObj <- dropGenesCells(aRunObj, cells = cellsToDrop)
+```
+
+### Redo the plots
+
+```{r}
+cellSizePlot(aRunObj, condName = "Participant.IDs")
+genesSizePlot(aRunObj, condName = "Participant.IDs")
+scatterPlot(aRunObj, condName = "Participant.IDs")
+
+c(mitPerPlot, mitPerDf) %<-%
+  mitochondrialPercentagePlot(aRunObj, condName = "Participant.IDs",
+                              genePrefix = "^MT-")
+mitPerPlot
+```
+
+### Remove cells with too high size
+
+```{r}
+librarySize <- getCellsSize(aRunObj)
+
+sum(librarySize > 25000)
+sum(librarySize > 20000)
+sum(librarySize > 18000)
+sum(librarySize > 15000)
+sum(librarySize > 10000)
+
+# drop above 11%
+cellSizeThr <- 15000
+aRunObj <-
+  addElementToMetaDataset(
+    aRunObj,
+    "Cell size threshold", cellSizeThr)
+
+cellsToDrop <- getCells(aRunObj)[which(librarySize > cellSizeThr)]
+
+aRunObj <- dropGenesCells(aRunObj, cells = cellsToDrop)
+```
+
+### Redo the plots
+
+```{r}
+cellSizePlot(aRunObj, condName = "Participant.IDs")
+genesSizePlot(aRunObj, condName = "Participant.IDs")
+scatterPlot(aRunObj, condName = "Participant.IDs")
+
+c(mitPerPlot, mitPerDf) %<-%
+  mitochondrialPercentagePlot(aRunObj, condName = "Participant.IDs",
+                              genePrefix = "^MT-")
+mitPerPlot
+```
+
+### Check for spurious clusters
+
+```{r}
+aRunObj <- clean(aRunObj)
+
+c(pcaCells, pcaCellsData, genes, UDE, nu, zoomedNu) %<-%
+  cleanPlots(aRunObj, includePCA = TRUE)
+```
+
+### Plot PCA and Nu
+
+```{r}
+plot(pcaCells)
+plot(UDE)
+
+plot(pcaCellsData)
+
+plot(genes)
+
+plot(nu)
+plot(zoomedNu)
+```
+
+### Remove cells below nu elbow point
+
+```{r}
+nu <- getNu(aRunObj)
+
+sum(nu < 0.15)
+sum(nu < 0.18)
+sum(nu < 0.20)
+sum(nu < 0.37)
+
+# drop above 11%
+lowNuThr <- 0.37
+aRunObj <-
+  addElementToMetaDataset(
+    aRunObj,
+    "Low Nu threshold", lowNuThr)
+
+cells_to_rem <- rownames(pcaCellsData)[pcaCellsData[["groups"]] == "B"]
+
+cellsToDrop <- getCells(aRunObj)[which(nu < lowNuThr)]
+
+aRunObj <- dropGenesCells(aRunObj, cells = c(cellsToDrop,cells_to_rem))
+```
+
+### Redo all the plots
+
+```{r}
+aRunObj <- clean(aRunObj)
+
+c(pcaCells, pcaCellsData, genes, UDE, nu, zoomedNu) %<-%
+  cleanPlots(aRunObj, includePCA = TRUE)
+```
+
+```{r}
+plot(pcaCells)
+plot(UDE)
+
+#plot(pcaCellsData)
+
+plot(genes)
+
+plot(nu)
+plot(zoomedNu)
+
+cellSizePlot(aRunObj, condName = "Participant.IDs")
+genesSizePlot(aRunObj, condName = "Participant.IDs")
+scatterPlot(aRunObj, condName = "Participant.IDs")
+
+c(mitPerPlot, mitPerDf) %<-%
+  mitochondrialPercentagePlot(aRunObj, condName = "Participant.IDs",
+                              genePrefix = "^MT-")
+mitPerPlot
+```
+
+## Finalize object and save
+
+```{r eval=FALSE}
+aRunObj <- proceedToCoex(aRunObj, calcCoex = FALSE, cores = 1L, saveObj = FALSE)
+```
+
+```{r eval=FALSE}
+fileNameOut <- paste0(globalCondition, "-Run_", thisRun, "-Cleaned", ".RDS")
+
+saveRDS(aRunObj, file = file.path(inDir, fileNameOut))
+```
+
+```{r}
+cellSizePlot(aRunObj,conditions = getClusterizationData(aRunObj,"c2")[[1]])
+```
+
+```{r}
+genesSizePlot(aRunObj,conditions = getClusterizationData(aRunObj,"c2")[[1]])
+```
+
+```{r}
+c(mitPerPlot, mitPerDf) %<-%
+  mitochondrialPercentagePlot(aRunObj, conditions = getClusterizationData(aRunObj,"c2")[[1]],
+                              genePrefix = "^MT-")
+mitPerPlot
+```
+
+```{r}
+cellSizePlot(aRunObj,conditions = getClusterizationData(aRunObj,"c3")[[1]])
+```
+
+```{r}
+genesSizePlot(aRunObj,conditions = getClusterizationData(aRunObj,"c3")[[1]])
+```
+
+```{r}
+c(mitPerPlot, mitPerDf) %<-%
+  mitochondrialPercentagePlot(aRunObj, conditions = getClusterizationData(aRunObj,"c3")[[1]],
+                              genePrefix = "^MT-")
+mitPerPlot
+```
+
+```{r}
+table(getClusterizationData(aRunObj,"c3")[[1]])
+```
+
+## Check uniform clusters
+
+```{r}
+getClData <- function(objCOTAN, clList, cl) {
+  checker <- new("SimpleGDIUniformityCheck")
+  cluster <- names(clList)[[cl]]
+  cells <- clList[[cl]]
+  res <- checkClusterUniformity(objCOTAN, cluster = cluster, cells = cells,checker = checker, 
+                                 cores = 6, saveObj = FALSE)
+  return(res)
+}
+```
+
+```{r}
+newCl <- paste(aRunObj@metaCells$Sample.IDs,aRunObj@metaCells$CL_c3,sep = "_")
+names(newCl) <- getCells(aRunObj)
+newCl <- base::as.factor(newCl)
+
+aRunObj <- addClusterization(aRunObj, clName = "Sample_C3", clusters = newCl)
+
+originalC3Cl <- getClusters(aRunObj, clName = "Sample_C3")
+
+sort(table(originalC3Cl), decreasing = TRUE)
+```
+
+```{r}
+largeCl <- which(table(originalC3Cl) >= 50)
+
+largeOrigCl <- originalC3Cl[(originalC3Cl %in% names(largeCl)),
+                                drop = TRUE]
+
+largeOrigCl <- toClustersList(largeOrigCl)
+                                
+```
+
+```{r}
+vapply(largeOrigCl, length, integer(1))
+
+resData <- lapply(seq_along(largeOrigCl), FUN = getClData,
+                       objCOTAN = aRunObj, clList = largeOrigCl)
+names(resData) <- names(largeOrigCl)
+
+clData <- checkersToDF(resData)
+rownames(clData) <- names(largeOrigCl)
+
+clData
+```
+
+```{r}
+shiftToUnif <- lapply(resData,calculateThresholdShiftToUniformity)
+
+shiftToUnif
+```
+
+```{r}
+write.csv(clData,file = paste0(outDir,"/clData.csv") )
+write.csv(shiftToUnif,file = paste0(outDir,"/shiftToUnif.csv") )
+```
+
+```{r}
+originalC3Cl <- getClusters(aRunObj, clName = "c3")
+
+sort(table(originalC3Cl), decreasing = TRUE)
+```
+
+```{r}
+largeCl <- which(table(originalC3Cl) >= 50)
+
+largeOrigCl <- originalC3Cl[(originalC3Cl %in% names(largeCl)),
+                                drop = TRUE]
+
+largeOrigCl <- toClustersList(largeOrigCl)
+                                
+```
+
+```{r}
+vapply(largeOrigCl, length, integer(1))
+
+resDataC3 <- lapply(seq_along(largeOrigCl), FUN = getClData,
+                       objCOTAN = aRunObj, clList = largeOrigCl)
+names(resDataC3) <- names(largeOrigCl)
+
+clDataC3 <- checkersToDF(resDataC3)
+rownames(clDataC3) <- names(largeOrigCl)
+
+clDataC3
+```
+
+```{r}
+shiftToUnif <- lapply(resDataC3,calculateThresholdShiftToUniformity)
+
+shiftToUnif
+```
+
+```{r}
+write.csv(clDataC3,file = paste0(outDir,"/clDataC3.csv") )
+write.csv(shiftToUnif,file = paste0(outDir,"/shiftToUnifC3.csv") )
+```
+
+# Coex clustering for CD4 T cells
+
+```{r, eval=FALSE}
+cells <- names(getClusterizationData(aRunObj,clName = "c3")[[1]][getClusterizationData(aRunObj,clName = "c3")[[1]] == "CD4 T Cells"])
+
+cd4TObj <- automaticCOTANObjectCreation(getRawData(aRunObj)[,cells],GEO = "Zenodo 8020792",
+"10x V3.1",sampleCondition = "CD4 T cells", calcCoex = TRUE, cores = 5, saveObj =FALSE)
+
+```
+
+```{r eval=FALSE}
+fileNameOut <- paste0("CD4Tcells-Run_", thisRun, "-Cleaned", ".RDS")
+saveRDS(cd4TObj, file = file.path(inDir, fileNameOut))
+```
+
+```{r}
+cd4TObj <- readRDS(paste0("CD4Tcells-Run_", thisRun, "-Cleaned", ".RDS"))
+```
+
+```{r}
+LogLike <- function(obj){
+  matrix  <- COTAN:::calculateLikelihoodOfObserved(obj)
+  matrix <- log(matrix)
+  return(matrix)
+}
+
+
+addMultipleClustering <- function(obj, npc = 15,range_resolution_min,range_resolution_max, step){
+  res <-  eigs_sym(as.matrix(obj@genesCoex), k = 30, which = "LM") 
+  autovettori <- res$vectors[,1:npc]
+  matrix <- LogLike(obj)
+
+  MatAutovet <- t(autovettori) %*% matrix  
+      
+  cellNorms <- sqrt(colMeans(as.matrix(MatAutovet**2)))
+  MatAutovetNew <- t(t(as.matrix(MatAutovet))/cellNorms)
+
+  FindNeighborsTest <- Seurat::FindNeighbors(t(MatAutovetNew))
+  for(resolution in seq(from = range_resolution_min,to = range_resolution_max,by = step)){
+      print(resolution)
+      ClusterSeuratMatAutovetNew <- Seurat:::RunModularityClustering(FindNeighborsTest$snn,resolution = resolution)
+
+
+      ClusterSeuratMatAutovetNew <- as.character(ClusterSeuratMatAutovetNew)
+      ClusterSeuratMatAutovetNew <- base::as.factor(ClusterSeuratMatAutovetNew)
+      names(ClusterSeuratMatAutovetNew) <- getCells(obj)
+
+      obj <- addClusterization(obj,clName = paste0("LL_New",resolution),clusters = ClusterSeuratMatAutovetNew,override = TRUE)
+  }
+  return(obj)
+}
+```
+
+```{r}
+cd4TObj  <- addMultipleClustering(cd4TObj, npc = 15, range_resolution_min = 0.3,range_resolution_max=0.6, step=0.1  )
+```
+
+### Clusters with resolution 0.3
+
+```{r}
+originalC3Cl <- getClusters(cd4TObj, clName = "LL_New0.3")
+
+sort(table(originalC3Cl), decreasing = TRUE)
+```
+
+```{r}
+largeCl <- which(table(originalC3Cl) >= 50)
+
+largeOrigCl <- originalC3Cl[(originalC3Cl %in% names(largeCl)),
+                                drop = TRUE]
+
+largeOrigCl <- toClustersList(largeOrigCl)
+                                
+```
+
+```{r}
+vapply(largeOrigCl, length, integer(1))
+
+resDataC3 <- lapply(seq_along(largeOrigCl), FUN = getClData,
+                       objCOTAN = cd4TObj, clList = largeOrigCl)
+names(resDataC3) <- names(largeOrigCl)
+
+clDataC3 <- checkersToDF(resDataC3)
+rownames(clDataC3) <- names(largeOrigCl)
+
+clDataC3
+```
+
+```{r}
+shiftToUnif <- lapply(resDataC3,calculateThresholdShiftToUniformity)
+
+shiftToUnif
+```
+
+### Clusters with resolution 0.4
+
+```{r}
+originalC3Cl <- getClusters(cd4TObj, clName = "LL_New0.4")
+
+sort(table(originalC3Cl), decreasing = TRUE)
+```
+
+```{r}
+largeCl <- which(table(originalC3Cl) >= 50)
+
+largeOrigCl <- originalC3Cl[(originalC3Cl %in% names(largeCl)),
+                                drop = TRUE]
+
+largeOrigCl <- toClustersList(largeOrigCl)
+                                
+```
+
+```{r}
+vapply(largeOrigCl, length, integer(1))
+
+resDataC3 <- lapply(seq_along(largeOrigCl), FUN = getClData,
+                       objCOTAN = cd4TObj, clList = largeOrigCl)
+names(resDataC3) <- names(largeOrigCl)
+
+clDataC3 <- checkersToDF(resDataC3)
+rownames(clDataC3) <- names(largeOrigCl)
+
+clDataC3
+```
+
+```{r}
+shiftToUnif <- lapply(resDataC3,calculateThresholdShiftToUniformity)
+
+shiftToUnif
+```
+
+### Clusters with resolution 0.5
+
+```{r}
+originalC3Cl <- getClusters(cd4TObj, clName = "LL_New0.5")
+
+sort(table(originalC3Cl), decreasing = TRUE)
+```
+
+```{r}
+largeCl <- which(table(originalC3Cl) >= 50)
+
+largeOrigCl <- originalC3Cl[(originalC3Cl %in% names(largeCl)),
+                                drop = TRUE]
+
+largeOrigCl <- toClustersList(largeOrigCl)
+                                
+```
+
+```{r}
+vapply(largeOrigCl, length, integer(1))
+
+resDataC3 <- lapply(seq_along(largeOrigCl), FUN = getClData,
+                       objCOTAN = cd4TObj, clList = largeOrigCl)
+names(resDataC3) <- names(largeOrigCl)
+
+clDataC3 <- checkersToDF(resDataC3)
+rownames(clDataC3) <- names(largeOrigCl)
+
+clDataC3
+```
+
+```{r}
+shiftToUnif <- lapply(resDataC3,calculateThresholdShiftToUniformity)
+
+shiftToUnif
+```
+
+```{r}
+Sys.time()
+sessionInfo()
+```

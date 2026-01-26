@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/PBMC_Brown_preview.html">Brown PBMC</a></li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/Run_77/DatasetCleaning_Run77.html">Cleaning run 77</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/PBMC_Brown_preview.qmd">Brown PBMC</a></li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/Run_77/DatasetCleaning_Run77.html">Cleaning run 77</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -143,6 +143,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../CotanV1vsV2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">COTAN chages in version 2</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -352,13 +358,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Data/Brown_PBMC_Datasets/PBMC_Brown_preview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../Data/Brown_PBMC_Datasets/PBMC_Brown_preview.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">General dataset overview</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../../Data/Brown_PBMC_Datasets/Run_40/DatasetCleaning_Run40.html" class="sidebar-item-text sidebar-link">
+  <a href="../../../Data/Brown_PBMC_Datasets/Run_40/DatasetCleaning_Run40.qmd" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Cleaning run 40</span></a>
   </div>
 </li>
@@ -750,7 +756,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/PBMC_Brown_preview.html">Brown PBMC</a></li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/Run_77/DatasetCleaning_Run77.html">Cleaning run 77</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Datasets</li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/PBMC_Brown_preview.qmd">Brown PBMC</a></li><li class="breadcrumb-item"><a href="../../../Data/Brown_PBMC_Datasets/Run_77/DatasetCleaning_Run77.html">Cleaning run 77</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">DatasetCleaning_Run77</h1>
 </div>
@@ -1254,7 +1260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="finalize-object-and-save" class="level2">
 <h2 class="anchored" data-anchor-id="finalize-object-and-save">Finalize object and save</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">proceedToCoex</span>(aRunObj, <span class="at">calcCoex =</span> <span class="cn">FALSE</span>, <span class="at">cores =</span> <span class="dv">1</span>L, <span class="at">saveObj =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>aRunObj <span class="ot">&lt;-</span> <span class="fu">proceedToCoex</span>(aRunObj, <span class="at">calcCoex =</span> <span class="cn">TRUE</span>, <span class="at">cores =</span> <span class="dv">1</span>L, <span class="at">saveObj =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>fileNameOut <span class="ot">&lt;-</span> <span class="fu">paste0</span>(globalCondition, <span class="st">"-Run_"</span>, thisRun, <span class="st">"-Cleaned"</span>, <span class="st">".RDS"</span>)</span>
@@ -1356,7 +1362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "2026-01-05 12:34:22 CET"</code></pre>
+<pre><code>[1] "2026-01-26 11:02:33 CET"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1392,76 +1398,77 @@ loaded via a namespace (and not attached):
   [9] globals_0.18.0              lattice_0.22-7             
  [11] MASS_7.3-65                 ggdist_3.3.3               
  [13] dendextend_1.19.0           magrittr_2.0.4             
- [15] plotly_4.11.0               rmarkdown_2.29             
- [17] yaml_2.3.10                 httpuv_1.6.16              
- [19] Seurat_5.2.1                sctransform_0.4.2          
- [21] spam_2.11-1                 sp_2.2-0                   
- [23] spatstat.sparse_3.1-0       reticulate_1.42.0          
- [25] cowplot_1.2.0               pbapply_1.7-2              
- [27] RColorBrewer_1.1-3          abind_1.4-8                
- [29] Rtsne_0.17                  GenomicRanges_1.60.0       
- [31] purrr_1.2.0                 BiocGenerics_0.54.0        
- [33] circlize_0.4.16             GenomeInfoDbData_1.2.14    
- [35] IRanges_2.44.0              S4Vectors_0.48.0           
- [37] ggrepel_0.9.6               irlba_2.3.5.1              
- [39] listenv_0.9.1               spatstat.utils_3.1-4       
- [41] goftest_1.2-3               RSpectra_0.16-2            
- [43] spatstat.random_3.4-1       fitdistrplus_1.2-2         
- [45] parallelly_1.46.0           codetools_0.2-20           
- [47] DelayedArray_0.34.1         tidyselect_1.2.1           
- [49] shape_1.4.6.1               UCSC.utils_1.4.0           
- [51] farver_2.1.2                ScaledMatrix_1.16.0        
- [53] viridis_0.6.5               matrixStats_1.5.0          
- [55] stats4_4.5.2                spatstat.explore_3.4-2     
- [57] jsonlite_2.0.0              GetoptLong_1.0.5           
- [59] progressr_0.15.1            ggridges_0.5.6             
- [61] survival_3.8-3              iterators_1.0.14           
- [63] foreach_1.5.2               tools_4.5.2                
- [65] ica_1.0-3                   Rcpp_1.0.14                
- [67] glue_1.8.0                  gridExtra_2.3              
- [69] SparseArray_1.10.8          xfun_0.52                  
- [71] MatrixGenerics_1.20.0       distributional_0.5.0       
- [73] ggthemes_5.2.0              GenomeInfoDb_1.44.0        
- [75] dplyr_1.1.4                 withr_3.0.2                
- [77] fastmap_1.2.0               digest_0.6.37              
- [79] rsvd_1.0.5                  parallelDist_0.2.6         
- [81] R6_2.6.1                    mime_0.13                  
- [83] colorspace_2.1-1            scattermore_1.2            
- [85] tensor_1.5                  spatstat.data_3.1-6        
- [87] tidyr_1.3.1                 generics_0.1.3             
- [89] data.table_1.17.0           httr_1.4.7                 
- [91] htmlwidgets_1.6.4           S4Arrays_1.10.1            
- [93] uwot_0.2.3                  pkgconfig_2.0.3            
- [95] gtable_0.3.6                ComplexHeatmap_2.26.0      
- [97] lmtest_0.9-40               S7_0.2.1                   
- [99] SingleCellExperiment_1.32.0 XVector_0.50.0             
-[101] htmltools_0.5.8.1           dotCall64_1.2              
-[103] zigg_0.0.2                  clue_0.3-66                
-[105] SeuratObject_5.1.0          scales_1.4.0               
-[107] Biobase_2.68.0              png_0.1-8                  
-[109] spatstat.univar_3.1-3       knitr_1.50                 
-[111] reshape2_1.4.4              rjson_0.2.23               
-[113] nlme_3.1-168                proxy_0.4-27               
-[115] cachem_1.1.0                zoo_1.8-14                 
-[117] GlobalOptions_0.1.2         stringr_1.6.0              
-[119] KernSmooth_2.23-26          parallel_4.5.2             
-[121] miniUI_0.1.2                pillar_1.10.2              
-[123] grid_4.5.2                  vctrs_0.6.5                
-[125] RANN_2.6.2                  promises_1.3.2             
-[127] BiocSingular_1.26.1         beachmat_2.26.0            
-[129] xtable_1.8-4                cluster_2.1.8.1            
-[131] evaluate_1.0.3              cli_3.6.5                  
-[133] compiler_4.5.2              rlang_1.1.6                
-[135] crayon_1.5.3                future.apply_1.20.0        
-[137] labeling_0.4.3              plyr_1.8.9                 
-[139] stringi_1.8.7               viridisLite_0.4.2          
-[141] deldir_2.0-4                BiocParallel_1.44.0        
-[143] lazyeval_0.2.2              spatstat.geom_3.4-1        
-[145] RcppHNSW_0.6.0              patchwork_1.3.2            
-[147] future_1.58.0               shiny_1.11.0               
-[149] SummarizedExperiment_1.38.1 ROCR_1.0-11                
-[151] Rfast_2.1.5.1               igraph_2.1.4               
-[153] memoise_2.0.1               RcppParallel_5.1.10        </code></pre>
+ [15] plotly_4.12.0               rmarkdown_2.29             
+ [17] yaml_2.3.12                 httpuv_1.6.16              
+ [19] otel_0.2.0                  Seurat_5.4.0               
+ [21] sctransform_0.4.2           spam_2.11-1                
+ [23] sp_2.2-0                    spatstat.sparse_3.1-0      
+ [25] reticulate_1.44.1           cowplot_1.2.0              
+ [27] pbapply_1.7-2               RColorBrewer_1.1-3         
+ [29] abind_1.4-8                 Rtsne_0.17                 
+ [31] GenomicRanges_1.62.1        purrr_1.2.0                
+ [33] BiocGenerics_0.56.0         circlize_0.4.16            
+ [35] GenomeInfoDbData_1.2.14     IRanges_2.44.0             
+ [37] S4Vectors_0.48.0            ggrepel_0.9.6              
+ [39] irlba_2.3.5.1               listenv_0.10.0             
+ [41] spatstat.utils_3.2-1        goftest_1.2-3              
+ [43] RSpectra_0.16-2             spatstat.random_3.4-3      
+ [45] fitdistrplus_1.2-2          parallelly_1.46.0          
+ [47] codetools_0.2-20            DelayedArray_0.36.0        
+ [49] tidyselect_1.2.1            shape_1.4.6.1              
+ [51] UCSC.utils_1.4.0            farver_2.1.2               
+ [53] ScaledMatrix_1.16.0         viridis_0.6.5              
+ [55] matrixStats_1.5.0           stats4_4.5.2               
+ [57] spatstat.explore_3.7-0      Seqinfo_1.0.0              
+ [59] jsonlite_2.0.0              GetoptLong_1.1.0           
+ [61] progressr_0.18.0            ggridges_0.5.6             
+ [63] survival_3.8-3              iterators_1.0.14           
+ [65] foreach_1.5.2               tools_4.5.2                
+ [67] ica_1.0-3                   Rcpp_1.1.0                 
+ [69] glue_1.8.0                  gridExtra_2.3              
+ [71] SparseArray_1.10.8          xfun_0.52                  
+ [73] MatrixGenerics_1.22.0       distributional_0.6.0       
+ [75] ggthemes_5.2.0              GenomeInfoDb_1.44.0        
+ [77] dplyr_1.1.4                 withr_3.0.2                
+ [79] fastmap_1.2.0               digest_0.6.37              
+ [81] rsvd_1.0.5                  parallelDist_0.2.6         
+ [83] R6_2.6.1                    mime_0.13                  
+ [85] colorspace_2.1-1            scattermore_1.2            
+ [87] tensor_1.5                  spatstat.data_3.1-9        
+ [89] tidyr_1.3.1                 generics_0.1.3             
+ [91] data.table_1.18.0           httr_1.4.7                 
+ [93] htmlwidgets_1.6.4           S4Arrays_1.10.1            
+ [95] uwot_0.2.3                  pkgconfig_2.0.3            
+ [97] gtable_0.3.6                ComplexHeatmap_2.26.0      
+ [99] lmtest_0.9-40               S7_0.2.1                   
+[101] SingleCellExperiment_1.32.0 XVector_0.50.0             
+[103] htmltools_0.5.8.1           dotCall64_1.2              
+[105] zigg_0.0.2                  clue_0.3-66                
+[107] SeuratObject_5.3.0          scales_1.4.0               
+[109] Biobase_2.70.0              png_0.1-8                  
+[111] spatstat.univar_3.1-6       knitr_1.50                 
+[113] reshape2_1.4.4              rjson_0.2.23               
+[115] nlme_3.1-168                proxy_0.4-29               
+[117] cachem_1.1.0                zoo_1.8-14                 
+[119] GlobalOptions_0.1.2         stringr_1.6.0              
+[121] KernSmooth_2.23-26          parallel_4.5.2             
+[123] miniUI_0.1.2                pillar_1.11.1              
+[125] grid_4.5.2                  vctrs_0.7.0                
+[127] RANN_2.6.2                  promises_1.5.0             
+[129] BiocSingular_1.26.1         beachmat_2.26.0            
+[131] xtable_1.8-4                cluster_2.1.8.1            
+[133] evaluate_1.0.5              cli_3.6.5                  
+[135] compiler_4.5.2              rlang_1.1.7                
+[137] crayon_1.5.3                future.apply_1.20.0        
+[139] labeling_0.4.3              plyr_1.8.9                 
+[141] stringi_1.8.7               viridisLite_0.4.2          
+[143] deldir_2.0-4                BiocParallel_1.44.0        
+[145] lazyeval_0.2.2              spatstat.geom_3.7-0        
+[147] RcppHNSW_0.6.0              patchwork_1.3.2            
+[149] future_1.69.0               shiny_1.12.1               
+[151] SummarizedExperiment_1.38.1 ROCR_1.0-11                
+[153] Rfast_2.1.5.1               igraph_2.2.1               
+[155] memoise_2.0.1               RcppParallel_5.1.10        </code></pre>
 </div>
 </div>
 

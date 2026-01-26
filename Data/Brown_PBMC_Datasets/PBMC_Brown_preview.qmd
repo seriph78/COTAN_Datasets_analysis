@@ -1,0 +1,485 @@
+---
+title: "PBMC_Brown_preview"
+---
+
+## Preamble
+
+```{r}
+# Util libs
+library(assertthat)
+library(ggplot2)
+library(zeallot)
+library(conflicted)
+library(Matrix)
+
+# Data processing libs
+require(COTAN)
+library(SingleCellExperiment)
+library(S4Vectors)
+library(hdf5r)
+library(hdf5r.Extra)
+
+conflicts_prefer(zeallot::`%->%`, zeallot::`%<-%`)
+conflicts_prefer(base::setdiff)
+conflicts_prefer(Matrix::unname)
+options(parallelly.fork.enable = TRUE)
+
+setLoggingLevel(2L)
+```
+
+## List input files
+
+```{r}
+#inDir <- file.path("Data/Brown_PBMC_Datasets/OriginalData/")
+#outDir <- file.path("Data/Brown_PBMC_Datasets/")
+inDir <- file.path("../OriginalData/")
+outDir <- file.path(".")
+setLoggingFile(file.path(inDir, "Dataset_Extraction.log"))
+list.files(path = inDir)
+
+h5adFile <- "imyoo_capillary_blood_samples_76535_pbmcs.h5ad"
+
+globalCondition <- "capillary_blood_samples_pbmcs"
+```
+
+## Inspect h5ad file
+
+```{r eval=FALSE}
+h5 <- H5File$new(paste(inDir,h5adFile,sep = "/"), mode = "r")
+
+for (nm in names(h5)) {
+  cat("Name:", nm, " -> class:", class(h5[[nm]]), "\n")
+}
+
+h5$close_all()
+```
+
+# Load matrices and genes/cells meta-data
+
+```{r}
+## 1) counts: layers/counts -> genes × cells
+counts <- h5Read(paste(inDir,h5adFile,sep = "/"), name = "layers/counts", transpose = FALSE)
+# counts: rows = genes, cols = cells
+
+## 2) obs / var (you already handled categoricals)
+obs <- h5Read(paste(inDir,h5adFile,sep = "/"), name = "obs")
+var <- h5Read(paste(inDir,h5adFile,sep = "/"), name = "var")
+
+nGenes <- nrow(var)
+nCells <- nrow(obs)
+
+stopifnot(
+  nGenes == nrow(counts),
+  nCells == ncol(counts)
+)
+
+## Ensure row/colnames are consistent
+# AnnData convention: obs index = cell IDs, var index = gene IDs
+if (is.null(rownames(obs))) {
+  # if needed, derive from a specific column
+  # rownames(obs) <- obs$some_cell_id_column
+}
+
+if (is.null(rownames(var))) {
+  # rownames(var) <- var$some_gene_id_column
+}
+
+# Now align the matrix names to metadata
+if (is.null(colnames(counts))) colnames(counts) <- rownames(obs)
+if (is.null(rownames(counts))) rownames(counts) <- rownames(var)
+
+assert_that(
+  identical(colnames(counts), rownames(obs)),
+  identical(rownames(counts), rownames(var))
+)
+```
+
+### Retrieve clusterizations as factors
+
+```{r}
+readAnnDataCategorical <- function(colGroup, nObs) {
+  encType <- h5attr(colGroup, "encoding-type")
+  if (!identical(encType, "categorical")) {
+    stop("Group does not have encoding-type = 'categorical'")
+  }
+  
+  codes <- colGroup[["codes"]][]       # length nObs, usually 0-based, with -1 for NA
+  cats  <- colGroup[["categories"]][]  # character vector of categories
+  
+  codes <- as.integer(codes)
+  res <- rep(NA_character_, length(codes))
+  
+  # AnnData uses 0-based codes; adjust to 1-based R indices
+  valid <- codes >= 0L
+  res[valid] <- cats[codes[valid] + 1L]
+  
+  factor(res, levels = cats)
+}
+
+catCols <- c(
+  "cell_type_level_1", "cell_type_level_2",
+  "cell_type_level_3", "cell_type_level_4",
+  "c1", "c2", "c3", "c4"
+)
+
+h5 <- H5File$new(paste(inDir,h5adFile,sep = "/"), mode = "r")
+
+obsGroup <- h5[["obs"]]
+names(obsGroup)
+
+nObs <- nrow(obs)  # 76535
+
+for (nm in catCols) {
+  if (nm %in% names(obsGroup)) {
+    obs[[nm]] <- readAnnDataCategorical(obsGroup[[nm]], nObs)
+  } else {
+    warning(sprintf("Column %s not found in obs group", nm))
+  }
+}
+
+h5$close_all()
+
+table(obs$cell_type_level_3, useNA = "ifany")
+```
+
+## Create SingleCellExperiment
+
+```{r}
+sce <- SingleCellExperiment(
+  assays = list(
+    counts = counts
+  )
+)
+
+# Attach metadata
+colData(sce) <- DataFrame(obs)  # cells metadata
+rowData(sce) <- DataFrame(var)  # genes metadata
+
+# load processed matrices
+if (FALSE) {
+  X <- h5Read(paste(inDir,h5adFile,sep = "/"), name = "X", transpose = FALSE)  # genes × cells
+
+  assert_that(all(dim(X) == dim(counts)))
+
+  assays(sce)[["logcounts"]] <- X  # or "normcounts", depending on what X really is
+}
+
+if (FALSE) {
+  obsm <- h5Read(paste(inDir,h5adFile,sep = "/"), name = "obsm")
+
+  names(obsm)
+  # e.g. "X_pca", "X_umap", "X_tsne", ...
+  
+  # Simple mapping from AnnData keys to SCE reducedDim names
+  rdMap <- c(
+    X_pca  = "PCA",
+    X_umap = "UMAP",
+    X_tsne = "TSNE",
+    X_mde  = "MDE",
+    X_scvi = "SCVI"
+  )
+
+  for (key in intersect(names(obsm), names(rdMap))) {
+    mat <- obsm[[key]]  # cells × k
+    # sanity check
+    stopifnot(nrow(mat) == ncol(sce))
+    reducedDims(sce)[[ rdMap[[key]] ]] <- as.matrix(mat)
+  }
+}
+
+uns <- h5Read(paste(inDir,h5adFile,sep = "/"), name = "uns")
+
+# root-level attributes
+h5 <- H5File$new(paste(inDir,h5adFile,sep = "/"), mode = "r")
+rootAttrs <- h5attributes(h5)
+h5$close_all()
+
+# Store them in SCE metadata
+metadata(sce)$uns           <- uns
+metadata(sce)$h5ad_attrs    <- rootAttrs
+metadata(sce)$source_file   <- h5adFile
+metadata(sce)$source_format <- "AnnData h5ad"
+```
+
+### Check all OK
+
+```{r}
+sce
+assayNames(sce)
+colData(sce)[1:3, ]
+rowData(sce)[1:3, ]
+reducedDimNames(sce)
+names(metadata(sce))
+```
+
+```{r}
+table(colData(sce)[, "cell_barcoding_protocol"],colData(sce)[, "Lane"])
+```
+
+## Convert SCE objects to COTAN
+
+```{r}
+table(colData(sce)[, "run_lane_batch"])
+```
+
+```{r}
+table(colData(sce)[, "Cell.Barcoding.Runs"],colData(sce)[, "Lane"])
+```
+
+```{r}
+## helper: convert a single SCE + its global attrs into a COTAN object
+sceToCotan <- function(sce, globalAttrs = list()) {
+  # 1. SCE -> COTAN (handles counts, rowData, colData, cluster columns, etc.)
+  objCOTAN <- convertFromSingleCellExperiment(objSCE = sce)
+
+  # 1.1 Override col/row names to proper cells/genes names
+  rownames(objCOTAN@raw) <- make.unique(factorToVector(rowData(sce)[, "name"]))
+  colnames(objCOTAN@raw) <- make.unique(factorToVector(colData(sce)[, "barcode"]))
+  rownames(objCOTAN@metaCells) <- make.unique(factorToVector(colData(sce)[, "barcode"]))
+  objCOTAN@metaCells$barcode <- make.unique(as.vector(objCOTAN@metaCells$barcode))
+  # 2. Initialize metaDataset with standard tags (use whatever you have)
+  #    If your globalAttrs already contain these, pick from there.
+  geoVal   <-
+    if ("GEO"   %in% names(globalAttrs)) globalAttrs[["GEO"]]   else ""
+  seqVal   <- 
+    if ("method" %in% names(globalAttrs)) globalAttrs[["method"]] else ""
+  condVal  <- 
+    if ("condition" %in% names(globalAttrs)) globalAttrs[["condition"]] else ""
+
+  objCOTAN <- initializeMetaDataset(
+    objCOTAN,
+    GEO              = as.character(geoVal),
+    sequencingMethod = as.character(seqVal),
+    sampleCondition  = as.character(condVal)
+  )
+
+  # 3. Add all remaining global attributes as extra metadata rows
+  usedTags <- c("GEO", "method", "condition")
+  extraTags <- base::setdiff(names(globalAttrs), usedTags)
+
+  for (tag in extraTags) {
+    val <- globalAttrs[[tag]]
+    # COTAN expects a character vector; coerce anything else
+    objCOTAN <- addElementToMetaDataset(
+      objCOTAN,
+      tag   = tag,
+      value = as.character(val)
+    )
+  }
+
+  validObject(objCOTAN)
+
+  objCOTAN
+}
+```
+
+## Create the COTAN object
+
+```{r}
+objCOTAN <- sceToCotan(sce, globalAttrs = metadata(sce))
+
+metaCellsNames <- colnames(getMetadataCells(objCOTAN))
+metaCellsNames
+
+for (clName in metaCellsNames[12:19]) {
+  clusters <- factor(getMetadataCells(objCOTAN)[[clName]])
+  levels(clusters)[is.na(levels(clusters))] <- "NA"
+  names(clusters) <- getCells(objCOTAN)
+  objCOTAN <- addClusterization(objCOTAN, clName = clName, clusters = clusters)
+}
+
+for (condName in metaCellsNames[c(2:5, 9:11)]) {
+  condition <- getMetadataCells(objCOTAN)[[condName]]
+  names(condition) <- getCells(objCOTAN)
+  objCOTAN <- addCondition(objCOTAN, condName = condName, conditions = condition)
+}
+
+objCOTAN <- addElementToMetaDataset(objCOTAN,
+                                    datasetTags()[["cond"]],
+                                    globalCondition)
+
+print(getMetadataDataset(objCOTAN)[, 1:2])
+```
+
+```{r}
+cellSizePlot(objCOTAN, condName = "cell_barcoding_protocol")
+```
+
+```{r}
+cellSizePlot(objCOTAN, condName = "Lane")
+```
+
+```{r}
+genesSizePlot(objCOTAN, condName = "cell_barcoding_protocol")
+```
+
+```{r}
+genesSizePlot(objCOTAN, condName = "Lane")
+```
+
+```{r}
+objCOTAN <- clean(objCOTAN)
+  
+c(pcaCellsData=, UDE=) %<-% cleanPlots(objCOTAN, includePCA = TRUE)
+
+print(unique(getCondition(objCOTAN, "Lane")))
+  
+pcaCellsData <- setColumnInDF(pcaCellsData, colName = "Lane",
+                              colToSet = getCondition(objCOTAN, "Lane")) 
+
+pcaPlot <- 
+  ggplot(pcaCellsData, aes(PC1, PC2, color = Lane)) +
+  geom_point(size = 0.1)
+
+c(umapPlot, .) %<-%
+  cellsUMAPPlot(
+    objCOTAN,
+    clusters = getCondition(objCOTAN, "Lane"),
+    useCoexEigen = FALSE,
+    dataMethod = "LN",
+    genesSel = "HVG_Seurat")
+
+```
+
+```{r}
+plot(UDE)
+plot(pcaPlot)
+plot(umapPlot)
+```
+
+Notice that the 10x v3.1 Prime HT has different general statistics
+
+### Save the COTAN object
+
+```{r eval=FALSE}
+fileOut <- file.path(outDir, paste0(globalCondition, ".RDS"))
+saveRDS(objCOTAN, file = fileOut)
+```
+
+## Split object by `run`
+
+```{r}
+runs <- getCondition(objCOTAN, condName = "Cell.Barcoding.Runs")
+
+singleRunObjects <- list()
+for (aRun in levels(runs)) {
+  cellsToDrop <- getCells(objCOTAN)[runs != aRun]
+  print(getNumCells(objCOTAN) - length(cellsToDrop))
+
+  splitObj <- dropGenesCells(objCOTAN, cells = cellsToDrop)
+  splitObj <- addElementToMetaDataset(splitObj,
+                                      datasetTags()[["cond"]],
+                                      paste0(globalCondition, "-Run_", aRun))
+
+  singleRunObjects[[aRun]] <- splitObj
+}
+```
+
+## Save all split objects
+
+```{r eval=FALSE}
+for (aRun in levels(runs)) {
+  cat("Run: ", aRun, "\tNum Cells: ", getNumCells(singleRunObjects[[aRun]]), "\n")
+  cond <- getMetadataElement(singleRunObjects[[aRun]], datasetTags()[["cond"]])[[1L]]
+  fileOut <- file.path(outDir, paste0(cond, ".RDS"))
+  saveRDS(singleRunObjects[[aRun]], file = fileOut)
+}
+```
+
+Selected runs: those with medium size
+
+40, 41, 77
+
+Runs 77 and 28 are basic (v3.1 Prime) while runs 40, 41, and 62 are HT
+
+## Check Runs are uniform across Lanes
+
+### Lane number 40
+
+```{r}
+subObj <- clean(singleRunObjects[["40"]])
+
+assert_that(1L == length(unique(getCondition(subObj, "Cell.Barcoding.Runs"))))
+  
+c(pcaCellsData=, UDE=) %<-% cleanPlots(subObj, includePCA = TRUE)
+
+print(unique(getCondition(subObj, "Lane")))
+  
+pcaCellsData <- setColumnInDF(pcaCellsData, colName = "Lane",
+                              colToSet = getCondition(subObj, "Lane")) 
+
+pcaPlot <- 
+  ggplot(pcaCellsData, aes(PC1, PC2, color = Lane)) +
+  geom_point(size = 0.1)
+
+c(umapPlot, .) %<-%
+  cellsUMAPPlot(
+    subObj,
+    clusters = getCondition(subObj, "Lane"),
+    useCoexEigen = FALSE,
+    dataMethod = "LN",
+    genesSel = "HVG_Seurat")
+
+```
+
+```{r}
+plot(UDE)
+plot(pcaPlot)
+plot(umapPlot)
+```
+
+```{r}
+subObj <- proceedToCoex(subObj,calcCoex = T,cores = 5)
+
+c(umapPlot2, .) %<-%
+  cellsUMAPPlot(
+    subObj,
+    clusters = getCondition(subObj, "Lane"),
+    useCoexEigen = TRUE,
+    dataMethod = "LN",
+    genesSel = "HGDI")
+
+```
+
+```{r}
+plot(umapPlot2)
+```
+
+### Lane number 77
+
+```{r}
+subObj <- clean(singleRunObjects[["77"]])
+
+assert_that(1L == length(unique(getCondition(subObj, "Cell.Barcoding.Runs"))))
+  
+c(pcaCellsData=, UDE=) %<-% cleanPlots(subObj, includePCA = TRUE)
+
+print(unique(getCondition(subObj, "Lane")))
+  
+pcaCellsData <- setColumnInDF(pcaCellsData, colName = "Lane",
+                              colToSet = getCondition(subObj, "Lane")) 
+
+pcaPlot <- 
+  ggplot(pcaCellsData, aes(PC1, PC2, color = Lane)) +
+  geom_point(size = 0.1)
+
+c(umapPlot, .) %<-%
+  cellsUMAPPlot(
+    subObj,
+    clusters = getCondition(subObj, "Lane"),
+    useCoexEigen = FALSE,
+    dataMethod = "LN",
+    genesSel = "HVG_Seurat")
+
+```
+
+```{r}
+plot(UDE)
+plot(pcaPlot)
+plot(umapPlot)
+```
+
+```{r}
+Sys.time()
+sessionInfo()
+```
