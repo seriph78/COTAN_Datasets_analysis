@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.47">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-02-02">
+
+<title>GDI Increment From Mixing using Run 40 – COTAN Datasets analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">GDI sensitivity</li><li class="breadcrumb-item"><a href="./2_RelevantClusters_DistanceEvaluation.html">Brown PBMC dataset GDI</a></li><li class="breadcrumb-item"><a href="./4_GDI_Increment_From_Mixing.html">GDI Increment From Mixing</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">COTAN Datasets analysis</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CotanV1vsV2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">COTAN chages in version 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text">Datasets</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Loo 2019</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Mouse_Cortex_E14.5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDataset1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Coexpression analaysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Cortex Yuzwa 2017</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861511_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorticalCells_GSM2861514_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5Yuzwa.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Brain LaManno 2021</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E135-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E13.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE13.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E13.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E150-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E15.0 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE15.0MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E15.0</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainDorsal_E175-analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">E17.5 Cleaning and cell clustering</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisE17.5MouseBrain.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for E17.5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ForebrainLaManno2021ClustersGDI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Original Clusters GDI evaluation</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">CD14+</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ Cleaning and cell clustering</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">PBMC form 10X site</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC1_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC2_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC3_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./PBMC4_filtering.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning PBMC4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMC4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC 4</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Brown PBMC</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/Brown_PBMC_Datasets/PBMC_Brown_preview.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General dataset overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./1_DatasetCleaning_And_ClustersChecks_Run40.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning run 40</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMCBrownRun40.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC Brown run 40</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/Brown_PBMC_Datasets/Run_41/DatasetCleaning_Run41.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning run 41</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMCBrownRun41.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC Brown run 41</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/Brown_PBMC_Datasets/Run_77/DatasetCleaning_Run77.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cleaning run 77</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisPBMCBrownRun77.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis PBMC Brown run 77</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Brain O.P.</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/MouseBrainOpenProblemPreview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General dataset overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/MouseBrainOpenProblemCleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">General dataset cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisMouseBrainOP.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for Mouse Brain OP</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
+ <span class="menu-text">Ding 2020</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="D:/COTAN_Datasets_analysis/Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/Looms_preview.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dataset preview and splitting</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-10XV2_Cortex1_specimen1_cell2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ding Brain 1 10x V2 cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDingMouseBrain1V2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for Ding Brain 1 10X V2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-10XV2_Cortex2_specimen1_cell2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ding Brain 2 10x V2 cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDingMouseBrain2V2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for Ding Brain 2 10X V2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-SS2_Cortex1_specimen1_cell1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ding Brain 2 Smart-seq2 cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDingMouseBrain1SS2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for Ding Brain 1 Smart-seq2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/Ding_GSE132044_H_PBMC_M_Brain_CleanedDatasets/SplitLoomsAsCOTANObjects/DatasetCleaning_MouseCortex-SS2_Cortex2_specimen1_cell1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ding Brain 2 Smart-seq2 cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisDingMouseBrain2SS2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for Ding Brain 2 Smart-seq2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false">
+ <span class="menu-text">Mouse Brain Morabito 2021</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Data/NewDataRevision/MouseBrainMorabito/Dataset_Cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Morabito Brain Split-seq cleaning</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneCoexAnalysisMouseBrainMorabito.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Correlation analysis for Morabito Brain Split-seq</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false">
+ <span class="menu-text">Coex score evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 ">  
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true">
+ <span class="menu-text">GDI sensitivity</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-12" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-12" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false">
+ <span class="menu-text">La Manno dataset GDI</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-13" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-13" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./OriginalClustersDistanceEvaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clusters Distance Evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FindUniformOrigCluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cluster Unifomity and GDI score</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./GDI_Increment_From_Mixing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">GDI Increment From Mixing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true">
+ <span class="menu-text">Brown PBMC dataset GDI</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-14" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-14" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2_RelevantClusters_DistanceEvaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Clusters Distance Evaluation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./3_MixingUniformClusters_ForGDIDelta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Cluster Unifomity and GDI score</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./4_GDI_Increment_From_Mixing.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">GDI Increment From Mixing</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false">
+ <span class="menu-text">Cluster evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-15" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-15" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./NonCT_clusters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Not UT cluster with LR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Real_UT_clustersByCotan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Real UT clusters with LR</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cd14_clusterizations_comparisons.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CD14+ clusterizations</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./clustering_comparison.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PBMCs clustering comparison</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./probability_score.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">PBMCs probability score</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./COTAN_NewClusteringTest/src/TumorDataAnalysisClusterFinal.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">COEX matrix for clustering</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false">
+ <span class="menu-text">DEA evaluation</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-16" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-16" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DEA_Type1Er.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Type I error</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./geneExpressionAnalysisUniformClusters.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Explorative analysis of gene expression</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisys.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDR analysis - define DE genes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysMemento.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">FDR analysis - define DE genes - Memento</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false">
+ <span class="menu-text">FDR and TPR - ROC curves</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-17" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-17" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults3_10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 3% 10%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5_20.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5% 20%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analisysResults5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - thresholds true 5%</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./FDR_analysisResultsLFC.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Results - Log Fold Change</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false">
+ <span class="menu-text">Additional code and scripts</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-18" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-18" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./src/scanpyTypeIError.py" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ScamPy Type I Error code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./src/scanpyFDR.py" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ScamPy FDR code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./src/mementoTypeIError.py" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Memento Type I Error code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DEA_Type1ErrorMomenot.ipynb" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Memento DEA for Type I Error</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scanpy.ipynb" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example of scanpy clustering and DEA</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./scvi-tools.ipynb" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Example of ScVI clustering and DEA</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preamble" id="toc-preamble" class="nav-link active" data-scroll-target="#preamble">Preamble</a></li>
+  <li><a href="#re-load-calculated-data-for-analysis" id="toc-re-load-calculated-data-for-analysis" class="nav-link" data-scroll-target="#re-load-calculated-data-for-analysis">Re-Load calculated data for analysis</a>
+  <ul class="collapse">
+  <li><a href="#define-all-mixing-fractions" id="toc-define-all-mixing-fractions" class="nav-link" data-scroll-target="#define-all-mixing-fractions">Define all mixing fractions</a></li>
+  <li><a href="#actually-load-the-data" id="toc-actually-load-the-data" class="nav-link" data-scroll-target="#actually-load-the-data">Actually load the data</a></li>
+  <li><a href="#add-baseline-00-mixing" id="toc-add-baseline-00-mixing" class="nav-link" data-scroll-target="#add-baseline-00-mixing">Add baseline (“00%” mixing)</a></li>
+  </ul></li>
+  <li><a href="#merge-all-results-and-calculate-the-fitting-regression-for-each-cluster-pair" id="toc-merge-all-results-and-calculate-the-fitting-regression-for-each-cluster-pair" class="nav-link" data-scroll-target="#merge-all-results-and-calculate-the-fitting-regression-for-each-cluster-pair">Merge all results and calculate the fitting regression for each cluster pair</a></li>
+  <li><a href="#recall-cluster-distance-and-add-it-to-the-results" id="toc-recall-cluster-distance-and-add-it-to-the-results" class="nav-link" data-scroll-target="#recall-cluster-distance-and-add-it-to-the-results">Recall cluster distance and add it to the results</a>
+  <ul class="collapse">
+  <li><a href="#scatter-plot-of-δgdi-vs-distance" id="toc-scatter-plot-of-δgdi-vs-distance" class="nav-link" data-scroll-target="#scatter-plot-of-δgdi-vs-distance">Scatter plot of ΔGDI vs Distance</a></li>
+  </ul></li>
+  <li><a href="#merge-all-data-and-plot-it-using-a-priory-squared-distance-as-discriminant" id="toc-merge-all-data-and-plot-it-using-a-priory-squared-distance-as-discriminant" class="nav-link" data-scroll-target="#merge-all-data-and-plot-it-using-a-priory-squared-distance-as-discriminant">Merge all data and plot it using <em>a-priory</em> (squared) distance as discriminant</a></li>
+  <li><a href="#plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-distance-as-color" id="toc-plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-distance-as-color" class="nav-link" data-scroll-target="#plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-distance-as-color">Plot all data using the mixing fraction as abscissas and the distance as color</a></li>
+  <li><a href="#plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-cell-type-pairing-as-color" id="toc-plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-cell-type-pairing-as-color" class="nav-link" data-scroll-target="#plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-cell-type-pairing-as-color">Plot all data using the mixing fraction as abscissas and the cell type pairing as color</a>
+  <ul class="collapse">
+  <li><a href="#reorder-by-cluster-pair" id="toc-reorder-by-cluster-pair" class="nav-link" data-scroll-target="#reorder-by-cluster-pair">Reorder by cluster pair</a></li>
+  <li><a href="#plot-by-lines" id="toc-plot-by-lines" class="nav-link" data-scroll-target="#plot-by-lines">Plot by lines</a></li>
+  </ul></li>
+  <li><a href="#δgdi-main-plot" id="toc-δgdi-main-plot" class="nav-link" data-scroll-target="#δgdi-main-plot">ΔGDI main plot</a></li>
+  <li><a href="#gdi-main-plot" id="toc-gdi-main-plot" class="nav-link" data-scroll-target="#gdi-main-plot">GDI main plot</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">GDI sensitivity</li><li class="breadcrumb-item"><a href="./2_RelevantClusters_DistanceEvaluation.html">Brown PBMC dataset GDI</a></li><li class="breadcrumb-item"><a href="./4_GDI_Increment_From_Mixing.html">GDI Increment From Mixing</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">GDI Increment From Mixing using Run 40</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 2, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="preamble" class="level2">
+<h2 class="anchored" data-anchor-id="preamble">Preamble</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(assertthat)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rlang)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggh4x)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(grDevices)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zeallot)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(conflicted)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#library(tidyverse)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(parallelDist)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">conflicts_prefer</span>(zeallot<span class="sc">::</span><span class="st">`</span><span class="at">%-&gt;%</span><span class="st">`</span>, zeallot<span class="sc">::</span><span class="st">`</span><span class="at">%&lt;-%</span><span class="st">`</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>inDir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"Data/Brown_PBMC_Datasets/"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>outDir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"Results/GDI_Sensitivity/PBMCBrownRun40/"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="re-load-calculated-data-for-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="re-load-calculated-data-for-analysis">Re-Load calculated data for analysis</h2>
+<section id="define-all-mixing-fractions" class="level3">
+<h3 class="anchored" data-anchor-id="define-all-mixing-fractions">Define all mixing fractions</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>allMixingFractions <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.10</span>, <span class="fl">0.20</span>, <span class="fl">0.40</span>, <span class="fl">0.80</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(allMixingFractions) <span class="ot">&lt;-</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_pad</span>(scales<span class="sc">::</span><span class="fu">label_percent</span>()(allMixingFractions), <span class="dv">3</span>, <span class="at">pad =</span> <span class="st">"0"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="actually-load-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="actually-load-the-data">Actually load the data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>allResList <span class="ot">&lt;-</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">names</span>(allMixingFractions),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(mixStr) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">readRDS</span>(<span class="fu">file.path</span>(outDir, <span class="fu">paste0</span>(<span class="st">"GDI_with_"</span>, mixStr, <span class="st">"_Mixing.RDS"</span>)))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(allResList) <span class="ot">&lt;-</span> <span class="fu">names</span>(allMixingFractions)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">unique</span>(<span class="fu">sapply</span>(allResList, ncol)) <span class="sc">==</span> <span class="dv">5</span>L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="add-baseline-00-mixing" class="level3">
+<h3 class="anchored" data-anchor-id="add-baseline-00-mixing">Add baseline (“00%” mixing)</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> allResList[[<span class="dv">1</span>L]]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>baseline[[<span class="st">"MixingFraction"</span>]] <span class="ot">&lt;-</span> <span class="fl">0.0</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>baseline[[<span class="st">"GDI"</span>]] <span class="ot">&lt;-</span> baseline[[<span class="st">"GDI"</span>]] <span class="sc">-</span> baseline[[<span class="st">"GDIIncrement"</span>]]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>baseline[[<span class="st">"GDIIncrement"</span>]] <span class="ot">&lt;-</span> <span class="fl">0.0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>allResListWithBase <span class="ot">&lt;-</span> <span class="fu">append</span>(<span class="fu">list</span>(<span class="st">"00%"</span> <span class="ot">=</span> baseline), allResList)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(baseline)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="merge-all-results-and-calculate-the-fitting-regression-for-each-cluster-pair" class="level2">
+<h2 class="anchored" data-anchor-id="merge-all-results-and-calculate-the-fitting-regression-for-each-cluster-pair">Merge all results and calculate the fitting regression for each cluster pair</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>allRes <span class="ot">&lt;-</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(allResList[[<span class="dv">1</span>L]][, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lapply</span>(allResList, <span class="cf">function</span>(df) { df[, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] }))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(allRes) <span class="ot">&lt;-</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">colnames</span>(allResList[[<span class="dv">1</span>L]])[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="fu">colnames</span>(allResList[[<span class="dv">1</span>L]])[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>], <span class="dv">5</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"_"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="fu">names</span>(allMixingFractions), <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>allResWithBase <span class="ot">&lt;-</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(allResListWithBase[[<span class="dv">1</span>L]][, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">lapply</span>(allResListWithBase, <span class="cf">function</span>(df) { df[, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] }))</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(allResWithBase) <span class="ot">&lt;-</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">colnames</span>(allResListWithBase[[<span class="dv">1</span>L]])[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>],</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="fu">colnames</span>(allResListWithBase[[<span class="dv">1</span>L]])[<span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>], <span class="dv">5</span>),</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>      <span class="st">"_"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"00%"</span>, <span class="fu">names</span>(allMixingFractions)), <span class="at">each =</span> <span class="dv">3</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    allRes, allResWithBase[, <span class="fu">str_detect</span>(<span class="fu">colnames</span>(allResWithBase),</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>                                        <span class="st">"00%"</span>, <span class="at">negate =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="recall-cluster-distance-and-add-it-to-the-results" class="level2">
+<h2 class="anchored" data-anchor-id="recall-cluster-distance-and-add-it-to-the-results">Recall cluster distance and add it to the results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>zeroOneAvg <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">file.path</span>(outDir,  <span class="st">"allZeroOne.RDS"</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># zeroOneAvg &lt;- readRDS(file.path(outDir, "distanceZeroOne.RDS"))</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>distZeroOne <span class="ot">&lt;-</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>(<span class="fu">parDist</span>(<span class="fu">t</span>(zeroOneAvg), <span class="at">method =</span> <span class="st">"hellinger"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">diag =</span> <span class="cn">TRUE</span>, <span class="at">upper =</span> <span class="cn">TRUE</span>))<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>distZeroOneLong <span class="ot">&lt;-</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="fu">as.data.frame</span>(distZeroOne), <span class="at">var =</span> <span class="st">"MainCluster"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>distZeroOneLong <span class="ot">&lt;-</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(distZeroOneLong,</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> <span class="sc">!</span>MainCluster,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"OtherCluster"</span>, </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"Distance"</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>distZeroOneLong <span class="ot">&lt;-</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(distZeroOneLong[distZeroOneLong[[<span class="st">"Distance"</span>]] <span class="sc">!=</span> <span class="fl">0.0</span>, ])</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(<span class="fu">all.equal</span>(distZeroOneLong[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], allRes[, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>perm <span class="ot">&lt;-</span> <span class="fu">order</span>(distZeroOneLong[[<span class="st">"Distance"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="scatter-plot-of-δgdi-vs-distance" class="level3">
+<h3 class="anchored" data-anchor-id="scatter-plot-of-δgdi-vs-distance">Scatter plot of ΔGDI vs Distance</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>distDF <span class="ot">&lt;-</span> <span class="fu">cbind</span>(distZeroOneLong[, <span class="st">"Distance"</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>],</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sqrt</span>(distZeroOneLong[, <span class="st">"Distance"</span>, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(distDF) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Distance"</span>, <span class="st">"DistanceSqrt"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>D2IPlot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="fu">cbind</span>(allResList[[<span class="st">"20%"</span>]], distDF),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">aes</span>(<span class="at">x =</span> Distance, <span class="at">y =</span> GDIIncrement)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>             <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>             <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">formula =</span> y <span class="sc">~</span> x)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>           <span class="co"># +  xlim(0, 1.5) + ylim(0, 1.5) + coord_fixed()</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(D2IPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4_GDI_Increment_From_Mixing_files/figure-html/Scatter plot of ΔGDI vs Distance-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="merge-all-data-and-plot-it-using-a-priory-squared-distance-as-discriminant" class="level2">
+<h2 class="anchored" data-anchor-id="merge-all-data-and-plot-it-using-a-priory-squared-distance-as-discriminant">Merge all data and plot it using <em>a-priory</em> (squared) distance as discriminant</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>allResPerm <span class="ot">&lt;-</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(allResList, <span class="cf">function</span>(df) df[perm, ]))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>allResPerm <span class="ot">&lt;-</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(allResPerm,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ClusterPair"</span> <span class="ot">=</span> <span class="fu">rep.int</span>(<span class="fu">seq_along</span>(perm),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">length</span>(allResList)),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Distance"</span>    <span class="ot">=</span> <span class="fu">rep</span>(distZeroOneLong[[<span class="st">"Distance"</span>]][perm],</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">length</span>(allResList)))</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(allResPerm) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(allResPerm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 150   7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>allResWithBasePerm <span class="ot">&lt;-</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind,<span class="fu">lapply</span>(allResListWithBase, <span class="cf">function</span>(df) df[perm, ]))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>allResWithBasePerm <span class="ot">&lt;-</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(allResWithBasePerm,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ClusterPair"</span> <span class="ot">=</span> <span class="fu">rep.int</span>(<span class="fu">seq_along</span>(perm),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                                <span class="fu">length</span>(allResListWithBase)),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Distance"</span>    <span class="ot">=</span> <span class="fu">rep</span>(distZeroOneLong[[<span class="st">"Distance"</span>]][perm],</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">length</span>(allResListWithBase)))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(allResWithBasePerm) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(allResWithBasePerm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 180   7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert_that</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all.equal</span>(</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    allResPerm,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    allResWithBasePerm[(<span class="fu">length</span>(perm) <span class="sc">+</span> <span class="dv">1</span>)<span class="sc">:</span><span class="fu">nrow</span>(allResWithBasePerm), ],</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">check.attributes =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">msg =</span> <span class="st">"Trouble with meshing all res permutated data"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-distance-as-color" class="level2">
+<h2 class="anchored" data-anchor-id="plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-distance-as-color">Plot all data using the mixing fraction as abscissas and the distance as color</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>IScPlot <span class="ot">&lt;-</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(allResPerm,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> MixingFraction, <span class="at">y =</span> GDIIncrement, <span class="at">color =</span> Distance)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>() <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Top GDI percentile Increment"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(IScPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4_GDI_Increment_From_Mixing_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>GScPlot <span class="ot">&lt;-</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(allResWithBasePerm,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">aes</span>(<span class="at">x =</span> MixingFraction, <span class="at">y =</span> GDI, <span class="at">color =</span> Distance)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_continuous</span>(<span class="at">type =</span> <span class="st">"viridis"</span>) <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Top GDI percentile"</span>) </span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(GScPlot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4_GDI_Increment_From_Mixing_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-cell-type-pairing-as-color" class="level2">
+<h2 class="anchored" data-anchor-id="plot-all-data-using-the-mixing-fraction-as-abscissas-and-the-cell-type-pairing-as-color">Plot all data using the mixing fraction as abscissas and the cell type pairing as color</h2>
+<div class="cell" data-inlcude="false">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># IScPlot &lt;-</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(allResPerm,</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#          aes(x = MixingFraction, y = GDIIncrement, color = Distance)</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point() +</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_color_continuous(type = "viridis") +</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_x_log10() +</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylab("Top GDI percentile Increment")</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(IScPlot)</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># GScPlot &lt;-</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   ggplot(allResWithBasePerm,</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#          aes(x = MixingFraction, y = GDI, color = Distance)</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   ) +</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_point() +</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   scale_color_continuous(type = "viridis") +</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   ylab("Top GDI percentile") </span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># plot(GScPlot)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="reorder-by-cluster-pair" class="level3">
+<h3 class="anchored" data-anchor-id="reorder-by-cluster-pair">Reorder by cluster pair</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>reOrder <span class="ot">&lt;-</span> <span class="cf">function</span>(df, numBlocks) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  blockLength <span class="ot">&lt;-</span> <span class="fu">nrow</span>(df) <span class="sc">/</span> numBlocks</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  permut <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span>blockLength, <span class="at">each =</span> numBlocks) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>              <span class="fu">rep</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="fu">nrow</span>(df) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">by =</span> blockLength), <span class="at">times =</span> numBlocks)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df[permut, ])</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>allResPerm2 <span class="ot">&lt;-</span> <span class="fu">reOrder</span>(allResPerm, <span class="dv">5</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>allResWithBasePerm2 <span class="ot">&lt;-</span> <span class="fu">reOrder</span>(allResWithBasePerm, <span class="dv">6</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(allResPerm[[<span class="st">"ClusterPair"</span>]], <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(allResPerm2[[<span class="st">"ClusterPair"</span>]], <span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1 1 1 1 1 2 2 2 2 2 3 3 3 3 3 4 4 4 4 4</code></pre>
+</div>
+</div>
+</section>
+<section id="plot-by-lines" class="level3">
+<h3 class="anchored" data-anchor-id="plot-by-lines">Plot by lines</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>numBuckets <span class="ot">&lt;-</span> <span class="dv">6</span>L</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>bucketLength <span class="ot">&lt;-</span> <span class="fu">length</span>(perm) <span class="sc">%/%</span> numBuckets</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>ILinesPLot <span class="ot">&lt;-</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    allResPerm2,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> MixingFraction, <span class="at">y =</span> GDIIncrement,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> (ClusterPair <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%/%</span> bucketLength <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">group =</span> ClusterPair)) <span class="sc">+</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_stepsn</span>(</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">rev</span>(<span class="fu">hcl.colors</span>(numBuckets, <span class="at">palette =</span> <span class="st">"Dark 2"</span>))</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Top GDI percentile Increment"</span>)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ILinesPLot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4_GDI_Increment_From_Mixing_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>GLinesPLot <span class="ot">&lt;-</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    allResWithBasePerm2,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> MixingFraction, <span class="at">y =</span> GDI,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> (ClusterPair <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%/%</span> bucketLength <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="fu">aes</span>(<span class="at">group =</span> ClusterPair)) <span class="sc">+</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_stepsn</span>(</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">colours =</span> <span class="fu">rev</span>(<span class="fu">hcl.colors</span>(numBuckets, <span class="at">palette =</span> <span class="st">"Dark 2"</span>))</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Top GDI percentile"</span>)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co">#  geom_line(data = data.frame(cbind(MixingFraction = c(0,0.8), GDI = c(1.4,1.4))),</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#            aes(x = MixingFraction, y = GDI))</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(GLinesPLot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4_GDI_Increment_From_Mixing_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="δgdi-main-plot" class="level2">
+<h2 class="anchored" data-anchor-id="δgdi-main-plot">ΔGDI main plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>numBuckets <span class="ot">&lt;-</span> <span class="dv">6</span>L</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>bucketLength <span class="ot">&lt;-</span> <span class="fu">length</span>(perm) <span class="sc">%/%</span> numBuckets</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>mg <span class="ot">&lt;-</span> <span class="cf">function</span>(mixings) {</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> mixings</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  actOn <span class="ot">&lt;-</span> res <span class="sc">!=</span> <span class="fl">0.0</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  res[actOn] <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">log2</span>(res[actOn] <span class="sc">*</span> <span class="dv">40</span>))</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>((allResPerm[[<span class="st">"ClusterPair"</span>]] <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%/%</span> bucketLength <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(group) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Distance bin "</span>, <span class="dv">1</span><span class="sc">:</span>numBuckets)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>discreteMixing <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">mg</span>(allResPerm[[<span class="st">"MixingFraction"</span>]]))</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(discreteMixing) <span class="ot">&lt;-</span> <span class="fu">names</span>(allMixingFractions)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>allResPermBuck <span class="ot">&lt;-</span></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(allResPerm, <span class="st">"Group"</span> <span class="ot">=</span> group, <span class="st">"DiscreteMixing"</span> <span class="ot">=</span> discreteMixing)</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>first.part  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Distance bin 1"</span>, <span class="st">"Distance bin 2"</span>, <span class="st">"Distance bin 3"</span>)</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>second.part <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Distance bin 4"</span>, <span class="st">"Distance bin 5"</span>, <span class="st">"Distance bin 6"</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>IBoxPlotA <span class="ot">&lt;-</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    allResPermBuck[allResPermBuck[[<span class="st">"Group"</span>]] <span class="sc">%in%</span> first.part,],</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DiscreteMixing, <span class="at">y =</span> GDIIncrement,</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> Group, <span class="at">group =</span> DiscreteMixing)</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#4C0D7A"</span>, <span class="st">"#3C279C"</span>, <span class="st">"#4C29B5"</span>)</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values = c("#0B5345", "#117A65", "#16A085")</span></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid2</span>(<span class="at">cols =</span> <span class="fu">vars</span>(Group)) <span class="sc">+</span></span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.15</span>),</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_width</span>(<span class="fl">0.5</span>)</span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">""</span></span>
+<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a>IBoxPlotB <span class="ot">&lt;-</span></span>
+<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>    allResPermBuck[allResPermBuck[[<span class="st">"Group"</span>]] <span class="sc">%in%</span> second.part, ],</span>
+<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DiscreteMixing, <span class="at">y =</span> GDIIncrement,</span>
+<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> Group, <span class="at">group =</span> DiscreteMixing)</span>
+<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#702FCC"</span>, <span class="st">"#9E79D4"</span>, <span class="st">"#AA96CF"</span>)</span>
+<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values = c("#1ABC9C", "#48C9B0", "#A3E4D7")</span></span>
+<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid2</span>(<span class="at">cols =</span> <span class="fu">vars</span>(Group)) <span class="sc">+</span></span>
+<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.05</span>, <span class="fl">1.45</span>),</span>
+<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_width</span>(<span class="fl">0.5</span>)</span>
+<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb27-64"><a href="#cb27-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb27-65"><a href="#cb27-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb27-66"><a href="#cb27-66" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Ratio between sizes of second and first cluster"</span>,</span>
+<span id="cb27-67"><a href="#cb27-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Variation of the 99th percentile of GDI scores"</span></span>
+<span id="cb27-68"><a href="#cb27-68" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb27-69"><a href="#cb27-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-70"><a href="#cb27-70" aria-hidden="true" tabindex="-1"></a>finalIPlot <span class="ot">&lt;-</span></span>
+<span id="cb27-71"><a href="#cb27-71" aria-hidden="true" tabindex="-1"></a>  gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb27-72"><a href="#cb27-72" aria-hidden="true" tabindex="-1"></a>    IBoxPlotA, IBoxPlotB, <span class="at">nrow =</span> <span class="dv">9</span>, <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb27-73"><a href="#cb27-73" aria-hidden="true" tabindex="-1"></a>    <span class="at">layout_matrix =</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">each =</span> <span class="dv">5</span>)[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb27-74"><a href="#cb27-74" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4_GDI_Increment_From_Mixing_files/figure-html/ΔGDI main plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>grDevices<span class="sc">::</span><span class="fu">pdf</span>(<span class="fu">file.path</span>(outDir, <span class="st">"GDI-Increment_PBMC-Brown_Run-40.pdf"</span>),</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.newpage</span>()</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.draw</span>(finalIPlot)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>grDevices<span class="sc">::</span><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>png 
+  2 </code></pre>
+</div>
+</div>
+</section>
+<section id="gdi-main-plot" class="level2">
+<h2 class="anchored" data-anchor-id="gdi-main-plot">GDI main plot</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>numBuckets <span class="ot">&lt;-</span> <span class="dv">6</span>L</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>bucketLength <span class="ot">&lt;-</span> <span class="fu">length</span>(perm) <span class="sc">%/%</span> numBuckets</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>mg <span class="ot">&lt;-</span> <span class="cf">function</span>(mixings) {</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  res <span class="ot">&lt;-</span> mixings</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  actOn <span class="ot">&lt;-</span> res <span class="sc">!=</span> <span class="fl">0.0</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  res[actOn] <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">log2</span>(res[actOn] <span class="sc">*</span> <span class="dv">40</span>))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(res)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>((allResWithBasePerm[[<span class="st">"ClusterPair"</span>]] <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">%/%</span> bucketLength <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(group) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Distance bin "</span>, <span class="dv">1</span><span class="sc">:</span>numBuckets)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>discreteMixing <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">mg</span>(allResWithBasePerm[[<span class="st">"MixingFraction"</span>]]))</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(discreteMixing) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"00%"</span>, <span class="fu">names</span>(allMixingFractions))</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>allResWithBasePermBuck <span class="ot">&lt;-</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(allResWithBasePerm, <span class="st">"Group"</span> <span class="ot">=</span> group, <span class="st">"DiscreteMixing"</span> <span class="ot">=</span> discreteMixing)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>first.part  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Distance bin 1"</span>, <span class="st">"Distance bin 2"</span>, <span class="st">"Distance bin 3"</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>second.part <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Distance bin 4"</span>, <span class="st">"Distance bin 5"</span>, <span class="st">"Distance bin 6"</span>)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>GBoxPlotA <span class="ot">&lt;-</span></span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>    allResWithBasePermBuck[allResWithBasePermBuck[[<span class="st">"Group"</span>]] <span class="sc">%in%</span> first.part,],</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DiscreteMixing, <span class="at">y =</span> GDI,</span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> Group, <span class="at">group =</span> DiscreteMixing)</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#4C0D7A"</span>, <span class="st">"#3C279C"</span>, <span class="st">"#4C29B5"</span>)</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values = c("#0B5345", "#117A65", "#16A085")</span></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid2</span>(<span class="at">cols =</span> <span class="fu">vars</span>(Group)) <span class="sc">+</span></span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">2.40</span>),</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_width</span>(<span class="fl">0.5</span>)</span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>, <span class="at">axis.title.x =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Top 1% GDI score of genes"</span></span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>GBoxPlotB <span class="ot">&lt;-</span></span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>    allResWithBasePermBuck[allResWithBasePermBuck[[<span class="st">"Group"</span>]] <span class="sc">%in%</span> second.part,],</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> DiscreteMixing, <span class="at">y =</span> GDI,</span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> Group, <span class="at">group =</span> DiscreteMixing)</span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#702FCC"</span>, <span class="st">"#9E79D4"</span>, <span class="st">"#AA96CF"</span>)</span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a>  <span class="co"># values = c("#1ABC9C", "#48C9B0", "#A3E4D7")</span></span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid2</span>(<span class="at">cols =</span> <span class="fu">vars</span>(Group)) <span class="sc">+</span></span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">1.20</span>, <span class="fl">2.70</span>),</span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> scales<span class="sc">::</span><span class="fu">breaks_width</span>(<span class="fl">0.5</span>)</span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Ratio between sizes of second and first cluster"</span>,</span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Top 1% GDI score of genes"</span></span>
+<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a>finalGPlot <span class="ot">&lt;-</span></span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a>  gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(</span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a>    GBoxPlotA, GBoxPlotB, <span class="at">nrow =</span> <span class="dv">9</span>, <span class="at">ncol =</span> <span class="dv">1</span>,</span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>    <span class="at">layout_matrix =</span> <span class="fu">cbind</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">each =</span> <span class="dv">5</span>)[<span class="dv">2</span><span class="sc">:</span><span class="dv">10</span>])</span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="4_GDI_Increment_From_Mixing_files/figure-html/GDI main plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>grDevices<span class="sc">::</span><span class="fu">pdf</span>(<span class="fu">file.path</span>(outDir, <span class="st">"GDI_PBMC-Brown_Run-40.pdf"</span>),</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">7</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.newpage</span>()</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>grid<span class="sc">::</span><span class="fu">grid.draw</span>(finalGPlot)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>grDevices<span class="sc">::</span><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>png 
+  2 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.time</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "2026-02-02 15:44:26 CET"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Sys.info()</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.5.2 (2025-10-31)
+Platform: x86_64-pc-linux-gnu
+Running under: Ubuntu 22.04.5 LTS
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/blas/libblas.so.3.10.0 
+LAPACK: /usr/lib/x86_64-linux-gnu/lapack/liblapack.so.3.10.0  LAPACK version 3.10.0
+
+locale:
+ [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+ [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+ [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+[10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+
+time zone: Europe/Rome
+tzcode source: system (glibc)
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] parallelDist_0.2.6 tidyr_1.3.1        tibble_3.3.0       data.table_1.18.0 
+ [5] conflicted_1.2.0   zeallot_0.2.0      gridExtra_2.3      ggh4x_0.3.1       
+ [9] ggplot2_4.0.1      scales_1.4.0       stringr_1.6.0      rlang_1.1.7       
+[13] assertthat_0.2.1  
+
+loaded via a namespace (and not attached):
+ [1] generics_0.1.3      stringi_1.8.7       lattice_0.22-7     
+ [4] digest_0.6.37       magrittr_2.0.4      evaluate_1.0.5     
+ [7] grid_4.5.2          RColorBrewer_1.1-3  fastmap_1.2.0      
+[10] jsonlite_2.0.0      Matrix_1.7-4        mgcv_1.9-3         
+[13] purrr_1.2.0         viridisLite_0.4.2   codetools_0.2-20   
+[16] cli_3.6.5           splines_4.5.2       withr_3.0.2        
+[19] cachem_1.1.0        yaml_2.3.12         tools_4.5.2        
+[22] memoise_2.0.1       dplyr_1.1.4         vctrs_0.7.0        
+[25] R6_2.6.1            lifecycle_1.0.4     htmlwidgets_1.6.4  
+[28] pkgconfig_2.0.3     RcppParallel_5.1.10 pillar_1.11.1      
+[31] gtable_0.3.6        glue_1.8.0          Rcpp_1.1.0         
+[34] xfun_0.52           tidyselect_1.2.1    knitr_1.50         
+[37] farver_2.1.2        htmltools_0.5.8.1   nlme_3.1-168       
+[40] labeling_0.4.3      rmarkdown_2.29      compiler_4.5.2     
+[43] S7_0.2.1           </code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/seriph78\.github\.io\/COTAN_Datasets_analysis\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
